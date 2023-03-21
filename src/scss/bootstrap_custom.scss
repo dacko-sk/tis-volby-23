@@ -1,0 +1,38 @@
+@use 'sass:map';
+@import 'variables';
+
+/* import bootstrap to apply variables changes */
+@import '~bootstrap/scss/bootstrap';
+
+/* bootstrap changes */
+.navbar-brand img {
+  height: 38px;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+
+.btn-secondary {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-hover-bg: #{$tis-dark-blue};
+  --bs-btn-hover-border-color: #{$tis-dark-blue};
+}
+
+.btn-success {
+  --bs-btn-hover-bg: #{$tis-orange};
+  --bs-btn-hover-border-color: #{$tis-orange};
+}
+
+@media (max-width: map.get($grid-breakpoints, 'lg')) {
+  .navbar-nav {
+    --bs-nav-link-padding-x: 0.5em;
+  }
+  .navbar-collapse .btn {
+    margin: 0.5em 0;
+  }
+}

@@ -1,0 +1,30 @@
+@use 'sass:map';
+@import 'variables';
+@import 'bootstrap_custom';
+@import 'volby-common';
+
+header {
+  background-image: url('./../../public/img/parlament_2_color_1920_900.png');
+  background-position-x: center;
+  background-position-y: 20%;
+}
+
+.elections .accordion-body {
+  padding: 0 calc(var(--bs-gutter-x) * 0.5);
+}
+
+.col-container {
+  container: col-container / inline-size;
+}
+
+@container col-container (min-width: 0) {
+  .col-lg-6 {
+    width: 100%;
+  }
+}
+
+@container col-container (min-width: #{map.get($container-min-widths-inner, 'lg')}) {
+  .col-lg-6 {
+    width: 50%;
+  }
+}
