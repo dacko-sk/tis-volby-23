@@ -1,7 +1,12 @@
 import { CookiesProvider } from './CookiesContext';
+import { DataProvider } from './DataContext';
 
 function ContextProviders({ children }) {
-    return <CookiesProvider>{children}</CookiesProvider>;
+    return (
+        <DataProvider>
+            <CookiesProvider>{children}</CookiesProvider>
+        </DataProvider>
+    );
 }
 
 export default ContextProviders;
