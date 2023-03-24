@@ -99,6 +99,10 @@ module.exports = (env, argv) => {
                     test: /\.(jpe?g|gif|png)$/i,
                     type: 'asset',
                 },
+                {
+                    test: /\.csv$/i,
+                    type: 'asset',
+                },
             ],
         },
         output: {
