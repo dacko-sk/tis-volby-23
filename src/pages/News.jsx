@@ -5,7 +5,7 @@ import { segments } from '../api/routes';
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';
 
-export const newsCategories = [categories.news23];
+export const newsCategories = [categories.news];
 
 const title = 'Aktuality';
 

@@ -1,8 +1,11 @@
 export const categories = {
-    news23: 877,
+    news: 877,
 };
 
 export const parties = {
+    demokrati: {
+        category: 897,
+    },
     hlas: {
         category: 893,
     },
@@ -57,6 +60,18 @@ export const errors = {
 export const labels = {
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',
+    elections: {
+        account_key: 'url',
+        name_key: 'name',
+    },
+    charts: {
+        disclaimer:
+            'Grafy obsahujú iba dáta z transparentných účtov evidovaných podľa zákona na webe ministerstva vnútra a niektoré manuálne dohľadané účty. Dáta sú očistené o vrátené platby.',
+        updated: 'Naposledy aktualizované',
+        incoming: 'Príjmy',
+        outgoing: 'Výdavky',
+        uniqeDonors: 'Počet unikátnych darcov',
+    },
     tis: 'Transparency International Slovensko',
     search: 'Vyhľadávanie',
     showMore: 'Zobraziť viac',
