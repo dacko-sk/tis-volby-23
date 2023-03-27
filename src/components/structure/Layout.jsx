@@ -6,6 +6,7 @@ import has from 'has';
 import { scrollToTop } from '../../api/helpers';
 
 import useData, {
+    accountsFile,
     baseDate,
     buildParserConfig,
     processAccountsData,
@@ -16,7 +17,7 @@ import Header from './Header';
 import Footer from './Footer';
 // import DonateModal from '../general/DonateModal';
 
-import accountsFile from '../../../public/csv/aggregation_no_returns_v2.csv';
+// import accountsFile from '../../../public/csv/aggregation_no_returns_v2.csv';
 
 function Layout() {
     const { csvData, setCsvData } = useData();

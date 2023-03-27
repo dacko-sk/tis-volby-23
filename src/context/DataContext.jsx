@@ -5,9 +5,8 @@ import { labels } from '../api/constants';
 import { compareStr, contains } from '../api/helpers';
 import { routes } from '../api/routes';
 
-// export const accountsFile =
-// 'https://volby.transparency.sk/samosprava2022/csv/aggregation_no_returns_v2.csv';
-// `${routes.home}csv/aggregation_no_returns_v2.csv`;
+export const accountsFile =
+    'https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/aggregation_no_returns.csv';
 export const baseDate = 1669068712;
 export const reloadMinutes = 70;
 
