@@ -8,6 +8,7 @@ import ContextProviders from './context/ContextProviders';
 import Article from './pages/Article';
 import Home from './pages/Home';
 import News from './pages/News';
+import Party from './pages/Party';
 import Search from './pages/Search';
 
 import Layout from './components/structure/Layout';
@@ -28,6 +29,10 @@ function App() {
                             <Route
                                 path={`${segments.NEWS}/:slug`}
                                 element={<Article />}
+                            />
+                            <Route
+                                path={`${segments.PARTY}/:slug`}
+                                element={<Party />}
                             />
                             <Route
                                 path={`${segments.SEARCH}/:query`}

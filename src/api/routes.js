@@ -3,8 +3,8 @@ import siteConfig from '../../package.json';
 
 export const separators = {
     newline: '\n',
-    parts: '~',
-    space: '.',
+    parts: '.',
+    space: '~',
     url: '/',
 };
 
@@ -14,6 +14,7 @@ export const segments = {
             ? siteConfig.homepage
             : '/',
     NEWS: 'aktuality',
+    PARTY: 'strana',
     SEARCH: 'vyhladavanie',
 };
 
@@ -23,6 +24,13 @@ export const routes = {
     articles: (page) => segments.ROOT + (page || ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
+    party: (slug) =>
+        segments.ROOT +
+        (slug
+            ? segments.PARTY +
+              separators.url +
+              encodeURIComponent(slug.replaceAll(' ', separators.space))
+            : ''),
     search: (query) =>
         segments.ROOT + (query ? segments.SEARCH + separators.url + query : ''),
 };
