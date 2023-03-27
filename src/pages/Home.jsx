@@ -2,6 +2,7 @@ import { setTitle } from '../api/helpers';
 import { segments } from '../api/routes';
 
 import { newsCategories } from './News';
+import Top10 from '../components/charts/Top10';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
 import TotalSpending from '../components/general/TotalSpending';
 import Title from '../components/structure/Title';
@@ -18,7 +19,7 @@ function Home() {
                 voľby
             </Title>
 
-            <div className="row gy-3 gy-lg-0 text-center">
+            <div className="row gy-3 gy-lg-0 text-center mb-4">
                 <div className="col-lg-6">
                     <ElectionsCountdown
                         start="2023-09-30T07:00:00"
@@ -29,6 +30,8 @@ function Home() {
                     <TotalSpending />
                 </div>
             </div>
+
+            <Top10 />
 
             <h2 className="mt-4">Najnovšie aktuality</h2>
             <Posts

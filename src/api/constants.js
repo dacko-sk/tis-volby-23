@@ -58,15 +58,17 @@ export const errors = {
 };
 
 export const labels = {
+    disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',
     elections: {
+        account: 'Transparentný účet',
         account_key: 'url',
         name_key: 'name',
     },
     charts: {
         disclaimer:
-            'Grafy obsahujú iba dáta z transparentných účtov evidovaných podľa zákona na webe ministerstva vnútra a niektoré manuálne dohľadané účty. Dáta sú očistené o vrátené platby.',
+            'Grafy obsahujú iba dáta z transparentných účtov evidovaných podľa zákona na webe ministerstva vnútra, očistené o vrátené platby.',
         updated: 'Naposledy aktualizované',
         incoming: 'Príjmy',
         outgoing: 'Výdavky',

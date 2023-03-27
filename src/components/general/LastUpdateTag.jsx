@@ -13,12 +13,7 @@ function LastUpdateTag({ short, timestamp }) {
 
     return (
         <em className="disclaimer">
-            {!short && (
-                <span>
-                    {`${labels.charts.disclaimer} `}
-                    <br className="d-none d-xl-inline" />
-                </span>
-            )}
+            {!short && <span>{labels.charts.disclaimer} </span>}
             {labels.charts.updated} {dateTimeFormat(lastUpdate)}.
         </em>
     );

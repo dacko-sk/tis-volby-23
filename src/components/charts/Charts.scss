@@ -1,0 +1,41 @@
+@import './../../scss/variables';
+
+.chart-outer.scrollable {
+  height: 400px;
+  overflow-y: scroll;
+}
+
+.chart {
+  width: 100%;
+  aspect-ratio: 2/1;
+  margin: 0 auto;
+  font-size: 13px;
+}
+
+tspan {
+  &.name,
+  text.recharts-cartesian-axis-tick-value[type='category'] & {
+    font-weight: $fw-bold;
+    &.elected {
+      paint-order: stroke;
+      stroke: $tis-light-blue;
+      stroke-linejoin: round;
+      stroke-width: 5px;
+      a {
+        fill: #fff;
+      }
+    }
+  }
+  &.cat-regional {
+    fill: $tis-orange;
+  }
+  &.cat-local {
+    fill: $tis-light-blue;
+  }
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

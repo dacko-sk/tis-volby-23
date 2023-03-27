@@ -143,6 +143,8 @@ export const ecodeHTMLEntities = (rawStr) =>
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];
 
+export const sortBySpending = sortByNumericProp('outgoing', false);
+
 export const removeAccentsFromString = (str) =>
     str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
 
