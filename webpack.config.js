@@ -19,7 +19,7 @@ module.exports = (env, argv) => {
             description: appManifest.name,
             title: appManifest.short_name,
             language: 'sk',
-            GTM_ID: 'GTM-XXXYYYZ',
+            GTM_ID: 'GTM-5Z6SFDZ',
         }),
         new WebpackManifestPlugin({
             fileName: 'asset-manifest.json',
