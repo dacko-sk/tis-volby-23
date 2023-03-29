@@ -78,8 +78,9 @@ export const labels = {
     },
     charts: {
         disclaimer:
-            'Grafy obsahujú iba dáta z transparentných účtov evidovaných podľa zákona na webe ministerstva vnútra, očistené o vrátené platby.',
-        updated: 'Naposledy aktualizované',
+            'Grafy obsahujú dáta z transparentných účtov manuálne vyhľadaných na stránkach bánk, očistené o vrátené platby.',
+        disclaimerClick: 'Po kliknutí na názov strany sa rozbalia podrobnosti.',
+        updated: 'Naposledy aktualizované',
         incoming: 'Príjmy',
         outgoing: 'Výdavky',
         uniqeDonors: 'Počet unikátnych darcov',

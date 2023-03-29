@@ -9,9 +9,9 @@ export const icons = {
     },
 };
 
-function AlertWithIcon({ className, children, icon, variant }) {
+function AlertWithIcon({ className, children, icon = icons.info, variant }) {
     return (
-        <Alert variant={variant} className={className}>
+        <Alert variant={variant} className={`d-flex ${className}`}>
             {icon && (
                 <svg
                     className="bi flex-shrink-0 me-2"
@@ -25,7 +25,7 @@ function AlertWithIcon({ className, children, icon, variant }) {
                     {icon.path}
                 </svg>
             )}
-            {children}
+            <div>{children}</div>
         </Alert>
     );
 }
