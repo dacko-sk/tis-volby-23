@@ -9,7 +9,7 @@ import { routes } from '../api/routes';
 
 import useData from '../context/DataContext';
 
-// import AccountTransactions from '../components/general/AccountTransactions';
+import AccountTransactions from '../components/accounts/AccountTransactions';
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
 
@@ -92,7 +92,7 @@ function Party() {
 
             <em className="disclaimer">{labels.disclaimerAccount}</em>
 
-            {/* <AccountTransactions party={party} /> */}
+            <AccountTransactions party={party} />
         </section>
     );
 }

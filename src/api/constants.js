@@ -58,6 +58,16 @@ export const errors = {
 };
 
 export const labels = {
+    account: {
+        account_name: 'Názov účtu',
+        date: 'Dátum',
+        amount: 'Suma',
+        // currency: 'Mena',
+        message: 'Popis platby',
+        tx_type: 'Druh platby',
+        vs: 'VS',
+        ss: 'ŠS',
+    },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',

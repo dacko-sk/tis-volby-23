@@ -3,7 +3,6 @@ import has from 'has';
 
 import { labels } from '../api/constants';
 import { compareStr, contains } from '../api/helpers';
-import { routes } from '../api/routes';
 
 export const accountsFile =
     'https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/aggregation_no_returns.csv';
@@ -15,21 +14,21 @@ export const types = {
     local: 'local',
 };
 
-export const getFileName = (candidate) => {
+export const getFileName = (account) => {
     if (
-        !has(candidate, labels.elections.name_key) ||
-        !has(candidate, labels.elections.account_key)
+        !has(account, labels.elections.name_key) ||
+        !has(account, labels.elections.account_key)
     ) {
         return null;
     }
 
-    const match = candidate[labels.elections.account_key].match(
+    const match = account[labels.elections.account_key].match(
         /.*(?:SK\d{12})?(\d{10}).*/
     );
     return match && match.length > 1
-        ? `${routes.home}csv/accounts/${candidate[labels.elections.name_key]} ${
-              match[1]
-          }.csv`
+        ? `https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/accounts/${
+              account[labels.elections.name_key]
+          } ${match[1]}.csv`
         : null;
 };
 
@@ -96,7 +95,7 @@ export const findRow = (csvData, name, mun) => {
 
 export const buildParserConfig = (processCallback, storeDataCallback) => {
     return {
-        worker: false, // must be false for local files
+        worker: true, // must be false for local files
         header: true,
         dynamicTyping: true,
         skipEmptyLines: true,

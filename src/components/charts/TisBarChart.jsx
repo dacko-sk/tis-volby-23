@@ -25,7 +25,7 @@ import { separators } from '../../api/routes';
 
 import HorizontalTick from './HorizontalTick';
 import VerticalTick, { tickFontSize } from './VerticalTick';
-import LastUpdateTag from '../general/LastUpdateTag';
+import LastUpdateTag from '../accounts/LastUpdateTag';
 
 import './Charts.scss';
 

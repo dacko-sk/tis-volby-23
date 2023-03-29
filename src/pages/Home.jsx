@@ -4,7 +4,7 @@ import { segments } from '../api/routes';
 import { newsCategories } from './News';
 import Top10 from '../components/charts/Top10';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
-import TotalSpending from '../components/general/TotalSpending';
+import TotalSpending from '../components/accounts/TotalSpending';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
 
