@@ -3,40 +3,40 @@ export const categories = {
 };
 
 export const parties = {
-    demokrati: {
+    Demokrati: {
         category: 897,
     },
-    hlas: {
+    Hlas: {
         category: 893,
     },
-    kdh: {
+    KDH: {
         category: 892,
     },
-    kss: {
+    KSS: {
         category: 888,
     },
-    lsns: {
+    ĽSNS: {
         category: 895,
     },
-    olano: {
+    OĽaNO: {
         category: 886,
     },
-    ps: {
+    PS: {
         category: 891,
     },
-    republika: {
+    Republika: {
         category: 894,
     },
-    sas: {
+    SaS: {
         category: 887,
     },
-    'sme-rodina': {
+    'Sme Rodina': {
         category: 896,
     },
-    smer: {
+    Smer: {
         category: 889,
     },
-    sns: {
+    SNS: {
         category: 890,
     },
 };

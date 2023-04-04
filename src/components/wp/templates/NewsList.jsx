@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import { dateTimeFormat, parseWpHtml } from '../../../api/helpers';
 
 import Media from '../Media';
+import PartyTags from '../PartyTags';
 
 function NewsList({ article, clickHandler, keyUpHandler }) {
     return (
@@ -32,6 +33,10 @@ function NewsList({ article, clickHandler, keyUpHandler }) {
                         <div className="article-date my-2">
                             {dateTimeFormat(article.date)}
                         </div>
+                        <PartyTags
+                            className="article-tags my-2"
+                            categories={article.categories}
+                        />
                         {parseWpHtml(article.excerpt.rendered)}
                     </Col>
                 </Row>

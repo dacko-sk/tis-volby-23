@@ -128,13 +128,28 @@
   }
 }
 
-.article-date {
+.article-date,
+.article-tags {
   font-style: italic;
   &:before {
-    content: '📅';
     font-style: normal;
     margin-right: 0.25em;
   }
+  a {
+    color: $tis-dark-blue;
+    margin-right: 0.5em;
+    &:hover {
+      color: $tis-dark-blue;
+    }
+  }
+}
+
+.article-date:before {
+  content: '📅';
+}
+
+.article-tags:before {
+  content: '🔖';
 }
 
 ul.blocks-gallery-grid {

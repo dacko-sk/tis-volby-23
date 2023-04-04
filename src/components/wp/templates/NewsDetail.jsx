@@ -1,9 +1,19 @@
-import { dateFormat, parseWpHtml } from '../../../api/helpers';
+import { dateTimeFormat, parseWpHtml } from '../../../api/helpers';
+
+import PartyTags from '../PartyTags';
 
 function NewsDetail({ article }) {
     return (
         <div className="article-body">
-            <div className="article-date my-4">{dateFormat(article.date)}</div>
+            <div className="d-md-flex">
+                <div className="article-date my-4 me-auto">
+                    {dateTimeFormat(article.date)}
+                </div>
+                <PartyTags
+                    className="article-tags my-4"
+                    categories={article.categories}
+                />
+            </div>
             {parseWpHtml(article.content.rendered)}
         </div>
     );

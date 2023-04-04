@@ -59,10 +59,12 @@ function Posts({
     );
 
     const navigate = useNavigate();
-    const getClickHandler = (article) => () => {
-        navigate(routes.article(section, article.slug), {
-            state: { article },
-        });
+    const getClickHandler = (article) => (event) => {
+        if (event.target.tagName.toLowerCase() !== 'a') {
+            navigate(routes.article(section, article.slug), {
+                state: { article },
+            });
+        }
     };
     const getKeyUpHandler = (article) => (event) => {
         if (event.keyCode === 13) {
