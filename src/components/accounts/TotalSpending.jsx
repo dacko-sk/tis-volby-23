@@ -1,6 +1,5 @@
 import has from 'has';
 
-import { labels } from '../../api/constants';
 import { currencyFormat } from '../../api/helpers';
 
 import useData from '../../context/DataContext';
@@ -12,18 +11,11 @@ function TotalSpending() {
 
     // parse data
     let total = 0;
-    const uniqueAccounts = {};
     if (has(csvData, 'data')) {
         csvData.data.forEach((row) => {
             // sum of outgoing amounts from all transparent accounts
             if (row.sum_outgoing > 0) {
-                // add each account number only once
-                if (has(uniqueAccounts, row[labels.elections.account_key])) {
-                    uniqueAccounts[row[labels.elections.account_key]] += 1;
-                } else {
-                    uniqueAccounts[row[labels.elections.account_key]] = 1;
-                    total += row.sum_outgoing;
-                }
+                total += row.sum_outgoing;
             }
             // remove manually added duplicate expenses
             if (has(row, 'duplicateExpenses') && row.duplicateExpenses > 0) {
