@@ -16,6 +16,7 @@ export const segments = {
     NEWS: 'aktuality',
     PARTY: 'strana',
     SEARCH: 'vyhladavanie',
+    TRANSACTIONS: 'financovanie',
 };
 
 export const routes = {
@@ -24,13 +25,16 @@ export const routes = {
     articles: (page) => segments.ROOT + (page || ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
-    party: (slug) =>
+    party: (slug, subpage) =>
         segments.ROOT +
         (slug
             ? segments.PARTY +
               separators.url +
               encodeURIComponent(slug.replaceAll(' ', separators.space))
-            : ''),
+            : '') +
+        (subpage ? separators.url + subpage : ''),
     search: (query) =>
         segments.ROOT + (query ? segments.SEARCH + separators.url + query : ''),
 };
+
+export const decodeSlug = (slug) => slug.replaceAll(separators.space, ' ');

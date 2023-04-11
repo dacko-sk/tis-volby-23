@@ -29,6 +29,8 @@ function Posts({
     search = '',
     section = segments.NEWS,
     showMore = null,
+    showMoreLink = null,
+    tags = [],
     template = templates.list,
 }) {
     const [totalPages, setTotalPages] = useState(0);
@@ -40,12 +42,13 @@ function Posts({
     const catExParam = categoriesExclude.length
         ? `&categories_exclude=${categoriesExclude.join()}`
         : '';
+    const tagParam = tags.length ? `&tags=${tags.join()}&tax_relation=AND` : '';
     const searchParam = search ? `&search=${search}` : '';
     const { isLoading, error, data } = useQuery(
         [`all_posts_${catParam}_${search}_${blocksize}_${activePage}`],
         () =>
             fetch(
-                `https://cms.transparency.sk/wp-json/wp/v2/posts?per_page=${blocksize}&page=${activePage}${catParam}${catExParam}${searchParam}`
+                `https://cms.transparency.sk/wp-json/wp/v2/posts?per_page=${blocksize}&page=${activePage}${catParam}${catExParam}${tagParam}${searchParam}`
             ).then((response) => {
                 if (response.headers) {
                     const wptp = Number(
@@ -126,7 +129,7 @@ function Posts({
             <div className="buttons mt-3 text-center">
                 <Button
                     as={Link}
-                    to={routes.articles(section)}
+                    to={showMoreLink || routes.articles(section)}
                     variant="secondary"
                 >
                     {showMore || labels.showMore}

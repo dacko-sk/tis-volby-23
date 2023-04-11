@@ -39,7 +39,7 @@ function NewsCondensed({ article, clickHandler, keyUpHandler }) {
                         </div>
                         <PartyTags
                             className="article-tags my-2"
-                            categories={article.categories}
+                            tags={article.tags}
                         />
                         {parseWpHtml(article.excerpt.rendered)}
                     </Col>

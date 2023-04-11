@@ -9,6 +9,9 @@ import Article from './pages/Article';
 import Home from './pages/Home';
 import News from './pages/News';
 import Party from './pages/Party';
+import PartyNews from './pages/party/PartyNews';
+import PartyOverview from './pages/party/PartyOverview';
+import PartyTransactions from './pages/party/PartyTransactions';
 import Search from './pages/Search';
 
 import Layout from './components/structure/Layout';
@@ -33,7 +36,17 @@ function App() {
                             <Route
                                 path={`${segments.PARTY}/:slug`}
                                 element={<Party />}
-                            />
+                            >
+                                <Route index element={<PartyOverview />} />
+                                <Route
+                                    path={segments.NEWS}
+                                    element={<PartyNews />}
+                                />
+                                <Route
+                                    path={segments.TRANSACTIONS}
+                                    element={<PartyTransactions />}
+                                />
+                            </Route>
                             <Route
                                 path={`${segments.SEARCH}/:query`}
                                 element={<Search />}

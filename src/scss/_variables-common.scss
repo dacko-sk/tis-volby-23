@@ -58,9 +58,10 @@ $navbar-padding-y: 0;
 $navbar-light-color: $tis-dark-blue;
 $navbar-light-active-color: white;
 $navbar-brand-padding-y: 0.75rem;
-// $nav-link-font-weight: $fw-bold;
-// $navbar-nav-link-padding-x: 2rem;
-// $nav-link-padding-y: 1.25rem;
+$nav-link-color: $tis-dark-blue;
+$nav-link-hover-color: $tis-light-blue;
+$nav-tabs-link-active-color: $tis-light-blue;
+$nav-tabs-border-radius: 0;
 $nav-pills-border-radius: 0;
 
 $btn-border-radius: 0;

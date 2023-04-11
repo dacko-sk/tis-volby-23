@@ -25,8 +25,8 @@ const formatColumn = (column, value) => {
     }
 };
 
-function AccountTransactions({ pageSize = 25, party }) {
-    const file = getFileName(party);
+function AccountTransactions({ pageSize = 25, account }) {
+    const file = getFileName(account);
     const [transactions, setTransactions] = useState(null);
     const [activePage, setActivePage] = useState(1);
     const { readRemoteFile } = usePapaParse();

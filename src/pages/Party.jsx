@@ -1,30 +1,28 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Table from 'react-bootstrap/Table';
+import Nav from 'react-bootstrap/Nav';
+import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import has from 'has';
 
-import { labels } from '../api/constants';
-import { currencyFormat, setTitle, shortenUrl } from '../api/helpers';
-import { routes } from '../api/routes';
+import { labels, parties } from '../api/constants';
+import { decodeSlug, routes, segments } from '../api/routes';
 
 import useData from '../context/DataContext';
 
-import AccountTransactions from '../components/accounts/AccountTransactions';
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
 
 function Party() {
-    const { pathname } = useLocation();
+    const { slug } = useParams();
     const navigate = useNavigate();
 
     const { csvData } = useData();
 
     // parse aggregated data
-    let party = null;
+    let partyAccount = null;
     if (has(csvData, 'data')) {
         csvData.data.some((row) => {
-            if (pathname === routes.party(row[labels.elections.name_key])) {
-                party = row;
+            if (decodeSlug(slug) === row[labels.elections.name_key]) {
+                partyAccount = row;
                 return true;
             }
             return false;
@@ -32,67 +30,40 @@ function Party() {
     }
 
     useEffect(() => {
-        if (!party && has(csvData, 'data')) {
-            // redirect to home page in case party does not exist
+        if (!partyAccount && has(csvData, 'data')) {
+            // redirect to home page in case party does not have transparent account
             navigate(routes.home);
         }
-    }, [party, csvData, navigate]);
+    }, [partyAccount, csvData, navigate]);
 
-    if (!party || !has(csvData, 'data')) {
+    if (!partyAccount || !has(csvData, 'data')) {
         return <Loading />;
     }
 
-    setTitle(party[labels.elections.name_key]);
+    const party = {
+        ...parties[partyAccount[labels.elections.name_key]],
+        name: partyAccount[labels.elections.name_key],
+    };
 
     return (
         <section className="party-page">
-            <Title>{party[labels.elections.name_key]}</Title>
-            <Table striped bordered responsive hover>
-                <tbody>
-                    <tr>
-                        <td>{labels.charts.incoming}</td>
-                        <td>{currencyFormat(party.sum_incoming)}</td>
-                    </tr>
-                    <tr>
-                        <td>{labels.charts.outgoing}</td>
-                        <td>{currencyFormat(party.sum_outgoing)}</td>
-                    </tr>
-                    <tr>
-                        <td>Bilancia</td>
-                        <td>{currencyFormat(party.balance)}</td>
-                    </tr>
-                    <tr>
-                        <td>Počet príjmov</td>
-                        <td>{party.num_incoming}</td>
-                    </tr>
-                    <tr>
-                        <td>Počet výdavkov</td>
-                        <td>{party.num_outgoing}</td>
-                    </tr>
-                    <tr>
-                        <td>{labels.charts.uniqeDonors}</td>
-                        <td>{party.num_unique_donors}</td>
-                    </tr>
-                    <tr>
-                        <td>{labels.elections.account}</td>
-                        <td>
-                            <a
-                                href={party[labels.elections.account_key]}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                {shortenUrl(
-                                    party[labels.elections.account_key]
-                                )}
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </Table>
+            <Title>{partyAccount[labels.elections.name_key]}</Title>
+            <Nav variant="tabs" className="me-auto">
+                <Nav.Link as={NavLink} to={routes.party(slug)} end>
+                    Prehľad
+                </Nav.Link>
+                <Nav.Link
+                    as={NavLink}
+                    to={routes.party(slug, segments.TRANSACTIONS)}
+                >
+                    Financovanie
+                </Nav.Link>
+                <Nav.Link as={NavLink} to={routes.party(slug, segments.NEWS)}>
+                    Aktuality
+                </Nav.Link>
+            </Nav>
 
-            <em className="disclaimer">{labels.disclaimerAccount}</em>
-
-            <AccountTransactions party={party} />
+            <Outlet context={{ party, partyAccount }} />
         </section>
     );
 }

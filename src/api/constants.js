@@ -3,41 +3,44 @@ export const categories = {
 };
 
 export const parties = {
+    'Aliancia-Szövetség': {
+        tag: 899,
+    },
     Demokrati: {
-        category: 897,
+        tag: 900,
     },
     Hlas: {
-        category: 893,
+        tag: 901,
     },
     KDH: {
-        category: 892,
+        tag: 902,
     },
     KSS: {
-        category: 888,
+        tag: 903,
     },
     ĽSNS: {
-        category: 895,
+        tag: 904,
     },
     OĽaNO: {
-        category: 886,
+        tag: 905,
     },
     PS: {
-        category: 891,
+        tag: 906,
     },
     Republika: {
-        category: 894,
+        tag: 907,
     },
     SaS: {
-        category: 887,
+        tag: 908,
     },
     'Sme Rodina': {
-        category: 896,
+        tag: 909,
     },
     Smer: {
-        category: 889,
+        tag: 910,
     },
     SNS: {
-        category: 890,
+        tag: 911,
     },
 };
 

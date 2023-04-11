@@ -6,17 +6,17 @@ import { routes } from '../../api/routes';
 
 import useData from '../../context/DataContext';
 
-function PartyTags({ categories, className }) {
+function PartyTags({ tags, className }) {
     const { csvData } = useData();
 
-    const tags = [];
+    const items = [];
     // parse data
     if (has(csvData, 'data')) {
         Object.entries(parties).forEach(([partyName, partyProps]) => {
-            if (categories.includes(partyProps.category)) {
+            if (tags.includes(partyProps.tag)) {
                 csvData.data.some((row) => {
                     if (partyName === row[labels.elections.name_key]) {
-                        tags.push(
+                        items.push(
                             <Link key={partyName} to={routes.party(partyName)}>
                                 {partyName}
                             </Link>
@@ -27,8 +27,8 @@ function PartyTags({ categories, className }) {
                 });
             }
         });
-        if (tags.length) {
-            return <div className={className}>{tags}</div>;
+        if (items.length) {
+            return <div className={className}>{items}</div>;
         }
     }
 
