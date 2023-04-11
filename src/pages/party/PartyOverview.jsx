@@ -1,13 +1,15 @@
 import Button from 'react-bootstrap/Button';
-import Table from 'react-bootstrap/Table';
 import { Link, useOutletContext } from 'react-router-dom';
 
-import { labels } from '../../api/constants';
-import { currencyFormat, setTitle, shortenUrl } from '../../api/helpers';
+import { colors, labels } from '../../api/constants';
+import { currencyFormat, setTitle } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 
 // import AccountTransactions from '../../components/accounts/AccountTransactions';
+import LastUpdateTag from '../../components/accounts/LastUpdateTag';
 import Posts, { templates } from '../../components/wp/Posts';
+import TisBarChart from '../../components/charts/TisBarChart';
+
 import { newsCategories } from '../News';
 
 function PartyTransactions() {
@@ -17,63 +19,62 @@ function PartyTransactions() {
 
     return (
         <div className="subpage">
-            <h2 className="mt-4 mb-3">Informácie o kampani</h2>
+            <div className="row text-center my-4">
+                <div className="col-lg-6">
+                    <TisBarChart
+                        bars={[
+                            {
+                                key: 'outgoing',
+                                name: labels.charts.outgoing,
+                                color: colors.colorOrange,
+                                stackId: 'finance',
+                            },
+                            {
+                                key: 'incoming',
+                                name: labels.charts.incoming,
+                                color: colors.colorDarkBlue,
+                                stackId: 'finance',
+                            },
+                        ]}
+                        data={[
+                            {
+                                name: labels.charts.outgoing,
+                                outgoing: partyAccount.sum_outgoing,
+                            },
+                            {
+                                name: labels.charts.incoming,
+                                incoming: partyAccount.sum_incoming,
+                            },
+                        ]}
+                        buttonLink={routes.charts}
+                        currency
+                        lastUpdate={false}
+                    />
+                </div>
+                <div className="col-lg-6">
+                    <div className="total-spending">
+                        <h2 className="d-none d-lg-block mt-xxl-4">
+                            Priebežné výdavky strany
+                        </h2>
+                        <p className="hero-number">
+                            {currencyFormat(partyAccount.sum_outgoing)}
+                            <LastUpdateTag
+                                short
+                                timestamp={partyAccount.timestamp}
+                            />
+                        </p>
+                    </div>
 
-            <Table striped bordered responsive hover>
-                <tbody>
-                    <tr>
-                        <td>{labels.charts.incoming}</td>
-                        <td>{currencyFormat(partyAccount.sum_incoming)}</td>
-                    </tr>
-                    <tr>
-                        <td>{labels.charts.outgoing}</td>
-                        <td>{currencyFormat(partyAccount.sum_outgoing)}</td>
-                    </tr>
-                    <tr>
-                        <td>Bilancia</td>
-                        <td>{currencyFormat(partyAccount.balance)}</td>
-                    </tr>
-                    <tr>
-                        <td>Počet príjmov</td>
-                        <td>{partyAccount.num_incoming}</td>
-                    </tr>
-                    <tr>
-                        <td>Počet výdavkov</td>
-                        <td>{partyAccount.num_outgoing}</td>
-                    </tr>
-                    <tr>
-                        <td>{labels.charts.uniqeDonors}</td>
-                        <td>{partyAccount.num_unique_donors}</td>
-                    </tr>
-                    <tr>
-                        <td>{labels.elections.account}</td>
-                        <td>
-                            <a
-                                href={
-                                    partyAccount[labels.elections.account_key]
-                                }
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                {shortenUrl(
-                                    partyAccount[labels.elections.account_key]
-                                )}
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </Table>
-
-            <em className="disclaimer">{labels.disclaimerAccount}</em>
-
-            <div className="buttons text-center">
-                <Button
-                    as={Link}
-                    to={routes.party(party.name, segments.TRANSACTIONS)}
-                    variant="secondary"
-                >
-                    Všetky transakcie
-                </Button>
+                    <div className="buttons text-center mt-4">
+                        <Button
+                            as={Link}
+                            to={routes.party(party.name, segments.TRANSACTIONS)}
+                            variant="secondary"
+                        >
+                            Zobraziť všetky transakcie
+                        </Button>
+                    </div>
+                </div>
             </div>
 
             <h2 className="mt-4">Najnovšie aktuality</h2>
