@@ -19,9 +19,21 @@ function Party() {
 
     // parse aggregated data
     let partyAccount = null;
+    let accountKey = decodeSlug(slug);
     if (has(csvData, 'data')) {
+        // find CSV account key if slug is not identical as config key
+        if (!has(parties, accountKey)) {
+            Object.entries(parties).some(([partyKey, partyProps]) => {
+                if (has(partyProps, 'slug') && accountKey === partyProps.slug) {
+                    accountKey = partyKey;
+                    return true;
+                }
+                return false;
+            });
+        }
+        // find aggregated data for the account
         csvData.data.some((row) => {
-            if (decodeSlug(slug) === row[labels.elections.name_key]) {
+            if (accountKey === row[labels.elections.name_key]) {
                 partyAccount = row;
                 return true;
             }
@@ -40,30 +52,44 @@ function Party() {
         return <Loading />;
     }
 
-    const party = {
-        ...parties[partyAccount[labels.elections.name_key]],
-        name: partyAccount[labels.elections.name_key],
+    // prepare party object to be used by subpages via outlet context
+    let party = {
+        account: partyAccount,
+        // copy full name & slug from account key as default
+        name: accountKey,
+        slug: accountKey,
     };
+    if (has(parties, accountKey)) {
+        party = {
+            ...party,
+            ...parties[accountKey],
+        };
+    }
 
     return (
         <section className="party-page">
-            <Title>{partyAccount[labels.elections.name_key]}</Title>
+            <Title>{party.name}</Title>
             <Nav variant="tabs" className="me-auto">
-                <Nav.Link as={NavLink} to={routes.party(slug)} end>
+                <Nav.Link as={NavLink} to={routes.party(party.slug)} end>
                     Prehľad
                 </Nav.Link>
                 <Nav.Link
                     as={NavLink}
-                    to={routes.party(slug, segments.TRANSACTIONS)}
+                    to={routes.party(party.slug, segments.TRANSACTIONS)}
                 >
                     Financovanie
                 </Nav.Link>
-                <Nav.Link as={NavLink} to={routes.party(slug, segments.NEWS)}>
-                    Aktuality
-                </Nav.Link>
+                {has(party, 'tag') && (
+                    <Nav.Link
+                        as={NavLink}
+                        to={routes.party(party.slug, segments.NEWS)}
+                    >
+                        Aktuality
+                    </Nav.Link>
+                )}
             </Nav>
 
-            <Outlet context={{ party, partyAccount }} />
+            <Outlet context={party} />
         </section>
     );
 }

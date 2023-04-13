@@ -1,8 +1,8 @@
 import has from 'has';
 
-import { labels } from '../../api/constants';
+import { getPartyChartLabel } from '../../api/chartHelpers';
 import { sortBySpending } from '../../api/helpers';
-import { routes, separators } from '../../api/routes';
+import { routes } from '../../api/routes';
 
 import useData from '../../context/DataContext';
 
@@ -16,7 +16,7 @@ function Top10() {
     if (has(csvData, 'data')) {
         csvData.data.forEach((row) => {
             parties.push({
-                name: `${row[labels.elections.name_key] + separators.newline}`,
+                name: getPartyChartLabel(row),
                 incoming: row.sum_incoming,
                 outgoing: row.sum_outgoing,
             });

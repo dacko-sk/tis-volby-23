@@ -1,24 +1,33 @@
+import { Link, useParams } from 'react-router-dom';
 import has from 'has';
-import { Link } from 'react-router-dom';
 
 import { labels, parties } from '../../api/constants';
-import { routes } from '../../api/routes';
+import { decodeSlug, routes } from '../../api/routes';
 
 import useData from '../../context/DataContext';
 
 function PartyTags({ tags, className }) {
     const { csvData } = useData();
+    const { slug } = useParams();
+    const currentParty = slug ? decodeSlug(slug) : null;
 
     const items = [];
     // parse data
     if (has(csvData, 'data')) {
-        Object.entries(parties).forEach(([partyName, partyProps]) => {
+        Object.entries(parties).forEach(([partyKey, partyProps]) => {
             if (tags.includes(partyProps.tag)) {
                 csvData.data.some((row) => {
-                    if (partyName === row[labels.elections.name_key]) {
+                    if (partyKey === row[labels.elections.name_key]) {
+                        const tagName = has(partyProps, 'slug')
+                            ? partyProps.slug
+                            : partyKey;
                         items.push(
-                            <Link key={partyName} to={routes.party(partyName)}>
-                                {partyName}
+                            <Link key={partyKey} to={routes.party(tagName)}>
+                                {currentParty === tagName ? (
+                                    <strong>{tagName}</strong>
+                                ) : (
+                                    tagName
+                                )}
                             </Link>
                         );
                         return true;

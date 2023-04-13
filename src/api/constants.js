@@ -2,44 +2,55 @@ export const categories = {
     news: 877,
 };
 
+// party object key matches with CSV account key
 export const parties = {
-    'Aliancia-Szövetség': {
+    Aliancia: {
+        name: 'Aliancia - Szövetség',
         tag: 899,
     },
     Demokrati: {
         tag: 900,
     },
     Hlas: {
+        name: 'Hlas - SD',
         tag: 901,
     },
     KDH: {
+        name: 'Kresťansko Demokratické Hnutie',
         tag: 902,
     },
     KSS: {
         tag: 903,
     },
-    ĽSNS: {
+    LSNS: {
+        name: 'Kotlebovci - ĽSNS',
+        slug: 'ĽSNS',
         tag: 904,
     },
     OĽaNO: {
+        name: 'Obyčajní Ľudia a Nezávislé Osobnosti',
         tag: 905,
     },
     PS: {
+        name: 'Progresívne Slovensko',
         tag: 906,
     },
     Republika: {
         tag: 907,
     },
     SaS: {
+        name: 'Sloboda a Solidarita',
         tag: 908,
     },
     'Sme Rodina': {
         tag: 909,
     },
     Smer: {
+        name: 'Smer - SSD',
         tag: 910,
     },
     SNS: {
+        name: 'Slovenská Národná Strana',
         tag: 911,
     },
 };

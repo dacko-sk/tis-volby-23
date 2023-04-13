@@ -1,5 +1,6 @@
 import has from 'has';
 import siteConfig from '../../package.json';
+import { parties } from './constants';
 
 export const separators = {
     newline: '\n',
@@ -25,14 +26,21 @@ export const routes = {
     articles: (page) => segments.ROOT + (page || ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
-    party: (slug, subpage) =>
-        segments.ROOT +
-        (slug
-            ? segments.PARTY +
-              separators.url +
-              encodeURIComponent(slug.replaceAll(' ', separators.space))
-            : '') +
-        (subpage ? separators.url + subpage : ''),
+    party: (slug, subpage) => {
+        const niceSlug =
+            has(parties, slug) && has(parties[slug], 'slug')
+                ? parties[slug].slug
+                : slug;
+        return (
+            segments.ROOT +
+            (slug
+                ? segments.PARTY +
+                  separators.url +
+                  encodeURIComponent(niceSlug.replaceAll(' ', separators.space))
+                : '') +
+            (subpage ? separators.url + subpage : '')
+        );
+    },
     search: (query) =>
         segments.ROOT + (query ? segments.SEARCH + separators.url + query : ''),
 };

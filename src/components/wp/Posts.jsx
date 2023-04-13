@@ -45,7 +45,9 @@ function Posts({
     const tagParam = tags.length ? `&tags=${tags.join()}&tax_relation=AND` : '';
     const searchParam = search ? `&search=${search}` : '';
     const { isLoading, error, data } = useQuery(
-        [`all_posts_${catParam}_${search}_${blocksize}_${activePage}`],
+        [
+            `all_posts_${catParam}_${tagParam}_${search}_${blocksize}_${activePage}`,
+        ],
         () =>
             fetch(
                 `https://cms.transparency.sk/wp-json/wp/v2/posts?per_page=${blocksize}&page=${activePage}${catParam}${catExParam}${tagParam}${searchParam}`

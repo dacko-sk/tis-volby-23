@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import { Link, useOutletContext } from 'react-router-dom';
+import has from 'has';
 
 import { colors, labels } from '../../api/constants';
 import { currencyFormat, setTitle } from '../../api/helpers';
@@ -13,7 +14,7 @@ import TisBarChart from '../../components/charts/TisBarChart';
 import { newsCategories } from '../News';
 
 function PartyTransactions() {
-    const { party, partyAccount } = useOutletContext();
+    const party = useOutletContext();
 
     setTitle(party.name);
 
@@ -39,11 +40,11 @@ function PartyTransactions() {
                         data={[
                             {
                                 name: labels.charts.outgoing,
-                                outgoing: partyAccount.sum_outgoing,
+                                outgoing: party.account.sum_outgoing,
                             },
                             {
                                 name: labels.charts.incoming,
-                                incoming: partyAccount.sum_incoming,
+                                incoming: party.account.sum_incoming,
                             },
                         ]}
                         buttonLink={routes.charts}
@@ -57,10 +58,10 @@ function PartyTransactions() {
                             Priebežné výdavky strany
                         </h2>
                         <p className="hero-number">
-                            {currencyFormat(partyAccount.sum_outgoing)}
+                            {currencyFormat(party.account.sum_outgoing)}
                             <LastUpdateTag
                                 short
-                                timestamp={partyAccount.timestamp}
+                                timestamp={party.account.timestamp}
                             />
                         </p>
                     </div>
@@ -68,7 +69,7 @@ function PartyTransactions() {
                     <div className="buttons text-center mt-4">
                         <Button
                             as={Link}
-                            to={routes.party(party.name, segments.TRANSACTIONS)}
+                            to={routes.party(party.slug, segments.TRANSACTIONS)}
                             variant="secondary"
                         >
                             Zobraziť všetky transakcie
@@ -77,15 +78,19 @@ function PartyTransactions() {
                 </div>
             </div>
 
-            <h2 className="mt-4">Najnovšie aktuality</h2>
-            <Posts
-                categories={newsCategories}
-                limit={2}
-                section={segments.NEWS}
-                showMoreLink={routes.party(party.name, segments.NEWS)}
-                tags={[party.tag]}
-                template={templates.condensed}
-            />
+            {has(party, 'tag') && (
+                <>
+                    <h2 className="mt-4">Najnovšie aktuality</h2>
+                    <Posts
+                        categories={newsCategories}
+                        limit={2}
+                        section={segments.NEWS}
+                        showMoreLink={routes.party(party.slug, segments.NEWS)}
+                        tags={[party.tag]}
+                        template={templates.condensed}
+                    />
+                </>
+            )}
         </div>
     );
 }

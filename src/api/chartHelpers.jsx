@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
+import has from 'has';
 
+import { labels, parties } from './constants';
 import { routes, separators } from './routes';
 
 export const tooltipNameFormat = (value) => {
@@ -14,4 +16,13 @@ export const tickLabel = (value) => {
     ) : (
         value
     );
+};
+
+export const getPartyChartLabel = (row) => {
+    const n =
+        has(parties, row[labels.elections.name_key]) &&
+        has(parties[row[labels.elections.name_key]], 'slug')
+            ? parties[row[labels.elections.name_key]].slug
+            : row[labels.elections.name_key];
+    return n + separators.newline;
 };
