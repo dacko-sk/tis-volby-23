@@ -6,6 +6,7 @@ import Top10 from '../components/charts/Top10';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
 import TotalSpending from '../components/accounts/TotalSpending';
 import AlertWithIcon from '../components/general/AlertWithIcon';
+import PartiesLogos from '../components/general/PartiesLogos';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
 
@@ -34,6 +35,8 @@ function Home() {
                     Samosprávne voľby 2022
                 </a>
             </AlertWithIcon>
+
+            <PartiesLogos />
 
             <div className="row gy-3 gy-lg-0 text-center mb-4">
                 <div className="col-lg-6">

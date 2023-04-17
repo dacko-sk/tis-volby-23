@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import has from 'has';
 
-import { labels } from '../api/constants';
+import { labels, parties } from '../api/constants';
 import { compareStr, contains } from '../api/helpers';
 
 export const accountsFile =
@@ -65,6 +65,19 @@ export const processAccountsData = (data) => {
             pd.data[index].num_incoming = row.num_incoming ?? 0;
             pd.data[index].num_outgoing = row.num_outgoing ?? 0;
             pd.data[index].num_unique_donors = row.num_unique_donors ?? 0;
+
+            // merge data with party config
+            if (has(parties, pd.data[index][labels.elections.name_key])) {
+                pd.data[index] = {
+                    ...pd.data[index],
+                    // copy full name & slug from account key as default
+                    fullName: pd.data[index][labels.elections.name_key],
+                    slug: pd.data[index][labels.elections.name_key],
+                    share: 0,
+                    // overwrite with config
+                    ...parties[pd.data[index][labels.elections.name_key]],
+                };
+            }
         });
         return {
             ...pd,

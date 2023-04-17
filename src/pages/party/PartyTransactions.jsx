@@ -9,7 +9,7 @@ import AccountTransactions from '../../components/accounts/AccountTransactions';
 function PartyTransactions() {
     const party = useOutletContext();
 
-    setTitle(`${party.name} : Financovanie`);
+    setTitle(`${party.fullName} : Financovanie`);
 
     return (
         <div className="subpage">
@@ -19,40 +19,38 @@ function PartyTransactions() {
                 <tbody>
                     <tr>
                         <td>{labels.charts.incoming}</td>
-                        <td>{currencyFormat(party.account.sum_incoming)}</td>
+                        <td>{currencyFormat(party.sum_incoming)}</td>
                     </tr>
                     <tr>
                         <td>{labels.charts.outgoing}</td>
-                        <td>{currencyFormat(party.account.sum_outgoing)}</td>
+                        <td>{currencyFormat(party.sum_outgoing)}</td>
                     </tr>
                     <tr>
                         <td>Zostatok</td>
-                        <td>{currencyFormat(party.account.balance)}</td>
+                        <td>{currencyFormat(party.balance)}</td>
                     </tr>
                     <tr>
                         <td>Počet príjmov</td>
-                        <td>{party.account.num_incoming}</td>
+                        <td>{party.num_incoming}</td>
                     </tr>
                     <tr>
                         <td>Počet výdavkov</td>
-                        <td>{party.account.num_outgoing}</td>
+                        <td>{party.num_outgoing}</td>
                     </tr>
                     <tr>
                         <td>{labels.charts.uniqeDonors}</td>
-                        <td>{party.account.num_unique_donors}</td>
+                        <td>{party.num_unique_donors}</td>
                     </tr>
                     <tr>
                         <td>{labels.elections.account}</td>
                         <td>
                             <a
-                                href={
-                                    party.account[labels.elections.account_key]
-                                }
+                                href={party[labels.elections.account_key]}
                                 target="_blank"
                                 rel="noreferrer"
                             >
                                 {shortenUrl(
-                                    party.account[labels.elections.account_key]
+                                    party[labels.elections.account_key]
                                 )}
                             </a>
                         </td>
@@ -62,7 +60,7 @@ function PartyTransactions() {
 
             <em className="disclaimer">{labels.disclaimerAccount}</em>
 
-            <AccountTransactions account={party.account} />
+            <AccountTransactions account={party} />
         </div>
     );
 }

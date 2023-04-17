@@ -19,7 +19,7 @@ function PartyNews() {
         }
     }, [party]);
 
-    setTitle(`${party.name} : Aktuality`);
+    setTitle(`${party.fullName} : Aktuality`);
 
     return (
         <div className="subpage">

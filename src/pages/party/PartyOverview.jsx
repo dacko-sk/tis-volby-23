@@ -16,7 +16,7 @@ import { newsCategories } from '../News';
 function PartyTransactions() {
     const party = useOutletContext();
 
-    setTitle(party.name);
+    setTitle(party.fullName);
 
     return (
         <div className="subpage">
@@ -40,11 +40,11 @@ function PartyTransactions() {
                         data={[
                             {
                                 name: labels.charts.outgoing,
-                                outgoing: party.account.sum_outgoing,
+                                outgoing: party.sum_outgoing,
                             },
                             {
                                 name: labels.charts.incoming,
-                                incoming: party.account.sum_incoming,
+                                incoming: party.sum_incoming,
                             },
                         ]}
                         buttonLink={routes.charts}
@@ -58,11 +58,8 @@ function PartyTransactions() {
                             Priebežné výdavky strany
                         </h2>
                         <p className="hero-number">
-                            {currencyFormat(party.account.sum_outgoing)}
-                            <LastUpdateTag
-                                short
-                                timestamp={party.account.timestamp}
-                            />
+                            {currencyFormat(party.sum_outgoing)}
+                            <LastUpdateTag short timestamp={party.timestamp} />
                         </p>
                     </div>
 

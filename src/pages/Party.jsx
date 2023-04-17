@@ -18,7 +18,7 @@ function Party() {
     const { csvData } = useData();
 
     // parse aggregated data
-    let partyAccount = null;
+    let party = null;
     let accountKey = decodeSlug(slug);
     if (has(csvData, 'data')) {
         // find CSV account key if slug is not identical as config key
@@ -34,7 +34,7 @@ function Party() {
         // find aggregated data for the account
         csvData.data.some((row) => {
             if (accountKey === row[labels.elections.name_key]) {
-                partyAccount = row;
+                party = row;
                 return true;
             }
             return false;
@@ -42,33 +42,19 @@ function Party() {
     }
 
     useEffect(() => {
-        if (!partyAccount && has(csvData, 'data')) {
+        if (!party && has(csvData, 'data')) {
             // redirect to home page in case party does not have transparent account
             navigate(routes.home);
         }
-    }, [partyAccount, csvData, navigate]);
+    }, [party, csvData, navigate]);
 
-    if (!partyAccount || !has(csvData, 'data')) {
+    if (!party || !has(csvData, 'data')) {
         return <Loading />;
-    }
-
-    // prepare party object to be used by subpages via outlet context
-    let party = {
-        account: partyAccount,
-        // copy full name & slug from account key as default
-        name: accountKey,
-        slug: accountKey,
-    };
-    if (has(parties, accountKey)) {
-        party = {
-            ...party,
-            ...parties[accountKey],
-        };
     }
 
     return (
         <section className="party-page">
-            <Title>{party.name}</Title>
+            <Title>{party.fullName}</Title>
             <Nav variant="tabs" className="me-auto">
                 <Nav.Link as={NavLink} to={routes.party(party.slug)} end>
                     Prehľad
