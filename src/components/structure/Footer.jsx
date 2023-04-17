@@ -21,7 +21,7 @@ function Footer() {
             <div className="footer-top py-5">
                 <Container>
                     <h2 className="mb-3 text-center">Donori projektu</h2>
-                    <Row className="justify-content-around gx-5">
+                    <Row className="justify-content-around gx-md-5">
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
                             xs={12}
