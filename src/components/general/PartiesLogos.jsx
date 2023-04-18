@@ -1,3 +1,4 @@
+import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
@@ -11,7 +12,7 @@ import useData from '../../context/DataContext';
 
 import Loading from './Loading';
 
-import './PartiesLogos.scss';
+import './Parties.scss';
 
 function PartiesLogos({ minShare = 2, maxParties = 12 }) {
     const { csvData } = useData();
@@ -20,15 +21,17 @@ function PartiesLogos({ minShare = 2, maxParties = 12 }) {
 
     if (has(csvData, 'data')) {
         csvData.data.forEach((row) => {
-            if (
-                has(parties, row[labels.elections.name_key]) &&
-                has(parties[row[labels.elections.name_key]], 'logo') &&
-                parties[row[labels.elections.name_key]].share > minShare
-            ) {
+            if (row.share > minShare) {
                 items.push({
                     key: row[labels.elections.name_key],
-                    logo: parties[row[labels.elections.name_key]].logo,
-                    share: parties[row[labels.elections.name_key]].share,
+                    logo: has(row, 'logo') ? (
+                        <figure>
+                            <img src={row.logo} />
+                        </figure>
+                    ) : (
+                        <h3>{row.slug}</h3>
+                    ),
+                    share: row.share,
                 });
             }
         });
@@ -42,16 +45,12 @@ function PartiesLogos({ minShare = 2, maxParties = 12 }) {
                             to={routes.party(item.key)}
                             className="party-logo d-flex align-items-center justify-content-center h-100"
                         >
-                            <figure>
-                                <img src={item.logo} />
-                            </figure>
+                            {item.logo}
                         </Link>
                     </Col>
                 );
             });
-    }
-
-    if (!has(csvData, 'data')) {
+    } else {
         return <Loading />;
     }
 
@@ -65,6 +64,12 @@ function PartiesLogos({ minShare = 2, maxParties = 12 }) {
                 strán nájdete na podstránke Strany. Posledná aktualizácia: AKO,
                 13. apríla 2023.
             </em>
+
+            <div className="buttons text-center mt-3">
+                <Button as={Link} to={routes.parties} variant="secondary">
+                    Zobraziť všetky strany
+                </Button>
+            </div>
         </div>
     );
 }

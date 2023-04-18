@@ -12,10 +12,10 @@ function Top10() {
     const { csvData } = useData();
 
     // parse data
-    const parties = [];
+    const columns = [];
     if (has(csvData, 'data')) {
         csvData.data.forEach((row) => {
-            parties.push({
+            columns.push({
                 name: getPartyChartLabel(row),
                 incoming: row.sum_incoming,
                 outgoing: row.sum_outgoing,
@@ -27,9 +27,9 @@ function Top10() {
         <TisBarChart
             title={`Top ${Math.min(
                 10,
-                parties.length
+                columns.length
             )} kampaní podľa výdavkov a príjmov`}
-            data={parties.sort(sortBySpending).slice(0, 10)}
+            data={columns.sort(sortBySpending).slice(0, 10)}
             buttonLink={routes.charts}
             currency
             vertical

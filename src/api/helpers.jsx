@@ -145,6 +145,8 @@ export const sortByNumericProp = (prop, asc) => (a, b) =>
 
 export const sortBySpending = sortByNumericProp('outgoing', false);
 
+export const sortByName = (a, b) => a.name.localeCompare(b.name);
+
 export const removeAccentsFromString = (str) =>
     str ? str.normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
 

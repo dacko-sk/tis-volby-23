@@ -8,6 +8,7 @@ import ContextProviders from './context/ContextProviders';
 import Article from './pages/Article';
 import Home from './pages/Home';
 import News from './pages/News';
+import Parties from './pages/Parties';
 import Party from './pages/Party';
 import PartyNews from './pages/party/PartyNews';
 import PartyOverview from './pages/party/PartyOverview';
@@ -34,7 +35,11 @@ function App() {
                                 element={<Article />}
                             />
                             <Route
-                                path={`${segments.PARTY}/:slug`}
+                                path={segments.PARTIES}
+                                element={<Parties />}
+                            />
+                            <Route
+                                path={`${segments.PARTIES}/:slug`}
                                 element={<Party />}
                             >
                                 <Route index element={<PartyOverview />} />

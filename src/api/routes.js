@@ -15,7 +15,7 @@ export const segments = {
             ? siteConfig.homepage
             : '/',
     NEWS: 'aktuality',
-    PARTY: 'strana',
+    PARTIES: 'strany',
     SEARCH: 'vyhladavanie',
     TRANSACTIONS: 'financovanie',
 };
@@ -26,6 +26,7 @@ export const routes = {
     articles: (page) => segments.ROOT + (page || ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
+    parties: segments.ROOT + segments.PARTIES,
     party: (slug, subpage) => {
         const niceSlug =
             has(parties, slug) && has(parties[slug], 'slug')
@@ -34,7 +35,7 @@ export const routes = {
         return (
             segments.ROOT +
             (slug
-                ? segments.PARTY +
+                ? segments.PARTIES +
                   separators.url +
                   encodeURIComponent(niceSlug.replaceAll(' ', separators.space))
                 : '') +

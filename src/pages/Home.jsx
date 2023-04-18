@@ -21,7 +21,7 @@ function Home() {
                 voľby
             </Title>
 
-            <AlertWithIcon className="mt-4" variant="primary">
+            <AlertWithIcon className="my-4" variant="primary">
                 Vitajte na novej volebnej stránke pre predčasné parlamentné
                 voľby v roku 2023.
                 <br />
@@ -36,9 +36,7 @@ function Home() {
                 </a>
             </AlertWithIcon>
 
-            <PartiesLogos />
-
-            <div className="row gy-3 gy-lg-0 text-center mb-4">
+            <div className="row gy-3 gy-lg-0 text-center mb-2">
                 <div className="col-lg-6">
                     <ElectionsCountdown
                         start="2023-09-30T07:00:00"
@@ -49,6 +47,8 @@ function Home() {
                     <TotalSpending />
                 </div>
             </div>
+
+            <PartiesLogos />
 
             <Top10 />
 

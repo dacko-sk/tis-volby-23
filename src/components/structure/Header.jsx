@@ -31,6 +31,9 @@ function Header() {
                         <Nav.Link as={NavLink} to={routes.news}>
                             Aktuality
                         </Nav.Link>
+                        <Nav.Link as={NavLink} to={routes.parties}>
+                            Strany
+                        </Nav.Link>
                     </Nav>
                     <SearchField />
                     <DonateButton xl />
