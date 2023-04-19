@@ -22,12 +22,9 @@ function Parties() {
     if (has(csvData, 'data')) {
         csvData.data.sort(sortByName).forEach((row) => {
             links.push(
-                <div
-                    className="party-link"
-                    key={row[labels.elections.name_key]}
-                >
+                <div key={row[labels.elections.name_key]}>
                     <Link
-                        className="party-logo hover-bg d-flex align-items-center"
+                        className="party-logo-link hover-bg d-flex align-items-center"
                         to={routes.party(row[labels.elections.name_key])}
                     >
                         <figure className="flex-shrink-0 me-3">

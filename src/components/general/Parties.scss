@@ -1,6 +1,6 @@
 @import './../../scss/variables';
 
-.party-logo {
+.party-logo-link {
   &:hover,
   &:active,
   &:focus {
@@ -20,17 +20,15 @@
     color: $tis-orange;
     margin-bottom: 0;
   }
-}
 
-.party-link {
-  .hover-bg {
+  &.hover-bg {
     &,
     &:hover {
       padding-bottom: 0;
       padding-top: 0;
     }
-  }
-  figure {
-    width: 36px;
+    figure {
+      width: 36px;
+    }
   }
 }

@@ -38,6 +38,9 @@ header {
     margin: 0;
     width: 100%;
   }
+  .logo {
+    max-height: 64px;
+  }
 }
 
 h1 {
@@ -295,9 +298,12 @@ footer h2 {
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -75%);
+        transform: translate(-50%, -50%);
         padding: 0 0.5em;
       }
+    }
+    .logo {
+      max-height: 96px;
     }
   }
   #search {
@@ -311,6 +317,9 @@ footer h2 {
 @media (min-width: map.get($grid-breakpoints, 'xl')) {
   header {
     min-height: 320px;
+    .logo {
+      max-height: 128px;
+    }
   }
   #search {
     max-width: unset;

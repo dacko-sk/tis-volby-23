@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 import has from 'has';
 
-import { labels, parties } from '../../api/constants';
+import { labels } from '../../api/constants';
 import { sortByNumericProp } from '../../api/helpers';
 import { routes } from '../../api/routes';
 
@@ -43,7 +43,7 @@ function PartiesLogos({ minShare = 2, maxParties = 12 }) {
                     <Col xs={4} md={3} xl={2} key={item.key}>
                         <Link
                             to={routes.party(item.key)}
-                            className="party-logo d-flex align-items-center justify-content-center h-100"
+                            className="party-logo-link d-flex align-items-center justify-content-center h-100"
                         >
                             {item.logo}
                         </Link>

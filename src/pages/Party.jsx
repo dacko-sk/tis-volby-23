@@ -54,7 +54,15 @@ function Party() {
 
     return (
         <section className="party-page">
-            <Title>{party.fullName}</Title>
+            <Title>
+                {has(party, 'logo') && (
+                    <>
+                        <img className="logo my-2" src={party.logo} />
+                        <br />
+                    </>
+                )}
+                {party.fullName}
+            </Title>
             <Nav variant="tabs" className="me-auto">
                 <Nav.Link as={NavLink} to={routes.party(party.slug)} end>
                     Prehľad
