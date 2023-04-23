@@ -14,7 +14,7 @@ import Loading from './Loading';
 
 import './Parties.scss';
 
-function PartiesLogos({ minShare = 2, maxParties = 12 }) {
+function PartiesLogos({ minShare = 3 }) {
     const { csvData } = useData();
     const items = [];
     const logos = [];
@@ -35,21 +35,18 @@ function PartiesLogos({ minShare = 2, maxParties = 12 }) {
                 });
             }
         });
-        items
-            .sort(sortByNumericProp('share'))
-            .slice(0, maxParties)
-            .forEach((item) => {
-                logos.push(
-                    <Col xs={4} md={3} xl={2} key={item.key}>
-                        <Link
-                            to={routes.party(item.key)}
-                            className="party-logo-link d-flex align-items-center justify-content-center h-100"
-                        >
-                            {item.logo}
-                        </Link>
-                    </Col>
-                );
-            });
+        items.sort(sortByNumericProp('share')).forEach((item) => {
+            logos.push(
+                <Col xs={4} md={3} xl={2} key={item.key}>
+                    <Link
+                        to={routes.party(item.key)}
+                        className="party-logo-link d-flex align-items-center justify-content-center h-100"
+                    >
+                        {item.logo}
+                    </Link>
+                </Col>
+            );
+        });
     } else {
         return <Loading />;
     }
@@ -59,10 +56,11 @@ function PartiesLogos({ minShare = 2, maxParties = 12 }) {
             <h2 className="text-center mb-4">Kandidujúce strany a hnutia</h2>
             <Row className="gx-3 gx-sm-5 gy-3 mb-2">{logos}</Row>
             <em className="disclaimer">
-                Zobrazujeme len logá {maxParties} preferenčne najsilnejších
-                strán, u ktorých evidujeme transparentný účet. Zoznam všetkých
-                strán nájdete na podstránke Strany. Posledná aktualizácia: AKO,
-                13. apríla 2023.
+                Na úvodnej stránke sú logá strán, ktoré vo viac ako jednom
+                prieskume relevantných agentúr dosiahli za posledné obdobie cez
+                3%. <br className="d-none d-lg-block" />
+                Zoznam všetkých strán nájdete na podstránke Strany. Posledná
+                aktualizácia: 13. apríla 2023.
             </em>
 
             <div className="buttons text-center mt-3">

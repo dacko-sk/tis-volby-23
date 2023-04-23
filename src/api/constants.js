@@ -54,7 +54,7 @@ export const parties = {
     OĽaNO: {
         fullName: 'Obyčajní Ľudia a Nezávislé Osobnosti',
         logo: logoOLaNO,
-        share: 5.8,
+        share: 7,
         tag: 905,
     },
     PS: {
@@ -65,7 +65,7 @@ export const parties = {
     },
     Republika: {
         logo: logoRepublika,
-        share: 6.6,
+        share: 8.8,
         tag: 907,
     },
     SaS: {
