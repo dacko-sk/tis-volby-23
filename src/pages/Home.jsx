@@ -48,9 +48,9 @@ function Home() {
                 </div>
             </div>
 
-            <PartiesLogos />
-
             <Top10 />
+
+            <PartiesLogos />
 
             <h2 className="mt-4">Najnovšie aktuality</h2>
             <Posts

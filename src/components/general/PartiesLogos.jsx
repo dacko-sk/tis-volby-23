@@ -37,7 +37,7 @@ function PartiesLogos({ minShare = 3 }) {
         });
         items.sort(sortByNumericProp('share')).forEach((item) => {
             logos.push(
-                <Col xs={4} md={3} xl={2} key={item.key}>
+                <Col xs={4} sm="auto" key={item.key}>
                     <Link
                         to={routes.party(item.key)}
                         className="party-logo-link d-flex align-items-center justify-content-center h-100"
@@ -54,8 +54,10 @@ function PartiesLogos({ minShare = 3 }) {
     return (
         <div className="logos mb-4">
             <h2 className="text-center mb-4">Kandidujúce strany a hnutia</h2>
-            <Row className="gx-3 gx-sm-5 gy-3 mb-2">{logos}</Row>
-            <em className="disclaimer">
+            <Row className="gx-3 gx-sm-5 gy-3 justify-content-evenly mb-3">
+                {logos}
+            </Row>
+            <em className="disclaimer text-center">
                 Na úvodnej stránke sú logá strán, ktoré vo viac ako jednom
                 prieskume relevantných agentúr dosiahli za posledné obdobie cez
                 3%. <br className="d-none d-lg-block" />

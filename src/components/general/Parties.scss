@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import './../../scss/variables';
 
 .party-logo-link {
@@ -12,9 +13,11 @@
     margin: 0;
   }
   img {
-    width: 100%;
-    max-width: 176px;
-    filter: saturate(25%);
+    width: 120px;
+    max-width: 100%;
+    @media (min-width: map.get($grid-breakpoints, 'xl')) {
+      filter: saturate(25%);
+    }
   }
   h3 {
     color: $tis-orange;
