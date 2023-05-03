@@ -5,7 +5,7 @@ import { dateTimeFormat } from '../../api/helpers';
 
 import useData, { baseDate } from '../../context/DataContext';
 
-function LastUpdateTag({ short, timestamp }) {
+function LastUpdateTag({ children, timestamp }) {
     const { csvData } = useData();
     const lastUpdate =
         timestamp ??
@@ -13,14 +13,12 @@ function LastUpdateTag({ short, timestamp }) {
 
     return (
         <em className="disclaimer">
-            {!short && (
-                <span>
-                    {labels.charts.disclaimer}
-                    <br className="d-xl-none" />
-                    {` ${labels.charts.disclaimerClick}`}
-                </span>
+            {children && (
+                <>
+                    {children}
+                    <br />
+                </>
             )}
-            <br />
             {labels.charts.updated} {dateTimeFormat(lastUpdate)}.
         </em>
     );

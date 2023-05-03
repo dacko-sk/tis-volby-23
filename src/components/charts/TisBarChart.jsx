@@ -58,6 +58,7 @@ function TisBarChart({
     children,
     currency = false,
     data,
+    disclaimer = null,
     lastUpdate = true,
     namesLength,
     scrollable = false,
@@ -106,10 +107,9 @@ function TisBarChart({
             {title && <h2 className={subtitle ? '' : 'mb-3'}>{title}</h2>}
             {subtitle && <h6>{subtitle}</h6>}
             {lastUpdate && (
-                <LastUpdateTag
-                    short={!!timestamp}
-                    timestamp={timestamp ?? null}
-                />
+                <LastUpdateTag timestamp={timestamp ?? null}>
+                    {disclaimer}
+                </LastUpdateTag>
             )}
             <div className={`chart-outer${scrollable ? ' scrollable' : ''}`}>
                 <div

@@ -30,7 +30,6 @@ function TotalSpending() {
             <p className="hero-number">
                 {currencyFormat(total)}
                 <LastUpdateTag
-                    short
                     timestamp={has(csvData, 'data') ? csvData.lastUpdate : null}
                 />
             </p>

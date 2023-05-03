@@ -120,6 +120,15 @@ export const labels = {
         vs: 'VS',
         ss: 'ŠS',
     },
+    ads: {
+        amount: 'Počet reklám',
+        amountTitle: 'Počet reklám za sledované obdobie',
+        barRange: 'Skutočný rozsah výdavkov',
+        disclaimerMetaRange:
+            'Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných na Facebooku a Instagrame od 10.4.2023.',
+        rangesTitle: 'Reklama na sociálnych sieťach platformy Meta',
+        scatterEstimate: 'Odhadované výdavky',
+    },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',

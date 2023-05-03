@@ -59,7 +59,7 @@ function PartyTransactions() {
                         </h2>
                         <p className="hero-number">
                             {currencyFormat(party.sum_outgoing)}
-                            <LastUpdateTag short timestamp={party.timestamp} />
+                            <LastUpdateTag timestamp={party.timestamp} />
                         </p>
                     </div>
 
