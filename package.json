@@ -15,7 +15,8 @@
     "react-router-dom": "^6.7.0",
     "react-social-icons": "^5.15.0",
     "recharts": "^2.5.0",
-    "use-debounce": "^9.0.3"
+    "use-debounce": "^9.0.3",
+    "use-google-sheets": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
