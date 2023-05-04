@@ -1,8 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import has from 'has';
 
+import { getPartyChartLabel } from '../api/chartHelpers';
 import { colors, labels } from '../api/constants';
 import { setTitle, sortByNumericProp } from '../api/helpers';
+
+import useAdsData, { findPartyForFbAccount } from '../context/AdsDataContext';
+import useCsvData from '../context/DataContext';
 
 import FbRangesChart from '../components/charts/FbRangesChart';
 import Loading from '../components/general/Loading';
@@ -10,6 +14,9 @@ import Title from '../components/structure/Title';
 import TisBarChart from '../components/charts/TisBarChart';
 
 function Charts() {
+    const { adsData } = useAdsData();
+    const { csvData } = useCsvData();
+
     // load chart data
     const { isLoading, error, data } = useQuery([`fb_chart_all`], () =>
         fetch(
@@ -18,15 +25,31 @@ function Charts() {
     );
 
     const pages = [];
+    const partiesAggr = {};
     const amounts = [];
     let timestamp = 0;
     if (!isLoading && !error && data && has(data, 'pages')) {
         Object.entries(data.pages).forEach(([pageId, pageProps]) => {
+            const party = findPartyForFbAccount(pageId, adsData, csvData);
+            if (party) {
+                if (has(partiesAggr, party.slug)) {
+                    partiesAggr[party.slug].range[0] += pageProps.min;
+                    partiesAggr[party.slug].range[1] += pageProps.max;
+                    partiesAggr[party.slug].est += pageProps.est;
+                } else {
+                    partiesAggr[party.slug] = {
+                        id: pageId,
+                        name: getPartyChartLabel(party),
+                        range: [pageProps.min, pageProps.max],
+                        est: pageProps.est,
+                    };
+                }
+            }
             pages.push({
                 id: pageId,
                 name: pageProps.name,
                 range: [pageProps.min, pageProps.max],
-                est: pageProps.max - pageProps.ads * 49,
+                est: pageProps.est,
             });
             amounts.push({
                 id: pageId,
@@ -51,6 +74,13 @@ function Charts() {
             <Title>Grafy</Title>
             <FbRangesChart
                 data={pages}
+                disclaimer={labels.ads.disclaimerMetaRange}
+                vertical
+                timestamp={timestamp}
+                title={labels.ads.rangesTitle}
+            />
+            <FbRangesChart
+                data={Object.values(partiesAggr).sort(sortByNumericProp('est'))}
                 disclaimer={labels.ads.disclaimerMetaRange}
                 vertical
                 timestamp={timestamp}

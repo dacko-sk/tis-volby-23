@@ -13,8 +13,10 @@ import {
 import { tooltipNameFormat } from '../../api/chartHelpers';
 import { colors, labels } from '../../api/constants';
 import { numFormat, wholeCurrencyFormat } from '../../api/helpers';
+import { separators } from '../../api/routes';
 
-import { tickFontSize } from './VerticalTick';
+import HorizontalTick from './HorizontalTick';
+import VerticalTick, { tickFontSize } from './VerticalTick';
 
 import './Charts.scss';
 import LastUpdateTag from '../accounts/LastUpdateTag';
@@ -40,6 +42,14 @@ function FbRanges({
         }
         return wholeCurrencyFormat(value);
     };
+
+    let labelLines = 1;
+    data.forEach((row) => {
+        labelLines = Math.max(
+            labelLines,
+            row.name.split(separators.newline).length
+        );
+    });
 
     return (
         <div className="chart-wrapper mb-3">
@@ -83,7 +93,13 @@ function FbRanges({
                                 <XAxis
                                     type="category"
                                     dataKey="name"
-                                    tick={axisConfig}
+                                    tick={
+                                        labelLines > 1 ? (
+                                            <HorizontalTick />
+                                        ) : (
+                                            axisConfig
+                                        )
+                                    }
                                     minTickGap={-10}
                                     height={30}
                                 />
@@ -92,7 +108,13 @@ function FbRanges({
                                 <YAxis
                                     type="category"
                                     dataKey="name"
-                                    tick={axisConfig}
+                                    tick={
+                                        labelLines > 1 ? (
+                                            <VerticalTick />
+                                        ) : (
+                                            axisConfig
+                                        )
+                                    }
                                     minTickGap={-15}
                                     width={160}
                                 />

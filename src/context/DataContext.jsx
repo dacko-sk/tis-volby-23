@@ -71,6 +71,7 @@ export const processAccountsData = (data) => {
                 pd.data[index] = {
                     ...pd.data[index],
                     // copy full name & slug from account key as default
+                    fbName: pd.data[index][labels.elections.name_key],
                     fullName: pd.data[index][labels.elections.name_key],
                     slug: pd.data[index][labels.elections.name_key],
                     share: 0,

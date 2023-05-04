@@ -7,6 +7,7 @@ import ContextProviders from './context/ContextProviders';
 
 import Article from './pages/Article';
 import Home from './pages/Home';
+import Charts from './pages/Charts';
 import News from './pages/News';
 import Parties from './pages/Parties';
 import Party from './pages/Party';
@@ -33,6 +34,10 @@ function App() {
                             <Route
                                 path={`${segments.NEWS}/:slug`}
                                 element={<Article />}
+                            />
+                            <Route
+                                path={`${segments.CHARTS}`}
+                                element={<Charts />}
                             />
                             <Route
                                 path={segments.PARTIES}

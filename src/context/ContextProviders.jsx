@@ -1,10 +1,13 @@
+import { AdsDataProvider } from './AdsDataContext';
 import { CookiesProvider } from './CookiesContext';
 import { DataProvider } from './DataContext';
 
 function ContextProviders({ children }) {
     return (
         <DataProvider>
-            <CookiesProvider>{children}</CookiesProvider>
+            <AdsDataProvider>
+                <CookiesProvider>{children}</CookiesProvider>
+            </AdsDataProvider>
         </DataProvider>
     );
 }

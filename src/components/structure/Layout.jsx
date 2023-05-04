@@ -2,9 +2,14 @@ import { useEffect } from 'react';
 import { usePapaParse } from 'react-papaparse';
 import { Outlet, useLocation } from 'react-router-dom';
 import has from 'has';
+import useGoogleSheets from 'use-google-sheets';
 
 import { scrollToTop } from '../../api/helpers';
 
+import useAdsData, {
+    googleSheetId,
+    processSheetData,
+} from '../../context/AdsDataContext';
 import useData, {
     accountsFile,
     baseDate,
@@ -20,8 +25,8 @@ import Footer from './Footer';
 // import accountsFile from '../../../public/csv/aggregation_no_returns_v2.csv';
 
 function Layout() {
+    const { setAdsData } = useAdsData();
     const { csvData, setCsvData } = useData();
-    // const { adsData, setAdsData } = useAdsData();
     const lastUpdate = has(csvData, 'lastUpdate')
         ? csvData.lastUpdate
         : baseDate;
@@ -30,6 +35,19 @@ function Layout() {
     const reloadData = outdatedMinutes > reloadMinutes;
     const { readRemoteFile } = usePapaParse();
     const { pathname } = useLocation();
+
+    // load ads data
+    const { data, loading, error } = useGoogleSheets({
+        apiKey: process.env.REACT_APP_SHEETS_API_KEY,
+        sheetId: googleSheetId,
+    });
+    // store ads data in context provider once loaded
+    useEffect(() => {
+        if (!error && !loading && data) {
+            const parsed = processSheetData(data);
+            setAdsData(parsed);
+        }
+    }, [data, loading, error]);
 
     // load election data from CSV API and store in context provider
     useEffect(() => {
