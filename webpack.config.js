@@ -1,10 +1,20 @@
 const path = require('path');
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 const { homepage } = require('./package.json');
 const appManifest = require('./public/manifest.json');
+
+// read .env file
+const envLocal = dotenv.config({ path: './.env' }).parsed || {};
+// collect all .env keys and values
+const envKeys = Object.keys(envLocal).reduce((prev, next) => {
+    prev[`process.env.${next.trim()}`] = JSON.stringify(envLocal[next].trim());
+    return prev;
+}, {});
 
 module.exports = (env, argv) => {
     const isEnvProduction = argv.mode === 'production';
@@ -40,6 +50,7 @@ module.exports = (env, argv) => {
                 };
             },
         }),
+        new webpack.DefinePlugin(envKeys),
     ];
     if (isEnvProduction) {
         plugins.push(
