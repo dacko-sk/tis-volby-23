@@ -1,11 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import has from 'has';
-
 import { getPartyChartLabel } from '../api/chartHelpers';
 import { colors, labels } from '../api/constants';
 import { setTitle, sortByNumericProp } from '../api/helpers';
 
-import useAdsData, { findPartyForFbAccount } from '../context/AdsDataContext';
+import useAdsData from '../context/AdsDataContext';
 import useCsvData from '../context/DataContext';
 
 import FbRangesChart from '../components/charts/FbRangesChart';
@@ -14,32 +11,25 @@ import Title from '../components/structure/Title';
 import TisBarChart from '../components/charts/TisBarChart';
 
 function Charts() {
-    const { adsData } = useAdsData();
+    const { metaApiData, findPartyForFbAccount } = useAdsData();
     const { csvData } = useCsvData();
-
-    // load chart data
-    const { isLoading, error, data } = useQuery([`fb_chart_all`], () =>
-        fetch(
-            'https://volby.transparency.sk/api/meta/ads_archive.php?page=all'
-        ).then((response) => response.json())
-    );
 
     const pages = [];
     const partiesAggr = {};
     const amounts = [];
     let timestamp = 0;
-    if (!isLoading && !error && data && has(data, 'pages')) {
-        Object.entries(data.pages).forEach(([pageId, pageProps]) => {
-            const party = findPartyForFbAccount(pageId, adsData, csvData);
-            if (party) {
-                if (has(partiesAggr, party.slug)) {
-                    partiesAggr[party.slug].range[0] += pageProps.min;
-                    partiesAggr[party.slug].range[1] += pageProps.max;
-                    partiesAggr[party.slug].est += pageProps.est;
+    if (metaApiData.lastUpdate) {
+        Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
+            const [fbName, party] = findPartyForFbAccount(pageId, csvData);
+            if (fbName) {
+                if (partiesAggr[fbName] ?? false) {
+                    partiesAggr[fbName].range[0] += pageProps.min;
+                    partiesAggr[fbName].range[1] += pageProps.max;
+                    partiesAggr[fbName].est += pageProps.est;
                 } else {
-                    partiesAggr[party.slug] = {
+                    partiesAggr[fbName] = {
                         id: pageId,
-                        name: getPartyChartLabel(party),
+                        name: party ? getPartyChartLabel(party) : fbName,
                         range: [pageProps.min, pageProps.max],
                         est: pageProps.est,
                     };
@@ -62,9 +52,9 @@ function Charts() {
         amounts.sort(sortByNumericProp('num'));
     }
 
-    if (isLoading || error) {
+    if (!metaApiData.lastUpdate || metaApiData.error) {
         // waiting for data or error in loding
-        return <Loading error={error} />;
+        return <Loading error={metaApiData.error} />;
     }
 
     setTitle('Grafy');

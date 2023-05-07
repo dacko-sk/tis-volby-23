@@ -124,7 +124,6 @@ const initialState = {
     csvData: {
         lastUpdate: baseDate,
     },
-    setCsvData: () => {},
 };
 
 const DataContext = createContext(initialState);

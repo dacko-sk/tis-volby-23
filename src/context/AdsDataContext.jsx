@@ -1,25 +1,37 @@
 import { createContext, useContext, useMemo, useState } from 'react';
-import has from 'has';
 
 export const googleSheetId = '1E3OiM5lU0D8lXRj_LIs6wR9KxHuEzylYxfF8QYTaFbE';
+export const metaApiUrl =
+    'https://volby.transparency.sk/api/meta/ads_archive.php?page=all';
+export const apiReloadUrl = (accounts) =>
+    metaApiUrl + (accounts ? `&reload=${accounts}` : '');
 
 const initialState = {
-    adsData: {
-        pages: {},
+    sheetsData: {
+        error: null,
+        parties: {},
         weeks: {},
         lastUpdate: 0,
     },
-    setAdsData: () => {},
+    metaApiData: {
+        error: null,
+        pages: {},
+        lastUpdate: 0,
+    },
 };
 
-export const processSheetData = (data) => {
+export const loadingErrorSheets = (error) => {
+    return { ...initialState.sheetsData, error };
+};
+
+export const processDataSheets = (data) => {
     if (Array.isArray(data)) {
-        const ads = { ...initialState.adsData };
+        const pd = { ...initialState.sheetsData };
         data.forEach((sheet, index) => {
             if (index === 0) {
                 // first sheet is parties accounts list
                 sheet.data.forEach((row) => {
-                    ads.pages[row.Strana] = row['Účty']
+                    pd.parties[row.Strana] = row['Účty']
                         .replaceAll(' ', '')
                         .split(',');
                 });
@@ -32,55 +44,84 @@ export const processSheetData = (data) => {
                 const time = new Date(
                     `${dateParts[2]} ${dateParts[1]} ${dateParts[0]}`
                 ).getTime();
-                ads.lastUpdate = time;
-                ads.weeks[time] = sheet.data;
+                pd.lastUpdate = time;
+                pd.weeks[time] = sheet.data;
             }
         });
-        return ads;
+        return pd;
     }
     return data;
 };
 
-export const getPartyFbAccounts = (fbName, adsData) => {
-    return has(adsData.pages[fbName]) ? adsData.pages[fbName] : [];
+export const loadingErrorMetaApi = (error) => {
+    return { ...initialState.metaApiData, error };
 };
 
-export const findPartyForFbAccount = (accountId, adsData, csvData) => {
-    if (has(csvData, 'data')) {
-        let fbName = null;
-        Object.entries(adsData.pages).some(([partyFbName, partyAccounts]) => {
-            if (partyAccounts.includes(accountId)) {
-                fbName = partyFbName;
-                return true;
-            }
-            return false;
+export const processDataMetaApi = (data) => {
+    if (data.pages ?? false) {
+        const pd = { ...initialState.metaApiData, ...data };
+        Object.values(data.pages).forEach((pageData) => {
+            pd.lastUpdate = Math.max(pd.lastUpdate, pageData.updated ?? 0);
         });
-        if (fbName) {
-            let party = null;
-            csvData.data.some((row) => {
-                if (row.fbName === fbName) {
-                    party = row;
-                    return true;
-                }
-                return false;
-            });
-            return party;
-        }
+        return pd;
     }
-    return null;
+    return data;
 };
 
 const AdsDataContext = createContext(initialState);
 
 export const AdsDataProvider = function ({ children }) {
-    const [adsData, setAdsData] = useState(initialState.adsData);
+    const [sheetsData, setSheetsData] = useState(initialState.sheetsData);
+    const [metaApiData, setMetaApiData] = useState(initialState.metaApiData);
+
+    // selectors
+    const findPartyForFbAccount = (accountId, csvData) => {
+        let fbName = null;
+        let party = null;
+        if (csvData.data ?? false) {
+            Object.entries(sheetsData.parties).some(
+                ([partyFbName, partyAccounts]) => {
+                    if (partyAccounts.includes(accountId)) {
+                        fbName = partyFbName;
+                        return true;
+                    }
+                    return false;
+                }
+            );
+            if (fbName) {
+                csvData.data.some((row) => {
+                    if (row.fbName === fbName) {
+                        party = row;
+                        return true;
+                    }
+                    return false;
+                });
+            }
+        }
+        return [fbName, party];
+    };
+
+    const getAllFbAccounts = () => {
+        const all = [];
+        Object.values(sheetsData.parties).forEach((partyAccounts) => {
+            all.push(...partyAccounts);
+        });
+        return all;
+    };
+
+    const getPartyFbAccounts = (fbName) => sheetsData.parties?.[fbName] ?? [];
 
     const value = useMemo(
         () => ({
-            adsData,
-            setAdsData,
+            sheetsData,
+            setSheetsData,
+            metaApiData,
+            setMetaApiData,
+            findPartyForFbAccount,
+            getAllFbAccounts,
+            getPartyFbAccounts,
         }),
-        [adsData]
+        [sheetsData, metaApiData]
     );
 
     return (
