@@ -12,7 +12,11 @@ import {
 
 import { tooltipNameFormat } from '../../api/chartHelpers';
 import { colors, labels } from '../../api/constants';
-import { numFormat, wholeCurrencyFormat } from '../../api/helpers';
+import {
+    numFormat,
+    shortenValue,
+    wholeCurrencyFormat,
+} from '../../api/helpers';
 import { separators } from '../../api/routes';
 
 import HorizontalTick from './HorizontalTick';
@@ -24,6 +28,7 @@ import LastUpdateTag from '../accounts/LastUpdateTag';
 function FbRanges({
     data,
     disclaimer = null,
+    namesLength,
     timestamp,
     title,
     vertical = false,
@@ -42,6 +47,8 @@ function FbRanges({
         }
         return wholeCurrencyFormat(value);
     };
+
+    const shortChartNames = (name) => shortenValue(name, namesLength ?? 200);
 
     let labelLines = 1;
     data.forEach((row) => {
@@ -93,6 +100,7 @@ function FbRanges({
                                 <XAxis
                                     type="category"
                                     dataKey="name"
+                                    tickFormatter={shortChartNames}
                                     tick={
                                         labelLines > 1 ? (
                                             <HorizontalTick />
@@ -108,6 +116,7 @@ function FbRanges({
                                 <YAxis
                                     type="category"
                                     dataKey="name"
+                                    tickFormatter={shortChartNames}
                                     tick={
                                         labelLines > 1 ? (
                                             <VerticalTick />

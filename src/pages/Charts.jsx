@@ -10,6 +10,14 @@ import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
 import TisBarChart from '../components/charts/TisBarChart';
 
+const amountBars = [
+    {
+        key: 'num',
+        name: labels.ads.amount,
+        color: colors.colorOrange,
+    },
+];
+
 function Charts() {
     const { metaApiData, findPartyForFbAccount } = useAdsData();
     const { csvData } = useCsvData();
@@ -17,6 +25,7 @@ function Charts() {
     const pages = [];
     const partiesAggr = {};
     const amounts = [];
+    const amountsAggr = {};
     let timestamp = 0;
     if (metaApiData.lastUpdate) {
         Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
@@ -26,12 +35,16 @@ function Charts() {
                     partiesAggr[fbName].range[0] += pageProps.min;
                     partiesAggr[fbName].range[1] += pageProps.max;
                     partiesAggr[fbName].est += pageProps.est;
+                    amountsAggr[fbName].num += pageProps.ads;
                 } else {
                     partiesAggr[fbName] = {
-                        id: pageId,
                         name: party ? getPartyChartLabel(party) : fbName,
                         range: [pageProps.min, pageProps.max],
                         est: pageProps.est,
+                    };
+                    amountsAggr[fbName] = {
+                        name: party ? getPartyChartLabel(party) : fbName,
+                        num: pageProps.ads,
                     };
                 }
             }
@@ -48,8 +61,6 @@ function Charts() {
             });
             timestamp = Math.max(timestamp, pageProps.updated);
         });
-        pages.sort(sortByNumericProp('est'));
-        amounts.sort(sortByNumericProp('num'));
     }
 
     if (!metaApiData.lastUpdate || metaApiData.error) {
@@ -63,30 +74,33 @@ function Charts() {
         <section className="charts-page">
             <Title>Grafy</Title>
             <FbRangesChart
-                data={pages}
-                disclaimer={labels.ads.disclaimerMetaRange}
-                vertical
-                timestamp={timestamp}
-                title={labels.ads.rangesTitle}
-            />
-            <FbRangesChart
                 data={Object.values(partiesAggr).sort(sortByNumericProp('est'))}
                 disclaimer={labels.ads.disclaimerMetaRange}
-                vertical
                 timestamp={timestamp}
-                title={labels.ads.rangesTitle}
+                title={labels.ads.rangesPartiesTitle}
+                vertical
             />
             <TisBarChart
-                bars={[
-                    {
-                        key: 'num',
-                        name: labels.ads.amount,
-                        color: colors.colorOrange,
-                    },
-                ]}
-                data={amounts}
+                bars={amountBars}
+                data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
                 timestamp={timestamp}
-                title={labels.ads.amountTitle}
+                title={labels.ads.amountPartiesTitle}
+                vertical
+            />
+            <FbRangesChart
+                data={pages.sort(sortByNumericProp('est'))}
+                disclaimer={labels.ads.disclaimerMetaRange}
+                namesLength={40}
+                timestamp={timestamp}
+                title={labels.ads.rangesAccountsTitle}
+                vertical
+            />
+            <TisBarChart
+                bars={amountBars}
+                data={amounts.sort(sortByNumericProp('num'))}
+                namesLength={40}
+                timestamp={timestamp}
+                title={labels.ads.amountAccountsTitle}
                 vertical
             />
         </section>
