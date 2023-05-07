@@ -41,9 +41,10 @@ export const processDataSheets = (data) => {
                     .replaceAll('/', '.')
                     .replaceAll(' ', '')
                     .split('.');
-                const time = new Date(
-                    `${dateParts[2]} ${dateParts[1]} ${dateParts[0]}`
-                ).getTime();
+                const time =
+                    new Date(
+                        `${dateParts[2]}/${dateParts[1]}/${dateParts[0]} 23:59:59`
+                    ).getTime() / 1000;
                 pd.lastUpdate = time;
                 pd.weeks[time] = sheet.data;
             }
@@ -75,6 +76,7 @@ export const AdsDataProvider = function ({ children }) {
     const [metaApiData, setMetaApiData] = useState(initialState.metaApiData);
 
     // selectors
+
     const findPartyForFbAccount = (accountId, csvData) => {
         let fbName = null;
         let party = null;
@@ -101,6 +103,18 @@ export const AdsDataProvider = function ({ children }) {
         return [fbName, party];
     };
 
+    const isPoliticAccount = (accountId) => {
+        let isPolitic = false;
+        Object.values(sheetsData.parties).some((partyAccounts) => {
+            if (partyAccounts.includes(accountId)) {
+                isPolitic = true;
+                return true;
+            }
+            return false;
+        });
+        return isPolitic;
+    };
+
     const getAllFbAccounts = () => {
         const all = [];
         Object.values(sheetsData.parties).forEach((partyAccounts) => {
@@ -111,6 +125,30 @@ export const AdsDataProvider = function ({ children }) {
 
     const getPartyFbAccounts = (fbName) => sheetsData.parties?.[fbName] ?? [];
 
+    const mergedWeeksData = () => {
+        const pages = {};
+        Object.values(sheetsData.weeks).forEach((weekData) => {
+            weekData.forEach((pageData) => {
+                if (
+                    isPoliticAccount(pageData['Page ID']) &&
+                    !Number.isNaN(pageData['Amount spent (EUR)'])
+                ) {
+                    if (pages[pageData['Page ID']] ?? false) {
+                        pages[pageData['Page ID']].outgoing += Number(
+                            pageData['Amount spent (EUR)']
+                        );
+                    } else {
+                        pages[pageData['Page ID']] = {
+                            name: pageData['Page name'],
+                            outgoing: Number(pageData['Amount spent (EUR)']),
+                        };
+                    }
+                }
+            });
+        });
+        return pages;
+    };
+
     const value = useMemo(
         () => ({
             sheetsData,
@@ -118,8 +156,10 @@ export const AdsDataProvider = function ({ children }) {
             metaApiData,
             setMetaApiData,
             findPartyForFbAccount,
+            isPoliticAccount,
             getAllFbAccounts,
             getPartyFbAccounts,
+            mergedWeeksData: mergedWeeksData(),
         }),
         [sheetsData, metaApiData]
     );
