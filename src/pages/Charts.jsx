@@ -25,7 +25,7 @@ const bars = {
         {
             key: 'outgoing',
             name: labels.charts.outgoing,
-            color: colors.colorDarkBlue,
+            color: colors.colorLightBlue,
         },
     ],
 };
@@ -128,38 +128,17 @@ function Charts() {
         [chartKeys.RANGES_PARTIES]: (
             <FbRangesChart
                 data={Object.values(partiesAggr).sort(sortByNumericProp('est'))}
-                disclaimer={labels.ads.disclaimerMetaRange}
+                disclaimer={labels.ads.rangesDisclaimer}
                 timestamp={timestamp}
                 vertical
             />
         ),
-        [chartKeys.AMOUNTS_PARTIES]: loadedCharts.includes(
-            chartKeys.AMOUNTS_PARTIES
-        ) ? (
-            <TisBarChart
-                bars={bars.amount}
-                data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
-                timestamp={timestamp}
-                vertical
-            />
-        ) : null,
         [chartKeys.RANGES_ACCOUNTS]: loadedCharts.includes(
             chartKeys.RANGES_ACCOUNTS
         ) ? (
             <FbRangesChart
                 data={pages.sort(sortByNumericProp('est'))}
-                disclaimer={labels.ads.disclaimerMetaRange}
-                namesLength={40}
-                timestamp={timestamp}
-                vertical
-            />
-        ) : null,
-        [chartKeys.AMOUNTS_ACCOUNTS]: loadedCharts.includes(
-            chartKeys.AMOUNTS_ACCOUNTS
-        ) ? (
-            <TisBarChart
-                bars={bars.amount}
-                data={amounts.sort(sortByNumericProp('num'))}
+                disclaimer={labels.ads.rangesDisclaimer}
                 namesLength={40}
                 timestamp={timestamp}
                 vertical
@@ -172,6 +151,7 @@ function Charts() {
                 bars={bars.spending}
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
+                disclaimer={labels.ads.spendingDisclaimer}
                 namesLength={40}
                 timestamp={sheetsData.lastUpdate}
                 vertical
@@ -184,8 +164,32 @@ function Charts() {
                 bars={bars.spending}
                 currency
                 data={spending.sort(sortBySpending)}
+                disclaimer={labels.ads.spendingDisclaimer}
                 namesLength={40}
                 timestamp={sheetsData.lastUpdate}
+                vertical
+            />
+        ) : null,
+        [chartKeys.AMOUNTS_PARTIES]: loadedCharts.includes(
+            chartKeys.AMOUNTS_PARTIES
+        ) ? (
+            <TisBarChart
+                bars={bars.amount}
+                data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
+                disclaimer={labels.ads.amountDisclaimer}
+                timestamp={timestamp}
+                vertical
+            />
+        ) : null,
+        [chartKeys.AMOUNTS_ACCOUNTS]: loadedCharts.includes(
+            chartKeys.AMOUNTS_ACCOUNTS
+        ) ? (
+            <TisBarChart
+                bars={bars.amount}
+                data={amounts.sort(sortByNumericProp('num'))}
+                disclaimer={labels.ads.amountDisclaimer}
+                namesLength={40}
+                timestamp={timestamp}
                 vertical
             />
         ) : null,

@@ -123,17 +123,20 @@ export const labels = {
     ads: {
         amount: 'Počet reklám',
         amountAccountsTitle: 'Počet reklám jednotlivých FB profilov',
+        amountDisclaimer: 'Počet reklám za sledované obdobie od 10.4.2023.',
         amountPartiesTitle:
             'Súčet počtov reklám všetkých profilov politickej strany',
         barRange: 'Skutočný rozsah výdavkov',
-        disclaimerMetaRange:
-            'Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných na Facebooku a Instagrame od 10.4.2023.',
         rangesAccountsTitle:
-            'Najviac inzerujúce profily na sociálnych sieťach platformy Meta',
+            'Najviac inzerujúce profily na sociálnych sieťach platformy Meta od začiatku kampane',
+        rangesDisclaimer:
+            'Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných na Facebooku a Instagrame od 10.4.2023.',
         rangesPartiesTitle:
-            'Rozsah výdavkov všetkých profilov politickej strany na sociálnych sieťach platformy Meta',
+            'Rozsah výdavkov všetkých profilov politickej strany na sociálnych sieťach platformy Meta od začiatku kampane',
         scatterEstimate: 'Odhadované výdavky',
         spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 EUR',
+        spendingDisclaimer:
+            'Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100€ aspoň v jednom týždni počas sledovaného obdobia od 1.5.2023.',
         spendingPartiesTitle:
             'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami nad 100 EUR',
     },
