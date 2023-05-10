@@ -142,9 +142,9 @@ export const labels = {
         spendingPartiesTitle:
             'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami nad 100 €',
         totalAmountDisclaimer:
-            'Počet reklám všetkých politických profilov za sledované obdobie od 1.1.2023.',
+            'Počet politických reklám na sociálnej sieti Facebook za sledované obdobie od 1.1.2023.',
         totalDisclaimer:
-            'Súčet výdavkov všetkých politických profilov, ktorých výdavky presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1.5.2023.',
+            'Súčet výdavkov na politickú reklamu na sociálnej sieti Facebook. Započítane sú všetky profliy, ktorých výdavky presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1.5.2023.',
     },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',

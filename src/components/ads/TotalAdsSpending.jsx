@@ -44,7 +44,7 @@ function TotalAdsSpending() {
                     </div>
                 </Col>
                 <Col lg={6}>
-                    <h2>Počet online reklám</h2>
+                    <h2>Celkový počet online reklám</h2>
 
                     <div className="hero-number">
                         {metaApiData.lastUpdate ? (
