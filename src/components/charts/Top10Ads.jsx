@@ -43,7 +43,7 @@ function Top10Ads({ maxItems = 10 }) {
             disclaimer={labels.ads.spendingDisclaimer}
             namesLength={40}
             timestamp={sheetsData.lastUpdate}
-            title={`Top ${columns.length} online kampaní s týždennými výdavkami nad 100 €`}
+            title={`Top ${columns.length} online kampaní`}
             vertical
         />
     );
