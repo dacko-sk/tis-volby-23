@@ -9,7 +9,7 @@ import useData from '../../context/DataContext';
 
 import TisBarChart from './TisBarChart';
 
-function Top10() {
+function Top10({ maxItems = 10 }) {
     const { csvData } = useData();
 
     // parse data
@@ -27,10 +27,10 @@ function Top10() {
     return (
         <TisBarChart
             title={`Top ${Math.min(
-                10,
+                maxItems,
                 columns.length
             )} kampaní podľa výdavkov a príjmov`}
-            data={columns.sort(sortBySpending).slice(0, 10)}
+            data={columns.sort(sortBySpending).slice(0, maxItems)}
             disclaimer={
                 <span>
                     {labels.charts.disclaimer}

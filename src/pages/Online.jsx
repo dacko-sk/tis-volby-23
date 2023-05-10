@@ -2,33 +2,19 @@ import { useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 
 import { getPartyChartLabel } from '../api/chartHelpers';
-import { colors, labels } from '../api/constants';
+import { labels } from '../api/constants';
 import { setTitle, sortByNumericProp, sortBySpending } from '../api/helpers';
 
 import useAdsData from '../context/AdsDataContext';
 import useCsvData from '../context/DataContext';
 
 import FbRangesChart from '../components/charts/FbRangesChart';
+import TisBarChart, { columnVariants } from '../components/charts/TisBarChart';
+import AlertWithIcon from '../components/general/AlertWithIcon';
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
-import TisBarChart from '../components/charts/TisBarChart';
 
-const bars = {
-    amount: [
-        {
-            key: 'num',
-            name: labels.ads.amount,
-            color: colors.colorOrange,
-        },
-    ],
-    spending: [
-        {
-            key: 'outgoing',
-            name: labels.charts.outgoing,
-            color: colors.colorLightBlue,
-        },
-    ],
-};
+const pageTitle = 'Online';
 
 const chartKeys = {
     RANGES_PARTIES: labels.ads.rangesPartiesTitle,
@@ -39,7 +25,7 @@ const chartKeys = {
     AMOUNTS_ACCOUNTS: labels.ads.amountAccountsTitle,
 };
 
-function Charts() {
+function Online() {
     const [activeKeys, setActiveKeys] = useState([chartKeys.RANGES_PARTIES]);
     const [loadedCharts, setLoadedCharts] = useState([
         chartKeys.RANGES_PARTIES,
@@ -148,7 +134,7 @@ function Charts() {
             chartKeys.SPENDING_PARTIES
         ) ? (
             <TisBarChart
-                bars={bars.spending}
+                bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
                 disclaimer={labels.ads.spendingDisclaimer}
@@ -161,7 +147,7 @@ function Charts() {
             chartKeys.SPENDING_ACCOUNTS
         ) ? (
             <TisBarChart
-                bars={bars.spending}
+                bars={columnVariants.spending}
                 currency
                 data={spending.sort(sortBySpending)}
                 disclaimer={labels.ads.spendingDisclaimer}
@@ -174,7 +160,7 @@ function Charts() {
             chartKeys.AMOUNTS_PARTIES
         ) ? (
             <TisBarChart
-                bars={bars.amount}
+                bars={columnVariants.amount}
                 data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
                 disclaimer={labels.ads.amountDisclaimer}
                 timestamp={timestamp}
@@ -185,7 +171,7 @@ function Charts() {
             chartKeys.AMOUNTS_ACCOUNTS
         ) ? (
             <TisBarChart
-                bars={bars.amount}
+                bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
                 disclaimer={labels.ads.amountDisclaimer}
                 namesLength={40}
@@ -221,11 +207,19 @@ function Charts() {
         });
     };
 
-    setTitle('Grafy');
+    setTitle(pageTitle);
 
     return (
         <section className="charts-page">
-            <Title>Grafy</Title>
+            <Title>{pageTitle}</Title>
+
+            <AlertWithIcon className="my-4" variant="primary">
+                Politickú reklamu strán a ich politikov na sociálnej sieti
+                Facebook sledujeme vďaka údajom, ktoré publikuje spoločnosť META
+                v knižnici Ad Facebook Library.
+                <br />
+                Sumy sú uvedené bez DPH.
+            </AlertWithIcon>
             <Accordion
                 className="mt-4"
                 activeKey={activeKeys}
@@ -238,4 +232,4 @@ function Charts() {
     );
 }
 
-export default Charts;
+export default Online;

@@ -23,7 +23,7 @@ import HorizontalTick from './HorizontalTick';
 import VerticalTick, { tickFontSize } from './VerticalTick';
 
 import './Charts.scss';
-import LastUpdateTag from '../accounts/LastUpdateTag';
+import LastUpdateTag from '../general/LastUpdateTag';
 
 function FbRanges({
     data,

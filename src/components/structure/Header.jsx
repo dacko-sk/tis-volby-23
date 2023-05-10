@@ -34,6 +34,9 @@ function Header() {
                         <Nav.Link as={NavLink} to={routes.parties}>
                             Strany
                         </Nav.Link>
+                        <Nav.Link as={NavLink} to={routes.online}>
+                            Online
+                        </Nav.Link>
                     </Nav>
                     <SearchField />
                     <DonateButton xl />

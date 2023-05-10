@@ -52,7 +52,7 @@ function PartiesLogos({ minShare = 3 }) {
     }
 
     return (
-        <div className="logos mb-4">
+        <div className="logos my-4">
             <h2 className="text-center mb-4">Kandidujúce strany a hnutia</h2>
             <Row className="gx-3 gx-sm-5 gy-3 justify-content-evenly mb-3">
                 {logos}

@@ -7,7 +7,7 @@ import { currencyFormat, setTitle } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 
 // import AccountTransactions from '../../components/accounts/AccountTransactions';
-import LastUpdateTag from '../../components/accounts/LastUpdateTag';
+import LastUpdateTag from '../../components/general/LastUpdateTag';
 import Posts, { templates } from '../../components/wp/Posts';
 import TisBarChart from '../../components/charts/TisBarChart';
 

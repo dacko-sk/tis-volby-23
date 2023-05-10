@@ -14,8 +14,8 @@ export const segments = {
         has(siteConfig, 'homepage') && siteConfig.homepage
             ? siteConfig.homepage
             : '/',
-    CHARTS: 'grafy',
     NEWS: 'aktuality',
+    ONLINE: 'online',
     PARTIES: 'strany',
     SEARCH: 'vyhladavanie',
     TRANSACTIONS: 'financovanie',
@@ -27,6 +27,7 @@ export const routes = {
     articles: (page) => segments.ROOT + (page || ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
+    online: segments.ROOT + segments.ONLINE,
     parties: segments.ROOT + segments.PARTIES,
     party: (slug, subpage) => {
         const niceSlug =

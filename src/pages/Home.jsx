@@ -1,8 +1,12 @@
+import { Col, Row } from 'react-bootstrap';
+
 import { setTitle } from '../api/helpers';
 import { segments } from '../api/routes';
 
 import { newsCategories } from './News';
+import TotalAdsSpending from '../components/ads/TotalAdsSpending';
 import Top10 from '../components/charts/Top10';
+import Top10Ads from '../components/charts/Top10Ads';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
 import TotalSpending from '../components/accounts/TotalSpending';
 import AlertWithIcon from '../components/general/AlertWithIcon';
@@ -36,19 +40,23 @@ function Home() {
                 </a>
             </AlertWithIcon>
 
-            <div className="row gy-3 gy-lg-0 text-center mb-2">
-                <div className="col-lg-6">
+            <Row className="gy-3 gy-lg-0 text-center mb-4">
+                <Col lg={6}>
                     <ElectionsCountdown
                         start="2023-09-30T07:00:00"
                         end="2023-09-30T20:00:00"
                     />
-                </div>
-                <div className="col-lg-6">
+                </Col>
+                <Col lg={6}>
                     <TotalSpending />
-                </div>
-            </div>
+                </Col>
+            </Row>
 
             <Top10 />
+
+            <TotalAdsSpending />
+
+            <Top10Ads />
 
             <PartiesLogos />
 

@@ -119,26 +119,32 @@ export const labels = {
         tx_type: 'Druh platby',
         vs: 'VS',
         ss: 'ŠS',
+        totalDisclaimer:
+            'Súčet výdavkov na všetkých transparentných účtoch politických strán.',
     },
     ads: {
         amount: 'Počet reklám',
         amountAccountsTitle: 'Počet reklám jednotlivých FB profilov',
-        amountDisclaimer: 'Počet reklám za sledované obdobie od 10.4.2023.',
+        amountDisclaimer: 'Počet reklám za sledované obdobie od 1.1.2023.',
         amountPartiesTitle:
             'Súčet počtov reklám všetkých profilov politickej strany',
         barRange: 'Skutočný rozsah výdavkov',
         rangesAccountsTitle:
             'Najviac inzerujúce profily na sociálnych sieťach platformy Meta od začiatku kampane',
         rangesDisclaimer:
-            'Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných na Facebooku a Instagrame od 10.4.2023.',
+            'Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných na Facebooku a Instagrame od 1.1.2023.',
         rangesPartiesTitle:
             'Rozsah výdavkov všetkých profilov politickej strany na sociálnych sieťach platformy Meta od začiatku kampane',
         scatterEstimate: 'Odhadované výdavky',
-        spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 EUR',
+        spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 €',
         spendingDisclaimer:
-            'Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100€ aspoň v jednom týždni počas sledovaného obdobia od 1.5.2023.',
+            'Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1.5.2023.',
         spendingPartiesTitle:
-            'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami nad 100 EUR',
+            'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami nad 100 €',
+        totalAmountDisclaimer:
+            'Počet reklám všetkých politických profilov za sledované obdobie od 1.1.2023.',
+        totalDisclaimer:
+            'Súčet výdavkov všetkých politických profilov, ktorých výdavky presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1.5.2023.',
     },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',

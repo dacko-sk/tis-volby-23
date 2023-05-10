@@ -25,7 +25,7 @@ import { separators } from '../../api/routes';
 
 import HorizontalTick from './HorizontalTick';
 import VerticalTick, { tickFontSize } from './VerticalTick';
-import LastUpdateTag from '../accounts/LastUpdateTag';
+import LastUpdateTag from '../general/LastUpdateTag';
 
 import './Charts.scss';
 
@@ -47,6 +47,20 @@ export const columnVariants = {
             key: 'donors',
             name: labels.charts.uniqeDonors,
             color: colors.colorDarkBlue,
+        },
+    ],
+    amount: [
+        {
+            key: 'num',
+            name: labels.ads.amount,
+            color: colors.colorOrange,
+        },
+    ],
+    spending: [
+        {
+            key: 'outgoing',
+            name: labels.charts.outgoing,
+            color: colors.colorLightBlue,
         },
     ],
 };
