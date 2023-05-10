@@ -14,7 +14,7 @@ import AlertWithIcon from '../components/general/AlertWithIcon';
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
 
-const pageTitle = 'Online';
+const pageTitle = 'Online kampane';
 
 const chartKeys = {
     RANGES_PARTIES: labels.ads.rangesPartiesTitle,
