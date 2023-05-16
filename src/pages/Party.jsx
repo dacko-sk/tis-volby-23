@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
-import has from 'has';
 
 import { labels, parties } from '../api/constants';
 import { decodeSlug, routes, segments } from '../api/routes';
@@ -20,11 +19,14 @@ function Party() {
     // parse aggregated data
     let party = null;
     let accountKey = decodeSlug(slug);
-    if (has(csvData, 'data')) {
+    if (csvData.data ?? false) {
         // find CSV account key if slug is not identical as config key
-        if (!has(parties, accountKey)) {
+        if (!(parties[accountKey] ?? false)) {
             Object.entries(parties).some(([partyKey, partyProps]) => {
-                if (has(partyProps, 'slug') && accountKey === partyProps.slug) {
+                if (
+                    (partyProps.slug ?? false) &&
+                    accountKey === partyProps.slug
+                ) {
                     accountKey = partyKey;
                     return true;
                 }
@@ -42,20 +44,20 @@ function Party() {
     }
 
     useEffect(() => {
-        if (!party && has(csvData, 'data')) {
+        if (!party && (csvData.data ?? false)) {
             // redirect to home page in case party does not have transparent account
             navigate(routes.home);
         }
     }, [party, csvData, navigate]);
 
-    if (!party || !has(csvData, 'data')) {
+    if (!party || !(csvData.data ?? false)) {
         return <Loading />;
     }
 
     return (
         <section className="party-page">
             <Title>
-                {has(party, 'logo') && (
+                {(party.logo ?? false) && (
                     <>
                         <img className="logo my-2" src={party.logo} />
                         <br />
@@ -73,7 +75,13 @@ function Party() {
                 >
                     Financovanie
                 </Nav.Link>
-                {has(party, 'tag') && (
+                <Nav.Link
+                    as={NavLink}
+                    to={routes.party(party.slug, segments.ONLINE)}
+                >
+                    Online
+                </Nav.Link>
+                {(party.tag ?? false) && (
                     <Nav.Link
                         as={NavLink}
                         to={routes.party(party.slug, segments.NEWS)}

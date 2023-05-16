@@ -134,11 +134,26 @@ export const DataProvider = function ({ children }) {
     // selectors
     const findInCsvData = (name, mun) => findRow(csvData, name, mun);
 
+    const findPartyByFbName = (fbName) => {
+        let party = null;
+        if (csvData.data ?? false) {
+            csvData.data.some((row) => {
+                if (row.fbName === fbName) {
+                    party = row;
+                    return true;
+                }
+                return false;
+            });
+        }
+        return party;
+    };
+
     const value = useMemo(
         () => ({
             csvData,
             setCsvData,
             findInCsvData,
+            findPartyByFbName,
         }),
         [csvData]
     );

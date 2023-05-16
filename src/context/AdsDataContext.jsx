@@ -77,30 +77,18 @@ export const AdsDataProvider = function ({ children }) {
 
     // selectors
 
-    const findPartyForFbAccount = (accountId, csvData) => {
+    const findPartyForFbAccount = (accountId) => {
         let fbName = null;
-        let party = null;
-        if (csvData.data ?? false) {
-            Object.entries(sheetsData.parties).some(
-                ([partyFbName, partyAccounts]) => {
-                    if (partyAccounts.includes(accountId)) {
-                        fbName = partyFbName;
-                        return true;
-                    }
-                    return false;
+        Object.entries(sheetsData.parties).some(
+            ([partyFbName, partyAccounts]) => {
+                if (partyAccounts.includes(accountId)) {
+                    fbName = partyFbName;
+                    return true;
                 }
-            );
-            if (fbName) {
-                csvData.data.some((row) => {
-                    if (row.fbName === fbName) {
-                        party = row;
-                        return true;
-                    }
-                    return false;
-                });
+                return false;
             }
-        }
-        return [fbName, party];
+        );
+        return fbName;
     };
 
     const isPoliticAccount = (accountId) => {

@@ -14,26 +14,49 @@ import AlertWithIcon from '../components/general/AlertWithIcon';
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
 
-const pageTitle = 'Online kampane';
-
 const chartKeys = {
-    RANGES_PARTIES: labels.ads.rangesPartiesTitle,
-    RANGES_ACCOUNTS: labels.ads.rangesAccountsTitle,
     SPENDING_PARTIES: labels.ads.spendingPartiesTitle,
     SPENDING_ACCOUNTS: labels.ads.spendingAccountsTitle,
+    RANGES_PARTIES: labels.ads.rangesPartiesTitle,
+    RANGES_ACCOUNTS: labels.ads.rangesAccountsTitle,
     AMOUNTS_PARTIES: labels.ads.amountPartiesTitle,
     AMOUNTS_ACCOUNTS: labels.ads.amountAccountsTitle,
 };
 
+const pageTitle = 'Online kampane';
+
 function Online() {
-    const [activeKeys, setActiveKeys] = useState([chartKeys.RANGES_PARTIES]);
+    const [activeKeys, setActiveKeys] = useState([chartKeys.SPENDING_PARTIES]);
     const [loadedCharts, setLoadedCharts] = useState([
-        chartKeys.RANGES_PARTIES,
+        chartKeys.SPENDING_PARTIES,
     ]);
 
     const { metaApiData, sheetsData, mergedWeeksData, findPartyForFbAccount } =
         useAdsData();
-    const { csvData } = useCsvData();
+    const { findPartyByFbName } = useCsvData();
+
+    // parse data from sheets
+    let spending = [];
+    const spendingAggr = {};
+    if (sheetsData.lastUpdate) {
+        Object.entries(mergedWeeksData).forEach(([pageId, pageProps]) => {
+            const fbName = findPartyForFbAccount(pageId);
+            const party = findPartyByFbName(fbName);
+            if (fbName) {
+                if (spendingAggr[fbName] ?? false) {
+                    spendingAggr[fbName].outgoing += pageProps.outgoing;
+                } else {
+                    spendingAggr[fbName] = {
+                        name: party ? getPartyChartLabel(party) : fbName,
+                        outgoing: pageProps.outgoing,
+                    };
+                }
+            }
+        });
+        if (loadedCharts.includes(chartKeys.SPENDING_ACCOUNTS)) {
+            spending = Object.values(mergedWeeksData);
+        }
+    }
 
     // parse data from API
     const pages = [];
@@ -43,18 +66,21 @@ function Online() {
     let timestamp = 0;
     if (metaApiData.lastUpdate) {
         Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
-            const [fbName, party] = findPartyForFbAccount(pageId, csvData);
+            const fbName = findPartyForFbAccount(pageId);
+            const party = findPartyByFbName(fbName);
             if (fbName) {
-                if (partiesAggr[fbName] ?? false) {
-                    partiesAggr[fbName].range[0] += pageProps.min;
-                    partiesAggr[fbName].range[1] += pageProps.max;
-                    partiesAggr[fbName].est += pageProps.est;
-                } else {
-                    partiesAggr[fbName] = {
-                        name: party ? getPartyChartLabel(party) : fbName,
-                        range: [pageProps.min, pageProps.max],
-                        est: pageProps.est,
-                    };
+                if (loadedCharts.includes(chartKeys.RANGES_PARTIES)) {
+                    if (partiesAggr[fbName] ?? false) {
+                        partiesAggr[fbName].range[0] += pageProps.min;
+                        partiesAggr[fbName].range[1] += pageProps.max;
+                        partiesAggr[fbName].est += pageProps.est;
+                    } else {
+                        partiesAggr[fbName] = {
+                            name: party ? getPartyChartLabel(party) : fbName,
+                            range: [pageProps.min, pageProps.max],
+                            est: pageProps.est,
+                        };
+                    }
                 }
                 if (loadedCharts.includes(chartKeys.AMOUNTS_PARTIES)) {
                     if (amountsAggr[fbName] ?? false) {
@@ -84,30 +110,6 @@ function Online() {
             }
             timestamp = Math.max(timestamp, pageProps.updated);
         });
-    }
-
-    // parse data from sheets
-    let spending = [];
-    const spendingAggr = {};
-    if (sheetsData.lastUpdate) {
-        if (loadedCharts.includes(chartKeys.SPENDING_PARTIES)) {
-            Object.entries(mergedWeeksData).forEach(([pageId, pageProps]) => {
-                const [fbName, party] = findPartyForFbAccount(pageId, csvData);
-                if (fbName) {
-                    if (spendingAggr[fbName] ?? false) {
-                        spendingAggr[fbName].outgoing += pageProps.outgoing;
-                    } else {
-                        spendingAggr[fbName] = {
-                            name: party ? getPartyChartLabel(party) : fbName,
-                            outgoing: pageProps.outgoing,
-                        };
-                    }
-                }
-            });
-        }
-        if (loadedCharts.includes(chartKeys.SPENDING_ACCOUNTS)) {
-            spending = Object.values(mergedWeeksData);
-        }
     }
 
     const charts = {

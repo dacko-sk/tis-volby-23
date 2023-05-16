@@ -12,6 +12,7 @@ import News from './pages/News';
 import Parties from './pages/Parties';
 import Party from './pages/Party';
 import PartyNews from './pages/party/PartyNews';
+import PartyOnline from './pages/party/PartyOnline';
 import PartyOverview from './pages/party/PartyOverview';
 import PartyTransactions from './pages/party/PartyTransactions';
 import Search from './pages/Search';
@@ -49,12 +50,16 @@ function App() {
                             >
                                 <Route index element={<PartyOverview />} />
                                 <Route
-                                    path={segments.NEWS}
-                                    element={<PartyNews />}
-                                />
-                                <Route
                                     path={segments.TRANSACTIONS}
                                     element={<PartyTransactions />}
+                                />
+                                <Route
+                                    path={segments.ONLINE}
+                                    element={<PartyOnline />}
+                                />
+                                <Route
+                                    path={segments.NEWS}
+                                    element={<PartyNews />}
                                 />
                             </Route>
                             <Route

@@ -10,13 +10,14 @@ import TisBarChart, { columnVariants } from './TisBarChart';
 
 function Top10Ads({ maxItems = 10 }) {
     const { findPartyForFbAccount, mergedWeeksData, sheetsData } = useAdsData();
-    const { csvData } = useData();
+    const { findPartyByFbName } = useData();
 
     // parse data
     const spendingAggr = {};
     if (sheetsData.lastUpdate) {
         Object.entries(mergedWeeksData).forEach(([pageId, pageProps]) => {
-            const [fbName, party] = findPartyForFbAccount(pageId, csvData);
+            const fbName = findPartyForFbAccount(pageId);
+            const party = findPartyByFbName(fbName);
             if (fbName) {
                 if (spendingAggr[fbName] ?? false) {
                     spendingAggr[fbName].outgoing += pageProps.outgoing;
