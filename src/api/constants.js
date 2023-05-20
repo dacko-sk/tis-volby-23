@@ -142,7 +142,7 @@ export const labels = {
         scatterEstimate: 'Odhadované výdavky',
         spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 €',
         spendingDisclaimer:
-            'Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1.5.2023.',
+            'Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1. mája 2023.',
         spendingPartiesTitle:
             'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami nad 100 €',
         spendingPartyAccountsTitle:
@@ -150,7 +150,7 @@ export const labels = {
         totalAmountDisclaimer:
             'Počet politických reklám na sociálnej sieti Facebook za sledované obdobie od 1.1.2023.',
         totalDisclaimer:
-            'Súčet výdavkov na politickú reklamu na sociálnej sieti Facebook. Započítane sú všetky profliy, ktorých výdavky presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1.5.2023.',
+            'Súčet výdavkov na politickú reklamu na sociálnej sieti Facebook. Započítane sú všetky profliy, ktorých výdavky presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1. mája 2023.',
     },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',

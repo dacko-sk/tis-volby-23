@@ -28,14 +28,14 @@ function Header() {
                         <Nav.Link as={NavLink} to={routes.home}>
                             Úvod
                         </Nav.Link>
-                        <Nav.Link as={NavLink} to={routes.news}>
-                            Aktuality
-                        </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.parties}>
                             Strany
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.online}>
                             Online
+                        </Nav.Link>
+                        <Nav.Link as={NavLink} to={routes.news}>
+                            Aktuality
                         </Nav.Link>
                     </Nav>
                     <SearchField />

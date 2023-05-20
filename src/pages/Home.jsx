@@ -13,6 +13,7 @@ import AlertWithIcon from '../components/general/AlertWithIcon';
 import PartiesLogos from '../components/general/PartiesLogos';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
+import DonateButton from '../components/general/DonateButton';
 
 function Home() {
     setTitle('Úvod');
@@ -51,6 +52,10 @@ function Home() {
                     <TotalSpending />
                 </Col>
             </Row>
+
+            <div className="text-center mb-4">
+                <DonateButton long xl />
+            </div>
 
             <Top10 />
 

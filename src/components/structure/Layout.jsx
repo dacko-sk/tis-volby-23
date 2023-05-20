@@ -25,7 +25,7 @@ import useData, {
 
 import Header from './Header';
 import Footer from './Footer';
-// import DonateModal from '../general/DonateModal';
+import DonateModal from '../general/DonateModal';
 
 // import accountsFile from '../../../public/csv/aggregation_no_returns_v2.csv';
 
@@ -133,7 +133,7 @@ function Layout() {
                 <Outlet />
             </main>
             <Footer />
-            {/* <DonateModal /> */}
+            <DonateModal />
         </div>
     );
 }
