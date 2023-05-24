@@ -140,6 +140,7 @@ export const labels = {
         rangesPartyAccountsTitle:
             'Najviac inzerujúce profily strany na sociálnych sieťach platformy Meta od začiatku kampane',
         scatterEstimate: 'Odhadované výdavky',
+        showMore: 'Zistiť viac o online kampani',
         spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 €',
         spendingDisclaimer:
             'Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1. mája 2023.',
@@ -150,7 +151,8 @@ export const labels = {
         totalAmountDisclaimer:
             'Počet politických reklám na sociálnej sieti Facebook za sledované obdobie od 1.1.2023.',
         totalDisclaimer:
-            'Súčet výdavkov na politickú reklamu na sociálnej sieti Facebook. Započítane sú všetky profliy, ktorých výdavky presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1. mája 2023.',
+            'Súčet výdavkov na politickú reklamu na sociálnej sieti Facebook. Započítane sú všetky stranícke profliy, ktorých výdavky presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1. mája 2023.',
+        weeklySpending: 'Týždňové výdavky na FB reklamu',
     },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',

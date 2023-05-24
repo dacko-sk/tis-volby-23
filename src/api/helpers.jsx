@@ -33,10 +33,11 @@ export const wholeCurrencyFormat = (value) =>
         maximumFractionDigits: 0,
     });
 
-export const slovakDateFormat = (timestamp, options) =>
-    new Intl.DateTimeFormat('sk-SK', options).format(
-        new Date(typeof timestamp === 'number' ? 1000 * timestamp : timestamp)
-    );
+export const slovakDateFormat = (timestamp, options) => {
+    const num = Number(timestamp);
+    const input = Number.isNaN(num) ? timestamp : 1000 * num;
+    return new Intl.DateTimeFormat('sk-SK', options).format(new Date(input));
+};
 
 export const dateTimeFormat = (timestamp) =>
     slovakDateFormat(timestamp, {

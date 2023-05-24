@@ -65,31 +65,33 @@ function Party() {
                 )}
                 {party.fullName}
             </Title>
-            <Nav variant="tabs" className="me-auto">
-                <Nav.Link as={NavLink} to={routes.party(party.slug)} end>
-                    Prehľad
-                </Nav.Link>
-                <Nav.Link
-                    as={NavLink}
-                    to={routes.party(party.slug, segments.TRANSACTIONS)}
-                >
-                    Financovanie
-                </Nav.Link>
-                <Nav.Link
-                    as={NavLink}
-                    to={routes.party(party.slug, segments.ONLINE)}
-                >
-                    Online
-                </Nav.Link>
-                {(party.tag ?? false) && (
+            <div className="me-auto overflow-auto">
+                <Nav variant="tabs" className="flex-nowrap">
+                    <Nav.Link as={NavLink} to={routes.party(party.slug)} end>
+                        Prehľad
+                    </Nav.Link>
                     <Nav.Link
                         as={NavLink}
-                        to={routes.party(party.slug, segments.NEWS)}
+                        to={routes.party(party.slug, segments.TRANSACTIONS)}
                     >
-                        Aktuality
+                        Financovanie
                     </Nav.Link>
-                )}
-            </Nav>
+                    <Nav.Link
+                        as={NavLink}
+                        to={routes.party(party.slug, segments.ONLINE)}
+                    >
+                        Online
+                    </Nav.Link>
+                    {(party.tag ?? false) && (
+                        <Nav.Link
+                            as={NavLink}
+                            to={routes.party(party.slug, segments.NEWS)}
+                        >
+                            Aktuality
+                        </Nav.Link>
+                    )}
+                </Nav>
+            </div>
 
             <Outlet context={party} />
         </section>

@@ -46,6 +46,7 @@ export const processDataSheets = (data) => {
                         `${dateParts[2]}/${dateParts[1]}/${dateParts[0]} 23:59:59`
                     ).getTime() / 1000;
                 pd.lastUpdate = time;
+                // TODO: filter non-political accounts here! .. and remove isPoliticalAccount selector
                 pd.weeks[time] = sheet.data;
             }
         });

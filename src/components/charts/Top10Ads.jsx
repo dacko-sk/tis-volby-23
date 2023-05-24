@@ -38,7 +38,7 @@ function Top10Ads({ maxItems = 10 }) {
         <TisBarChart
             bars={columnVariants.spending}
             buttonLink={routes.online}
-            buttonText="Zistiť viac o online kampani"
+            buttonText={labels.ads.showMore}
             currency
             data={columns}
             disclaimer={labels.ads.spendingDisclaimer}
