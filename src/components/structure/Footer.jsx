@@ -21,12 +21,14 @@ function Footer() {
             <div className="footer-top py-5">
                 <Container>
                     <h2 className="mb-3 text-center">Donori projektu</h2>
-                    <Row className="justify-content-around gx-md-5">
+                    <Row className="justify-content-around gy-4">
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
-                            xs={12}
-                            md={6}
+                            xs={8}
+                            sm={7}
+                            md={5}
                             lg={4}
+                            xl={3}
                         >
                             <img
                                 className="mw-100 align-self-center"
@@ -35,9 +37,11 @@ function Footer() {
                         </Col>
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
-                            xs={12}
-                            md={6}
+                            xs={8}
+                            sm={7}
+                            md={5}
                             lg={4}
+                            xl={3}
                         >
                             <img
                                 className="mw-100 align-self-center"
@@ -46,9 +50,11 @@ function Footer() {
                         </Col>
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
-                            xs={12}
-                            md={6}
+                            xs={8}
+                            sm={7}
+                            md={5}
                             lg={4}
+                            xl={3}
                         >
                             <figure className="align-self-center m-0">
                                 <img className="mw-100" src={logoEu} />
