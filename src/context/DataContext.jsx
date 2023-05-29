@@ -21,14 +21,21 @@ export const getFileName = (account) => {
     ) {
         return null;
     }
-
+    let fileName = null;
     const match = account[labels.elections.account_key].match(
         /.*(?:SK\d{12})?(\d{10}).*/
     );
-    return match && match.length > 1
+    if (match && match.length > 1) {
+        // #1) IBAN / 10 digits account number match
+        [, fileName] = match;
+    } else if (account[labels.elections.account_key].length > 9) {
+        // #2) last 10 characters
+        fileName = account[labels.elections.account_key].substr(-10);
+    }
+    return fileName
         ? `https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/accounts/${
               account[labels.elections.name_key]
-          } ${match[1]}.csv`
+          } ${fileName}.csv`
         : null;
 };
 
@@ -66,15 +73,19 @@ export const processAccountsData = (data) => {
             pd.data[index].num_outgoing = row.num_outgoing ?? 0;
             pd.data[index].num_unique_donors = row.num_unique_donors ?? 0;
 
+            // copy full name & slug from account key as default
+            pd.data[index] = {
+                ...pd.data[index],
+                fbName: pd.data[index][labels.elections.name_key],
+                fullName: pd.data[index][labels.elections.name_key],
+                slug: pd.data[index][labels.elections.name_key],
+                share: 0,
+            };
+
             // merge data with party config
             if (has(parties, pd.data[index][labels.elections.name_key])) {
                 pd.data[index] = {
                     ...pd.data[index],
-                    // copy full name & slug from account key as default
-                    fbName: pd.data[index][labels.elections.name_key],
-                    fullName: pd.data[index][labels.elections.name_key],
-                    slug: pd.data[index][labels.elections.name_key],
-                    share: 0,
                     // overwrite with config
                     ...parties[pd.data[index][labels.elections.name_key]],
                 };

@@ -119,44 +119,46 @@ function Posts({
                 {articles}
             </Row>
         ) : (
-            <Alert variant="secondary">
+            <Alert variant="secondary" className="my-4">
                 {noResults ?? 'Neboli nájdené žiadne články.'}
             </Alert>
         );
     }
 
     let nav = null;
-    if (showMore || limit) {
-        nav = (
-            <div className="buttons mt-3 text-center">
-                <Button
-                    as={Link}
-                    to={showMoreLink || routes.articles(section)}
-                    variant="secondary"
-                >
-                    {showMore || labels.showMore}
-                </Button>
-            </div>
-        );
-    } else {
-        const items = [];
-        for (let i = 1; i <= totalPages; i += 1) {
-            items.push(
-                <Pagination.Item
-                    key={i}
-                    active={i === activePage}
-                    onClick={loadPage(i)}
-                >
-                    {i}
-                </Pagination.Item>
-            );
-        }
-        if (items.length > 1) {
+    if (articles.length) {
+        if (showMore || limit) {
             nav = (
-                <Pagination className="justify-content-center mt-4">
-                    {items}
-                </Pagination>
+                <div className="buttons mt-3 text-center">
+                    <Button
+                        as={Link}
+                        to={showMoreLink || routes.articles(section)}
+                        variant="secondary"
+                    >
+                        {showMore || labels.showMore}
+                    </Button>
+                </div>
             );
+        } else {
+            const items = [];
+            for (let i = 1; i <= totalPages; i += 1) {
+                items.push(
+                    <Pagination.Item
+                        key={i}
+                        active={i === activePage}
+                        onClick={loadPage(i)}
+                    >
+                        {i}
+                    </Pagination.Item>
+                );
+            }
+            if (items.length > 1) {
+                nav = (
+                    <Pagination className="justify-content-center mt-4">
+                        {items}
+                    </Pagination>
+                );
+            }
         }
     }
 

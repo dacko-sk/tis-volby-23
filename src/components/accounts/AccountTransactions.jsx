@@ -12,7 +12,7 @@ import Loading from '../general/Loading';
 import PaginationWithGaps from '../general/PaginationWithGaps';
 
 const indexColumn = 'index';
-const allowedColumns = Object.keys(labels.account);
+const allowedColumns = Object.entries(labels.account.tableCols);
 
 const formatColumn = (column, value) => {
     switch (column) {
@@ -61,8 +61,8 @@ function AccountTransactions({ pageSize = 25, account }) {
     const totalPages = Math.ceil(transactions.data.length / pageSize);
 
     const headers = [];
-    allowedColumns.forEach((column) => {
-        headers.push(<th key={column}>{labels.account[column]}</th>);
+    allowedColumns.forEach(([colId, colName]) => {
+        headers.push(<th key={colId}>{colName}</th>);
     });
     const rows = [];
     for (
@@ -73,9 +73,9 @@ function AccountTransactions({ pageSize = 25, account }) {
         const tx = transactions.data[i];
         if (tx) {
             const cols = [];
-            allowedColumns.forEach((column) => {
+            allowedColumns.forEach(([colId]) => {
                 cols.push(
-                    <td key={column}>{formatColumn(column, tx[column])}</td>
+                    <td key={colId}>{formatColumn(colId, tx[colId])}</td>
                 );
             });
             rows.push(<tr key={tx[indexColumn]}>{cols}</tr>);

@@ -4,6 +4,7 @@ import logoHlas from '../../public/img/parties/Hlas.svg?url';
 import logoKDH from '../../public/img/parties/KDH.svg?url';
 import logoKSS from '../../public/img/parties/KSS.svg?url';
 import logoLSNS from '../../public/img/parties/LSNS.svg?url';
+import logoMF from '../../public/img/parties/MF.png';
 import logoOLaNO from '../../public/img/parties/OĽaNO.png';
 import logoPS from '../../public/img/parties/PS.png';
 import logoRepublika from '../../public/img/parties/Republika.png';
@@ -50,6 +51,11 @@ export const parties = {
         logo: logoLSNS,
         slug: 'ĽSNS',
         tag: 904,
+    },
+    MF: {
+        fullName: 'Magyar Fórum - Maďarské fórum',
+        logo: logoMF,
+        tag: 912,
     },
     OĽaNO: {
         fullName: 'Obyčajní Ľudia a Nezávislé Osobnosti',
@@ -111,14 +117,16 @@ export const errors = {
 
 export const labels = {
     account: {
-        account_name: 'Názov účtu',
-        date: 'Dátum',
-        amount: 'Suma',
-        // currency: 'Mena',
-        message: 'Popis platby',
-        tx_type: 'Druh platby',
-        vs: 'VS',
-        ss: 'ŠS',
+        tableCols: {
+            account_name: 'Názov účtu',
+            date: 'Dátum',
+            amount: 'Suma',
+            // currency: 'Mena',
+            message: 'Popis platby',
+            tx_type: 'Druh platby',
+            vs: 'VS',
+            ss: 'ŠS',
+        },
         totalDisclaimer:
             'Súčet výdavkov na všetkých transparentných účtoch politických strán.',
     },
