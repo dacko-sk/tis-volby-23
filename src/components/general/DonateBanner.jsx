@@ -13,8 +13,9 @@ function DonateBanner() {
                         rel="noreferrer"
                     >
                         <img
-                            src={banner}
                             alt="Nenechajme voľby bez kontroly!"
+                            className="mw-100"
+                            src={banner}
                         />
                     </a>
                 </div>
