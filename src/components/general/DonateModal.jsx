@@ -48,10 +48,10 @@ function DonateModal() {
             show={show}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Voľby sú už za dverami!</Modal.Title>
+                <Modal.Title>Nenechajme voľby bez kontroly!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Darujte už od 20 € na ich kontrolu aj Vy, aby boli férové.
+                Darujte už od 20 €, aby sme ustrážili férovosť volieb.
                 <br />
                 Ďakujeme.
             </Modal.Body>

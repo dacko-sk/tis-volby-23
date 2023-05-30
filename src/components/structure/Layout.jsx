@@ -25,6 +25,7 @@ import useData, {
 
 import Header from './Header';
 import Footer from './Footer';
+import DonateBanner from '../general/DonateBanner';
 import DonateModal from '../general/DonateModal';
 
 // import accountsFile from '../../../public/csv/aggregation_no_returns_v2.csv';
@@ -129,10 +130,15 @@ function Layout() {
     return (
         <div className="layout-default">
             <Header />
+
             <main className="container mb-4">
                 <Outlet />
             </main>
+
+            <DonateBanner />
+
             <Footer />
+
             <DonateModal />
         </div>
     );

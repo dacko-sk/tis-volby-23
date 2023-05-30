@@ -185,12 +185,17 @@ export const labels = {
     websiteTitle: 'Voľby',
 };
 
+export const settings = {
+    donateUrl: 'https://transparency.sk/volby',
+};
+
 export const constants = {
     categories,
     colors,
     errors,
     labels,
     parties,
+    settings,
 };
 
 export default constants;

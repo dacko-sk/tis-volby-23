@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 
-import { labels } from '../../api/constants';
+import { labels, settings } from '../../api/constants';
 
 function DonateButton({ className, long, xl }) {
     return (
@@ -8,7 +8,7 @@ function DonateButton({ className, long, xl }) {
             className={`${className ? `${className} ` : ''}${
                 xl ? 'btn-xl ' : ''
             }text-uppercase fw-bold`}
-            href="https://transparency.sk/volby"
+            href={settings.donateUrl}
             target="_blank"
             variant="secondary"
         >

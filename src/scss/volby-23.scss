@@ -9,6 +9,10 @@ header {
   background-position-y: 20%;
 }
 
+.bg-banner {
+  background-color: $tis-banner-bg;
+}
+
 .elections .accordion-body {
   padding: 0 calc(var(--bs-gutter-x) * 0.5);
 }

@@ -20,7 +20,7 @@ function Footer() {
         <footer className="mt-auto">
             <div className="footer-top py-5">
                 <Container>
-                    <h2 className="mb-3 text-center">Donori projektu</h2>
+                    {/* <h2 className="mb-3 text-center">Donori projektu</h2>
                     <Row className="justify-content-around gy-4">
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
@@ -79,7 +79,7 @@ function Footer() {
                                 nadáciou.
                             </p>
                         </Col>
-                    </Row>
+                    </Row> */}
                     <Row>
                         <Col md={6} lg={4}>
                             <h2 className="mb-3">Kontakt</h2>
