@@ -71,24 +71,24 @@ function Online() {
             if (fbName) {
                 if (loadedCharts.includes(chartKeys.RANGES_PARTIES)) {
                     if (partiesAggr[fbName] ?? false) {
-                        partiesAggr[fbName].range[0] += pageProps.min;
-                        partiesAggr[fbName].range[1] += pageProps.max;
-                        partiesAggr[fbName].est += pageProps.est;
+                        partiesAggr[fbName].range[0] += pageProps.spend.min;
+                        partiesAggr[fbName].range[1] += pageProps.spend.max;
+                        partiesAggr[fbName].est += pageProps.spend.est;
                     } else {
                         partiesAggr[fbName] = {
                             name: party ? getPartyChartLabel(party) : fbName,
-                            range: [pageProps.min, pageProps.max],
-                            est: pageProps.est,
+                            range: [pageProps.spend.min, pageProps.spend.max],
+                            est: pageProps.spend.est,
                         };
                     }
                 }
                 if (loadedCharts.includes(chartKeys.AMOUNTS_PARTIES)) {
                     if (amountsAggr[fbName] ?? false) {
-                        amountsAggr[fbName].num += pageProps.ads;
+                        amountsAggr[fbName].num += pageProps.spend.num;
                     } else {
                         amountsAggr[fbName] = {
                             name: party ? getPartyChartLabel(party) : fbName,
-                            num: pageProps.ads,
+                            num: pageProps.spend.num,
                         };
                     }
                 }
@@ -97,15 +97,15 @@ function Online() {
                 pages.push({
                     id: pageId,
                     name: pageProps.name,
-                    range: [pageProps.min, pageProps.max],
-                    est: pageProps.est,
+                    range: [pageProps.spend.min, pageProps.spend.max],
+                    est: pageProps.spend.est,
                 });
             }
             if (loadedCharts.includes(chartKeys.AMOUNTS_ACCOUNTS)) {
                 amounts.push({
                     id: pageId,
                     name: pageProps.name,
-                    num: pageProps.ads,
+                    num: pageProps.spend.num,
                 });
             }
             timestamp = Math.max(timestamp, pageProps.updated);

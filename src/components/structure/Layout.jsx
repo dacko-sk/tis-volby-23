@@ -31,7 +31,8 @@ import DonateModal from '../general/DonateModal';
 // import accountsFile from '../../../public/csv/aggregation_no_returns_v2.csv';
 
 function Layout() {
-    const { getAllFbAccounts, setSheetsData, setMetaApiData } = useAdsData();
+    const { getAllFbAccounts, metaApiData, setSheetsData, setMetaApiData } =
+        useAdsData();
     const { csvData, setCsvData } = useData();
     const lastUpdate = has(csvData, 'lastUpdate')
         ? csvData.lastUpdate
@@ -101,11 +102,13 @@ function Layout() {
     // store meta API data in context provider once loaded
     useEffect(() => {
         if (maError) {
-            const parsed = loadingErrorMetaApi(maError);
+            const parsed = loadingErrorMetaApi(maError, metaApiData);
             setMetaApiData(parsed);
         } else if (!maLoading && maData) {
             const parsed = processDataMetaApi(maData);
-            setMetaApiData(parsed);
+            if (parsed.lastUpdate > metaApiData.lastUpdate) {
+                setMetaApiData(parsed);
+            }
         }
     }, [maData, maLoading, maError]);
 

@@ -51,15 +51,15 @@ function PartyOnline() {
                     pages.push({
                         id: pageId,
                         name: pageProps.name,
-                        range: [pageProps.min, pageProps.max],
-                        est: pageProps.est,
+                        range: [pageProps.spend.min, pageProps.spend.max],
+                        est: pageProps.spend.est,
                     });
                 }
                 if (loadedCharts.includes(chartKeys.AMOUNTS)) {
                     amounts.push({
                         id: pageId,
                         name: pageProps.name,
-                        num: pageProps.ads,
+                        num: pageProps.spend.num,
                     });
                 }
                 timestamp = Math.max(timestamp, pageProps.updated);

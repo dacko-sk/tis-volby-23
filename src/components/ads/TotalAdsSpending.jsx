@@ -21,7 +21,7 @@ function TotalAdsSpending() {
     let num = 0;
     if (metaApiData.lastUpdate) {
         Object.values(metaApiData.pages).forEach((pageProps) => {
-            num += pageProps.ads > 0 ? pageProps.ads : 0;
+            num += pageProps.spend.num > 0 ? pageProps.spend.num : 0;
         });
     }
 

@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useState } from 'react';
 
 export const googleSheetId = '1E3OiM5lU0D8lXRj_LIs6wR9KxHuEzylYxfF8QYTaFbE';
 export const metaApiUrl =
-    'https://volby.transparency.sk/api/meta/ads_archive.php?page=all';
+    'https://volby.transparency.sk/api/meta/ads.php?page=all';
 export const apiReloadUrl = (accounts) =>
     metaApiUrl + (accounts ? `&reload=${accounts}` : '');
 
@@ -55,8 +55,8 @@ export const processDataSheets = (data) => {
     return data;
 };
 
-export const loadingErrorMetaApi = (error) => {
-    return { ...initialState.metaApiData, error };
+export const loadingErrorMetaApi = (error, originalData) => {
+    return { ...originalData, error };
 };
 
 export const processDataMetaApi = (data) => {
