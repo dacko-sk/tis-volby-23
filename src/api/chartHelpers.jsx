@@ -26,3 +26,18 @@ export const getPartyChartLabel = (row) => {
             : row[labels.elections.name_key];
     return n + separators.newline;
 };
+
+export const preparePctData = (data, key) => {
+    const pctData = [];
+    let sum = 0;
+    data.forEach((dataPoint) => {
+        sum += dataPoint[key];
+    });
+    data.forEach((dataPoint) => {
+        pctData.push({
+            ...dataPoint,
+            [key]: dataPoint[key] / sum,
+        });
+    });
+    return pctData;
+};

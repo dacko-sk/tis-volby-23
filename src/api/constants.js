@@ -147,6 +147,11 @@ export const labels = {
             'Rozsah výdavkov všetkých profilov politickej strany na sociálnych sieťach platformy Meta od začiatku kampane',
         rangesPartyAccountsTitle:
             'Najviac inzerujúce profily strany na sociálnych sieťach platformy Meta od začiatku kampane',
+        regionalDisclaimer:
+            'Absolútny podiel zásahu online reklamy v krajoch Slovenska a zahraničí za sledované obdobie od 1.1.2023.',
+        regionalRelDisclaimer:
+            'Podiel zásahu online reklamy, relatívny k počtu obyvateľov daného kraja na Slovensku.',
+        regionalTitle: 'Regionálne rozloženie online reklamy',
         scatterEstimate: 'Odhadované výdavky',
         showMore: 'Zistiť viac o online kampani',
         spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 €',
@@ -185,6 +190,18 @@ export const labels = {
     websiteTitle: 'Voľby',
 };
 
+export const regions = {
+    BA: { name: 'Bratislavský kraj', size: 677024 },
+    BB: { name: 'Banskobystrický kraj', size: 643102 },
+    KE: { name: 'Košický kraj', size: 802092 },
+    NR: { name: 'Nitriansky kraj', size: 671508 },
+    PO: { name: 'Prešovský kraj', size: 827028 },
+    TN: { name: 'Trenčiansky kraj', size: 582567 },
+    TT: { name: 'Trnavský kraj', size: 565324 },
+    ZA: { name: 'Žilinský kraj', size: 691136 },
+    W: { name: 'Zahraničie' },
+};
+
 export const settings = {
     donateUrl: 'https://transparency.sk/volby',
 };
@@ -195,6 +212,7 @@ export const constants = {
     errors,
     labels,
     parties,
+    regions,
     settings,
 };
 

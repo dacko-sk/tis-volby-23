@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Accordion from 'react-bootstrap/Accordion';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-import { labels } from '../../api/constants';
+import { colors, labels, regions } from '../../api/constants';
 import { setTitle, sortByNumericProp, sortBySpending } from '../../api/helpers';
 
 import useAdsData from '../../context/AdsDataContext';
@@ -11,6 +13,7 @@ import FbRangesChart from '../../components/charts/FbRangesChart';
 import TisBarChart, {
     columnVariants,
 } from '../../components/charts/TisBarChart';
+import TisPieChart from '../../components/charts/TisPieChart';
 import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Loading from '../../components/general/Loading';
 
@@ -18,6 +21,7 @@ const chartKeys = {
     SPENDING: labels.ads.spendingPartyAccountsTitle,
     RANGES: labels.ads.rangesPartyAccountsTitle,
     AMOUNTS: labels.ads.amountPartyAccountsTitle,
+    REGIONS: labels.ads.regionalTitle,
 };
 
 function PartyOnline() {
@@ -42,6 +46,8 @@ function PartyOnline() {
     // parse data from API
     const pages = [];
     const amounts = [];
+    let pie = null;
+    let relativePie = null;
     let timestamp = 0;
     if (metaApiData.lastUpdate) {
         Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
@@ -61,6 +67,36 @@ function PartyOnline() {
                         name: pageProps.name,
                         num: pageProps.spend.num,
                     });
+                }
+                if (loadedCharts.includes(chartKeys.REGIONS)) {
+                    const pies = [];
+                    const relativePies = [];
+                    Object.entries(pageProps.regions).forEach(
+                        ([name, value]) => {
+                            pies.push({
+                                name: regions[name].name ?? name,
+                                value,
+                            });
+                            if (regions[name].size ?? false) {
+                                relativePies.push({
+                                    name: regions[name].name ?? name,
+                                    value: value / regions[name].size,
+                                });
+                            }
+                        }
+                    );
+                    pie = {
+                        data: pies.sort(sortByNumericProp('value')),
+                        color: colors.colorOrange,
+                        name: 'name',
+                        key: 'value',
+                    };
+                    relativePie = {
+                        data: relativePies.sort(sortByNumericProp('value')),
+                        color: colors.colorDarkBlue,
+                        name: 'name',
+                        key: 'value',
+                    };
                 }
                 timestamp = Math.max(timestamp, pageProps.updated);
             }
@@ -97,6 +133,24 @@ function PartyOnline() {
                 timestamp={timestamp}
                 vertical
             />
+        ) : null,
+        [chartKeys.REGIONS]: loadedCharts.includes(chartKeys.REGIONS) ? (
+            <Row className="gx-0">
+                <Col xl={6}>
+                    <TisPieChart
+                        pie={pie}
+                        disclaimer={labels.ads.regionalDisclaimer}
+                        timestamp={timestamp}
+                    />
+                </Col>
+                <Col xl={6}>
+                    <TisPieChart
+                        pie={relativePie}
+                        disclaimer={labels.ads.regionalRelDisclaimer}
+                        timestamp={timestamp}
+                    />
+                </Col>
+            </Row>
         ) : null,
     };
 

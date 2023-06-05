@@ -7,13 +7,18 @@ export const slovakFormat = (value, options) =>
 
 export const numFormat = (value) => slovakFormat(value, {});
 
-export const pctFormat = (value) => {
+export const pctFormat = (value, precision) => {
     const num = Number(value);
     if (!Number.isNaN(num)) {
-        return `${numFormat(num)} %`;
+        return `${slovakFormat(
+            num,
+            precision ? { maximumFractionDigits: precision } : {}
+        )} %`;
     }
     return '';
 };
+
+export const humanPctFormat = (value) => pctFormat(100 * value, 2);
 
 export const wholeNumFormat = (value) =>
     slovakFormat(value, {
