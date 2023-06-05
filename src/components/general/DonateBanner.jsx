@@ -1,6 +1,6 @@
 import { settings } from '../../api/constants';
 
-import banner from '../../../public/img/banner_crop.png';
+import banner from '../../../public/img/banner.png';
 
 function DonateBanner() {
     return (
