@@ -73,13 +73,18 @@ function PartyOnline() {
                     const relativePies = [];
                     Object.entries(pageProps.regions).forEach(
                         ([name, value]) => {
+                            let label = regions[name].name ?? name;
+                            if (window.innerWidth < 576) {
+                                // shorter labels on mobile
+                                label = label.replace(' kraj', '');
+                            }
                             pies.push({
-                                name: regions[name].name ?? name,
+                                name: label,
                                 value,
                             });
                             if (regions[name].size ?? false) {
                                 relativePies.push({
-                                    name: regions[name].name ?? name,
+                                    name: label,
                                     value: value / regions[name].size,
                                 });
                             }
@@ -135,7 +140,7 @@ function PartyOnline() {
             />
         ) : null,
         [chartKeys.REGIONS]: loadedCharts.includes(chartKeys.REGIONS) ? (
-            <Row className="gx-0">
+            <Row className="gx-0 gy-3">
                 <Col xl={6}>
                     <TisPieChart
                         pie={pie}

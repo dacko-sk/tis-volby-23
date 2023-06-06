@@ -124,10 +124,17 @@ function TisPieChart({
                     {disclaimer}
                 </LastUpdateTag>
             )}
-            <div className="chart-outer mt-4 mb-2">
+            <div className="chart-outer mt-3">
                 <div className="chart">
                     <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
+                        <PieChart
+                            margin={{
+                                top: 20,
+                                right: 20,
+                                bottom: 20,
+                                left: 20,
+                            }}
+                        >
                             <Tooltip formatter={humanPctFormat} />
                             <Pie
                                 activeIndex={activeSegment}
@@ -143,6 +150,7 @@ function TisPieChart({
                                 paddingAngle={1}
                                 fill={pie.color}
                                 label={renderCustomizedLabel}
+                                animationDuration={750}
                                 onClick={pieClick}
                                 onMouseOver={pieOver}
                                 onMouseOut={pieOut}
