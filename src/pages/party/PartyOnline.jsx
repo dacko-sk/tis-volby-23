@@ -4,7 +4,8 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { colors, labels, regions } from '../../api/constants';
+import { regions } from '../../api/chartHelpers';
+import { colors, labels } from '../../api/constants';
 import { setTitle, sortByNumericProp, sortBySpending } from '../../api/helpers';
 
 import useAdsData from '../../context/AdsDataContext';
@@ -46,8 +47,10 @@ function PartyOnline() {
     // parse data from API
     const pages = [];
     const amounts = [];
-    let pie = null;
-    let relativePie = null;
+    const regionsPies = {};
+    const regionsRelPies = {};
+    let regionsPie = null;
+    let regionsRelPie = null;
     let timestamp = 0;
     if (metaApiData.lastUpdate) {
         Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
@@ -69,43 +72,61 @@ function PartyOnline() {
                     });
                 }
                 if (loadedCharts.includes(chartKeys.REGIONS)) {
-                    const pies = [];
-                    const relativePies = [];
-                    Object.entries(pageProps.regions).forEach(
-                        ([name, value]) => {
-                            let label = regions[name].name ?? name;
-                            if (window.innerWidth < 576) {
-                                // shorter labels on mobile
-                                label = label.replace(' kraj', '');
-                            }
-                            pies.push({
-                                name: label,
-                                value,
-                            });
-                            if (regions[name].size ?? false) {
-                                relativePies.push({
-                                    name: label,
-                                    value: value / regions[name].size,
-                                });
+                    Object.entries(regions).forEach(
+                        ([regionKey, regionProps]) => {
+                            if (pageProps.regions[regionKey] ?? false) {
+                                let label = regionProps.name ?? regionKey;
+                                if (window.innerWidth < 576) {
+                                    // shorter labels on mobile
+                                    label = label.replace(' kraj', '');
+                                }
+                                if (regionsPies[regionKey] ?? false) {
+                                    regionsPies[regionKey].value +=
+                                        pageProps.regions[regionKey];
+                                } else {
+                                    regionsPies[regionKey] = {
+                                        name: label,
+                                        value: pageProps.regions[regionKey],
+                                        color:
+                                            regionProps.color ??
+                                            colors.colorOrange,
+                                    };
+                                }
+                                if (regionProps.size ?? false) {
+                                    const val =
+                                        pageProps.regions[regionKey] /
+                                        regionProps.size;
+                                    if (regionsRelPies[regionKey] ?? false) {
+                                        regionsRelPies[regionKey].value += val;
+                                    } else {
+                                        regionsRelPies[regionKey] = {
+                                            name: label,
+                                            value: val,
+                                            color:
+                                                regionProps.color ??
+                                                colors.colorDarkBlue,
+                                        };
+                                    }
+                                }
                             }
                         }
                     );
-                    pie = {
-                        data: pies.sort(sortByNumericProp('value')),
-                        color: colors.colorOrange,
-                        name: 'name',
-                        key: 'value',
-                    };
-                    relativePie = {
-                        data: relativePies.sort(sortByNumericProp('value')),
-                        color: colors.colorDarkBlue,
-                        name: 'name',
-                        key: 'value',
-                    };
                 }
                 timestamp = Math.max(timestamp, pageProps.updated);
             }
         });
+        regionsPie = {
+            data: Object.values(regionsPies),
+            color: colors.colorOrange,
+            name: 'name',
+            key: 'value',
+        };
+        regionsRelPie = {
+            data: Object.values(regionsRelPies),
+            color: colors.colorDarkBlue,
+            name: 'name',
+            key: 'value',
+        };
     }
 
     const charts = {
@@ -143,14 +164,14 @@ function PartyOnline() {
             <Row className="gx-0 gy-3">
                 <Col xl={6}>
                     <TisPieChart
-                        pie={pie}
+                        pie={regionsPie}
                         disclaimer={labels.ads.regionalDisclaimer}
                         timestamp={timestamp}
                     />
                 </Col>
                 <Col xl={6}>
                     <TisPieChart
-                        pie={relativePie}
+                        pie={regionsRelPie}
                         disclaimer={labels.ads.regionalRelDisclaimer}
                         timestamp={timestamp}
                     />

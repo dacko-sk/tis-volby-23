@@ -190,18 +190,6 @@ export const labels = {
     websiteTitle: 'Voľby',
 };
 
-export const regions = {
-    BA: { name: 'Bratislavský kraj', size: 677024 },
-    BB: { name: 'Banskobystrický kraj', size: 643102 },
-    KE: { name: 'Košický kraj', size: 802092 },
-    NR: { name: 'Nitriansky kraj', size: 671508 },
-    PO: { name: 'Prešovský kraj', size: 827028 },
-    TN: { name: 'Trenčiansky kraj', size: 582567 },
-    TT: { name: 'Trnavský kraj', size: 565324 },
-    ZA: { name: 'Žilinský kraj', size: 691136 },
-    W: { name: 'Zahraničie' },
-};
-
 export const settings = {
     donateUrl: 'https://transparency.sk/volby',
 };
@@ -212,7 +200,6 @@ export const constants = {
     errors,
     labels,
     parties,
-    regions,
     settings,
 };
 

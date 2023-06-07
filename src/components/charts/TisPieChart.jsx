@@ -1,17 +1,56 @@
 import { useState } from 'react';
-import { ResponsiveContainer, Pie, PieChart, Sector, Tooltip } from 'recharts';
+import {
+    ResponsiveContainer,
+    Cell,
+    Legend,
+    Pie,
+    PieChart,
+    Sector,
+    Tooltip,
+} from 'recharts';
 
 import { preparePctData } from '../../api/chartHelpers';
-import { humanPctFormat } from '../../api/helpers';
+import { humanPctFormat, numFormat } from '../../api/helpers';
 
 import LastUpdateTag from '../general/LastUpdateTag';
 
 import './Charts.scss';
 
+const CustomLabel = (showName, formatPercent) =>
+    function ({ cx, cy, midAngle, outerRadius, name, percent, fill }) {
+        const RADIAN = Math.PI / 180;
+
+        const radius = outerRadius + 25;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+        let label;
+        if (showName) {
+            label = name;
+        } else {
+            label = formatPercent
+                ? humanPctFormat(percent)
+                : numFormat(percent);
+        }
+
+        return (
+            <text
+                x={x}
+                y={y}
+                fill={fill}
+                textAnchor={x > cx ? 'start' : 'end'}
+                dominantBaseline="central"
+            >
+                {label}
+            </text>
+        );
+    };
+
 function TisPieChart({
     pie,
     disclaimer = null,
     lastUpdate = true,
+    nameLabels = false,
     percent = true,
     subtitle,
     timestamp,
@@ -25,32 +64,7 @@ function TisPieChart({
 
     const [activeSegment, setActiveSegment] = useState(null);
 
-    const RADIAN = Math.PI / 180;
-    const renderCustomizedLabel = ({
-        cx,
-        cy,
-        midAngle,
-        // innerRadius,
-        outerRadius,
-        name,
-        fill,
-    }) => {
-        const radius = outerRadius + 25;
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-        return (
-            <text
-                x={x}
-                y={y}
-                fill={fill}
-                textAnchor={x > cx ? 'start' : 'end'}
-                dominantBaseline="central"
-            >
-                {name}
-            </text>
-        );
-    };
+    const label = CustomLabel(nameLabels, percent);
 
     const renderActiveShape = ({
         cx,
@@ -135,7 +149,6 @@ function TisPieChart({
                                 left: 20,
                             }}
                         >
-                            <Tooltip formatter={humanPctFormat} />
                             <Pie
                                 activeIndex={activeSegment}
                                 activeShape={renderActiveShape}
@@ -149,11 +162,27 @@ function TisPieChart({
                                 outerRadius="80%"
                                 paddingAngle={1}
                                 fill={pie.color}
-                                label={renderCustomizedLabel}
+                                label={label}
                                 animationDuration={750}
                                 onClick={pieClick}
                                 onMouseOver={pieOver}
                                 onMouseOut={pieOut}
+                            >
+                                {pie.data.map((entry) => (
+                                    <Cell
+                                        key={`cell-${entry[pie.key]}`}
+                                        fill={entry.color ?? null}
+                                        // stroke="#444444"
+                                    />
+                                ))}
+                            </Pie>
+                            <Legend
+                                layout="vertical"
+                                align="right"
+                                verticalAlign="middle"
+                            />
+                            <Tooltip
+                                formatter={percent ? humanPctFormat : numFormat}
                             />
                         </PieChart>
                     </ResponsiveContainer>
