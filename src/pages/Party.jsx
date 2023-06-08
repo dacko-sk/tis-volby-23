@@ -58,10 +58,13 @@ function Party() {
         <section className="party-page">
             <Title>
                 {(party.logo ?? false) && (
-                    <>
-                        <img className="logo my-2" src={party.logo} />
-                        <br />
-                    </>
+                    <div className="logo mb-2 mx-auto">
+                        <div className="img-aspect">
+                            <figure>
+                                <img src={party.logo} />
+                            </figure>
+                        </div>
+                    </div>
                 )}
                 {party.fullName}
             </Title>

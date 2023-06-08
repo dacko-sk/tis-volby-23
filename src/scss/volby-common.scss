@@ -39,7 +39,8 @@ header {
     width: 100%;
   }
   .logo {
-    max-height: 64px;
+    width: 64px;
+    max-width: 100%;
   }
 }
 
@@ -193,6 +194,7 @@ ul.arrows {
     height: 100%;
   }
   img {
+    @extend .mw-100;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -303,7 +305,7 @@ footer h2 {
       }
     }
     .logo {
-      max-height: 96px;
+      width: 96px;
     }
   }
   #search {
@@ -318,7 +320,7 @@ footer h2 {
   header {
     min-height: 320px;
     .logo {
-      max-height: 128px;
+      width: 128px;
     }
   }
   #search {
