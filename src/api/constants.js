@@ -144,6 +144,16 @@ export const labels = {
         amountPartyAccountsTitle:
             'Počet reklám jednotlivých FB profilov strany',
         barRange: 'Skutočný rozsah výdavkov',
+        demography: {
+            ages: 'Vekové skupiny',
+            agesDisclaimer:
+                'Podiel zásahu reklám vo vekových skupinách obyvateľstva za sledované obdobie od 1.1.2023.',
+            genders: 'Pohlavia',
+            gendersDisclaimer:
+                'Podiel zásahu reklám medzi pohlaviami za sledované obdobie od 1.1.2023.',
+            title: 'Demografické rozloženie online reklamy',
+        },
+        percent: 'Podiel',
         rangesAccountsTitle:
             'Najviac inzerujúce profily na sociálnych sieťach platformy Meta od začiatku kampane',
         rangesDisclaimer:

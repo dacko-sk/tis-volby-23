@@ -26,6 +26,17 @@ export const regions = {
     W: { name: 'Zahraničie', color: '#004549' },
 };
 
+export const genders = {
+    female: { name: 'Ženy', color: colors.colorOrange },
+    male: { name: 'Muži', color: colors.colorDarkBlue },
+    unknown: { name: 'Neznáme', color: colors.colorLightBlue },
+};
+
+export const getColorOpacityScale = (index, amount) => {
+    const [min, max] = [0.5, 1.0];
+    return min + (max - min) * Math.min(index / (amount - 1), 1);
+};
+
 export const tooltipNameFormat = (value) => {
     const parts = value.split(separators.newline);
     return <strong>{parts.length ? parts[0] : value}</strong>;
