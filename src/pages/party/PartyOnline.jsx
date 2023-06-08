@@ -49,8 +49,22 @@ function PartyOnline() {
     const amounts = [];
     const regionsPies = {};
     const regionsRelPies = {};
-    let regionsPie = null;
-    let regionsRelPie = null;
+    const regionsPie = {
+        data: [],
+        color: colors.colorOrange,
+        nameKey: 'name',
+        dataKey: 'value',
+        label: labels.ads.regionalLabel,
+    };
+    const regionsRelPie = {
+        data: [],
+        color: colors.colorDarkBlue,
+        nameKey: 'name',
+        dataKey: 'value',
+        innerKey: 'size',
+        label: labels.ads.regionalRelLabel,
+        innerLabel: labels.ads.regionalSizeLabel,
+    };
     let timestamp = 0;
     if (metaApiData.lastUpdate) {
         Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
@@ -75,11 +89,7 @@ function PartyOnline() {
                     Object.entries(regions).forEach(
                         ([regionKey, regionProps]) => {
                             if (pageProps.regions[regionKey] ?? false) {
-                                let label = regionProps.name ?? regionKey;
-                                if (window.innerWidth < 576) {
-                                    // shorter labels on mobile
-                                    label = label.replace(' kraj', '');
-                                }
+                                const label = regionProps.name ?? regionKey;
                                 if (regionsPies[regionKey] ?? false) {
                                     regionsPies[regionKey].value +=
                                         pageProps.regions[regionKey];
@@ -102,6 +112,7 @@ function PartyOnline() {
                                         regionsRelPies[regionKey] = {
                                             name: label,
                                             value: val,
+                                            size: regionProps.size,
                                             color:
                                                 regionProps.color ??
                                                 colors.colorDarkBlue,
@@ -115,18 +126,8 @@ function PartyOnline() {
                 timestamp = Math.max(timestamp, pageProps.updated);
             }
         });
-        regionsPie = {
-            data: Object.values(regionsPies),
-            color: colors.colorOrange,
-            name: 'name',
-            key: 'value',
-        };
-        regionsRelPie = {
-            data: Object.values(regionsRelPies),
-            color: colors.colorDarkBlue,
-            name: 'name',
-            key: 'value',
-        };
+        regionsPie.data = Object.values(regionsPies);
+        regionsRelPie.data = Object.values(regionsRelPies);
     }
 
     const charts = {

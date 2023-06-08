@@ -149,8 +149,11 @@ export const labels = {
             'Najviac inzerujúce profily strany na sociálnych sieťach platformy Meta od začiatku kampane',
         regionalDisclaimer:
             'Absolútny podiel zásahu online reklamy v krajoch Slovenska a zahraničí za sledované obdobie od 1.1.2023.',
+        regionalLabel: 'Absolútny podiel zásahu reklam',
         regionalRelDisclaimer:
-            'Podiel zásahu online reklamy, relatívny k počtu obyvateľov daného kraja na Slovensku.',
+            'Prepočet zásahu online reklamy na jedného obyvateľa daného kraja na Slovensku. Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.',
+        regionalRelLabel: 'Podiel zásahu reklamy na jedného obyvateľa',
+        regionalSizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
         regionalTitle: 'Regionálne rozloženie online reklamy',
         scatterEstimate: 'Odhadované výdavky',
         showMore: 'Zistiť viac o online kampani',

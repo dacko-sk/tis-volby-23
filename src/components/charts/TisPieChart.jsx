@@ -5,50 +5,25 @@ import {
     Legend,
     Pie,
     PieChart,
-    Sector,
     Tooltip,
 } from 'recharts';
 
-import { preparePctData } from '../../api/chartHelpers';
+import {
+    preparePctData,
+    ActiveShape,
+    CustomLabel,
+    CustomTooltip,
+    InactiveShape,
+} from '../../api/chartHelpers';
 import { humanPctFormat, numFormat } from '../../api/helpers';
 
 import LastUpdateTag from '../general/LastUpdateTag';
 
 import './Charts.scss';
 
-const CustomLabel = (showName, formatPercent) =>
-    function ({ cx, cy, midAngle, outerRadius, name, percent, fill }) {
-        const RADIAN = Math.PI / 180;
-
-        const radius = outerRadius + 25;
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-        let label;
-        if (showName) {
-            label = name;
-        } else {
-            label = formatPercent
-                ? humanPctFormat(percent)
-                : numFormat(percent);
-        }
-
-        return (
-            <text
-                x={x}
-                y={y}
-                fill={fill}
-                textAnchor={x > cx ? 'start' : 'end'}
-                dominantBaseline="central"
-            >
-                {label}
-            </text>
-        );
-    };
-
 function TisPieChart({
     pie,
-    disclaimer = null,
+    disclaimer,
     lastUpdate = true,
     nameLabels = false,
     percent = true,
@@ -60,60 +35,21 @@ function TisPieChart({
         return null;
     }
 
-    const data = percent ? preparePctData(pie.data, pie.key) : pie.data;
+    const isMobile = window.innerWidth < 576;
+    const hasInner = !!(pie.innerKey ?? false);
+
+    const dataKeys = [pie.dataKey];
+    const dataLabels = [pie.label];
+    if (hasInner) {
+        dataKeys.push(pie.innerKey);
+        dataLabels.push(pie.innerLabel);
+    }
+    const data = percent ? preparePctData(pie.data, dataKeys) : pie.data;
 
     const [activeSegment, setActiveSegment] = useState(null);
 
     const label = CustomLabel(nameLabels, percent);
-
-    const renderActiveShape = ({
-        cx,
-        cy,
-        innerRadius,
-        outerRadius,
-        startAngle,
-        endAngle,
-        fill,
-    }) => {
-        return (
-            <g>
-                <Sector
-                    cx={cx}
-                    cy={cy}
-                    innerRadius={Math.round(innerRadius * 0.95)}
-                    outerRadius={Math.round(outerRadius * 1.05)}
-                    startAngle={startAngle}
-                    endAngle={endAngle}
-                    fill={fill}
-                />
-            </g>
-        );
-    };
-
-    const renderInactiveShape = ({
-        cx,
-        cy,
-        innerRadius,
-        outerRadius,
-        startAngle,
-        endAngle,
-        fill,
-    }) => {
-        return (
-            <g>
-                <Sector
-                    className="pie-inactive"
-                    cx={cx}
-                    cy={cy}
-                    innerRadius={innerRadius}
-                    outerRadius={outerRadius}
-                    startAngle={startAngle}
-                    endAngle={endAngle}
-                    fill={fill}
-                />
-            </g>
-        );
-    };
+    const tooltip = CustomTooltip(dataKeys, dataLabels, percent);
 
     const pieClick = (segmentProps, segmentKey) => {
         setActiveSegment(segmentKey === activeSegment ? null : segmentKey);
@@ -141,25 +77,18 @@ function TisPieChart({
             <div className="chart-outer mt-3">
                 <div className="chart">
                     <ResponsiveContainer width="100%" height="100%">
-                        <PieChart
-                            margin={{
-                                top: 20,
-                                right: 20,
-                                bottom: 20,
-                                left: 20,
-                            }}
-                        >
+                        <PieChart>
                             <Pie
                                 activeIndex={activeSegment}
-                                activeShape={renderActiveShape}
-                                inactiveShape={renderInactiveShape}
+                                activeShape={ActiveShape}
+                                inactiveShape={InactiveShape}
                                 data={data}
-                                dataKey={pie.key}
-                                nameKey={pie.name}
+                                dataKey={pie.dataKey}
+                                nameKey={pie.nameKey}
                                 cx="50%"
                                 cy="50%"
-                                innerRadius="50%"
-                                outerRadius="80%"
+                                innerRadius="55%"
+                                outerRadius="75%"
                                 paddingAngle={1}
                                 fill={pie.color}
                                 label={label}
@@ -168,21 +97,58 @@ function TisPieChart({
                                 onMouseOver={pieOver}
                                 onMouseOut={pieOut}
                             >
-                                {pie.data.map((entry) => (
+                                {pie.data.map((dataObj) => (
                                     <Cell
-                                        key={`cell-${entry[pie.key]}`}
-                                        fill={entry.color ?? null}
-                                        // stroke="#444444"
+                                        key={`cell-${dataObj[pie.dataKey]}`}
+                                        fill={dataObj.color ?? null}
                                     />
                                 ))}
                             </Pie>
+                            {hasInner && (
+                                <Pie
+                                    activeIndex={activeSegment}
+                                    activeShape={ActiveShape}
+                                    inactiveShape={InactiveShape}
+                                    data={data}
+                                    dataKey={pie.innerKey}
+                                    nameKey={pie.nameKey}
+                                    cx="50%"
+                                    cy="50%"
+                                    innerRadius={0}
+                                    outerRadius="45%"
+                                    paddingAngle={1}
+                                    fill={pie.color}
+                                    label={false}
+                                    animationDuration={750}
+                                    onClick={pieClick}
+                                    onMouseOver={pieOver}
+                                    onMouseOut={pieOut}
+                                >
+                                    {pie.data.map((dataObj) => (
+                                        <Cell
+                                            key={`cell-${
+                                                dataObj[pie.innerKey]
+                                            }`}
+                                            fill={dataObj.color ?? null}
+                                        />
+                                    ))}
+                                </Pie>
+                            )}
                             <Legend
-                                layout="vertical"
-                                align="right"
-                                verticalAlign="middle"
+                                layout={isMobile ? 'horizontal' : 'vertical'}
+                                align={isMobile ? 'center' : 'right'}
+                                verticalAlign={isMobile ? 'bottom' : 'middle'}
+                                payload={pie.data.map((dataObj) => {
+                                    return {
+                                        value: dataObj[pie.nameKey] ?? '',
+                                        type: 'rect',
+                                        color: dataObj.color ?? null,
+                                    };
+                                })}
                             />
                             <Tooltip
                                 formatter={percent ? humanPctFormat : numFormat}
+                                content={tooltip}
                             />
                         </PieChart>
                     </ResponsiveContainer>

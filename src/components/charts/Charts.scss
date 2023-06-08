@@ -1,3 +1,4 @@
+@use 'sass:map';
 @import './../../scss/variables';
 
 .chart-outer.scrollable {
@@ -41,10 +42,19 @@ tspan {
 }
 
 .pie-chart {
-  .recharts-tooltip-wrapper {
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
+  .chart {
+    svg {
+      overflow: visible;
+    }
+    @media (max-width: map.get($grid-breakpoints, 'sm')) {
+      min-height: 400px;
+    }
+  }
+  .recharts-default-tooltip {
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
+    white-space: nowrap;
   }
 }
 

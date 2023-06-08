@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
+import { Sector } from 'recharts';
 import has from 'has';
 
 import { colors, labels, parties } from './constants';
+import { humanPctFormat, numFormat } from './helpers';
 import { routes, separators } from './routes';
 
 export const regions = {
@@ -47,17 +49,131 @@ export const getPartyChartLabel = (row) => {
     return n + separators.newline;
 };
 
-export const preparePctData = (data, key) => {
+export const preparePctData = (data, keys) => {
+    const sums = keys.map(() => 0);
     const pctData = [];
-    let sum = 0;
     data.forEach((dataPoint) => {
-        sum += dataPoint[key];
+        keys.forEach((key, index) => {
+            sums[index] += dataPoint[key];
+        });
     });
     data.forEach((dataPoint) => {
+        const pctKeys = {};
+        keys.forEach((key, index) => {
+            pctKeys[key] = dataPoint[key] / sums[index];
+        });
         pctData.push({
             ...dataPoint,
-            [key]: dataPoint[key] / sum,
+            ...pctKeys,
         });
     });
     return pctData;
 };
+
+export const CustomLabel = (showName, formatPercent) =>
+    function ({ cx, cy, midAngle, outerRadius, name, percent, fill }) {
+        const RADIAN = Math.PI / 180;
+
+        const radius = outerRadius + 25;
+        const x = cx + radius * Math.cos(-midAngle * RADIAN);
+        const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+        let label;
+        if (showName) {
+            label = name;
+        } else {
+            label = formatPercent
+                ? humanPctFormat(percent)
+                : numFormat(percent);
+        }
+
+        return (
+            <text
+                x={x}
+                y={y}
+                fill={fill}
+                textAnchor={x > cx ? 'start' : 'end'}
+                dominantBaseline="central"
+            >
+                {label}
+            </text>
+        );
+    };
+
+export const CustomTooltip = (dataKeys, dataLabels, formatPercent) =>
+    function ({ active, payload }) {
+        if (active && payload && payload.length) {
+            console.log(payload[0].payload);
+            return (
+                <div className="recharts-default-tooltip">
+                    <div
+                        className="fw-bold"
+                        style={{ color: payload[0].payload.color }}
+                    >
+                        {payload[0].payload.name}
+                    </div>
+                    {dataKeys.map((key, index) => (
+                        <div key={key}>
+                            {dataLabels[index]}:{' '}
+                            <strong>
+                                {formatPercent
+                                    ? humanPctFormat(payload[0].payload[key])
+                                    : numFormat(payload[0].payload[key])}
+                            </strong>
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        return null;
+    };
+
+export function ActiveShape({
+    cx,
+    cy,
+    innerRadius,
+    outerRadius,
+    startAngle,
+    endAngle,
+    fill,
+}) {
+    return (
+        <g>
+            <Sector
+                cx={cx}
+                cy={cy}
+                innerRadius={Math.round(innerRadius * 0.95)}
+                outerRadius={Math.round(outerRadius * 1.05)}
+                startAngle={startAngle}
+                endAngle={endAngle}
+                fill={fill}
+            />
+        </g>
+    );
+}
+
+export function InactiveShape({
+    cx,
+    cy,
+    innerRadius,
+    outerRadius,
+    startAngle,
+    endAngle,
+    fill,
+}) {
+    return (
+        <g>
+            <Sector
+                className="pie-inactive"
+                cx={cx}
+                cy={cy}
+                innerRadius={innerRadius}
+                outerRadius={outerRadius}
+                startAngle={startAngle}
+                endAngle={endAngle}
+                fill={fill}
+            />
+        </g>
+    );
+}
