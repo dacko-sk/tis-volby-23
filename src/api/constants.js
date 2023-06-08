@@ -12,6 +12,7 @@ import logoSaS from '../../public/img/parties/SASKA.jpg';
 import logoSmeRodina from '../../public/img/parties/SmeRodina.png';
 import logoSmer from '../../public/img/parties/Smer.jpg';
 import logoSNS from '../../public/img/parties/SNS.png';
+import logoZaLudi from '../../public/img/parties/za-ludi.svg?url';
 
 export const categories = {
     news: 877,
@@ -96,6 +97,10 @@ export const parties = {
         logo: logoSNS,
         share: 4.3,
         tag: 911,
+    },
+    'Za Ľudí': {
+        logo: logoZaLudi,
+        tag: 913,
     },
 };
 

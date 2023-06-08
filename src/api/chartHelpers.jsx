@@ -103,7 +103,6 @@ export const CustomLabel = (showName, formatPercent) =>
 export const CustomTooltip = (dataKeys, dataLabels, formatPercent) =>
     function ({ active, payload }) {
         if (active && payload && payload.length) {
-            console.log(payload[0].payload);
             return (
                 <div className="recharts-default-tooltip">
                     <div
