@@ -42,7 +42,6 @@ function Top10Ads({ maxItems = 10 }) {
             currency
             data={columns}
             disclaimer={labels.ads.spendingDisclaimer}
-            namesLength={40}
             timestamp={sheetsData.lastUpdate}
             title={`Top ${columns.length} online kampaní`}
             vertical

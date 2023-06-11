@@ -10,13 +10,14 @@ import {
     YAxis,
 } from 'recharts';
 
-import { tooltipNameFormat } from '../../api/chartHelpers';
-import { colors, labels } from '../../api/constants';
 import {
-    numFormat,
-    shortenValue,
-    wholeCurrencyFormat,
-} from '../../api/helpers';
+    isMobile,
+    shortChartNames,
+    tooltipNameFormat,
+    verticalYaxisWidth,
+} from '../../api/chartHelpers';
+import { colors, labels } from '../../api/constants';
+import { numFormat, wholeCurrencyFormat } from '../../api/helpers';
 import { separators } from '../../api/routes';
 
 import HorizontalTick from './HorizontalTick';
@@ -25,10 +26,10 @@ import VerticalTick, { tickFontSize } from './VerticalTick';
 import './Charts.scss';
 import LastUpdateTag from '../general/LastUpdateTag';
 
-function FbRanges({
+function FbRangesChart({
+    className = '',
     data,
     disclaimer = null,
-    namesLength,
     timestamp,
     title,
     vertical = false,
@@ -48,8 +49,6 @@ function FbRanges({
         return wholeCurrencyFormat(value);
     };
 
-    const shortChartNames = (name) => shortenValue(name, namesLength ?? 200);
-
     let labelLines = 1;
     data.forEach((row) => {
         labelLines = Math.max(
@@ -59,7 +58,7 @@ function FbRanges({
     });
 
     return (
-        <div className="chart-wrapper mb-3">
+        <div className={`chart-wrapper ${className}`}>
             <h2>{title}</h2>
             <LastUpdateTag timestamp={timestamp}>{disclaimer}</LastUpdateTag>
 
@@ -69,7 +68,9 @@ function FbRanges({
                     style={
                         vertical
                             ? {
-                                  height: `${55 + data.length * 40}px`,
+                                  height: `${
+                                      (isMobile ? 90 : 65) + data.length * 40
+                                  }px`,
                               }
                             : {}
                     }
@@ -79,9 +80,9 @@ function FbRanges({
                             data={data}
                             layout={vertical ? 'vertical' : 'horizontal'}
                             margin={{
-                                top: 5,
+                                top: 15,
                                 right: 5,
-                                left: 15,
+                                left: 0,
                                 bottom: 5,
                             }}
                         >
@@ -92,9 +93,10 @@ function FbRanges({
                             />
                             {vertical ? (
                                 <XAxis
-                                    type="number"
-                                    tickFormatter={wholeCurrencyFormat}
                                     tick={axisConfig}
+                                    tickCount={7}
+                                    tickFormatter={wholeCurrencyFormat}
+                                    type="number"
                                 />
                             ) : (
                                 <XAxis
@@ -125,13 +127,14 @@ function FbRanges({
                                         )
                                     }
                                     minTickGap={-15}
-                                    width={160}
+                                    width={verticalYaxisWidth}
                                 />
                             ) : (
                                 <YAxis
-                                    type="number"
-                                    tickFormatter={wholeCurrencyFormat}
                                     tick={axisConfig}
+                                    tickCount={7}
+                                    tickFormatter={wholeCurrencyFormat}
+                                    type="number"
                                 />
                             )}
                             <Tooltip
@@ -158,4 +161,4 @@ function FbRanges({
     );
 }
 
-export default FbRanges;
+export default FbRangesChart;

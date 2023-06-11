@@ -26,10 +26,9 @@ function Top10({ maxItems = 10 }) {
 
     return (
         <TisBarChart
-            title={`Top ${Math.min(
-                maxItems,
-                columns.length
-            )} kampaní podľa výdavkov a príjmov`}
+            buttonLink={routes.charts}
+            className="mb-4"
+            currency
             data={columns.sort(sortBySpending).slice(0, maxItems)}
             disclaimer={
                 <span>
@@ -38,8 +37,10 @@ function Top10({ maxItems = 10 }) {
                     {` ${labels.charts.disclaimerClick}`}
                 </span>
             }
-            buttonLink={routes.charts}
-            currency
+            title={`Top ${Math.min(
+                maxItems,
+                columns.length
+            )} kampaní podľa výdavkov a príjmov`}
             vertical
         />
     );

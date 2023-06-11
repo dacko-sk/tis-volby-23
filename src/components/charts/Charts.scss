@@ -11,6 +11,10 @@
   aspect-ratio: 2/1;
   margin: 0 auto;
   font-size: 13px;
+  &.avg-diff .recharts-legend-icon {
+    fill: transparent;
+    stroke: #000;
+  }
 }
 
 tspan {

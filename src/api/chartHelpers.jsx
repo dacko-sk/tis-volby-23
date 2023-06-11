@@ -3,8 +3,11 @@ import { Sector } from 'recharts';
 import has from 'has';
 
 import { colors, labels, parties } from './constants';
-import { humanPctFormat, numFormat } from './helpers';
+import { humanPctFormat, numFormat, shortenValue } from './helpers';
 import { routes, separators } from './routes';
+
+export const isMobile = window.innerWidth < 576;
+export const verticalYaxisWidth = isMobile ? 120 : 180;
 
 export const regions = {
     BA: {
@@ -23,7 +26,6 @@ export const regions = {
     TN: { name: 'Trenčiansky kraj', size: 582567, color: colors.colorDarkBlue },
     TT: { name: 'Trnavský kraj', size: 565324, color: '#1f1a17' },
     ZA: { name: 'Žilinský kraj', size: 691136, color: '#18943c' },
-    W: { name: 'Zahraničie', color: '#004549' },
 };
 
 export const genders = {
@@ -60,6 +62,8 @@ export const getPartyChartLabel = (row) => {
     return n + separators.newline;
 };
 
+export const shortChartNames = (name) => shortenValue(name, isMobile ? 30 : 60);
+
 export const preparePctData = (data, keys) => {
     const sums = keys.map(() => 0);
     const pctData = [];
@@ -72,6 +76,31 @@ export const preparePctData = (data, keys) => {
         const pctKeys = {};
         keys.forEach((key, index) => {
             pctKeys[key] = dataPoint[key] / sums[index];
+        });
+        pctData.push({
+            ...dataPoint,
+            ...pctKeys,
+        });
+    });
+    return pctData;
+};
+
+export const prepareAvgDeltaPctData = (data, keys) => {
+    const sums = keys.map(() => 0);
+    const avgs = [];
+    const pctData = [];
+    data.forEach((dataPoint) => {
+        keys.forEach((key, index) => {
+            sums[index] += dataPoint[key];
+        });
+    });
+    sums.forEach((sum, index) => {
+        avgs[index] = sum / data.length;
+    });
+    data.forEach((dataPoint) => {
+        const pctKeys = {};
+        keys.forEach((key, index) => {
+            pctKeys[key] = dataPoint[key] / avgs[index] - 1;
         });
         pctData.push({
             ...dataPoint,

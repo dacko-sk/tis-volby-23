@@ -127,7 +127,6 @@ function Online() {
             <FbRangesChart
                 data={pages.sort(sortByNumericProp('est'))}
                 disclaimer={labels.ads.rangesDisclaimer}
-                namesLength={40}
                 timestamp={timestamp}
                 vertical
             />
@@ -140,7 +139,6 @@ function Online() {
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
                 disclaimer={labels.ads.spendingDisclaimer}
-                namesLength={40}
                 timestamp={sheetsData.lastUpdate}
                 vertical
             />
@@ -153,7 +151,6 @@ function Online() {
                 currency
                 data={spending.sort(sortBySpending)}
                 disclaimer={labels.ads.spendingDisclaimer}
-                namesLength={40}
                 timestamp={sheetsData.lastUpdate}
                 vertical
             />
@@ -176,7 +173,6 @@ function Online() {
                 bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
                 disclaimer={labels.ads.amountDisclaimer}
-                namesLength={40}
                 timestamp={timestamp}
                 vertical
             />

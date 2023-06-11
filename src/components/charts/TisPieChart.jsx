@@ -9,6 +9,7 @@ import {
 } from 'recharts';
 
 import {
+    isMobile,
     preparePctData,
     ActiveShape,
     CustomLabel,
@@ -22,11 +23,12 @@ import LastUpdateTag from '../general/LastUpdateTag';
 import './Charts.scss';
 
 function TisPieChart({
-    pie,
+    className = '',
     disclaimer,
     lastUpdate = true,
     nameLabels = false,
     percent = true,
+    pie,
     subtitle,
     timestamp,
     title,
@@ -35,7 +37,6 @@ function TisPieChart({
         return null;
     }
 
-    const isMobile = window.innerWidth < 576;
     const hasInner = !!(pie.innerKey ?? false);
 
     const dataKeys = [pie.dataKey];
@@ -66,7 +67,7 @@ function TisPieChart({
     };
 
     return (
-        <div className="chart-wrapper pie-chart">
+        <div className={`chart-wrapper pie-chart ${className}`}>
             {title && <h2 className={subtitle ? '' : 'mb-3'}>{title}</h2>}
             {subtitle && <h6>{subtitle}</h6>}
             {lastUpdate && (

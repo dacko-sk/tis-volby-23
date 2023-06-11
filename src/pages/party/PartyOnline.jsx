@@ -27,7 +27,7 @@ const chartKeys = {
     SPENDING: labels.ads.spendingPartyAccountsTitle,
     RANGES: labels.ads.rangesPartyAccountsTitle,
     AMOUNTS: labels.ads.amountPartyAccountsTitle,
-    REGIONS: labels.ads.regionalTitle,
+    REGIONS: labels.ads.regions.title,
     DEMOGRAPHY: labels.ads.demography.title,
 };
 
@@ -54,23 +54,17 @@ function PartyOnline() {
     const pages = [];
     const amounts = [];
     const regionsPies = {};
-    const regionsRelPies = {};
     const regionsPie = {
         data: [],
         color: colors.colorOrange,
         nameKey: 'name',
         dataKey: 'value',
-        label: labels.ads.regionalLabel,
-    };
-    const regionsRelPie = {
-        data: [],
-        color: colors.colorDarkBlue,
-        nameKey: 'name',
-        dataKey: 'value',
         innerKey: 'size',
-        label: labels.ads.regionalRelLabel,
-        innerLabel: labels.ads.regionalSizeLabel,
+        label: labels.ads.regions.label,
+        innerLabel: labels.ads.regions.sizeLabel,
     };
+    const regionsCols = {};
+    let regionsRelData = [];
     const dmgrGenders = {};
     const dmgrAges = {};
     const gendersPie = {
@@ -113,7 +107,7 @@ function PartyOnline() {
                     Object.entries(regions).forEach(
                         ([regionKey, regionProps]) => {
                             if (pageProps.regions[regionKey] ?? false) {
-                                const label = regionProps.name ?? regionKey;
+                                const label = regionProps.name;
                                 if (regionsPies[regionKey] ?? false) {
                                     regionsPies[regionKey].value +=
                                         pageProps.regions[regionKey];
@@ -121,27 +115,25 @@ function PartyOnline() {
                                     regionsPies[regionKey] = {
                                         name: label,
                                         value: pageProps.regions[regionKey],
+                                        size: regionProps.size,
                                         color:
                                             regionProps.color ??
                                             colors.colorOrange,
                                     };
                                 }
-                                if (regionProps.size ?? false) {
-                                    const val =
-                                        pageProps.regions[regionKey] /
-                                        regionProps.size;
-                                    if (regionsRelPies[regionKey] ?? false) {
-                                        regionsRelPies[regionKey].value += val;
-                                    } else {
-                                        regionsRelPies[regionKey] = {
-                                            name: label,
-                                            value: val,
-                                            size: regionProps.size,
-                                            color:
-                                                regionProps.color ??
-                                                colors.colorDarkBlue,
-                                        };
-                                    }
+                                const val =
+                                    pageProps.regions[regionKey] /
+                                    regionProps.size;
+                                if (regionsCols[regionKey] ?? false) {
+                                    regionsCols[regionKey].value += val;
+                                } else {
+                                    regionsCols[regionKey] = {
+                                        name: label,
+                                        value: val,
+                                        color:
+                                            regionProps.color ??
+                                            colors.colorDarkBlue,
+                                    };
                                 }
                             }
                         }
@@ -164,7 +156,9 @@ function PartyOnline() {
         });
 
         regionsPie.data = Object.values(regionsPies);
-        regionsRelPie.data = Object.values(regionsRelPies);
+        regionsRelData = Object.values(regionsCols).sort(
+            sortByNumericProp('value')
+        );
 
         Object.entries(genders).forEach(([gKey, gProps]) => {
             if (dmgrGenders[gKey] ?? false) {
@@ -198,7 +192,6 @@ function PartyOnline() {
                 currency
                 data={spending.sort(sortBySpending)}
                 disclaimer={labels.ads.spendingDisclaimer}
-                namesLength={40}
                 timestamp={sheetsData.lastUpdate}
                 vertical
             />
@@ -207,7 +200,6 @@ function PartyOnline() {
             <FbRangesChart
                 data={pages.sort(sortByNumericProp('est'))}
                 disclaimer={labels.ads.rangesDisclaimer}
-                namesLength={40}
                 timestamp={timestamp}
                 vertical
             />
@@ -217,7 +209,6 @@ function PartyOnline() {
                 bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
                 disclaimer={labels.ads.amountDisclaimer}
-                namesLength={40}
                 timestamp={timestamp}
                 vertical
             />
@@ -227,15 +218,30 @@ function PartyOnline() {
                 <Col xl={6}>
                     <TisPieChart
                         pie={regionsPie}
-                        disclaimer={labels.ads.regionalDisclaimer}
+                        disclaimer={
+                            <>
+                                {labels.ads.regions.disclaimer}
+                                <br />
+                                {labels.ads.regions.sizeDisclaimer}
+                            </>
+                        }
                         timestamp={timestamp}
                     />
                 </Col>
                 <Col xl={6}>
-                    <TisPieChart
-                        pie={regionsRelPie}
-                        disclaimer={labels.ads.regionalRelDisclaimer}
-                        timestamp={timestamp}
+                    <TisBarChart
+                        barHeight={35}
+                        bars={[
+                            {
+                                key: 'value',
+                                name: labels.ads.regions.diffAvg,
+                                color: '#000',
+                            },
+                        ]}
+                        data={regionsRelData}
+                        diffFromAverage
+                        disclaimer={labels.ads.regions.diffAvgDisclaimer}
+                        vertical
                     />
                 </Col>
             </Row>

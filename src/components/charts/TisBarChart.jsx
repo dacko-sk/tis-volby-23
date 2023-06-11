@@ -1,25 +1,32 @@
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import {
-    ResponsiveContainer,
-    BarChart,
     Bar,
+    BarChart,
+    CartesianGrid,
+    Cell,
+    Legend,
+    ReferenceLine,
+    ResponsiveContainer,
+    Tooltip,
     XAxis,
     YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
 } from 'recharts';
 import has from 'has';
 
-import { tooltipNameFormat } from '../../api/chartHelpers';
+import {
+    prepareAvgDeltaPctData,
+    shortChartNames,
+    tooltipNameFormat,
+    verticalYaxisWidth,
+} from '../../api/chartHelpers';
 import { colors, labels } from '../../api/constants';
 import {
-    numFormat,
-    wholeNumFormat,
     currencyFormat,
+    humanPctSignFormat,
+    numFormat,
     wholeCurrencyFormat,
-    shortenValue,
+    wholeNumFormat,
 } from '../../api/helpers';
 import { separators } from '../../api/routes';
 
@@ -66,15 +73,17 @@ export const columnVariants = {
 };
 
 function TisBarChart({
+    barHeight,
     bars = columnVariants.inOut,
     buttonLink,
     buttonText,
     children,
+    className = '',
     currency = false,
     data,
+    diffFromAverage = false,
     disclaimer = null,
     lastUpdate = true,
-    namesLength,
     scrollable = false,
     subtitle,
     timestamp,
@@ -85,14 +94,15 @@ function TisBarChart({
         return null;
     }
 
-    const axisNumFormat = currency ? wholeCurrencyFormat : wholeNumFormat;
-    const tooltipNumFormat = currency ? currencyFormat : numFormat;
-    const axisConfig = {
-        fill: '#333',
-        fontSize: tickFontSize,
-    };
-    const shortChartNames = (name) => shortenValue(name, namesLength ?? 200);
     const barElements = [];
+    const dataKeys = [];
+    bars.forEach((bar) => {
+        dataKeys.push(bar.key);
+    });
+    const parsedData = diffFromAverage
+        ? prepareAvgDeltaPctData(data, dataKeys)
+        : data;
+
     bars.forEach((bar) => {
         barElements.push(
             <Bar
@@ -103,21 +113,47 @@ function TisBarChart({
                 label={has(bar, 'label') ? bar.label : null}
                 stackId={has(bar, 'stackId') ? bar.stackId : null}
             >
-                {has(bar, 'labelList') ? bar.labelList : null}
+                {parsedData.map((dataObj) => (
+                    <Cell
+                        key={`cell-${dataObj[bar.key]}`}
+                        fill={dataObj.color ?? bar.color}
+                    >
+                        {has(bar, 'labelList') ? bar.labelList : null}
+                    </Cell>
+                ))}
             </Bar>
         );
     });
 
     let labelLines = 1;
-    data.forEach((row) => {
+    parsedData.forEach((row) => {
         labelLines = Math.max(
             labelLines,
             row.name.split(separators.newline).length
         );
     });
 
+    let axisNumFormat = currency ? wholeCurrencyFormat : wholeNumFormat;
+    let tooltipNumFormat = currency ? currencyFormat : numFormat;
+    if (diffFromAverage) {
+        axisNumFormat = humanPctSignFormat;
+        tooltipNumFormat = humanPctSignFormat;
+    }
+    const axisConfig = {
+        fill: '#333',
+        fontSize: tickFontSize,
+    };
+
+    const refLine = diffFromAverage ? (
+        <ReferenceLine
+            x={vertical ? 0 : null}
+            y={vertical ? null : 0}
+            stroke="#000"
+        />
+    ) : null;
+
     return (
-        <div className="chart-wrapper mb-3">
+        <div className={`chart-wrapper ${className}`}>
             {title && <h2 className={subtitle ? '' : 'mb-3'}>{title}</h2>}
             {subtitle && <h6>{subtitle}</h6>}
             {lastUpdate && (
@@ -127,13 +163,15 @@ function TisBarChart({
             )}
             <div className={`chart-outer${scrollable ? ' scrollable' : ''}`}>
                 <div
-                    className="chart"
+                    className={`chart${diffFromAverage ? ' avg-diff' : ''}`}
                     style={
                         vertical
                             ? {
                                   height: `${
-                                      55 +
-                                      data.length * Math.max(2, labelLines) * 20
+                                      65 +
+                                      data.length *
+                                          (barHeight ??
+                                              Math.max(2, labelLines) * 20)
                                   }px`,
                               }
                             : {}
@@ -141,12 +179,12 @@ function TisBarChart({
                 >
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart
-                            data={data}
+                            data={parsedData}
                             layout={vertical ? 'vertical' : 'horizontal'}
                             margin={{
-                                top: 5,
+                                top: 15,
                                 right: 5,
-                                left: 15,
+                                left: 0,
                                 bottom: 5,
                             }}
                         >
@@ -157,14 +195,16 @@ function TisBarChart({
                             />
                             {vertical ? (
                                 <XAxis
-                                    type="number"
+                                    tickCount={7}
                                     tickFormatter={axisNumFormat}
                                     tick={axisConfig}
+                                    type="number"
                                 />
                             ) : (
                                 <XAxis
-                                    type="category"
                                     dataKey="name"
+                                    height={15 + labelLines * 15}
+                                    minTickGap={-10}
                                     tickFormatter={shortChartNames}
                                     tick={
                                         labelLines > 1 ? (
@@ -173,15 +213,13 @@ function TisBarChart({
                                             axisConfig
                                         )
                                     }
-                                    minTickGap={-10}
-                                    height={15 + labelLines * 15}
+                                    type="category"
                                 />
                             )}
                             {vertical ? (
                                 <YAxis
-                                    type="category"
                                     dataKey="name"
-                                    tickFormatter={shortChartNames}
+                                    minTickGap={-15}
                                     tick={
                                         labelLines > 1 ? (
                                             <VerticalTick />
@@ -189,14 +227,16 @@ function TisBarChart({
                                             axisConfig
                                         )
                                     }
-                                    minTickGap={-15}
-                                    width={160}
+                                    tickFormatter={shortChartNames}
+                                    type="category"
+                                    width={verticalYaxisWidth}
                                 />
                             ) : (
                                 <YAxis
-                                    type="number"
-                                    tickFormatter={axisNumFormat}
                                     tick={axisConfig}
+                                    tickCount={7}
+                                    tickFormatter={axisNumFormat}
+                                    type="number"
                                 />
                             )}
                             <Tooltip
@@ -204,6 +244,7 @@ function TisBarChart({
                                 labelFormatter={tooltipNameFormat}
                             />
                             <Legend />
+                            {refLine}
                             {barElements}
                         </BarChart>
                     </ResponsiveContainer>

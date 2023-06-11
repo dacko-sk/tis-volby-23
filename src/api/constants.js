@@ -162,14 +162,18 @@ export const labels = {
             'Rozsah výdavkov všetkých profilov politickej strany na sociálnych sieťach platformy Meta od začiatku kampane',
         rangesPartyAccountsTitle:
             'Najviac inzerujúce profily strany na sociálnych sieťach platformy Meta od začiatku kampane',
-        regionalDisclaimer:
-            'Absolútny podiel zásahu online reklamy v krajoch Slovenska a zahraničí za sledované obdobie od 1.1.2023.',
-        regionalLabel: 'Absolútny podiel zásahu reklám',
-        regionalRelDisclaimer:
-            'Prepočet zásahu online reklamy na jedného obyvateľa daného kraja na Slovensku. Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.',
-        regionalRelLabel: 'Podiel zásahu reklamy na jedného obyvateľa',
-        regionalSizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
-        regionalTitle: 'Regionálne rozloženie online reklamy',
+        regions: {
+            diffAvg: 'Odchýlka od priemeru strany',
+            diffAvgDisclaimer:
+                'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',
+            disclaimer:
+                'Podiel zásahu online reklamy v krajoch Slovenska za sledované obdobie od 1.1.2023.',
+            label: 'Podiel zásahu reklám',
+            sizeDisclaimer:
+                'Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.',
+            sizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
+            title: 'Regionálne rozloženie online reklamy',
+        },
         scatterEstimate: 'Odhadované výdavky',
         showMore: 'Zistiť viac o online kampani',
         spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 €',
