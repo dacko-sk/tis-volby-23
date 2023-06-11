@@ -241,6 +241,7 @@ function PartyOnline() {
                         data={regionsRelData}
                         diffFromAverage
                         disclaimer={labels.ads.regions.diffAvgDisclaimer}
+                        timestamp={timestamp}
                         vertical
                     />
                 </Col>
