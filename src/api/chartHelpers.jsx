@@ -9,7 +9,7 @@ import { routes, separators } from './routes';
 export const isMobile = window.innerWidth < 576;
 export const verticalYaxisWidth = isMobile ? 120 : 180;
 
-export const regions = {
+export const regionDefs = {
     BA: {
         name: 'Bratislavský kraj',
         size: 677024,
@@ -28,10 +28,16 @@ export const regions = {
     ZA: { name: 'Žilinský kraj', size: 691136, color: '#18943c' },
 };
 
-export const genders = {
+export const genderDefs = {
     female: { name: 'Ženy', color: colors.colorOrange },
     male: { name: 'Muži', color: colors.colorDarkBlue },
-    unknown: { name: 'Neznáme', color: colors.colorLightBlue },
+    unknown: { name: 'Nezistené', color: colors.colorLightBlue },
+};
+
+export const attributionDefs = {
+    YES: { name: 'Správne označené', color: colors.colorDarkBlue },
+    NO: { name: 'Neoznačené', color: colors.colorOrange },
+    'N/A': { name: 'Nezistené', color: colors.colorLightBlue },
 };
 
 export const getColorOpacityScale = (index, amount) => {
@@ -111,7 +117,7 @@ export const prepareAvgDeltaPctData = (data, keys) => {
 };
 
 export const CustomLabel = (showName, formatPercent) =>
-    function ({ cx, cy, midAngle, outerRadius, name, percent, fill }) {
+    function ({ cx, cy, fill, midAngle, outerRadius, name, percent, value }) {
         const RADIAN = Math.PI / 180;
 
         const radius = outerRadius + 25;
@@ -122,9 +128,7 @@ export const CustomLabel = (showName, formatPercent) =>
         if (showName) {
             label = name;
         } else {
-            label = formatPercent
-                ? humanPctFormat(percent)
-                : numFormat(percent);
+            label = formatPercent ? humanPctFormat(percent) : numFormat(value);
         }
 
         return (

@@ -98,9 +98,9 @@ function TisPieChart({
                                 onMouseOver={pieOver}
                                 onMouseOut={pieOut}
                             >
-                                {pie.data.map((dataObj) => (
+                                {data.map((dataObj) => (
                                     <Cell
-                                        key={`cell-${dataObj[pie.dataKey]}`}
+                                        key={`cell-${dataObj[pie.nameKey]}`}
                                         fill={dataObj.color ?? null}
                                     />
                                 ))}
@@ -125,11 +125,9 @@ function TisPieChart({
                                     onMouseOver={pieOver}
                                     onMouseOut={pieOut}
                                 >
-                                    {pie.data.map((dataObj) => (
+                                    {data.map((dataObj) => (
                                         <Cell
-                                            key={`cell-${
-                                                dataObj[pie.innerKey]
-                                            }`}
+                                            key={`cell-${dataObj[pie.nameKey]}`}
                                             fill={dataObj.color ?? null}
                                         />
                                     ))}
@@ -139,7 +137,7 @@ function TisPieChart({
                                 layout={isMobile ? 'horizontal' : 'vertical'}
                                 align={isMobile ? 'center' : 'right'}
                                 verticalAlign={isMobile ? 'bottom' : 'middle'}
-                                payload={pie.data.map((dataObj) => {
+                                payload={data.map((dataObj) => {
                                     return {
                                         value: dataObj[pie.nameKey] ?? '',
                                         type: 'rect',

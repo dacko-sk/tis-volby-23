@@ -4,7 +4,12 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { genders, getColorOpacityScale, regions } from '../../api/chartHelpers';
+import {
+    attributionDefs,
+    genderDefs,
+    getColorOpacityScale,
+    regionDefs,
+} from '../../api/chartHelpers';
 import { colors, labels } from '../../api/constants';
 import {
     setTitle,
@@ -29,6 +34,7 @@ const chartKeys = {
     AMOUNTS: labels.ads.amountPartyAccountsTitle,
     REGIONS: labels.ads.regions.title,
     DEMOGRAPHY: labels.ads.demography.title,
+    ATTRIBUTION: labels.ads.attribution.title,
 };
 
 function PartyOnline() {
@@ -51,9 +57,9 @@ function PartyOnline() {
     }
 
     // parse data from API
-    const pages = [];
+    const ranges = [];
     const amounts = [];
-    const regionsPies = {};
+    const regions = {};
     const regionsPie = {
         data: [],
         color: colors.colorOrange,
@@ -64,9 +70,9 @@ function PartyOnline() {
         innerLabel: labels.ads.regions.sizeLabel,
     };
     const regionsCols = {};
-    let regionsRelData = [];
-    const dmgrGenders = {};
-    const dmgrAges = {};
+    let regionsDiffs = [];
+    const genders = {};
+    const ages = {};
     const gendersPie = {
         data: [],
         color: colors.colorLightBlue,
@@ -81,13 +87,23 @@ function PartyOnline() {
         dataKey: 'value',
         label: labels.ads.percent,
     };
+    const attributions = {};
+    const attributionsPie = {
+        data: [],
+        color: colors.colorLightBlue,
+        nameKey: 'name',
+        dataKey: 'value',
+        label: labels.ads.attribution.amount,
+    };
     let timestamp = 0;
+
     if (metaApiData.lastUpdate) {
+        // collect data from all FB accounts of the party
         Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
             const accountParty = findPartyForFbAccount(pageId);
             if (party.fbName === accountParty) {
                 if (loadedCharts.includes(chartKeys.RANGES)) {
-                    pages.push({
+                    ranges.push({
                         id: pageId,
                         name: pageProps.name,
                         range: [pageProps.spend.min, pageProps.spend.max],
@@ -104,15 +120,15 @@ function PartyOnline() {
                 }
 
                 if (loadedCharts.includes(chartKeys.REGIONS)) {
-                    Object.entries(regions).forEach(
+                    Object.entries(regionDefs).forEach(
                         ([regionKey, regionProps]) => {
                             if (pageProps.regions[regionKey] ?? false) {
                                 const label = regionProps.name;
-                                if (regionsPies[regionKey] ?? false) {
-                                    regionsPies[regionKey].value +=
+                                if (regions[regionKey] ?? false) {
+                                    regions[regionKey].value +=
                                         pageProps.regions[regionKey];
                                 } else {
-                                    regionsPies[regionKey] = {
+                                    regions[regionKey] = {
                                         name: label,
                                         value: pageProps.regions[regionKey],
                                         size: regionProps.size,
@@ -144,9 +160,17 @@ function PartyOnline() {
                     Object.entries(pageProps.demography).forEach(
                         ([dKey, dSize]) => {
                             const [gender, age] = dKey.split('|');
-                            dmgrGenders[gender] =
-                                (dmgrGenders[gender] ?? 0) + dSize;
-                            dmgrAges[age] = (dmgrAges[age] ?? 0) + dSize;
+                            genders[gender] = (genders[gender] ?? 0) + dSize;
+                            ages[age] = (ages[age] ?? 0) + dSize;
+                        }
+                    );
+                }
+
+                if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
+                    Object.entries(pageProps.attribution).forEach(
+                        ([aKey, aAmount]) => {
+                            attributions[aKey] =
+                                (attributions[aKey] ?? 0) + aAmount;
                         }
                     );
                 }
@@ -155,33 +179,40 @@ function PartyOnline() {
             }
         });
 
-        regionsPie.data = Object.values(regionsPies);
-        regionsRelData = Object.values(regionsCols).sort(
+        // sort & preprocess aggregated data for charts
+        regionsPie.data = Object.values(regions);
+        regionsDiffs = Object.values(regionsCols).sort(
             sortByNumericProp('value')
         );
-
-        Object.entries(genders).forEach(([gKey, gProps]) => {
-            if (dmgrGenders[gKey] ?? false) {
+        Object.entries(genderDefs).forEach(([gKey, gProps]) => {
+            if (genders[gKey] ?? false) {
                 gendersPie.data.push({
                     name: gProps.name ?? gKey,
-                    value: dmgrGenders[gKey],
+                    value: genders[gKey],
                     color: gProps.color ?? colors.colorLightBlue,
                 });
             }
         });
-
-        Object.entries(dmgrAges).forEach(([aKey, aSize]) => {
+        Object.entries(ages).forEach(([aKey, aSize]) => {
             agesPie.data.push({
                 name: aKey,
                 value: aSize,
             });
         });
-        agesPie.data.sort(sortByName);
-        agesPie.data.forEach((ap, index) => {
+        agesPie.data.sort(sortByName).forEach((ap, index) => {
             agesPie.data[index].color = `rgb(27, 51, 95, ${getColorOpacityScale(
                 index,
                 agesPie.data.length
             )})`;
+        });
+        Object.entries(attributionDefs).forEach(([aKey, aProps]) => {
+            if (attributions[aKey] ?? false) {
+                attributionsPie.data.push({
+                    name: aProps.name ?? aKey,
+                    value: attributions[aKey],
+                    color: aProps.color ?? colors.colorLightBlue,
+                });
+            }
         });
     }
 
@@ -198,7 +229,7 @@ function PartyOnline() {
         ) : null,
         [chartKeys.RANGES]: loadedCharts.includes(chartKeys.RANGES) ? (
             <FbRangesChart
-                data={pages.sort(sortByNumericProp('est'))}
+                data={ranges.sort(sortByNumericProp('est'))}
                 disclaimer={labels.ads.rangesDisclaimer}
                 timestamp={timestamp}
                 vertical
@@ -217,7 +248,6 @@ function PartyOnline() {
             <Row className="gx-0 gy-3">
                 <Col xl={6}>
                     <TisPieChart
-                        pie={regionsPie}
                         disclaimer={
                             <>
                                 {labels.ads.regions.disclaimer}
@@ -225,6 +255,7 @@ function PartyOnline() {
                                 {labels.ads.regions.sizeDisclaimer}
                             </>
                         }
+                        pie={regionsPie}
                         timestamp={timestamp}
                     />
                 </Col>
@@ -238,7 +269,7 @@ function PartyOnline() {
                                 color: '#000',
                             },
                         ]}
-                        data={regionsRelData}
+                        data={regionsDiffs}
                         diffFromAverage
                         disclaimer={labels.ads.regions.diffAvgDisclaimer}
                         timestamp={timestamp}
@@ -251,18 +282,30 @@ function PartyOnline() {
             <Row className="gx-0 gy-3">
                 <Col xl={6}>
                     <TisPieChart
-                        pie={gendersPie}
                         disclaimer={labels.ads.demography.gendersDisclaimer}
+                        pie={gendersPie}
                         timestamp={timestamp}
-                        // title={labels.ads.demography.genders}
                     />
                 </Col>
                 <Col xl={6}>
                     <TisPieChart
-                        pie={agesPie}
                         disclaimer={labels.ads.demography.agesDisclaimer}
+                        pie={agesPie}
                         timestamp={timestamp}
-                        // title={labels.ads.demography.ages}
+                    />
+                </Col>
+            </Row>
+        ) : null,
+        [chartKeys.ATTRIBUTION]: loadedCharts.includes(
+            chartKeys.ATTRIBUTION
+        ) ? (
+            <Row className="gx-0 gy-3">
+                <Col xl={6}>
+                    <TisPieChart
+                        disclaimer={labels.ads.attribution.disclaimer}
+                        pie={attributionsPie}
+                        percent={false}
+                        timestamp={timestamp}
                     />
                 </Col>
             </Row>

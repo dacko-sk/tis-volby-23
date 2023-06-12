@@ -143,6 +143,12 @@ export const labels = {
             'Súčet počtov reklám všetkých profilov politickej strany',
         amountPartyAccountsTitle:
             'Počet reklám jednotlivých FB profilov strany',
+        attribution: {
+            amount: 'Počet',
+            disclaimer:
+                'Označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani za sledované obdobie od 1.1.2023.',
+            title: 'Označenie objednávateľa a dodávateľa',
+        },
         barRange: 'Skutočný rozsah výdavkov',
         demography: {
             ages: 'Vekové skupiny',
