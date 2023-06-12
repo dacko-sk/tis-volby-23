@@ -163,7 +163,7 @@ export const labels = {
         rangesPartyAccountsTitle:
             'Najviac inzerujúce profily strany na sociálnych sieťach platformy Meta od začiatku kampane',
         regions: {
-            diffAvg: 'Odchýlka od priemeru strany',
+            diffAvg: 'Odchýlka od priemerného zásahu strany v SR',
             diffAvgDisclaimer:
                 'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',
             disclaimer:
