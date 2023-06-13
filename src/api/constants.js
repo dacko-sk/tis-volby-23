@@ -120,6 +120,11 @@ export const errors = {
     loading: 'Chyba pri načítaní dát. Prosím načítajte stránku znovu.',
 };
 
+const labelSuffixes = {
+    preCampaignStart: ' od začiatku predkampane 11. decembra 2022.',
+    weeklyReportsStart: ' počas sledovaného obdobia od 1. mája 2023.',
+};
+
 export const labels = {
     account: {
         tableCols: {
@@ -138,66 +143,63 @@ export const labels = {
     ads: {
         amount: 'Počet reklám',
         amountAccountsTitle: 'Počet reklám jednotlivých FB profilov',
-        amountDisclaimer: 'Počet reklám za sledované obdobie od 1.1.2023.',
+        amountDisclaimer: `Počet reklám${labelSuffixes.preCampaignStart}`,
         amountPartiesTitle:
             'Súčet počtov reklám všetkých profilov politickej strany',
         amountPartyAccountsTitle:
             'Počet reklám jednotlivých FB profilov strany',
         attribution: {
             amount: 'Počet',
+            campaign: 'Kampaň',
             disclaimer:
-                'Označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani za sledované obdobie od 1.1.2023.',
-            title: 'Označenie objednávateľa a dodávateľa',
+                'Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023.',
+            optionalDisclaimer:
+                'Nepovinné označenie objednávateľa a dodávateľa nad rámec zákona v predkampani od 11. decembra 2022 do 9. júna 2023.',
+            precampaign: `Predkampaň`,
+            title: 'Označenie objednávateľa a dodávateľa',
         },
         barRange: 'Skutočný rozsah výdavkov',
         demography: {
             ages: 'Vekové skupiny',
-            agesDisclaimer:
-                'Podiel zásahu reklám vo vekových skupinách obyvateľstva za sledované obdobie od 1.1.2023.',
+            agesDisclaimer: `Podiel zásahu reklám vo vekových skupinách obyvateľstva${labelSuffixes.preCampaignStart}`,
             genders: 'Pohlavia',
-            gendersDisclaimer:
-                'Podiel zásahu reklám medzi pohlaviami za sledované obdobie od 1.1.2023.',
+            gendersDisclaimer: `Podiel zásahu reklám medzi pohlaviami${labelSuffixes.preCampaignStart}`,
             title: 'Demografické rozloženie online reklamy',
         },
         percent: 'Podiel',
         rangesAccountsTitle:
-            'Najviac inzerujúce profily na sociálnych sieťach platformy Meta od začiatku kampane',
-        rangesDisclaimer:
-            'Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných na Facebooku a Instagrame od 1.1.2023.',
+            'Najviac inzerujúce profily na sociálnych sieťach platformy Meta od začiatku predkampane',
+        rangesDisclaimer: `Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných na Facebooku a Instagrame${labelSuffixes.preCampaignStart}`,
         rangesPartiesTitle:
-            'Rozsah výdavkov všetkých profilov politickej strany na sociálnych sieťach platformy Meta od začiatku kampane',
+            'Rozsah výdavkov všetkých profilov politickej strany na sociálnych sieťach platformy Meta od začiatku predkampane',
         rangesPartyAccountsTitle:
-            'Najviac inzerujúce profily strany na sociálnych sieťach platformy Meta od začiatku kampane',
+            'Najviac inzerujúce profily strany na sociálnych sieťach platformy Meta od začiatku predkampane',
         regions: {
-            diffAvg: 'Odchýlka od priemerného zásahu strany v SR',
+            diffAvg: 'Odchýlka od priemerného zásahu strany v SR',
             diffAvgDisclaimer:
-                'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',
-            disclaimer:
-                'Podiel zásahu online reklamy v krajoch Slovenska za sledované obdobie od 1.1.2023.',
+                'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',
+            disclaimer: `Podiel zásahu online reklamy v krajoch Slovenska${labelSuffixes.preCampaignStart} Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.`,
             label: 'Podiel zásahu reklám',
-            sizeDisclaimer:
-                'Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.',
-            sizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
+            sizeDisclaimer: '',
+            sizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
             title: 'Regionálne rozloženie online reklamy',
         },
         scatterEstimate: 'Odhadované výdavky',
-        showMore: 'Zistiť viac o online kampani',
+        showMore: 'Zistiť viac o online kampani',
         spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 €',
-        spendingDisclaimer:
-            'Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1. mája 2023.',
+        spendingDisclaimer: `Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni${labelSuffixes.weeklyReportsStart}`,
+        spendingPartiesDisclaimer: `Započítané sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni${labelSuffixes.weeklyReportsStart}`,
         spendingPartiesTitle:
             'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami nad 100 €',
         spendingPartyAccountsTitle:
             'FB profily strany s týždennými výdavkami nad 100 €',
-        totalAmountDisclaimer:
-            'Počet politických reklám na sociálnej sieti Facebook za sledované obdobie od 1.1.2023.',
-        totalDisclaimer:
-            'Súčet výdavkov na politickú reklamu na sociálnej sieti Facebook. Započítane sú všetky stranícke profliy, ktorých výdavky presiahli 100 € aspoň v jednom týždni počas sledovaného obdobia od 1. mája 2023.',
-        weeklySpending: 'Týždňové výdavky na FB reklamu',
+        totalAmountDisclaimer: `Počet politických reklám na sociálnej sieti Facebook${labelSuffixes.preCampaignStart}`,
+        totalDisclaimer: `Súčet výdavkov na politickú reklamu na sociálnej sieti Facebook. Započítane sú všetky stranícke profliy, ktorých výdavky presiahli 100 € aspoň v jednom týždni${labelSuffixes.weeklyReportsStart}`,
+        weeklySpending: 'Týždňové výdavky na FB reklamu',
     },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',
-    donateLong: 'Darujte na kontrolu volieb',
+    donateLong: 'Darujte na kontrolu volieb',
     elections: {
         account: 'Transparentný účet',
         account_key: 'url',

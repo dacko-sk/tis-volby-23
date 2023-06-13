@@ -32,6 +32,7 @@ function FbRangesChart({
     disclaimer = null,
     timestamp,
     title,
+    subtitle,
     vertical = false,
 }) {
     if (!data || !Array.isArray(data) || !data.length) {
@@ -59,7 +60,8 @@ function FbRangesChart({
 
     return (
         <div className={`chart-wrapper ${className}`}>
-            <h2>{title}</h2>
+            {title && <h2 className={subtitle ? '' : 'mb-3'}>{title}</h2>}
+            {subtitle && <h6>{subtitle}</h6>}
             <LastUpdateTag timestamp={timestamp}>{disclaimer}</LastUpdateTag>
 
             <div className="chart-outer">
@@ -69,7 +71,7 @@ function FbRangesChart({
                         vertical
                             ? {
                                   height: `${
-                                      (isMobile ? 90 : 65) + data.length * 40
+                                      (isMobile ? 80 : 55) + data.length * 40
                                   }px`,
                               }
                             : {}
@@ -80,7 +82,7 @@ function FbRangesChart({
                             data={data}
                             layout={vertical ? 'vertical' : 'horizontal'}
                             margin={{
-                                top: 15,
+                                top: 5,
                                 right: 5,
                                 left: 0,
                                 bottom: 5,

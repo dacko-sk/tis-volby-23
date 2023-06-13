@@ -168,7 +168,7 @@ function TisBarChart({
                         vertical
                             ? {
                                   height: `${
-                                      65 +
+                                      55 +
                                       data.length *
                                           (barHeight ??
                                               Math.max(2, labelLines) * 20)
@@ -182,7 +182,7 @@ function TisBarChart({
                             data={parsedData}
                             layout={vertical ? 'vertical' : 'horizontal'}
                             margin={{
-                                top: 15,
+                                top: 5,
                                 right: 5,
                                 left: 0,
                                 bottom: 5,

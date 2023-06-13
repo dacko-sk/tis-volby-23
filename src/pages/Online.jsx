@@ -113,24 +113,6 @@ function Online() {
     }
 
     const charts = {
-        [chartKeys.RANGES_PARTIES]: (
-            <FbRangesChart
-                data={Object.values(partiesAggr).sort(sortByNumericProp('est'))}
-                disclaimer={labels.ads.rangesDisclaimer}
-                timestamp={timestamp}
-                vertical
-            />
-        ),
-        [chartKeys.RANGES_ACCOUNTS]: loadedCharts.includes(
-            chartKeys.RANGES_ACCOUNTS
-        ) ? (
-            <FbRangesChart
-                data={pages.sort(sortByNumericProp('est'))}
-                disclaimer={labels.ads.rangesDisclaimer}
-                timestamp={timestamp}
-                vertical
-            />
-        ) : null,
         [chartKeys.SPENDING_PARTIES]: loadedCharts.includes(
             chartKeys.SPENDING_PARTIES
         ) ? (
@@ -138,8 +120,8 @@ function Online() {
                 bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
-                disclaimer={labels.ads.spendingDisclaimer}
                 timestamp={sheetsData.lastUpdate}
+                subtitle={labels.ads.spendingPartiesDisclaimer}
                 vertical
             />
         ) : null,
@@ -150,8 +132,26 @@ function Online() {
                 bars={columnVariants.spending}
                 currency
                 data={spending.sort(sortBySpending)}
-                disclaimer={labels.ads.spendingDisclaimer}
                 timestamp={sheetsData.lastUpdate}
+                subtitle={labels.ads.spendingDisclaimer}
+                vertical
+            />
+        ) : null,
+        [chartKeys.RANGES_PARTIES]: (
+            <FbRangesChart
+                data={Object.values(partiesAggr).sort(sortByNumericProp('est'))}
+                timestamp={timestamp}
+                subtitle={labels.ads.rangesDisclaimer}
+                vertical
+            />
+        ),
+        [chartKeys.RANGES_ACCOUNTS]: loadedCharts.includes(
+            chartKeys.RANGES_ACCOUNTS
+        ) ? (
+            <FbRangesChart
+                data={pages.sort(sortByNumericProp('est'))}
+                timestamp={timestamp}
+                subtitle={labels.ads.rangesDisclaimer}
                 vertical
             />
         ) : null,
@@ -161,8 +161,8 @@ function Online() {
             <TisBarChart
                 bars={columnVariants.amount}
                 data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
-                disclaimer={labels.ads.amountDisclaimer}
                 timestamp={timestamp}
+                subtitle={labels.ads.amountDisclaimer}
                 vertical
             />
         ) : null,
@@ -172,8 +172,8 @@ function Online() {
             <TisBarChart
                 bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
-                disclaimer={labels.ads.amountDisclaimer}
                 timestamp={timestamp}
+                subtitle={labels.ads.amountDisclaimer}
                 vertical
             />
         ) : null,
