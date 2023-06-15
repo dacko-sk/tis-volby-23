@@ -15,6 +15,7 @@ import {
 import has from 'has';
 
 import {
+    horizontalYaxisWidth,
     prepareAvgDeltaPctData,
     shortChartNames,
     tooltipNameFormat,
@@ -237,6 +238,7 @@ function TisBarChart({
                                     tickCount={7}
                                     tickFormatter={axisNumFormat}
                                     type="number"
+                                    width={horizontalYaxisWidth}
                                 />
                             )}
                             <Tooltip

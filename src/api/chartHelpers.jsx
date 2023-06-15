@@ -7,6 +7,7 @@ import { humanPctFormat, numFormat, shortenValue } from './helpers';
 import { routes, separators } from './routes';
 
 export const isMobile = window.innerWidth < 576;
+export const horizontalYaxisWidth = 80;
 export const verticalYaxisWidth = isMobile ? 120 : 180;
 
 export const regionDefs = {
