@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useState } from 'react';
 
 export const googleSheetId = '1E3OiM5lU0D8lXRj_LIs6wR9KxHuEzylYxfF8QYTaFbE';
 export const metaApiUrl =
-    'https://volby.transparency.sk/api/meta/ads_new.php?page=all';
+    'https://volby.transparency.sk/api/meta/ads.php?page=all';
 export const apiReloadUrl = (accounts) =>
     metaApiUrl + (accounts ? `&reload=${accounts}` : '');
 
