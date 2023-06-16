@@ -45,6 +45,13 @@ tspan {
   }
 }
 
+.recharts-tooltip-wrapper {
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
 .pie-chart {
   .chart {
     svg {
