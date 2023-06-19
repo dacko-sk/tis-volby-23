@@ -185,6 +185,7 @@ export const labels = {
             range: 'Skutočný rozsah výdavkov',
         },
         regions: {
+            allDisclaimer: `Podiel zásahu online reklamy všetkých strán v krajoch Slovenska ${phrases.preCampaignStart}`,
             diffAvg: 'Odchýlka od priemerného zásahu strany v SR',
             diffAvgDisclaimer:
                 'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',

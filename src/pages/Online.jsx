@@ -3,9 +3,18 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { attributionDefs, getPartyChartLabel } from '../api/chartHelpers';
+import {
+    attributionDefs,
+    getPartyChartLabel,
+    regionDefs,
+} from '../api/chartHelpers';
 import { colors, labels } from '../api/constants';
-import { setTitle, sortByNumericProp, sortBySpending } from '../api/helpers';
+import {
+    setTitle,
+    sortByName,
+    sortByNumericProp,
+    sortBySpending,
+} from '../api/helpers';
 
 import useAdsData from '../context/AdsDataContext';
 import useCsvData from '../context/DataContext';
@@ -24,6 +33,8 @@ const chartKeys = {
     RANGES_ACCOUNTS: labels.ads.ranges.accountsTitle,
     AMOUNTS_PARTIES: labels.ads.amount.partiesTitle,
     AMOUNTS_ACCOUNTS: labels.ads.amount.accountsTitle,
+    REGIONS: labels.ads.regions.title,
+    DEMOGRAPHY: labels.ads.demography.title,
     ATTRIBUTION: labels.ads.attribution.title,
 };
 
@@ -44,14 +55,17 @@ function Online() {
     const spendingAggr = {};
     if (sheetsData.lastUpdate) {
         Object.entries(mergedWeeksData).forEach(([pageId, pageProps]) => {
-            const fbName = findPartyForFbAccount(pageId);
-            const party = findPartyByFbName(fbName);
-            if (fbName) {
-                if (spendingAggr[fbName] ?? false) {
-                    spendingAggr[fbName].outgoing += pageProps.outgoing;
+            const parentPartyName = findPartyForFbAccount(pageId);
+            const party = findPartyByFbName(parentPartyName);
+            if (parentPartyName) {
+                if (spendingAggr[parentPartyName] ?? false) {
+                    spendingAggr[parentPartyName].outgoing +=
+                        pageProps.outgoing;
                 } else {
-                    spendingAggr[fbName] = {
-                        name: party ? getPartyChartLabel(party) : fbName,
+                    spendingAggr[parentPartyName] = {
+                        name: party
+                            ? getPartyChartLabel(party)
+                            : parentPartyName,
                         outgoing: pageProps.outgoing,
                     };
                 }
@@ -67,6 +81,9 @@ function Online() {
     const partiesAggr = {};
     const amounts = [];
     const amountsAggr = {};
+    const regionsAggr = {};
+    const regionsPercentages = [];
+    const regionsBars = [];
     const attributions = {};
     const attributionsAggr = {};
     const attributionsPercentages = [];
@@ -81,18 +98,23 @@ function Online() {
 
     if (metaApiData.lastUpdate) {
         Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
-            const fbName = findPartyForFbAccount(pageId);
-            const party = findPartyByFbName(fbName);
+            const parentPartyName = findPartyForFbAccount(pageId);
+            const party = findPartyByFbName(parentPartyName);
+            const partyChartLabel = party
+                ? getPartyChartLabel(party)
+                : parentPartyName;
 
-            if (fbName) {
+            if (parentPartyName) {
                 if (loadedCharts.includes(chartKeys.RANGES_PARTIES)) {
-                    if (partiesAggr[fbName] ?? false) {
-                        partiesAggr[fbName].range[0] += pageProps.spend.min;
-                        partiesAggr[fbName].range[1] += pageProps.spend.max;
-                        partiesAggr[fbName].est += pageProps.spend.est;
+                    if (partiesAggr[parentPartyName] ?? false) {
+                        partiesAggr[parentPartyName].range[0] +=
+                            pageProps.spend.min;
+                        partiesAggr[parentPartyName].range[1] +=
+                            pageProps.spend.max;
+                        partiesAggr[parentPartyName].est += pageProps.spend.est;
                     } else {
-                        partiesAggr[fbName] = {
-                            name: party ? getPartyChartLabel(party) : fbName,
+                        partiesAggr[parentPartyName] = {
+                            name: partyChartLabel,
                             range: [pageProps.spend.min, pageProps.spend.max],
                             est: pageProps.spend.est,
                         };
@@ -100,14 +122,31 @@ function Online() {
                 }
 
                 if (loadedCharts.includes(chartKeys.AMOUNTS_PARTIES)) {
-                    if (amountsAggr[fbName] ?? false) {
-                        amountsAggr[fbName].num += pageProps.spend.num;
+                    if (amountsAggr[parentPartyName] ?? false) {
+                        amountsAggr[parentPartyName].num += pageProps.spend.num;
                     } else {
-                        amountsAggr[fbName] = {
-                            name: party ? getPartyChartLabel(party) : fbName,
+                        amountsAggr[parentPartyName] = {
+                            name: partyChartLabel,
                             num: pageProps.spend.num,
                         };
                     }
+                }
+
+                if (loadedCharts.includes(chartKeys.REGIONS)) {
+                    // create initial object for party
+                    if (!(regionsAggr[partyChartLabel] ?? false)) {
+                        regionsAggr[partyChartLabel] = {};
+                        Object.keys(regionDefs).forEach((regionKey) => {
+                            regionsAggr[partyChartLabel][regionKey] = 0;
+                        });
+                    }
+                    // aggregate regions from all acounts of the party
+                    Object.keys(regionDefs).forEach((regionKey) => {
+                        if (pageProps.regions[regionKey] ?? false) {
+                            regionsAggr[partyChartLabel][regionKey] +=
+                                pageProps.regions[regionKey];
+                        }
+                    });
                 }
 
                 if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
@@ -122,14 +161,15 @@ function Online() {
                         amount += pageProps.attribution.mandatory.NO;
                     }
                     if (amount) {
-                        if (attributionsAggr[fbName] ?? false) {
-                            attributionsAggr[fbName].amount += amount;
-                            attributionsAggr[fbName].correct += correct;
+                        if (attributionsAggr[parentPartyName] ?? false) {
+                            attributionsAggr[parentPartyName].amount += amount;
+                            attributionsAggr[parentPartyName].correct +=
+                                correct;
                         } else {
-                            attributionsAggr[fbName] = {
+                            attributionsAggr[parentPartyName] = {
                                 name: party
                                     ? getPartyChartLabel(party)
-                                    : fbName,
+                                    : parentPartyName,
                                 amount,
                                 correct,
                             };
@@ -169,6 +209,33 @@ function Online() {
         });
 
         // sort & preprocess aggregated data for charts
+        Object.entries(regionsAggr).forEach(
+            ([partyChartLabel, partyRegions]) => {
+                const dataPoint = {
+                    name: partyChartLabel,
+                };
+                let sum = 0;
+                Object.values(partyRegions).forEach((regionShare) => {
+                    sum += regionShare;
+                });
+                Object.entries(partyRegions).forEach(
+                    ([regionKey, regionShare]) => {
+                        dataPoint[regionKey] = regionShare / sum;
+                    }
+                );
+                regionsPercentages.push(dataPoint);
+            }
+        );
+        regionsPercentages.sort(sortByName);
+        Object.entries(regionDefs).forEach(([regionKey, regionProps]) => {
+            regionsBars.push({
+                key: regionKey,
+                name: regionProps.name,
+                color: regionProps.color,
+                stackId: 'regions',
+            });
+        });
+
         Object.values(attributionsAggr).forEach((partyAttribution) => {
             attributionsPercentages.push({
                 name: partyAttribution.name,
@@ -249,6 +316,16 @@ function Online() {
                 bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
                 subtitle={labels.ads.amount.disclaimer}
+                timestamp={timestamp}
+                vertical
+            />
+        ) : null,
+        [chartKeys.REGIONS]: loadedCharts.includes(chartKeys.REGIONS) ? (
+            <TisBarChart
+                bars={regionsBars}
+                data={regionsPercentages}
+                percent
+                subtitle={labels.ads.regions.allDisclaimer}
                 timestamp={timestamp}
                 vertical
             />
