@@ -1,6 +1,20 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 
-export const googleSheetId = '1E3OiM5lU0D8lXRj_LIs6wR9KxHuEzylYxfF8QYTaFbE';
+import { isNumeric } from '../api/helpers';
+
+export const sheetsConfig = {
+    columns: {
+        ACCOUNTS: 'Účty',
+        PAGE_ID: 'Page ID',
+        PAGE_NAME: 'Page name',
+        SPENDING: 'Amount spent (EUR)',
+    },
+    id: '1EmyYjnUuhJkqPSolIimi5X91GVeXKTg68XT9BBgQK7E',
+    sheets: {
+        PARTY_ACCOUNTS: 'FB účty',
+        PRECAMPAIGN: 'Predkampaň 11.3.-8.6.',
+    },
+};
 export const metaApiUrl =
     'https://volby.transparency.sk/api/meta/ads.php?page=all';
 export const apiReloadUrl = (accounts) =>
@@ -10,6 +24,7 @@ const initialState = {
     sheetsData: {
         error: null,
         parties: {},
+        precampaign: [],
         weeks: {},
         lastUpdate: 0,
     },
@@ -20,6 +35,22 @@ const initialState = {
     },
 };
 
+const filterPoliticAccounts = (parties) => (pageData) => {
+    let isPolitic = false;
+    if (pageData[sheetsConfig.columns.PAGE_ID] ?? false) {
+        Object.values(parties).some((partyAccounts) => {
+            if (
+                partyAccounts.includes(pageData[sheetsConfig.columns.PAGE_ID])
+            ) {
+                isPolitic = true;
+                return true;
+            }
+            return false;
+        });
+    }
+    return isPolitic;
+};
+
 export const loadingErrorSheets = (error) => {
     return { ...initialState.sheetsData, error };
 };
@@ -27,27 +58,41 @@ export const loadingErrorSheets = (error) => {
 export const processDataSheets = (data) => {
     if (Array.isArray(data)) {
         const pd = { ...initialState.sheetsData };
-        data.forEach((sheet, index) => {
-            if (index === 0) {
-                // first sheet is parties accounts list
-                sheet.data.forEach((row) => {
-                    pd.parties[row.Strana] = row['Účty']
+        data.forEach((sheet) => {
+            switch (sheet.id ?? '') {
+                case sheetsConfig.sheets.PARTY_ACCOUNTS: {
+                    // first sheet is parties accounts list
+                    sheet.data.forEach((row) => {
+                        pd.parties[row.Strana] = row[
+                            sheetsConfig.columns.ACCOUNTS
+                        ]
+                            .replaceAll(' ', '')
+                            .split(',');
+                    });
+                    break;
+                }
+                case sheetsConfig.sheets.PRECAMPAIGN: {
+                    // load precampaing spending from second sheet
+                    pd.precampaign = sheet.data.filter(
+                        filterPoliticAccounts(pd.parties)
+                    );
+                    break;
+                }
+                default: {
+                    // load weekly reports from remaining sheets
+                    const dateParts = sheet.id
+                        .replaceAll('/', '.')
                         .replaceAll(' ', '')
-                        .split(',');
-                });
-            } else {
-                // remaining sheets are weekly reports
-                const dateParts = sheet.id
-                    .replaceAll('/', '.')
-                    .replaceAll(' ', '')
-                    .split('.');
-                const time =
-                    new Date(
-                        `${dateParts[2]}/${dateParts[1]}/${dateParts[0]} 23:59:59`
-                    ).getTime() / 1000;
-                pd.lastUpdate = time;
-                // TODO: filter non-political accounts here! .. and remove isPoliticalAccount selector
-                pd.weeks[time] = sheet.data;
+                        .split('.');
+                    const time =
+                        new Date(
+                            `${dateParts[2]}/${dateParts[1]}/${dateParts[0]} 23:59:59`
+                        ).getTime() / 1000;
+                    pd.lastUpdate = time;
+                    pd.weeks[time] = sheet.data.filter(
+                        filterPoliticAccounts(pd.parties)
+                    );
+                }
             }
         });
         return pd;
@@ -92,18 +137,6 @@ export const AdsDataProvider = function ({ children }) {
         return fbName;
     };
 
-    const isPoliticAccount = (accountId) => {
-        let isPolitic = false;
-        Object.values(sheetsData.parties).some((partyAccounts) => {
-            if (partyAccounts.includes(accountId)) {
-                isPolitic = true;
-                return true;
-            }
-            return false;
-        });
-        return isPolitic;
-    };
-
     const getAllFbAccounts = () => {
         const all = [];
         Object.values(sheetsData.parties).forEach((partyAccounts) => {
@@ -116,20 +149,41 @@ export const AdsDataProvider = function ({ children }) {
 
     const mergedWeeksData = () => {
         const pages = {};
+        // add precampaign data
+        sheetsData.precampaign.forEach((pageData) => {
+            if (isNumeric(pageData[sheetsConfig.columns.SPENDING])) {
+                if (pages[pageData[sheetsConfig.columns.PAGE_ID]] ?? false) {
+                    pages[pageData[sheetsConfig.columns.PAGE_ID]].outgoing +=
+                        Number(pageData[sheetsConfig.columns.SPENDING]);
+                } else {
+                    pages[pageData[sheetsConfig.columns.PAGE_ID]] = {
+                        name: pageData[sheetsConfig.columns.PAGE_NAME],
+                        outgoing: Number(
+                            pageData[sheetsConfig.columns.SPENDING]
+                        ),
+                    };
+                }
+            }
+        });
+        // add weekly spending from all weeks
         Object.values(sheetsData.weeks).forEach((weekData) => {
             weekData.forEach((pageData) => {
-                if (
-                    isPoliticAccount(pageData['Page ID']) &&
-                    !Number.isNaN(pageData['Amount spent (EUR)'])
-                ) {
-                    if (pages[pageData['Page ID']] ?? false) {
-                        pages[pageData['Page ID']].outgoing += Number(
-                            pageData['Amount spent (EUR)']
+                if (isNumeric(pageData[sheetsConfig.columns.SPENDING])) {
+                    if (
+                        pages[pageData[sheetsConfig.columns.PAGE_ID]] ??
+                        false
+                    ) {
+                        pages[
+                            pageData[sheetsConfig.columns.PAGE_ID]
+                        ].outgoing += Number(
+                            pageData[sheetsConfig.columns.SPENDING]
                         );
                     } else {
-                        pages[pageData['Page ID']] = {
-                            name: pageData['Page name'],
-                            outgoing: Number(pageData['Amount spent (EUR)']),
+                        pages[pageData[sheetsConfig.columns.PAGE_ID]] = {
+                            name: pageData[sheetsConfig.columns.PAGE_NAME],
+                            outgoing: Number(
+                                pageData[sheetsConfig.columns.SPENDING]
+                            ),
                         };
                     }
                 }
@@ -145,7 +199,6 @@ export const AdsDataProvider = function ({ children }) {
             metaApiData,
             setMetaApiData,
             findPartyForFbAccount,
-            isPoliticAccount,
             getAllFbAccounts,
             getPartyFbAccounts,
             mergedWeeksData: mergedWeeksData(),

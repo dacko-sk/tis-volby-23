@@ -30,13 +30,7 @@ function Top10({ maxItems = 10 }) {
             className="mb-4"
             currency
             data={columns.sort(sortBySpending).slice(0, maxItems)}
-            disclaimer={
-                <span>
-                    {labels.charts.disclaimer}
-                    <br className="d-xl-none" />
-                    {` ${labels.charts.disclaimerClick}`}
-                </span>
-            }
+            subtitle={`${labels.charts.disclaimer} ${labels.charts.disclaimerClick}`}
             title={`Top ${Math.min(
                 maxItems,
                 columns.length

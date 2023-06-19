@@ -15,12 +15,12 @@ import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
 
 const chartKeys = {
-    SPENDING_PARTIES: labels.ads.spendingPartiesTitle,
-    SPENDING_ACCOUNTS: labels.ads.spendingAccountsTitle,
-    RANGES_PARTIES: labels.ads.rangesPartiesTitle,
-    RANGES_ACCOUNTS: labels.ads.rangesAccountsTitle,
-    AMOUNTS_PARTIES: labels.ads.amountPartiesTitle,
-    AMOUNTS_ACCOUNTS: labels.ads.amountAccountsTitle,
+    SPENDING_PARTIES: labels.ads.weeklySpending.partiesTitle,
+    SPENDING_ACCOUNTS: labels.ads.weeklySpending.accountsTitle,
+    RANGES_PARTIES: labels.ads.ranges.partiesTitle,
+    RANGES_ACCOUNTS: labels.ads.ranges.accountsTitle,
+    AMOUNTS_PARTIES: labels.ads.amount.partiesTitle,
+    AMOUNTS_ACCOUNTS: labels.ads.amount.accountsTitle,
 };
 
 const pageTitle = 'Online kampane';
@@ -120,8 +120,8 @@ function Online() {
                 bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
+                subtitle={labels.ads.weeklySpending.partiesDisclaimer}
                 timestamp={sheetsData.lastUpdate}
-                subtitle={labels.ads.spendingPartiesDisclaimer}
                 vertical
             />
         ) : null,
@@ -132,16 +132,16 @@ function Online() {
                 bars={columnVariants.spending}
                 currency
                 data={spending.sort(sortBySpending)}
+                subtitle={labels.ads.weeklySpending.disclaimer}
                 timestamp={sheetsData.lastUpdate}
-                subtitle={labels.ads.spendingDisclaimer}
                 vertical
             />
         ) : null,
         [chartKeys.RANGES_PARTIES]: (
             <FbRangesChart
                 data={Object.values(partiesAggr).sort(sortByNumericProp('est'))}
+                subtitle={labels.ads.ranges.disclaimer}
                 timestamp={timestamp}
-                subtitle={labels.ads.rangesDisclaimer}
                 vertical
             />
         ),
@@ -150,8 +150,8 @@ function Online() {
         ) ? (
             <FbRangesChart
                 data={pages.sort(sortByNumericProp('est'))}
+                subtitle={labels.ads.ranges.disclaimer}
                 timestamp={timestamp}
-                subtitle={labels.ads.rangesDisclaimer}
                 vertical
             />
         ) : null,
@@ -161,8 +161,8 @@ function Online() {
             <TisBarChart
                 bars={columnVariants.amount}
                 data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
+                subtitle={labels.ads.amount.disclaimer}
                 timestamp={timestamp}
-                subtitle={labels.ads.amountDisclaimer}
                 vertical
             />
         ) : null,
@@ -172,8 +172,8 @@ function Online() {
             <TisBarChart
                 bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
+                subtitle={labels.ads.amount.disclaimer}
                 timestamp={timestamp}
-                subtitle={labels.ads.amountDisclaimer}
                 vertical
             />
         ) : null,

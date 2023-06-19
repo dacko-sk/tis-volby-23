@@ -5,10 +5,15 @@ import { Link, useOutletContext } from 'react-router-dom';
 import has from 'has';
 
 import { colors, labels } from '../../api/constants';
-import { currencyFormat, dateFormat, setTitle } from '../../api/helpers';
+import {
+    currencyFormat,
+    dateFormat,
+    isNumeric,
+    setTitle,
+} from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 
-import useAdsData from '../../context/AdsDataContext';
+import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
 
 // import AccountTransactions from '../../components/accounts/AccountTransactions';
 import LastUpdateTag from '../../components/general/LastUpdateTag';
@@ -25,23 +30,38 @@ function PartyTransactions() {
     setTitle(party.fullName);
 
     const weeks = [];
-    let allWeeks = 0;
+    let totalSpending = 0;
+    // add totals from precampaing
+    sheetsData.precampaign.forEach((pageData) => {
+        const accountParty = findPartyForFbAccount(
+            pageData[sheetsConfig.columns.PAGE_ID]
+        );
+        if (
+            party.fbName === accountParty &&
+            isNumeric(pageData[sheetsConfig.columns.SPENDING])
+        ) {
+            totalSpending += Number(pageData[sheetsConfig.columns.SPENDING]);
+        }
+    });
+    // add totals from all weeks of campaing
     Object.entries(sheetsData.weeks).forEach(([timestamp, weekData]) => {
         let weekSpent = 0;
         weekData.forEach((pageData) => {
-            const accountParty = findPartyForFbAccount(pageData['Page ID']);
+            const accountParty = findPartyForFbAccount(
+                pageData[sheetsConfig.columns.PAGE_ID]
+            );
             if (
                 party.fbName === accountParty &&
-                !Number.isNaN(pageData['Amount spent (EUR)'])
+                isNumeric(pageData[sheetsConfig.columns.SPENDING])
             ) {
-                weekSpent += Number(pageData['Amount spent (EUR)']);
+                weekSpent += Number(pageData[sheetsConfig.columns.SPENDING]);
             }
         });
         weeks.push({
             name: dateFormat(timestamp),
             outgoing: weekSpent,
         });
-        allWeeks += weekSpent;
+        totalSpending += weekSpent;
     });
 
     return (
@@ -105,7 +125,7 @@ function PartyTransactions() {
                         bars={[
                             {
                                 key: 'outgoing',
-                                name: labels.ads.weeklySpending,
+                                name: labels.ads.weeklySpending.label,
                                 color: colors.colorLightBlue,
                             },
                         ]}
@@ -120,11 +140,11 @@ function PartyTransactions() {
                             Priebežné výdavky na online
                         </h2>
                         <p className="hero-number">
-                            {currencyFormat(allWeeks)}
+                            {currencyFormat(totalSpending)}
                             <LastUpdateTag
                                 timestamp={sheetsData.lastUpdate || null}
                             >
-                                {labels.ads.totalDisclaimer}
+                                {labels.ads.weeklySpending.totalDisclaimer}
                             </LastUpdateTag>
                         </p>
                     </div>

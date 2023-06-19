@@ -2,6 +2,8 @@ import parse, { attributesToProps, domToReact } from 'html-react-parser';
 
 import { labels } from './constants';
 
+export const isNumeric = (value) => !Number.isNaN(value);
+
 export const slovakFormat = (value, options) =>
     new Intl.NumberFormat('sk-SK', options).format(value);
 

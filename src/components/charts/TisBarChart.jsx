@@ -60,7 +60,7 @@ export const columnVariants = {
     amount: [
         {
             key: 'num',
-            name: labels.ads.amount,
+            name: labels.ads.amount.label,
             color: colors.colorOrange,
         },
     ],

@@ -41,7 +41,7 @@ function Top10Ads({ maxItems = 10 }) {
             buttonText={labels.ads.showMore}
             currency
             data={columns}
-            disclaimer={labels.ads.spendingDisclaimer}
+            subtitle={labels.ads.weeklySpending.partiesDisclaimer}
             timestamp={sheetsData.lastUpdate}
             title={`Top ${columns.length} online kampaní`}
             vertical

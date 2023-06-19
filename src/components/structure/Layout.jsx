@@ -9,7 +9,7 @@ import { scrollToTop } from '../../api/helpers';
 
 import useAdsData, {
     apiReloadUrl,
-    googleSheetId,
+    sheetsConfig,
     loadingErrorMetaApi,
     loadingErrorSheets,
     processDataMetaApi,
@@ -77,7 +77,7 @@ function Layout() {
         error: gsError,
     } = useGoogleSheets({
         apiKey: process.env.REACT_APP_SHEETS_API_KEY,
-        sheetId: googleSheetId,
+        sheetId: sheetsConfig.id,
     });
     // store ads data in context provider once loaded
     useEffect(() => {

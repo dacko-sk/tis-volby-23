@@ -54,8 +54,10 @@ export const parties = {
         tag: 904,
     },
     MF: {
+        fbName: 'MF-ODS',
         fullName: 'Magyar Fórum - Maďarské fórum',
         logo: logoMF,
+        slug: 'MF-ODS',
         tag: 912,
     },
     OĽaNO: {
@@ -120,9 +122,11 @@ export const errors = {
     loading: 'Chyba pri načítaní dát. Prosím načítajte stránku znovu.',
 };
 
-const labelSuffixes = {
-    preCampaignStart: ' od začiatku predkampane 11. decembra 2022.',
-    weeklyReportsStart: ' počas sledovaného obdobia od 1. mája 2023.',
+const phrases = {
+    meta: 'na sociálnych sieťach platformy Meta',
+    preCampaignStart: 'od začiatku predkampane 11. decembra 2022.',
+    weeklyProfiles:
+        'profily, ktorých výdavky počas posledných 90 dní predkampane od 11. marca 2023 alebo týždňové výdavky od začiatku kampane 9. júna 2023 presiahli 100 €.',
 };
 
 export const labels = {
@@ -141,61 +145,62 @@ export const labels = {
             'Súčet výdavkov na všetkých transparentných účtoch politických strán.',
     },
     ads: {
-        amount: 'Počet reklám',
-        amountAccountsTitle: 'Počet reklám jednotlivých FB profilov',
-        amountDisclaimer: `Počet reklám${labelSuffixes.preCampaignStart}`,
-        amountPartiesTitle:
-            'Súčet počtov reklám všetkých profilov politickej strany',
-        amountPartyAccountsTitle:
-            'Počet reklám jednotlivých FB profilov strany',
+        amount: {
+            accountsTitle: `Počet reklám jednotlivých profilov`,
+            disclaimer: `Počet reklám ${phrases.preCampaignStart}`,
+            label: 'Počet reklám',
+            partiesTitle:
+                'Súčet počtov reklám všetkých profilov politickej strany',
+            partyAccountsTitle: `Počet reklám jednotlivých profilov strany`,
+            totalDisclaimer: `Počet politických reklám ${phrases.meta} ${phrases.preCampaignStart}`,
+        },
         attribution: {
             amount: 'Počet',
             campaign: 'Kampaň',
             disclaimer:
-                'Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023.',
+                'Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023.',
             optionalDisclaimer:
-                'Nepovinné označenie objednávateľa a dodávateľa nad rámec zákona v predkampani od 11. decembra 2022 do 9. júna 2023.',
+                'Nepovinné označenie objednávateľa a dodávateľa nad rámec zákona v predkampani od 11. decembra 2022 do 8. júna 2023.',
             precampaign: `Predkampaň`,
             title: 'Označenie objednávateľa a dodávateľa',
         },
-        barRange: 'Skutočný rozsah výdavkov',
         demography: {
             ages: 'Vekové skupiny',
-            agesDisclaimer: `Podiel zásahu reklám vo vekových skupinách obyvateľstva${labelSuffixes.preCampaignStart}`,
+            agesDisclaimer: `Podiel zásahu reklám vo vekových skupinách obyvateľstva ${phrases.preCampaignStart}`,
             genders: 'Pohlavia',
-            gendersDisclaimer: `Podiel zásahu reklám medzi pohlaviami${labelSuffixes.preCampaignStart}`,
+            gendersDisclaimer: `Podiel zásahu reklám medzi pohlaviami ${phrases.preCampaignStart}`,
             title: 'Demografické rozloženie online reklamy',
         },
         percent: 'Podiel',
-        rangesAccountsTitle:
-            'Najviac inzerujúce profily na sociálnych sieťach platformy Meta od začiatku predkampane',
-        rangesDisclaimer: `Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných na Facebooku a Instagrame${labelSuffixes.preCampaignStart}`,
-        rangesPartiesTitle:
-            'Rozsah výdavkov všetkých profilov politickej strany na sociálnych sieťach platformy Meta od začiatku predkampane',
-        rangesPartyAccountsTitle:
-            'Najviac inzerujúce profily strany na sociálnych sieťach platformy Meta od začiatku predkampane',
+        ranges: {
+            accountsTitle: `Najviac inzerujúce profily od začiatku predkampane`,
+            disclaimer: `Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných ${phrases.preCampaignStart}`,
+            estimate: 'Odhadované výdavky',
+            partiesTitle: `Rozsah výdavkov všetkých profilov politickej strany od začiatku predkampane`,
+            partyAccountsTitle: `Najviac inzerujúce profily strany od začiatku predkampane`,
+            range: 'Skutočný rozsah výdavkov',
+        },
         regions: {
             diffAvg: 'Odchýlka od priemerného zásahu strany v SR',
             diffAvgDisclaimer:
                 'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',
-            disclaimer: `Podiel zásahu online reklamy v krajoch Slovenska${labelSuffixes.preCampaignStart} Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.`,
+            disclaimer: `Podiel zásahu online reklamy v krajoch Slovenska ${phrases.preCampaignStart} Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.`,
             label: 'Podiel zásahu reklám',
             sizeDisclaimer: '',
             sizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
             title: 'Regionálne rozloženie online reklamy',
         },
-        scatterEstimate: 'Odhadované výdavky',
         showMore: 'Zistiť viac o online kampani',
-        spendingAccountsTitle: 'FB profily s týždennými výdavkami nad 100 €',
-        spendingDisclaimer: `Zobrazené sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni${labelSuffixes.weeklyReportsStart}`,
-        spendingPartiesDisclaimer: `Započítané sú len FB profily, ktorých výdavky na reklamu presiahli 100 € aspoň v jednom týždni${labelSuffixes.weeklyReportsStart}`,
-        spendingPartiesTitle:
-            'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami nad 100 €',
-        spendingPartyAccountsTitle:
-            'FB profily strany s týždennými výdavkami nad 100 €',
-        totalAmountDisclaimer: `Počet politických reklám na sociálnej sieti Facebook${labelSuffixes.preCampaignStart}`,
-        totalDisclaimer: `Súčet výdavkov na politickú reklamu na sociálnej sieti Facebook. Započítane sú všetky stranícke profliy, ktorých výdavky presiahli 100 € aspoň v jednom týždni${labelSuffixes.weeklyReportsStart}`,
-        weeklySpending: 'Týždňové výdavky na FB reklamu',
+        weeklySpending: {
+            accountsTitle: `Profily s týždennými výdavkami na reklamu nad 100 €`,
+            disclaimer: `Zobrazené sú len ${phrases.weeklyProfiles}`,
+            label: 'Týždňové výdavky na reklamu',
+            partiesDisclaimer: `Započítané sú len ${phrases.weeklyProfiles}`,
+            partiesTitle:
+                'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami na reklamu nad 100 €',
+            partyAccountsTitle: `Profily strany s týždennými výdavkami na reklamu nad 100 €`,
+            totalDisclaimer: `Súčet výdavkov na politickú reklamu ${phrases.meta}. Započítane sú všetky ${phrases.weeklyProfiles}`,
+        },
     },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',

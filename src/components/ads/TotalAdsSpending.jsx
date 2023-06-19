@@ -39,7 +39,7 @@ function TotalAdsSpending() {
                         <LastUpdateTag
                             timestamp={sheetsData.lastUpdate || null}
                         >
-                            {labels.ads.totalDisclaimer}
+                            {labels.ads.weeklySpending.totalDisclaimer}
                         </LastUpdateTag>
                     </div>
                 </Col>
@@ -55,7 +55,7 @@ function TotalAdsSpending() {
                         <LastUpdateTag
                             timestamp={metaApiData.lastUpdate || null}
                         >
-                            {labels.ads.totalAmountDisclaimer}
+                            {labels.ads.amount.totalDisclaimer}
                         </LastUpdateTag>
                     </div>
                 </Col>

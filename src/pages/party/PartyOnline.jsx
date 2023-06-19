@@ -29,9 +29,9 @@ import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Loading from '../../components/general/Loading';
 
 const chartKeys = {
-    SPENDING: labels.ads.spendingPartyAccountsTitle,
-    RANGES: labels.ads.rangesPartyAccountsTitle,
-    AMOUNTS: labels.ads.amountPartyAccountsTitle,
+    SPENDING: labels.ads.weeklySpending.partyAccountsTitle,
+    RANGES: labels.ads.ranges.partyAccountsTitle,
+    AMOUNTS: labels.ads.amount.partyAccountsTitle,
     REGIONS: labels.ads.regions.title,
     DEMOGRAPHY: labels.ads.demography.title,
     ATTRIBUTION: labels.ads.attribution.title,
@@ -243,18 +243,16 @@ function PartyOnline() {
                 bars={columnVariants.spending}
                 currency
                 data={spending.sort(sortBySpending)}
-                // disclaimer={labels.ads.spendingDisclaimer}
                 timestamp={sheetsData.lastUpdate}
-                subtitle={labels.ads.spendingDisclaimer}
+                subtitle={labels.ads.weeklySpending.disclaimer}
                 vertical
             />
         ) : null,
         [chartKeys.RANGES]: loadedCharts.includes(chartKeys.RANGES) ? (
             <FbRangesChart
                 data={ranges.sort(sortByNumericProp('est'))}
-                // disclaimer={labels.ads.rangesDisclaimer}
                 timestamp={timestamp}
-                subtitle={labels.ads.rangesDisclaimer}
+                subtitle={labels.ads.ranges.disclaimer}
                 vertical
             />
         ) : null,
@@ -263,7 +261,7 @@ function PartyOnline() {
                 bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
                 timestamp={timestamp}
-                subtitle={labels.ads.amountDisclaimer}
+                subtitle={labels.ads.amount.disclaimer}
                 vertical
             />
         ) : null,
@@ -294,8 +292,8 @@ function PartyOnline() {
                         ]}
                         data={regionsDiffs}
                         diffFromAverage
-                        timestamp={timestamp}
                         subtitle={labels.ads.regions.diffAvgDisclaimer}
+                        timestamp={timestamp}
                         vertical
                     />
                 </Col>
