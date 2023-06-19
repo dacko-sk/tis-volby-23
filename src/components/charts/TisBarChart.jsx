@@ -24,6 +24,7 @@ import {
 import { colors, labels } from '../../api/constants';
 import {
     currencyFormat,
+    humanPctFormat,
     humanPctSignFormat,
     numFormat,
     wholeCurrencyFormat,
@@ -64,6 +65,13 @@ export const columnVariants = {
             color: colors.colorOrange,
         },
     ],
+    percent: [
+        {
+            key: 'pct',
+            name: labels.ads.percent,
+            color: colors.colorDarkBlue,
+        },
+    ],
     spending: [
         {
             key: 'outgoing',
@@ -85,6 +93,7 @@ function TisBarChart({
     diffFromAverage = false,
     disclaimer = null,
     lastUpdate = true,
+    percent = false,
     scrollable = false,
     subtitle,
     timestamp,
@@ -139,6 +148,9 @@ function TisBarChart({
     if (diffFromAverage) {
         axisNumFormat = humanPctSignFormat;
         tooltipNumFormat = humanPctSignFormat;
+    } else if (percent) {
+        axisNumFormat = humanPctFormat;
+        tooltipNumFormat = humanPctFormat;
     }
     const axisConfig = {
         fill: '#333',
@@ -196,6 +208,7 @@ function TisBarChart({
                             />
                             {vertical ? (
                                 <XAxis
+                                    domain={percent ? [0, 1] : null}
                                     tickCount={7}
                                     tickFormatter={axisNumFormat}
                                     tick={axisConfig}
@@ -234,6 +247,7 @@ function TisBarChart({
                                 />
                             ) : (
                                 <YAxis
+                                    domain={percent ? [0, 1] : null}
                                     tick={axisConfig}
                                     tickCount={7}
                                     tickFormatter={axisNumFormat}

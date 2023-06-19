@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-import { getPartyChartLabel } from '../api/chartHelpers';
-import { labels } from '../api/constants';
+import { attributionDefs, getPartyChartLabel } from '../api/chartHelpers';
+import { colors, labels } from '../api/constants';
 import { setTitle, sortByNumericProp, sortBySpending } from '../api/helpers';
 
 import useAdsData from '../context/AdsDataContext';
@@ -13,6 +15,7 @@ import TisBarChart, { columnVariants } from '../components/charts/TisBarChart';
 import AlertWithIcon from '../components/general/AlertWithIcon';
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
+import TisPieChart from '../components/charts/TisPieChart';
 
 const chartKeys = {
     SPENDING_PARTIES: labels.ads.weeklySpending.partiesTitle,
@@ -21,6 +24,7 @@ const chartKeys = {
     RANGES_ACCOUNTS: labels.ads.ranges.accountsTitle,
     AMOUNTS_PARTIES: labels.ads.amount.partiesTitle,
     AMOUNTS_ACCOUNTS: labels.ads.amount.accountsTitle,
+    ATTRIBUTION: labels.ads.attribution.title,
 };
 
 const pageTitle = 'Online kampane';
@@ -63,11 +67,23 @@ function Online() {
     const partiesAggr = {};
     const amounts = [];
     const amountsAggr = {};
+    const attributions = {};
+    const attributionsAggr = {};
+    const attributionsPercentages = [];
+    const attributionsPie = {
+        data: [],
+        color: colors.colorLightBlue,
+        nameKey: 'name',
+        dataKey: 'value',
+        label: labels.ads.attribution.amount,
+    };
     let timestamp = 0;
+
     if (metaApiData.lastUpdate) {
         Object.entries(metaApiData.pages).forEach(([pageId, pageProps]) => {
             const fbName = findPartyForFbAccount(pageId);
             const party = findPartyByFbName(fbName);
+
             if (fbName) {
                 if (loadedCharts.includes(chartKeys.RANGES_PARTIES)) {
                     if (partiesAggr[fbName] ?? false) {
@@ -82,6 +98,7 @@ function Online() {
                         };
                     }
                 }
+
                 if (loadedCharts.includes(chartKeys.AMOUNTS_PARTIES)) {
                     if (amountsAggr[fbName] ?? false) {
                         amountsAggr[fbName].num += pageProps.spend.num;
@@ -92,7 +109,35 @@ function Online() {
                         };
                     }
                 }
+
+                if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
+                    let amount = 0;
+                    let correct = 0;
+                    // count YES & NO amounts, ignore N/A amounts
+                    if (pageProps.attribution.mandatory.YES ?? false) {
+                        amount += pageProps.attribution.mandatory.YES;
+                        correct += pageProps.attribution.mandatory.YES;
+                    }
+                    if (pageProps.attribution.mandatory.NO ?? false) {
+                        amount += pageProps.attribution.mandatory.NO;
+                    }
+                    if (amount) {
+                        if (attributionsAggr[fbName] ?? false) {
+                            attributionsAggr[fbName].amount += amount;
+                            attributionsAggr[fbName].correct += correct;
+                        } else {
+                            attributionsAggr[fbName] = {
+                                name: party
+                                    ? getPartyChartLabel(party)
+                                    : fbName,
+                                amount,
+                                correct,
+                            };
+                        }
+                    }
+                }
             }
+
             if (loadedCharts.includes(chartKeys.RANGES_ACCOUNTS)) {
                 pages.push({
                     id: pageId,
@@ -101,6 +146,7 @@ function Online() {
                     est: pageProps.spend.est,
                 });
             }
+
             if (loadedCharts.includes(chartKeys.AMOUNTS_ACCOUNTS)) {
                 amounts.push({
                     id: pageId,
@@ -108,7 +154,37 @@ function Online() {
                     num: pageProps.spend.num,
                 });
             }
+
+            if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
+                Object.keys(attributionDefs).forEach((aKey) => {
+                    if (pageProps.attribution.mandatory[aKey] ?? false) {
+                        attributions[aKey] =
+                            (attributions[aKey] ?? 0) +
+                            pageProps.attribution.mandatory[aKey];
+                    }
+                });
+            }
+
             timestamp = Math.max(timestamp, pageProps.updated);
+        });
+
+        // sort & preprocess aggregated data for charts
+        Object.values(attributionsAggr).forEach((partyAttribution) => {
+            attributionsPercentages.push({
+                name: partyAttribution.name,
+                pct: partyAttribution.correct / partyAttribution.amount,
+            });
+        });
+        attributionsPercentages.sort(sortByNumericProp('pct'));
+
+        Object.entries(attributionDefs).forEach(([aKey, aProps]) => {
+            if (attributions[aKey] ?? false) {
+                attributionsPie.data.push({
+                    name: aProps.name,
+                    value: attributions[aKey],
+                    color: aProps.color,
+                });
+            }
         });
     }
 
@@ -176,6 +252,32 @@ function Online() {
                 timestamp={timestamp}
                 vertical
             />
+        ) : null,
+        [chartKeys.ATTRIBUTION]: loadedCharts.includes(
+            chartKeys.ATTRIBUTION
+        ) ? (
+            <Row className="gy-3">
+                <Col xl={6}>
+                    <TisPieChart
+                        pie={attributionsPie}
+                        percent={false}
+                        subtitle={labels.ads.attribution.disclaimer}
+                        timestamp={timestamp}
+                        title={labels.ads.attribution.allTitle}
+                    />
+                </Col>
+                <Col xl={6}>
+                    <TisBarChart
+                        bars={columnVariants.percent}
+                        data={attributionsPercentages}
+                        percent
+                        subtitle={labels.ads.attribution.pctDisclaimer}
+                        timestamp={timestamp}
+                        title={labels.ads.attribution.pctTitle}
+                        vertical
+                    />
+                </Col>
+            </Row>
         ) : null,
     };
 

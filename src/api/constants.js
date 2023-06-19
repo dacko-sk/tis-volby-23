@@ -155,12 +155,16 @@ export const labels = {
             totalDisclaimer: `Počet politických reklám ${phrases.meta} ${phrases.preCampaignStart}`,
         },
         attribution: {
+            allTitle: 'Bilancia všetkých strán',
             amount: 'Počet',
             campaign: 'Kampaň',
             disclaimer:
                 'Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023.',
             optionalDisclaimer:
                 'Nepovinné označenie objednávateľa a dodávateľa nad rámec zákona v predkampani od 11. decembra 2022 do 8. júna 2023.',
+            pctTitle: 'Rebríček správnosti označovania',
+            pctDisclaimer:
+                'Podiel správne označených reklám podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023.',
             precampaign: `Predkampaň`,
             title: 'Označenie objednávateľa a dodávateľa',
         },

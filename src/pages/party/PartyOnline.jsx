@@ -198,6 +198,7 @@ function PartyOnline() {
         regionsDiffs = Object.values(regionsCols).sort(
             sortByNumericProp('value')
         );
+
         Object.entries(genderDefs).forEach(([gKey, gProps]) => {
             if (genders[gKey] ?? false) {
                 gendersPie.data.push({
@@ -207,6 +208,7 @@ function PartyOnline() {
                 });
             }
         });
+
         Object.entries(ages).forEach(([aKey, aSize]) => {
             agesPie.data.push({
                 name: aKey,
@@ -219,6 +221,7 @@ function PartyOnline() {
                 agesPie.data.length
             )})`;
         });
+
         Object.entries(attributionDefs).forEach(([aKey, aProps]) => {
             if (attributions[aKey] ?? false) {
                 attributionsPie.data.push({
