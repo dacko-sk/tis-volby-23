@@ -65,13 +65,6 @@ export const columnVariants = {
             color: colors.colorOrange,
         },
     ],
-    percent: [
-        {
-            key: 'pct',
-            name: labels.ads.percent,
-            color: colors.colorDarkBlue,
-        },
-    ],
     spending: [
         {
             key: 'outgoing',

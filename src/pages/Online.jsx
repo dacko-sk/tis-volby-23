@@ -96,6 +96,7 @@ function Online() {
     const attributions = {};
     const attributionsAggr = {};
     const attributionsPercentages = [];
+    const attributionsBars = [];
     const attributionsPie = {
         data: [],
         color: colors.colorLightBlue,
@@ -180,31 +181,20 @@ function Online() {
                 }
 
                 if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
-                    let amount = 0;
-                    let correct = 0;
-                    // count YES & NO amounts, ignore N/A amounts
-                    if (pageProps.attribution.mandatory.YES ?? false) {
-                        amount += pageProps.attribution.mandatory.YES;
-                        correct += pageProps.attribution.mandatory.YES;
+                    // create initial object for party
+                    if (!(attributionsAggr[partyChartLabel] ?? false)) {
+                        attributionsAggr[partyChartLabel] = {};
+                        Object.keys(attributionDefs).forEach((aKey) => {
+                            attributionsAggr[partyChartLabel][aKey] = 0;
+                        });
                     }
-                    if (pageProps.attribution.mandatory.NO ?? false) {
-                        amount += pageProps.attribution.mandatory.NO;
-                    }
-                    if (amount) {
-                        if (attributionsAggr[parentPartyName] ?? false) {
-                            attributionsAggr[parentPartyName].amount += amount;
-                            attributionsAggr[parentPartyName].correct +=
-                                correct;
-                        } else {
-                            attributionsAggr[parentPartyName] = {
-                                name: party
-                                    ? getPartyChartLabel(party)
-                                    : parentPartyName,
-                                amount,
-                                correct,
-                            };
+                    // aggregate attributions from all acounts of the party
+                    Object.keys(attributionDefs).forEach((aKey) => {
+                        if (pageProps.attribution.mandatory[aKey] ?? false) {
+                            attributionsAggr[partyChartLabel][aKey] +=
+                                pageProps.attribution.mandatory[aKey];
                         }
-                    }
+                    });
                 }
             }
 
@@ -321,14 +311,24 @@ function Online() {
             });
         });
 
-        Object.values(attributionsAggr).forEach((partyAttribution) => {
-            attributionsPercentages.push({
-                name: partyAttribution.name,
-                pct: partyAttribution.correct / partyAttribution.amount,
-            });
-        });
-        attributionsPercentages.sort(sortByNumericProp('pct'));
-
+        Object.entries(attributionsAggr).forEach(
+            ([partyChartLabel, partyAttr]) => {
+                const dataPoint = {
+                    name: partyChartLabel,
+                };
+                let sum = 0;
+                Object.values(partyAttr).forEach((amount) => {
+                    sum += amount;
+                });
+                Object.entries(partyAttr).forEach(([aKey, amount]) => {
+                    dataPoint[aKey] = amount / sum;
+                });
+                if (sum) {
+                    attributionsPercentages.push(dataPoint);
+                }
+            }
+        );
+        attributionsPercentages.sort(sortByNumericProp('YES'));
         Object.entries(attributionDefs).forEach(([aKey, aProps]) => {
             if (attributions[aKey] ?? false) {
                 attributionsPie.data.push({
@@ -337,6 +337,12 @@ function Online() {
                     color: aProps.color,
                 });
             }
+            attributionsBars.push({
+                key: aKey,
+                name: aProps.name,
+                color: aProps.color,
+                stackId: 'attr',
+            });
         });
     }
 
@@ -456,7 +462,7 @@ function Online() {
                 </Col>
                 <Col xl={6}>
                     <TisBarChart
-                        bars={columnVariants.percent}
+                        bars={attributionsBars}
                         data={attributionsPercentages}
                         percent
                         subtitle={labels.ads.attribution.pctDisclaimer}
