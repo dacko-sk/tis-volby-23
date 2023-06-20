@@ -4,9 +4,9 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import {
+    ageDefs,
     attributionDefs,
     genderDefs,
-    getColorOpacityScale,
     getPartyChartLabel,
     regionDefs,
 } from '../api/chartHelpers';
@@ -17,6 +17,7 @@ import {
     sortByNumericProp,
     sortBySpending,
 } from '../api/helpers';
+import { segments } from '../api/routes';
 
 import useAdsData from '../context/AdsDataContext';
 import useCsvData from '../context/DataContext';
@@ -66,7 +67,7 @@ function Online() {
                 } else {
                     spendingAggr[parentPartyName] = {
                         name: party
-                            ? getPartyChartLabel(party)
+                            ? getPartyChartLabel(party, segments.ONLINE)
                             : parentPartyName,
                         outgoing: pageProps.outgoing,
                     };
@@ -92,7 +93,6 @@ function Online() {
     const ageAggr = {};
     const agePercentages = [];
     const ageBars = [];
-    const ageKeys = {};
     const attributions = {};
     const attributionsAggr = {};
     const attributionsPercentages = [];
@@ -111,7 +111,7 @@ function Online() {
             const parentPartyName = findPartyForFbAccount(pageId);
             const party = findPartyByFbName(parentPartyName);
             const partyChartLabel = party
-                ? getPartyChartLabel(party)
+                ? getPartyChartLabel(party, segments.ONLINE)
                 : parentPartyName;
 
             if (parentPartyName) {
@@ -290,23 +290,16 @@ function Online() {
                 sum += aShare;
             });
             Object.entries(partyAges).forEach(([aKey, aShare]) => {
-                if (!(ageKeys[aKey] ?? false)) {
-                    ageKeys[aKey] = aKey;
-                }
                 dataPoint[aKey] = aShare / sum;
             });
             agePercentages.push(dataPoint);
         });
         agePercentages.sort(sortByName);
-        const ak = Object.keys(ageKeys).sort();
-        ak.forEach((aKey, index) => {
+        Object.entries(ageDefs).forEach(([age, color]) => {
             ageBars.push({
-                key: aKey,
-                name: aKey,
-                color: `rgb(27, 51, 95, ${getColorOpacityScale(
-                    index,
-                    ak.length
-                )})`,
+                key: age,
+                name: age,
+                color,
                 stackId: 'ages',
             });
         });
@@ -508,11 +501,7 @@ function Online() {
             <Title>{pageTitle}</Title>
 
             <AlertWithIcon className="my-4" variant="primary">
-                Politickú reklamu strán a ich politikov na sociálnej sieti
-                Facebook sledujeme vďaka údajom, ktoré publikuje spoločnosť META
-                v knižnici Ad Facebook Library.
-                <br />
-                Sumy sú uvedené bez DPH.
+                {labels.ads.metaDisclaimer}
             </AlertWithIcon>
             <Accordion
                 className="mt-4"

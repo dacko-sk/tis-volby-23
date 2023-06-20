@@ -1,7 +1,7 @@
 import { labels } from '../../api/constants';
 import { getPartyChartLabel } from '../../api/chartHelpers';
 import { sortBySpending } from '../../api/helpers';
-import { routes } from '../../api/routes';
+import { routes, segments } from '../../api/routes';
 
 import useAdsData from '../../context/AdsDataContext';
 import useData from '../../context/DataContext';
@@ -23,7 +23,9 @@ function Top10Ads({ maxItems = 10 }) {
                     spendingAggr[fbName].outgoing += pageProps.outgoing;
                 } else {
                     spendingAggr[fbName] = {
-                        name: party ? getPartyChartLabel(party) : fbName,
+                        name: party
+                            ? getPartyChartLabel(party, segments.ONLINE)
+                            : fbName,
                         outgoing: pageProps.outgoing,
                     };
                 }
@@ -43,7 +45,7 @@ function Top10Ads({ maxItems = 10 }) {
             data={columns}
             subtitle={labels.ads.weeklySpending.partiesDisclaimer}
             timestamp={sheetsData.lastUpdate}
-            title={`Top ${columns.length} online kampaní`}
+            title={labels.ads.weeklySpending.topTitle}
             vertical
         />
     );

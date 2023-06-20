@@ -109,12 +109,14 @@ export const parties = {
 export const colorLightBlue = '#2bace2';
 export const colorDarkBlue = '#1b335f';
 export const colorOrange = '#f06c50';
-export const colorGrey = '#e9f2f9';
+export const colorLightGrey = '#e9f2f9';
+export const colorGrey = '#878278';
 
 export const colors = {
     colorLightBlue,
     colorDarkBlue,
     colorOrange,
+    colorLightGrey,
     colorGrey,
 };
 
@@ -126,7 +128,7 @@ const phrases = {
     meta: 'na sociálnych sieťach platformy Meta',
     preCampaignStart: 'od začiatku predkampane 11. decembra 2022.',
     weeklyProfiles:
-        'profily, ktorých výdavky počas posledných 90 dní predkampane od 11. marca 2023 alebo týždňové výdavky od začiatku kampane 9. júna 2023 presiahli 100 €.',
+        'ktorých výdavky počas posledných 90 dní predkampane od 11. marca 2023 alebo týždňové výdavky od začiatku kampane 9. júna 2023 presiahli 100 €.',
 };
 
 export const labels = {
@@ -175,6 +177,8 @@ export const labels = {
             gendersDisclaimer: `Podiel zásahu reklám medzi pohlaviami ${phrases.preCampaignStart}`,
             title: 'Demografické rozloženie online reklamy',
         },
+        metaDisclaimer:
+            'Politickú reklamu strán a ich politikov na sociálnych sieťach Facebook a Instagram sledujeme vďaka údajom, ktoré publikuje spoločnosť Meta v knižnici Meta Ad Library. Sumy sú uvedené bez DPH.',
         percent: 'Podiel',
         ranges: {
             accountsTitle: `Najviac inzerujúce profily od začiatku predkampane`,
@@ -185,7 +189,7 @@ export const labels = {
             range: 'Skutočný rozsah výdavkov',
         },
         regions: {
-            allDisclaimer: `Podiel zásahu online reklamy všetkých strán v krajoch Slovenska ${phrases.preCampaignStart}`,
+            allDisclaimer: `Podiel zásahu online reklamy všetkých strán v krajoch Slovenska ${phrases.preCampaignStart} Pre podrobnejšiu analýzu cielenia strán na regióny vzhľadom na veľkosť krajov, kliknite na názov strany.`,
             diffAvg: 'Odchýlka od priemerného zásahu strany v SR',
             diffAvgDisclaimer:
                 'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',
@@ -198,13 +202,14 @@ export const labels = {
         showMore: 'Zistiť viac o online kampani',
         weeklySpending: {
             accountsTitle: `Profily s týždennými výdavkami na reklamu nad 100 €`,
-            disclaimer: `Zobrazené sú len ${phrases.weeklyProfiles}`,
+            disclaimer: `Zobrazené sú len profily, ${phrases.weeklyProfiles}`,
             label: 'Týždňové výdavky na reklamu',
-            partiesDisclaimer: `Započítané sú len ${phrases.weeklyProfiles}`,
+            partiesDisclaimer: `Započítané sú len profily ${phrases.meta}, ${phrases.weeklyProfiles} Pre kompletný zoznam započítaných straníckych profilov a podrobnejšie dáta o online kampani, kliknite na názov strany.`,
             partiesTitle:
                 'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami na reklamu nad 100 €',
             partyAccountsTitle: `Profily strany s týždennými výdavkami na reklamu nad 100 €`,
-            totalDisclaimer: `Súčet výdavkov na politickú reklamu ${phrases.meta}. Započítane sú všetky ${phrases.weeklyProfiles}`,
+            totalDisclaimer: `Súčet výdavkov na politickú reklamu ${phrases.meta}. Započítane sú všetky profily, ${phrases.weeklyProfiles}`,
+            topTitle: `Top 10 online kampaní`,
         },
     },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',

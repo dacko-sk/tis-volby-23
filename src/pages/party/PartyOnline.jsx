@@ -5,18 +5,13 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import {
+    ageDefs,
     attributionDefs,
     genderDefs,
-    getColorOpacityScale,
     regionDefs,
 } from '../../api/chartHelpers';
 import { colors, labels } from '../../api/constants';
-import {
-    setTitle,
-    sortByName,
-    sortByNumericProp,
-    sortBySpending,
-} from '../../api/helpers';
+import { setTitle, sortByNumericProp, sortBySpending } from '../../api/helpers';
 
 import useAdsData from '../../context/AdsDataContext';
 
@@ -209,17 +204,14 @@ function PartyOnline() {
             }
         });
 
-        Object.entries(ages).forEach(([aKey, aSize]) => {
-            agesPie.data.push({
-                name: aKey,
-                value: aSize,
-            });
-        });
-        agesPie.data.sort(sortByName).forEach((ap, index) => {
-            agesPie.data[index].color = `rgb(27, 51, 95, ${getColorOpacityScale(
-                index,
-                agesPie.data.length
-            )})`;
+        Object.entries(ageDefs).forEach(([age, color]) => {
+            if (ages[age] ?? false) {
+                agesPie.data.push({
+                    name: age,
+                    value: ages[age],
+                    color,
+                });
+            }
         });
 
         Object.entries(attributionDefs).forEach(([aKey, aProps]) => {
@@ -328,20 +320,11 @@ function PartyOnline() {
             <Row className="gy-3">
                 <Col xl={6}>
                     <TisPieChart
-                        pie={attrOptionalPie}
-                        percent={false}
-                        subtitle={labels.ads.attribution.optionalDisclaimer}
-                        timestamp={timestamp}
-                        title={labels.ads.attribution.precampaign}
-                    />
-                </Col>
-                <Col xl={6}>
-                    <TisPieChart
                         pie={attributionsPie}
                         percent={false}
                         subtitle={labels.ads.attribution.disclaimer}
                         timestamp={timestamp}
-                        title={labels.ads.attribution.campaign}
+                        // title={labels.ads.attribution.campaign}
                     />
                 </Col>
             </Row>
@@ -379,11 +362,7 @@ function PartyOnline() {
     return (
         <div className="subpage">
             <AlertWithIcon className="my-4" variant="primary">
-                Politickú reklamu strán a ich politikov na sociálnej sieti
-                Facebook sledujeme vďaka údajom, ktoré publikuje spoločnosť META
-                v knižnici Ad Facebook Library.
-                <br />
-                Sumy sú uvedené bez DPH.
+                {labels.ads.metaDisclaimer}
             </AlertWithIcon>
             <Accordion
                 className="mt-4"

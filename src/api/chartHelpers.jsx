@@ -32,18 +32,23 @@ export const regionDefs = {
 export const genderDefs = {
     female: { name: 'Ženy', color: colors.colorOrange },
     male: { name: 'Muži', color: colors.colorDarkBlue },
-    unknown: { name: 'Nezistené', color: colors.colorLightBlue },
+    unknown: { name: 'Nezistené', color: colors.colorGrey },
 };
 
 export const attributionDefs = {
     YES: { name: 'Správne označené', color: colors.colorDarkBlue },
     NO: { name: 'Neoznačené', color: colors.colorOrange },
-    'N/A': { name: 'Nezistené', color: colors.colorLightBlue },
+    'N/A': { name: 'Nezistené', color: colors.colorGrey },
 };
 
-export const getColorOpacityScale = (index, amount) => {
-    const [min, max] = [0.5, 1.0];
-    return min + (max - min) * Math.min(index / (amount - 1), 1);
+export const ageDefs = {
+    '13-17': '#1f1a17',
+    '18-24': '#c19c00',
+    '25-34': '#18943c',
+    '35-44': colors.colorLightBlue,
+    '45-54': colors.colorDarkBlue,
+    '55-64': '#75066e',
+    '65+': colors.colorOrange,
 };
 
 export const tooltipNameFormat = (value) => {
@@ -54,19 +59,19 @@ export const tooltipNameFormat = (value) => {
 export const tickLabel = (value) => {
     const parts = value.split(separators.newline);
     return parts.length > 1 ? (
-        <Link to={routes.party(parts[0])}>{parts[0]}</Link>
+        <Link to={routes.party(parts[0], parts[1])}>{parts[0]}</Link>
     ) : (
         value
     );
 };
 
-export const getPartyChartLabel = (row) => {
+export const getPartyChartLabel = (row, subpage) => {
     const n =
         has(parties, row[labels.elections.name_key]) &&
         has(parties[row[labels.elections.name_key]], 'slug')
             ? parties[row[labels.elections.name_key]].slug
             : row[labels.elections.name_key];
-    return n + separators.newline;
+    return n + separators.newline + (subpage ?? '');
 };
 
 export const shortChartNames = (name) => shortenValue(name, isMobile ? 30 : 60);
