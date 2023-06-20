@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 
 import {
     attributionDefs,
+    genderDefs,
+    getColorOpacityScale,
     getPartyChartLabel,
     regionDefs,
 } from '../api/chartHelpers';
@@ -84,6 +86,13 @@ function Online() {
     const regionsAggr = {};
     const regionsPercentages = [];
     const regionsBars = [];
+    const genderAggr = {};
+    const genderPercentages = [];
+    const genderBars = [];
+    const ageAggr = {};
+    const agePercentages = [];
+    const ageBars = [];
+    const ageKeys = {};
     const attributions = {};
     const attributionsAggr = {};
     const attributionsPercentages = [];
@@ -147,6 +156,27 @@ function Online() {
                                 pageProps.regions[regionKey];
                         }
                     });
+                }
+
+                if (loadedCharts.includes(chartKeys.DEMOGRAPHY)) {
+                    // create initial objects for party
+                    if (!(genderAggr[partyChartLabel] ?? false)) {
+                        genderAggr[partyChartLabel] = {};
+                    }
+                    if (!(ageAggr[partyChartLabel] ?? false)) {
+                        ageAggr[partyChartLabel] = {};
+                    }
+                    // aggregate gender/ages amounts from all acounts of the party
+                    Object.entries(pageProps.demography).forEach(
+                        ([dKey, dSize]) => {
+                            const [gender, age] = dKey.split('|');
+                            genderAggr[partyChartLabel][gender] =
+                                (genderAggr[partyChartLabel][gender] ?? 0) +
+                                dSize;
+                            ageAggr[partyChartLabel][age] =
+                                (ageAggr[partyChartLabel][age] ?? 0) + dSize;
+                        }
+                    );
                 }
 
                 if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
@@ -233,6 +263,61 @@ function Online() {
                 name: regionProps.name,
                 color: regionProps.color,
                 stackId: 'regions',
+            });
+        });
+
+        Object.entries(genderAggr).forEach(
+            ([partyChartLabel, partyGenders]) => {
+                const dataPoint = {
+                    name: partyChartLabel,
+                };
+                let sum = 0;
+                Object.values(partyGenders).forEach((gShare) => {
+                    sum += gShare;
+                });
+                Object.entries(partyGenders).forEach(([gKey, gShare]) => {
+                    dataPoint[gKey] = gShare / sum;
+                });
+                genderPercentages.push(dataPoint);
+            }
+        );
+        genderPercentages.sort(sortByNumericProp('female'));
+        Object.entries(genderDefs).forEach(([gKey, gProps]) => {
+            genderBars.push({
+                key: gKey,
+                name: gProps.name,
+                color: gProps.color,
+                stackId: 'genders',
+            });
+        });
+
+        Object.entries(ageAggr).forEach(([partyChartLabel, partyAges]) => {
+            const dataPoint = {
+                name: partyChartLabel,
+            };
+            let sum = 0;
+            Object.values(partyAges).forEach((aShare) => {
+                sum += aShare;
+            });
+            Object.entries(partyAges).forEach(([aKey, aShare]) => {
+                if (!(ageKeys[aKey] ?? false)) {
+                    ageKeys[aKey] = aKey;
+                }
+                dataPoint[aKey] = aShare / sum;
+            });
+            agePercentages.push(dataPoint);
+        });
+        agePercentages.sort(sortByName);
+        const ak = Object.keys(ageKeys).sort();
+        ak.forEach((aKey, index) => {
+            ageBars.push({
+                key: aKey,
+                name: aKey,
+                color: `rgb(27, 51, 95, ${getColorOpacityScale(
+                    index,
+                    ak.length
+                )})`,
+                stackId: 'ages',
             });
         });
 
@@ -329,6 +414,32 @@ function Online() {
                 timestamp={timestamp}
                 vertical
             />
+        ) : null,
+        [chartKeys.DEMOGRAPHY]: loadedCharts.includes(chartKeys.DEMOGRAPHY) ? (
+            <Row className="gy-3">
+                <Col>
+                    <TisBarChart
+                        bars={genderBars}
+                        data={genderPercentages}
+                        percent
+                        subtitle={labels.ads.demography.gendersDisclaimer}
+                        timestamp={timestamp}
+                        title={labels.ads.demography.genders}
+                        vertical
+                    />
+                </Col>
+                <Col>
+                    <TisBarChart
+                        bars={ageBars}
+                        data={agePercentages}
+                        percent
+                        subtitle={labels.ads.demography.agesDisclaimer}
+                        timestamp={timestamp}
+                        title={labels.ads.demography.ages}
+                        vertical
+                    />
+                </Col>
+            </Row>
         ) : null,
         [chartKeys.ATTRIBUTION]: loadedCharts.includes(
             chartKeys.ATTRIBUTION
