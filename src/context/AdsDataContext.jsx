@@ -63,11 +63,13 @@ export const processDataSheets = (data) => {
                 case sheetsConfig.sheets.PARTY_ACCOUNTS: {
                     // first sheet is parties accounts list
                     sheet.data.forEach((row) => {
-                        pd.parties[row.Strana] = row[
-                            sheetsConfig.columns.ACCOUNTS
-                        ]
-                            .replaceAll(' ', '')
-                            .split(',');
+                        if (row[sheetsConfig.columns.ACCOUNTS] ?? false) {
+                            pd.parties[row.Strana] = row[
+                                sheetsConfig.columns.ACCOUNTS
+                            ]
+                                .replaceAll(' ', '')
+                                .split(',');
+                        }
                     });
                     break;
                 }
