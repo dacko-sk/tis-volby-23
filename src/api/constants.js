@@ -125,6 +125,8 @@ export const errors = {
 };
 
 const phrases = {
+    attr: 'Za správne označenú reklamu vyhodnocujeme statusy, v TEXTE ktorých je uvedený objednávateľ a dodávateľ reklamy. Statusy bez textu vyhodnocujeme ako "Nezistené".',
+    campaignStart: 'od oficiálneho začiatku kampane 9. júna 2023.',
     meta: 'na sociálnych sieťach platformy Meta',
     preCampaignStart: 'od začiatku predkampane 11. decembra 2022.',
     weeklyProfiles:
@@ -160,13 +162,9 @@ export const labels = {
             allTitle: 'Bilancia všetkých strán',
             amount: 'Počet',
             campaign: 'Kampaň',
-            disclaimer:
-                'Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023.',
-            optionalDisclaimer:
-                'Nepovinné označenie objednávateľa a dodávateľa nad rámec zákona v predkampani od 11. decembra 2022 do 8. júna 2023.',
+            disclaimer: `Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani ${phrases.campaignStart} ${phrases.attr}`,
             pctTitle: 'Rebríček správnosti označovania',
-            pctDisclaimer:
-                'Podiel správne označených reklám podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023.',
+            pctDisclaimer: `Podiel správne označených reklám podľa zákona o volebnej kampani ${phrases.campaignStart} ${phrases.attr}`,
             precampaign: `Predkampaň`,
             title: 'Označenie objednávateľa a dodávateľa',
         },
