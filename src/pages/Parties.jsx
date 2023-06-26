@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import has from 'has';
 
 import { labels } from '../api/constants';
-import { setTitle, sortByName } from '../api/helpers';
+import { setTitle, sortByTextProp } from '../api/helpers';
 import { routes } from '../api/routes';
 
 import useData from '../context/DataContext';
@@ -20,7 +20,7 @@ function Parties() {
     const links = [];
 
     if (has(csvData, 'data')) {
-        csvData.data.sort(sortByName).forEach((row) => {
+        csvData.data.sort(sortByTextProp('fullName')).forEach((row) => {
             links.push(
                 <div key={row[labels.elections.name_key]}>
                     <Link

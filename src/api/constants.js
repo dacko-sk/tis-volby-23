@@ -12,6 +12,7 @@ import logoSaS from '../../public/img/parties/SASKA.jpg';
 import logoSmeRodina from '../../public/img/parties/SmeRodina.png';
 import logoSmer from '../../public/img/parties/Smer.jpg';
 import logoSNS from '../../public/img/parties/SNS.png';
+import logoSPS from '../../public/img/parties/SPS.png';
 import logoZaLudi from '../../public/img/parties/za-ludi.svg?url';
 
 export const categories = {
@@ -21,24 +22,25 @@ export const categories = {
 // party object key matches with CSV account key
 export const parties = {
     Aliancia: {
-        fullName: 'Aliancia - Szövetség',
+        fullName: 'SZÖVETSÉG - ALIANCIA',
         logo: logoAliancia,
         share: 2.1,
         tag: 899,
     },
     Demokrati: {
+        fullName: 'DEMOKRATI',
         logo: logoDemokrati,
         share: 4.1,
         tag: 900,
     },
     Hlas: {
-        fullName: 'Hlas - SD',
+        fullName: 'HLAS - sociálna demokracia',
         logo: logoHlas,
         share: 16.3,
         tag: 901,
     },
     KDH: {
-        fullName: 'Kresťansko Demokratické Hnutie',
+        fullName: 'Kresťanskodemokratické hnutie',
         logo: logoKDH,
         share: 6.4,
         tag: 902,
@@ -48,23 +50,30 @@ export const parties = {
         tag: 903,
     },
     LSNS: {
-        fullName: 'Kotlebovci - ĽSNS',
+        fullName: 'Kotlebovci - Ľudová strana Naše Slovensko',
         logo: logoLSNS,
         slug: 'ĽSNS',
         tag: 904,
     },
     MF: {
         fbName: 'MF-ODS',
-        fullName: 'Magyar Fórum - Maďarské fórum',
+        fullName:
+            'Maďarské fórum, Občianski demokrati Slovenska, Za regióny, Rómska koalícia, Demokratická strana',
         logo: logoMF,
-        slug: 'MF-ODS',
+        slug: 'MF-ODS-ZR-RK-DS',
         tag: 912,
     },
     OĽaNO: {
-        fullName: 'Obyčajní Ľudia a Nezávislé Osobnosti',
+        fullName:
+            'OĽANO A PRIATELIA: OBYČAJNÍ ĽUDIA (OĽANO), NEZÁVISLÍ KANDIDÁTI (NEKA), NOVA, SLOBODNÍ A ZODPOVEDNÍ, PAČIVALE ROMA, MAGYAR SZÍVEK',
         logo: logoOLaNO,
         share: 7,
         tag: 905,
+    },
+    'Pirátska strana': {
+        fullName: 'Pirátska strana - Slovensko',
+        logo: logoSPS,
+        tag: 914,
     },
     PS: {
         fullName: 'Progresívne Slovensko',
@@ -73,34 +82,41 @@ export const parties = {
         tag: 906,
     },
     Republika: {
+        fullName: 'REPUBLIKA',
         logo: logoRepublika,
         share: 8.8,
         tag: 907,
     },
     SaS: {
-        fullName: 'Sloboda a Solidarita',
+        fullName: 'Sloboda a Solidarita',
         logo: logoSaS,
         share: 8.3,
         tag: 908,
     },
     'Sme Rodina': {
+        fullName: 'SME RODINA',
         logo: logoSmeRodina,
         share: 7.1,
         tag: 909,
     },
     Smer: {
-        fullName: 'Smer - SSD',
+        fullName: 'SMER - sociálna demokracia',
         logo: logoSmer,
         share: 17.9,
         tag: 910,
     },
     SNS: {
-        fullName: 'Slovenská Národná Strana',
+        fullName: 'Slovenská národná strana',
         logo: logoSNS,
         share: 4.3,
         tag: 911,
     },
+    SPRAVODLIVOSŤ: {
+        slug: 'Spravodlivosť',
+        tag: 915,
+    },
     'Za Ľudí': {
+        fullName: 'ZA ĽUDÍ',
         logo: logoZaLudi,
         tag: 913,
     },
