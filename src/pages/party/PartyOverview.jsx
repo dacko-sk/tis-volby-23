@@ -34,13 +34,15 @@ function PartyTransactions() {
     // add totals from precampaing
     sheetsData.precampaign.forEach((pageData) => {
         const accountParty = findPartyForFbAccount(
-            pageData[sheetsConfig.columns.PAGE_ID]
+            pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
         );
         if (
             party.fbName === accountParty &&
-            isNumeric(pageData[sheetsConfig.columns.SPENDING])
+            isNumeric(pageData[sheetsConfig.FB_WEEKS.columns.SPENDING])
         ) {
-            totalSpending += Number(pageData[sheetsConfig.columns.SPENDING]);
+            totalSpending += Number(
+                pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
+            );
         }
     });
     // add totals from all weeks of campaing
@@ -48,13 +50,15 @@ function PartyTransactions() {
         let weekSpent = 0;
         weekData.forEach((pageData) => {
             const accountParty = findPartyForFbAccount(
-                pageData[sheetsConfig.columns.PAGE_ID]
+                pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
             );
             if (
                 party.fbName === accountParty &&
-                isNumeric(pageData[sheetsConfig.columns.SPENDING])
+                isNumeric(pageData[sheetsConfig.FB_WEEKS.columns.SPENDING])
             ) {
-                weekSpent += Number(pageData[sheetsConfig.columns.SPENDING]);
+                weekSpent += Number(
+                    pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
+                );
             }
         });
         weeks.push({

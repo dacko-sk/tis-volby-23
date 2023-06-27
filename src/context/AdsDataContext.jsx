@@ -2,17 +2,32 @@ import { createContext, useContext, useMemo, useState } from 'react';
 
 import { isNumeric } from '../api/helpers';
 
+export const sheetsId = '1EmyYjnUuhJkqPSolIimi5X91GVeXKTg68XT9BBgQK7E';
 export const sheetsConfig = {
-    columns: {
-        ACCOUNTS: 'Účty',
-        PAGE_ID: 'Page ID',
-        PAGE_NAME: 'Page name',
-        SPENDING: 'Amount spent (EUR)',
+    PARTY_ACCOUNTS: {
+        name: 'Stranícke účty',
+        columns: {
+            PARTY: 'Strana',
+            FB_ACCOUNTS: 'FB Účty',
+            GOOGLE_ACCOUNTS: 'Google účty',
+        },
     },
-    id: '1EmyYjnUuhJkqPSolIimi5X91GVeXKTg68XT9BBgQK7E',
-    sheets: {
-        PARTY_ACCOUNTS: 'FB účty',
-        PRECAMPAIGN: 'Predkampaň 11.3.-8.6.',
+    GOOGLE: { name: 'Google reklama' },
+    FB_PRECAMPAIGN: {
+        name: 'Predkampaň 11.3.-8.6.',
+        columns: {
+            ACCOUNTS: 'Účty',
+            PAGE_ID: 'Page ID',
+            PAGE_NAME: 'Page name',
+            SPENDING: 'Amount spent (EUR)',
+        },
+    },
+    FB_WEEKS: {
+        columns: {
+            PAGE_ID: 'Page ID',
+            PAGE_NAME: 'Page name',
+            SPENDING: 'Amount spent (EUR)',
+        },
     },
 };
 export const metaApiUrl =
@@ -37,10 +52,12 @@ const initialState = {
 
 const filterPoliticAccounts = (parties) => (pageData) => {
     let isPolitic = false;
-    if (pageData[sheetsConfig.columns.PAGE_ID] ?? false) {
+    if (pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID] ?? false) {
         Object.values(parties).some((partyAccounts) => {
             if (
-                partyAccounts.includes(pageData[sheetsConfig.columns.PAGE_ID])
+                partyAccounts.includes(
+                    pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
+                )
             ) {
                 isPolitic = true;
                 return true;
@@ -60,12 +77,19 @@ export const processDataSheets = (data) => {
         const pd = { ...initialState.sheetsData };
         data.forEach((sheet) => {
             switch (sheet.id ?? '') {
-                case sheetsConfig.sheets.PARTY_ACCOUNTS: {
+                case sheetsConfig.PARTY_ACCOUNTS.name: {
                     // first sheet is parties accounts list
                     sheet.data.forEach((row) => {
-                        if (row[sheetsConfig.columns.ACCOUNTS] ?? false) {
-                            pd.parties[row.Strana] = row[
-                                sheetsConfig.columns.ACCOUNTS
+                        if (
+                            row[
+                                sheetsConfig.PARTY_ACCOUNTS.columns.FB_ACCOUNTS
+                            ] ??
+                            false
+                        ) {
+                            pd.parties[
+                                row[sheetsConfig.PARTY_ACCOUNTS.columns.PARTY]
+                            ] = row[
+                                sheetsConfig.PARTY_ACCOUNTS.columns.FB_ACCOUNTS
                             ]
                                 .replaceAll(' ', '')
                                 .split(',');
@@ -73,8 +97,13 @@ export const processDataSheets = (data) => {
                     });
                     break;
                 }
-                case sheetsConfig.sheets.PRECAMPAIGN: {
-                    // load precampaing spending from second sheet
+                case sheetsConfig.GOOGLE.name: {
+                    // load Google spending from second sheet
+
+                    break;
+                }
+                case sheetsConfig.FB_PRECAMPAIGN.name: {
+                    // load precampaing spending from third sheet
                     pd.precampaign = sheet.data.filter(
                         filterPoliticAccounts(pd.parties)
                     );
@@ -153,15 +182,21 @@ export const AdsDataProvider = function ({ children }) {
         const pages = {};
         // add precampaign data
         sheetsData.precampaign.forEach((pageData) => {
-            if (isNumeric(pageData[sheetsConfig.columns.SPENDING])) {
-                if (pages[pageData[sheetsConfig.columns.PAGE_ID]] ?? false) {
-                    pages[pageData[sheetsConfig.columns.PAGE_ID]].outgoing +=
-                        Number(pageData[sheetsConfig.columns.SPENDING]);
+            if (isNumeric(pageData[sheetsConfig.FB_WEEKS.columns.SPENDING])) {
+                if (
+                    pages[pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]] ??
+                    false
+                ) {
+                    pages[
+                        pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
+                    ].outgoing += Number(
+                        pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
+                    );
                 } else {
-                    pages[pageData[sheetsConfig.columns.PAGE_ID]] = {
-                        name: pageData[sheetsConfig.columns.PAGE_NAME],
+                    pages[pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]] = {
+                        name: pageData[sheetsConfig.FB_WEEKS.columns.PAGE_NAME],
                         outgoing: Number(
-                            pageData[sheetsConfig.columns.SPENDING]
+                            pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
                         ),
                     };
                 }
@@ -170,23 +205,32 @@ export const AdsDataProvider = function ({ children }) {
         // add weekly spending from all weeks
         Object.values(sheetsData.weeks).forEach((weekData) => {
             weekData.forEach((pageData) => {
-                if (isNumeric(pageData[sheetsConfig.columns.SPENDING])) {
+                if (
+                    isNumeric(pageData[sheetsConfig.FB_WEEKS.columns.SPENDING])
+                ) {
                     if (
-                        pages[pageData[sheetsConfig.columns.PAGE_ID]] ??
+                        pages[
+                            pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
+                        ] ??
                         false
                     ) {
                         pages[
-                            pageData[sheetsConfig.columns.PAGE_ID]
+                            pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
                         ].outgoing += Number(
-                            pageData[sheetsConfig.columns.SPENDING]
+                            pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
                         );
                     } else {
-                        pages[pageData[sheetsConfig.columns.PAGE_ID]] = {
-                            name: pageData[sheetsConfig.columns.PAGE_NAME],
-                            outgoing: Number(
-                                pageData[sheetsConfig.columns.SPENDING]
-                            ),
-                        };
+                        pages[pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]] =
+                            {
+                                name: pageData[
+                                    sheetsConfig.FB_WEEKS.columns.PAGE_NAME
+                                ],
+                                outgoing: Number(
+                                    pageData[
+                                        sheetsConfig.FB_WEEKS.columns.SPENDING
+                                    ]
+                                ),
+                            };
                     }
                 }
             });
