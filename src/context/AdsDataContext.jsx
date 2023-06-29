@@ -30,10 +30,7 @@ export const sheetsConfig = {
         },
     },
 };
-export const metaApiUrl =
-    'https://volby.transparency.sk/api/meta/ads.php?page=all';
-export const apiReloadUrl = (accounts) =>
-    metaApiUrl + (accounts ? `&reload=${accounts}` : '');
+export const metaApiUrl = 'https://volby.transparency.sk/api/meta/ads_json.php';
 
 const initialState = {
     sheetsData: {

@@ -8,9 +8,9 @@ import { useQuery } from '@tanstack/react-query';
 import { scrollToTop } from '../../api/helpers';
 
 import useAdsData, {
-    apiReloadUrl,
     loadingErrorMetaApi,
     loadingErrorSheets,
+    metaApiUrl,
     processDataMetaApi,
     processDataSheets,
     sheetsId,
@@ -31,8 +31,7 @@ import DonateModal from '../general/DonateModal';
 // import accountsFile from '../../../public/csv/aggregation_no_returns_v2.csv';
 
 function Layout() {
-    const { getAllFbAccounts, metaApiData, setSheetsData, setMetaApiData } =
-        useAdsData();
+    const { metaApiData, setSheetsData, setMetaApiData } = useAdsData();
     const { csvData, setCsvData } = useData();
     const lastUpdate = has(csvData, 'lastUpdate')
         ? csvData.lastUpdate
@@ -90,14 +89,17 @@ function Layout() {
         }
     }, [gsData, gsLoading, gsError]);
 
-    // load ads data from meta API
-    const allAccounts = getAllFbAccounts().join(',');
+    // load ads data from meta API & reload every 12 hours
+    const d = new Date();
+    const reloadKey = `${d.getMonth() + 1}${d.getDate()}${Math.floor(
+        d.getHours() / 12
+    )}`;
     const {
         isLoading: maLoading,
         error: maError,
         data: maData,
-    } = useQuery([`meta_api_all_${allAccounts}`], () =>
-        fetch(apiReloadUrl(allAccounts)).then((response) => response.json())
+    } = useQuery([`meta_api_all_${reloadKey}`], () =>
+        fetch(`${metaApiUrl}?${reloadKey}`).then((response) => response.json())
     );
     // store meta API data in context provider once loaded
     useEffect(() => {
