@@ -197,11 +197,16 @@ export const labels = {
             agesDisclaimer: `Podiel zásahu reklám vo vekových skupinách obyvateľstva ${phrases.preCampaignStart}`,
             genders: 'Pohlavia',
             gendersDisclaimer: `Podiel zásahu reklám medzi pohlaviami ${phrases.preCampaignStart}`,
-            title: 'Demografické rozloženie online reklamy',
+            title: 'Demografické rozloženie reklamy',
         },
         google: {
             disclaimer:
                 'Politickú reklamu strán a ich politikov na platgormách Google sledujeme vďaka údajom, ktoré publikuje spoločnosť Google v Centre transparentnosti reklám. Sumy sú uvedené bez DPH.',
+            format: {
+                disclaimer:
+                    'Podiel jednotlivých formátov Google reklamy na celkových výdavkoch.',
+                title: 'Formáty reklamy',
+            },
             spending: {
                 accountsTitle: `Profily s výdavkami na reklamu nad 100 €`,
                 disclaimer: `Zobrazené sú len profily ${phrases.google} ${phrases.preCampaignStart}`,
@@ -229,7 +234,7 @@ export const labels = {
             label: 'Podiel zásahu reklám',
             sizeDisclaimer: '',
             sizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
-            title: 'Regionálne rozloženie online reklamy',
+            title: 'Regionálne rozloženie reklamy',
         },
         showMore: 'Zistiť viac o online kampani',
         weeklySpending: {

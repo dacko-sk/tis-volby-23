@@ -16,7 +16,11 @@ import {
     CustomTooltip,
     InactiveShape,
 } from '../../api/chartHelpers';
-import { humanPctFormat, numFormat } from '../../api/helpers';
+import {
+    humanPctFormat,
+    numFormat,
+    wholeCurrencyFormat,
+} from '../../api/helpers';
 
 import LastUpdateTag from '../general/LastUpdateTag';
 
@@ -24,6 +28,7 @@ import './Charts.scss';
 
 function TisPieChart({
     className = '',
+    currency = false,
     disclaimer,
     lastUpdate = true,
     nameLabels = false,
@@ -37,6 +42,8 @@ function TisPieChart({
         return null;
     }
 
+    const [activeSegment, setActiveSegment] = useState(null);
+
     const hasInner = !!(pie.innerKey ?? false);
 
     const dataKeys = [pie.dataKey];
@@ -47,10 +54,13 @@ function TisPieChart({
     }
     const data = percent ? preparePctData(pie.data, dataKeys) : pie.data;
 
-    const [activeSegment, setActiveSegment] = useState(null);
+    let formatter = humanPctFormat;
+    if (!percent) {
+        formatter = currency ? wholeCurrencyFormat : numFormat;
+    }
 
-    const label = CustomLabel(nameLabels, percent);
-    const tooltip = CustomTooltip(dataKeys, dataLabels, percent);
+    const label = CustomLabel(nameLabels, percent, formatter);
+    const tooltip = CustomTooltip(dataKeys, dataLabels, formatter);
 
     const pieClick = (segmentProps, segmentKey) => {
         setActiveSegment(segmentKey === activeSegment ? null : segmentKey);

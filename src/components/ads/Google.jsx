@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
-import { getPartyChartLabel } from '../../api/chartHelpers';
+import { formatDefs, getPartyChartLabel } from '../../api/chartHelpers';
 import { labels } from '../../api/constants';
 import {
+    fixNumber,
     getTimestampFromDate,
     setTitle,
+    sortByNumericProp,
     sortBySpending,
 } from '../../api/helpers';
 import { segments } from '../../api/routes';
@@ -16,11 +20,14 @@ import useCsvData from '../../context/DataContext';
 import TisBarChart, { columnVariants } from '../charts/TisBarChart';
 import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
-// import TisPieChart from '../charts/TisPieChart';
+import TisPieChart from '../charts/TisPieChart';
 
 const chartKeys = {
     SPENDING_PARTIES: labels.ads.google.spending.partiesTitle,
     SPENDING_ACCOUNTS: labels.ads.google.spending.accountsTitle,
+    AMOUNTS_PARTIES: labels.ads.amount.partiesTitle,
+    AMOUNTS_ACCOUNTS: labels.ads.amount.accountsTitle,
+    FORMATS: labels.ads.google.format.title,
 };
 
 function Google() {
@@ -34,9 +41,17 @@ function Google() {
 
     // parse data from sheets
     let googleLastUpdate = 0;
-    const spending = [];
     const spendingAggr = {};
     const spendingAccounts = {};
+    const amountsAggr = {};
+    const amountsAccounts = {};
+    const formatAggr = {};
+    const formatPie = {
+        data: [],
+        nameKey: 'name',
+        dataKey: 'value',
+        label: labels.charts.outgoing,
+    };
     if (sheetsData.lastUpdate) {
         sheetsData.googleAds.forEach((pageData) => {
             const parentPartyName = findPartyForGoogleAccount(
@@ -45,27 +60,39 @@ function Google() {
             const accountName =
                 pageData[sheetsConfig.GOOGLE.columns.PAGE_NAME] ?? null;
             const party = findPartyByFbName(parentPartyName);
-            const outgoing = Number(
+            const partyChartLabel = party
+                ? getPartyChartLabel(party, segments.ONLINE)
+                : parentPartyName;
+            const outgoing = fixNumber(
                 pageData[sheetsConfig.GOOGLE.columns.SPENDING]
             );
+            const num = fixNumber(pageData[sheetsConfig.GOOGLE.columns.AMOUNT]);
+
+            // aggregated party charts
             if (parentPartyName) {
                 if (spendingAggr[parentPartyName] ?? false) {
                     spendingAggr[parentPartyName].outgoing += outgoing;
                 } else {
                     spendingAggr[parentPartyName] = {
-                        name: party
-                            ? getPartyChartLabel(party, segments.ONLINE)
-                            : parentPartyName,
+                        name: partyChartLabel,
                         outgoing,
                     };
                 }
+
+                if (loadedCharts.includes(chartKeys.AMOUNTS_PARTIES)) {
+                    if (amountsAggr[parentPartyName] ?? false) {
+                        amountsAggr[parentPartyName].num += num;
+                    } else {
+                        amountsAggr[parentPartyName] = {
+                            name: partyChartLabel,
+                            num,
+                        };
+                    }
+                }
             }
 
+            // single profiles charts
             if (loadedCharts.includes(chartKeys.SPENDING_ACCOUNTS)) {
-                spending.push({
-                    name: accountName,
-                    outgoing,
-                });
                 if (spendingAccounts[accountName] ?? false) {
                     spendingAccounts[accountName].outgoing += outgoing;
                 } else {
@@ -76,6 +103,26 @@ function Google() {
                 }
             }
 
+            if (loadedCharts.includes(chartKeys.AMOUNTS_ACCOUNTS)) {
+                if (amountsAccounts[accountName] ?? false) {
+                    amountsAccounts[accountName].num += num;
+                } else {
+                    amountsAccounts[accountName] = {
+                        name: accountName,
+                        num,
+                    };
+                }
+            }
+
+            if (loadedCharts.includes(chartKeys.FORMATS)) {
+                Object.keys(formatDefs).forEach((fKey) => {
+                    if (pageData[fKey] ?? false) {
+                        formatAggr[fKey] =
+                            (formatAggr[fKey] ?? 0) + fixNumber(pageData[fKey]);
+                    }
+                });
+            }
+
             googleLastUpdate = Math.max(
                 googleLastUpdate,
                 getTimestampFromDate(
@@ -84,6 +131,17 @@ function Google() {
             );
         });
     }
+
+    // sort & preprocess aggregated data for charts
+    console.log(formatAggr);
+    Object.entries(formatAggr).forEach(([fKey, value]) => {
+        formatPie.data.push({
+            name: fKey,
+            value,
+            color: formatDefs[fKey],
+        });
+    });
+
     const charts = {
         [chartKeys.SPENDING_PARTIES]: loadedCharts.includes(
             chartKeys.SPENDING_PARTIES
@@ -108,6 +166,43 @@ function Google() {
                 timestamp={googleLastUpdate}
                 vertical
             />
+        ) : null,
+        [chartKeys.AMOUNTS_PARTIES]: loadedCharts.includes(
+            chartKeys.AMOUNTS_PARTIES
+        ) ? (
+            <TisBarChart
+                bars={columnVariants.amount}
+                data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
+                subtitle={labels.ads.amount.disclaimer}
+                timestamp={googleLastUpdate}
+                vertical
+            />
+        ) : null,
+        [chartKeys.AMOUNTS_ACCOUNTS]: loadedCharts.includes(
+            chartKeys.AMOUNTS_ACCOUNTS
+        ) ? (
+            <TisBarChart
+                bars={columnVariants.amount}
+                data={Object.values(amountsAccounts).sort(
+                    sortByNumericProp('num')
+                )}
+                subtitle={labels.ads.amount.disclaimer}
+                timestamp={googleLastUpdate}
+                vertical
+            />
+        ) : null,
+        [chartKeys.FORMATS]: loadedCharts.includes(chartKeys.FORMATS) ? (
+            <Row className="gy-3">
+                <Col xl={6}>
+                    <TisPieChart
+                        currency
+                        pie={formatPie}
+                        percent={false}
+                        subtitle={labels.ads.google.format.disclaimer}
+                        timestamp={googleLastUpdate}
+                    />
+                </Col>
+            </Row>
         ) : null,
     };
 

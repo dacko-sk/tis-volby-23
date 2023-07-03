@@ -4,6 +4,9 @@ import { labels } from './constants';
 
 export const isNumeric = (value) => !Number.isNaN(value);
 
+export const fixNumber = (value) =>
+    Number(value.replace(',', '.').replace(' ', ''));
+
 export const slovakFormat = (value, options) =>
     new Intl.NumberFormat('sk-SK', options).format(value);
 

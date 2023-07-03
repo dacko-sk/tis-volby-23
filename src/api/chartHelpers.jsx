@@ -3,8 +3,9 @@ import { Sector } from 'recharts';
 import has from 'has';
 
 import { colors, labels, parties } from './constants';
-import { humanPctFormat, numFormat, shortenValue } from './helpers';
+import { shortenValue } from './helpers';
 import { routes, separators } from './routes';
+import { sheetsConfig } from '../context/AdsDataContext';
 
 export const isMobile = window.innerWidth < 576;
 export const horizontalYaxisWidth = 80;
@@ -49,6 +50,12 @@ export const ageDefs = {
     '45-54': colors.colorDarkBlue,
     '55-64': '#75066e',
     '65+': colors.colorOrange,
+};
+
+export const formatDefs = {
+    [sheetsConfig.GOOGLE.columns.VIDEO]: colors.colorOrange,
+    [sheetsConfig.GOOGLE.columns.IMAGE]: colors.colorDarkBlue,
+    [sheetsConfig.GOOGLE.columns.TEXT]: colors.colorLightBlue,
 };
 
 export const tooltipNameFormat = (value) => {
@@ -122,7 +129,7 @@ export const prepareAvgDeltaPctData = (data, keys) => {
     return pctData;
 };
 
-export const CustomLabel = (showName, formatPercent) =>
+export const CustomLabel = (showName, formatPercent, formatter) =>
     function ({ cx, cy, fill, midAngle, outerRadius, name, percent, value }) {
         const RADIAN = Math.PI / 180;
 
@@ -134,7 +141,7 @@ export const CustomLabel = (showName, formatPercent) =>
         if (showName) {
             label = name;
         } else {
-            label = formatPercent ? humanPctFormat(percent) : numFormat(value);
+            label = formatter(formatPercent ? percent : value);
         }
 
         return (
@@ -150,7 +157,7 @@ export const CustomLabel = (showName, formatPercent) =>
         );
     };
 
-export const CustomTooltip = (dataKeys, dataLabels, formatPercent) =>
+export const CustomTooltip = (dataKeys, dataLabels, formatter) =>
     function ({ active, payload }) {
         if (active && payload && payload.length) {
             return (
@@ -165,9 +172,7 @@ export const CustomTooltip = (dataKeys, dataLabels, formatPercent) =>
                         <div key={key}>
                             {dataLabels[index]}:{' '}
                             <strong>
-                                {formatPercent
-                                    ? humanPctFormat(payload[0].payload[key])
-                                    : numFormat(payload[0].payload[key])}
+                                {formatter(payload[0].payload[key])}
                             </strong>
                         </div>
                     ))}
