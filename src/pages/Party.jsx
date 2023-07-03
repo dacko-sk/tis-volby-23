@@ -68,7 +68,7 @@ function Party() {
                 )}
                 {party.fullName}
             </Title>
-            <div className="me-auto overflow-auto">
+            <div className="overflow-auto">
                 <Nav variant="tabs" className="flex-nowrap">
                     <Nav.Link as={NavLink} to={routes.party(party.slug)} end>
                         Prehľad

@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 
-import { isNumeric } from '../api/helpers';
+import { getTimestampFromDate, isNumeric } from '../api/helpers';
 
 export const sheetsId = '1EmyYjnUuhJkqPSolIimi5X91GVeXKTg68XT9BBgQK7E';
 export const sheetsConfig = {
@@ -12,7 +12,15 @@ export const sheetsConfig = {
             GOOGLE_ACCOUNTS: 'Google účty',
         },
     },
-    GOOGLE: { name: 'Google reklama' },
+    GOOGLE: {
+        name: 'Google reklama',
+        columns: {
+            ID: 'ID',
+            PAGE_NAME: 'Inzerent',
+            SPENDING: 'Výdavky na reklamu',
+            UPDATED: 'Aktualizácia',
+        },
+    },
     FB_PRECAMPAIGN: {
         name: 'Predkampaň 11.3.-8.6.',
         columns: {
@@ -35,7 +43,9 @@ export const metaApiUrl = 'https://volby.transparency.sk/api/meta/ads_json.php';
 const initialState = {
     sheetsData: {
         error: null,
-        parties: {},
+        partiesFb: {},
+        partiesGgl: {},
+        googleAds: [],
         precampaign: [],
         weeks: {},
         lastUpdate: 0,
@@ -47,10 +57,10 @@ const initialState = {
     },
 };
 
-const filterPoliticAccounts = (parties) => (pageData) => {
+const filterPoliticAccounts = (partiesFb) => (pageData) => {
     let isPolitic = false;
     if (pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID] ?? false) {
-        Object.values(parties).some((partyAccounts) => {
+        Object.values(partiesFb).some((partyAccounts) => {
             if (
                 partyAccounts.includes(
                     pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
@@ -83,10 +93,26 @@ export const processDataSheets = (data) => {
                             ] ??
                             false
                         ) {
-                            pd.parties[
+                            pd.partiesFb[
                                 row[sheetsConfig.PARTY_ACCOUNTS.columns.PARTY]
                             ] = row[
                                 sheetsConfig.PARTY_ACCOUNTS.columns.FB_ACCOUNTS
+                            ]
+                                .replaceAll(' ', '')
+                                .split(',');
+                        }
+                        if (
+                            row[
+                                sheetsConfig.PARTY_ACCOUNTS.columns
+                                    .GOOGLE_ACCOUNTS
+                            ] ??
+                            false
+                        ) {
+                            pd.partiesGgl[
+                                row[sheetsConfig.PARTY_ACCOUNTS.columns.PARTY]
+                            ] = row[
+                                sheetsConfig.PARTY_ACCOUNTS.columns
+                                    .GOOGLE_ACCOUNTS
                             ]
                                 .replaceAll(' ', '')
                                 .split(',');
@@ -96,29 +122,22 @@ export const processDataSheets = (data) => {
                 }
                 case sheetsConfig.GOOGLE.name: {
                     // load Google spending from second sheet
-
+                    pd.googleAds = sheet.data;
                     break;
                 }
                 case sheetsConfig.FB_PRECAMPAIGN.name: {
                     // load precampaing spending from third sheet
                     pd.precampaign = sheet.data.filter(
-                        filterPoliticAccounts(pd.parties)
+                        filterPoliticAccounts(pd.partiesFb)
                     );
                     break;
                 }
                 default: {
                     // load weekly reports from remaining sheets
-                    const dateParts = sheet.id
-                        .replaceAll('/', '.')
-                        .replaceAll(' ', '')
-                        .split('.');
-                    const time =
-                        new Date(
-                            `${dateParts[2]}/${dateParts[1]}/${dateParts[0]} 23:59:59`
-                        ).getTime() / 1000;
+                    const time = getTimestampFromDate(sheet.id);
                     pd.lastUpdate = time;
                     pd.weeks[time] = sheet.data.filter(
-                        filterPoliticAccounts(pd.parties)
+                        filterPoliticAccounts(pd.partiesFb)
                     );
                 }
             }
@@ -153,7 +172,21 @@ export const AdsDataProvider = function ({ children }) {
 
     const findPartyForFbAccount = (accountId) => {
         let fbName = null;
-        Object.entries(sheetsData.parties).some(
+        Object.entries(sheetsData.partiesFb).some(
+            ([partyFbName, partyAccounts]) => {
+                if (partyAccounts.includes(accountId)) {
+                    fbName = partyFbName;
+                    return true;
+                }
+                return false;
+            }
+        );
+        return fbName;
+    };
+
+    const findPartyForGoogleAccount = (accountId) => {
+        let fbName = null;
+        Object.entries(sheetsData.partiesGgl).some(
             ([partyFbName, partyAccounts]) => {
                 if (partyAccounts.includes(accountId)) {
                     fbName = partyFbName;
@@ -167,13 +200,13 @@ export const AdsDataProvider = function ({ children }) {
 
     const getAllFbAccounts = () => {
         const all = [];
-        Object.values(sheetsData.parties).forEach((partyAccounts) => {
+        Object.values(sheetsData.partiesFb).forEach((partyAccounts) => {
             all.push(...partyAccounts);
         });
         return all;
     };
 
-    const getPartyFbAccounts = (fbName) => sheetsData.parties?.[fbName] ?? [];
+    const getPartyFbAccounts = (fbName) => sheetsData.partiesFb?.[fbName] ?? [];
 
     const mergedWeeksData = () => {
         const pages = {};
@@ -242,6 +275,7 @@ export const AdsDataProvider = function ({ children }) {
             metaApiData,
             setMetaApiData,
             findPartyForFbAccount,
+            findPartyForGoogleAccount,
             getAllFbAccounts,
             getPartyFbAccounts,
             mergedWeeksData: mergedWeeksData(),

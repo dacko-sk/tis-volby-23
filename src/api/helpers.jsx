@@ -67,6 +67,15 @@ export const dateFormat = (timestamp) =>
         day: 'numeric',
     });
 
+export const getTimestampFromDate = (date) => {
+    const dateParts = date.replaceAll('/', '.').replaceAll(' ', '').split('.');
+    return dateParts.length === 3
+        ? new Date(
+              `${dateParts[2]}/${dateParts[1]}/${dateParts[0]} 23:59:59`
+          ).getTime() / 1000
+        : 0;
+};
+
 export const shortenValue = (value, length, removals) => {
     if (value) {
         let shorten = value;
