@@ -1,4 +1,5 @@
 import logoAliancia from '../../public/img/parties/Aliancia.jpg';
+import logoApS from '../../public/img/parties/aps.jpg';
 import logoDemokrati from '../../public/img/parties/Demokrati.jpg';
 import logoHlas from '../../public/img/parties/Hlas.svg?url';
 import logoKDH from '../../public/img/parties/KDH.svg?url';
@@ -27,6 +28,11 @@ export const parties = {
         share: 2.1,
         tag: 899,
     },
+    'Alternatíva pre Slovensko': {
+        logo: logoApS,
+        slug: 'ApS',
+        tag: 916,
+    },
     Demokrati: {
         fullName: 'DEMOKRATI',
         logo: logoDemokrati,
@@ -45,8 +51,9 @@ export const parties = {
         share: 6.4,
         tag: 902,
     },
-    KSS: {
+    'Komunistická strana Slovenska': {
         logo: logoKSS,
+        slug: 'KSS',
         tag: 903,
     },
     LSNS: {
