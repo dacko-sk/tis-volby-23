@@ -6,6 +6,7 @@ import logoKDH from '../../public/img/parties/KDH.svg?url';
 import logoKSS from '../../public/img/parties/KSS.svg?url';
 import logoLSNS from '../../public/img/parties/LSNS.svg?url';
 import logoMF from '../../public/img/parties/MF.png';
+import logoMM from '../../public/img/parties/MM.jpg';
 import logoOLaNO from '../../public/img/parties/OĽaNO.png';
 import logoPS from '../../public/img/parties/PS.png';
 import logoRepublika from '../../public/img/parties/Republika.png';
@@ -70,6 +71,13 @@ export const parties = {
         slug: 'MF-ODS-ZR-RK-DS',
         tag: 912,
     },
+    'Modri, Most-Hid': {
+        fbName: 'Modrí-Most',
+        fullName: 'Modrí, Most - Híd',
+        logo: logoMM,
+        slug: 'MM',
+        tag: 917,
+    },
     OĽaNO: {
         fullName:
             'OĽANO A PRIATELIA: OBYČAJNÍ ĽUDIA (OĽANO), NEZÁVISLÍ KANDIDÁTI (NEKA), NOVA, SLOBODNÍ A ZODPOVEDNÍ, PAČIVALE ROMA, MAGYAR SZÍVEK',
@@ -78,8 +86,10 @@ export const parties = {
         tag: 905,
     },
     'Pirátska strana': {
+        fbName: 'SPS',
         fullName: 'Pirátska strana - Slovensko',
         logo: logoSPS,
+        slug: 'SPS',
         tag: 914,
     },
     PS: {
