@@ -52,7 +52,8 @@ const initialState = {
         googleAds: [],
         precampaign: [],
         weeks: {},
-        lastUpdate: 0,
+        lastUpdateFb: 0,
+        lastUpdateGgl: 0,
     },
     metaApiData: {
         error: null,
@@ -127,6 +128,14 @@ export const processDataSheets = (data) => {
                 case sheetsConfig.GOOGLE.name: {
                     // load Google spending from second sheet
                     pd.googleAds = sheet.data;
+                    sheet.data.forEach((pageData) => {
+                        const time = getTimestampFromDate(
+                            pageData[sheetsConfig.GOOGLE.columns.UPDATED]
+                        );
+                        if (time > pd.lastUpdateGgl) {
+                            pd.lastUpdateGgl = time;
+                        }
+                    });
                     break;
                 }
                 case sheetsConfig.FB_PRECAMPAIGN.name: {
@@ -139,7 +148,7 @@ export const processDataSheets = (data) => {
                 default: {
                     // load weekly reports from remaining sheets
                     const time = getTimestampFromDate(sheet.id);
-                    pd.lastUpdate = time;
+                    pd.lastUpdateFb = time;
                     pd.weeks[time] = sheet.data.filter(
                         filterPoliticAccounts(pd.partiesFb)
                     );

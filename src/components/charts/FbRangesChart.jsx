@@ -148,12 +148,12 @@ function FbRangesChart({
                                 key="range"
                                 dataKey="range"
                                 fill={colors.colorDarkBlue}
-                                name={labels.ads.ranges.range}
+                                name={labels.ads.meta.ranges.range}
                             />
                             <Scatter
                                 dataKey="est"
                                 fill={colors.colorOrange}
-                                name={labels.ads.ranges.estimate}
+                                name={labels.ads.meta.ranges.estimate}
                             />
                         </ComposedChart>
                     </ResponsiveContainer>

@@ -1,6 +1,8 @@
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 
+import { labels } from '../api/constants';
+
 import Google from '../components/ads/Google';
 import Meta from '../components/ads/Meta';
 import Title from '../components/structure/Title';
@@ -12,8 +14,12 @@ function Online() {
             <Tab.Container id="providers" defaultActiveKey="facebook">
                 <div className="overflow-auto">
                     <Nav variant="tabs" className="flex-nowrap">
-                        <Nav.Link eventKey="facebook">Meta</Nav.Link>
-                        <Nav.Link eventKey="google">Google</Nav.Link>
+                        <Nav.Link eventKey="facebook">
+                            {labels.ads.meta.title}
+                        </Nav.Link>
+                        <Nav.Link eventKey="google">
+                            {labels.ads.google.title}
+                        </Nav.Link>
                     </Nav>
                 </div>
 

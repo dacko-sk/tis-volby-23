@@ -1,27 +1,29 @@
 import { Col, Row } from 'react-bootstrap';
 
 import { labels } from '../../api/constants';
-import { currencyFormat, wholeNumFormat } from '../../api/helpers';
+import { currencyFormat, fixNumber } from '../../api/helpers';
 
-import useAdsData from '../../context/AdsDataContext';
+import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
 
 import LastUpdateTag from '../general/LastUpdateTag';
 import Loading from '../general/Loading';
 
 function TotalAdsSpending() {
-    const { metaApiData, sheetsData, mergedWeeksData } = useAdsData();
+    const { sheetsData, mergedWeeksData } = useAdsData();
 
     // parse data
-    let total = 0;
-    if (sheetsData.lastUpdate) {
+    let totalMeta = 0;
+    let totalGoogle = 0;
+    if (sheetsData.lastUpdateFb) {
         Object.values(mergedWeeksData).forEach((pageProps) => {
-            total += pageProps.outgoing > 0 ? pageProps.outgoing : 0;
+            totalMeta += pageProps.outgoing > 0 ? pageProps.outgoing : 0;
         });
     }
-    let num = 0;
-    if (metaApiData.lastUpdate) {
-        Object.values(metaApiData.pages).forEach((pageProps) => {
-            num += pageProps.spend.num > 0 ? pageProps.spend.num : 0;
+    if (sheetsData.lastUpdateGgl) {
+        sheetsData.googleAds.forEach((pageData) => {
+            totalGoogle += fixNumber(
+                pageData[sheetsConfig.GOOGLE.columns.SPENDING]
+            );
         });
     }
 
@@ -29,33 +31,32 @@ function TotalAdsSpending() {
         <div className="total-spending">
             <Row className="gy-3 gy-lg-0 text-center mb-4">
                 <Col lg={6}>
-                    <h2>Výdavky na online reklamu</h2>
+                    <h2>{labels.ads.meta.totalSpendingTitle}</h2>
                     <div className="hero-number">
-                        {sheetsData.lastUpdate ? (
-                            currencyFormat(total)
+                        {sheetsData.lastUpdateFb ? (
+                            currencyFormat(totalMeta)
                         ) : (
                             <Loading small />
                         )}
                         <LastUpdateTag
-                            timestamp={sheetsData.lastUpdate || null}
+                            timestamp={sheetsData.lastUpdateFb || null}
                         >
-                            {labels.ads.weeklySpending.totalDisclaimer}
+                            {labels.ads.meta.totalDisclaimer}
                         </LastUpdateTag>
                     </div>
                 </Col>
                 <Col lg={6}>
-                    <h2>Celkový počet online reklám</h2>
-
+                    <h2>{labels.ads.google.totalSpendingTitle}</h2>
                     <div className="hero-number">
-                        {metaApiData.lastUpdate ? (
-                            wholeNumFormat(num)
+                        {sheetsData.lastUpdateGgl ? (
+                            currencyFormat(totalGoogle)
                         ) : (
                             <Loading small />
                         )}
                         <LastUpdateTag
-                            timestamp={metaApiData.lastUpdate || null}
+                            timestamp={sheetsData.lastUpdateGgl || null}
                         >
-                            {labels.ads.amount.totalDisclaimer}
+                            {labels.ads.google.totalDisclaimer}
                         </LastUpdateTag>
                     </div>
                 </Col>

@@ -29,15 +29,15 @@ import Loading from '../general/Loading';
 import TisPieChart from '../charts/TisPieChart';
 
 const chartKeys = {
-    SPENDING_PARTIES: labels.ads.weeklySpending.partiesTitle,
-    SPENDING_ACCOUNTS: labels.ads.weeklySpending.accountsTitle,
-    RANGES_PARTIES: labels.ads.ranges.partiesTitle,
-    RANGES_ACCOUNTS: labels.ads.ranges.accountsTitle,
+    SPENDING_PARTIES: labels.ads.meta.spending.partiesTitle,
+    SPENDING_ACCOUNTS: labels.ads.meta.spending.accountsTitle,
+    RANGES_PARTIES: labels.ads.meta.ranges.partiesTitle,
+    RANGES_ACCOUNTS: labels.ads.meta.ranges.accountsTitle,
     AMOUNTS_PARTIES: labels.ads.amount.partiesTitle,
     AMOUNTS_ACCOUNTS: labels.ads.amount.accountsTitle,
-    REGIONS: labels.ads.regions.title,
-    DEMOGRAPHY: labels.ads.demography.title,
-    ATTRIBUTION: labels.ads.attribution.title,
+    REGIONS: labels.ads.meta.regions.title,
+    DEMOGRAPHY: labels.ads.meta.demography.title,
+    ATTRIBUTION: labels.ads.meta.attribution.title,
 };
 
 function Meta() {
@@ -53,7 +53,7 @@ function Meta() {
     // parse data from sheets
     let spending = [];
     const spendingAggr = {};
-    if (sheetsData.lastUpdate) {
+    if (sheetsData.lastUpdateFb) {
         Object.entries(mergedWeeksData).forEach(([pageId, pageProps]) => {
             const parentPartyName = findPartyForFbAccount(pageId);
             const party = findPartyByFbName(parentPartyName);
@@ -99,7 +99,7 @@ function Meta() {
         color: colors.colorLightBlue,
         nameKey: 'name',
         dataKey: 'value',
-        label: labels.ads.attribution.amount,
+        label: labels.ads.meta.attribution.amount,
     };
     let timestamp = 0;
 
@@ -344,8 +344,8 @@ function Meta() {
                 bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
-                subtitle={labels.ads.weeklySpending.partiesDisclaimer}
-                timestamp={sheetsData.lastUpdate}
+                subtitle={labels.ads.meta.spending.partiesDisclaimer}
+                timestamp={sheetsData.lastUpdateFb}
                 vertical
             />
         ) : null,
@@ -356,15 +356,15 @@ function Meta() {
                 bars={columnVariants.spending}
                 currency
                 data={spending.sort(sortBySpending)}
-                subtitle={labels.ads.weeklySpending.disclaimer}
-                timestamp={sheetsData.lastUpdate}
+                subtitle={labels.ads.meta.spending.disclaimer}
+                timestamp={sheetsData.lastUpdateFb}
                 vertical
             />
         ) : null,
         [chartKeys.RANGES_PARTIES]: (
             <FbRangesChart
                 data={Object.values(partiesAggr).sort(sortByNumericProp('est'))}
-                subtitle={labels.ads.ranges.disclaimer}
+                subtitle={labels.ads.meta.ranges.disclaimer}
                 timestamp={timestamp}
                 vertical
             />
@@ -374,7 +374,7 @@ function Meta() {
         ) ? (
             <FbRangesChart
                 data={pages.sort(sortByNumericProp('est'))}
-                subtitle={labels.ads.ranges.disclaimer}
+                subtitle={labels.ads.meta.ranges.disclaimer}
                 timestamp={timestamp}
                 vertical
             />
@@ -406,7 +406,7 @@ function Meta() {
                 bars={regionsBars}
                 data={regionsPercentages}
                 percent
-                subtitle={labels.ads.regions.allDisclaimer}
+                subtitle={labels.ads.meta.regions.allDisclaimer}
                 timestamp={timestamp}
                 vertical
             />
@@ -418,9 +418,9 @@ function Meta() {
                         bars={genderBars}
                         data={genderPercentages}
                         percent
-                        subtitle={labels.ads.demography.gendersDisclaimer}
+                        subtitle={labels.ads.meta.demography.gendersDisclaimer}
                         timestamp={timestamp}
-                        title={labels.ads.demography.genders}
+                        title={labels.ads.meta.demography.genders}
                         vertical
                     />
                 </Col>
@@ -429,9 +429,9 @@ function Meta() {
                         bars={ageBars}
                         data={agePercentages}
                         percent
-                        subtitle={labels.ads.demography.agesDisclaimer}
+                        subtitle={labels.ads.meta.demography.agesDisclaimer}
                         timestamp={timestamp}
-                        title={labels.ads.demography.ages}
+                        title={labels.ads.meta.demography.ages}
                         vertical
                     />
                 </Col>
@@ -445,9 +445,9 @@ function Meta() {
                     <TisPieChart
                         pie={attributionsPie}
                         percent={false}
-                        subtitle={labels.ads.attribution.disclaimer}
+                        subtitle={labels.ads.meta.attribution.disclaimer}
                         timestamp={timestamp}
-                        title={labels.ads.attribution.allTitle}
+                        title={labels.ads.meta.attribution.allTitle}
                     />
                 </Col>
                 <Col xl={6}>
@@ -455,9 +455,9 @@ function Meta() {
                         bars={attributionsBars}
                         data={attributionsPercentages}
                         percent
-                        subtitle={labels.ads.attribution.pctDisclaimer}
+                        subtitle={labels.ads.meta.attribution.pctDisclaimer}
                         timestamp={timestamp}
-                        title={labels.ads.attribution.pctTitle}
+                        title={labels.ads.meta.attribution.pctTitle}
                         vertical
                     />
                 </Col>
@@ -496,7 +496,7 @@ function Meta() {
     return (
         <div>
             <AlertWithIcon className="my-4" variant="primary">
-                {labels.ads.metaDisclaimer}
+                {labels.ads.meta.disclaimer}
             </AlertWithIcon>
             <Accordion
                 className="mt-4"

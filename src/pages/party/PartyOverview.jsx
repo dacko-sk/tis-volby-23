@@ -129,7 +129,7 @@ function PartyTransactions() {
                         bars={[
                             {
                                 key: 'outgoing',
-                                name: labels.ads.weeklySpending.label,
+                                name: labels.ads.meta.spending.label,
                                 color: colors.colorLightBlue,
                             },
                         ]}
@@ -141,14 +141,14 @@ function PartyTransactions() {
                 <Col lg={6} className="text-center">
                     <div className="total-spending">
                         <h2 className="mt-xxl-3">
-                            Priebežné výdavky na online
+                            {labels.ads.meta.totalSpendingTitle}
                         </h2>
                         <p className="hero-number">
                             {currencyFormat(totalSpending)}
                             <LastUpdateTag
-                                timestamp={sheetsData.lastUpdate || null}
+                                timestamp={sheetsData.lastUpdateFb || null}
                             >
-                                {labels.ads.weeklySpending.totalDisclaimer}
+                                {labels.ads.meta.totalDisclaimer}
                             </LastUpdateTag>
                         </p>
                     </div>

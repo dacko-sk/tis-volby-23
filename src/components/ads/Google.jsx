@@ -7,7 +7,6 @@ import { formatDefs, getPartyChartLabel } from '../../api/chartHelpers';
 import { labels } from '../../api/constants';
 import {
     fixNumber,
-    getTimestampFromDate,
     setTitle,
     sortByNumericProp,
     sortBySpending,
@@ -40,7 +39,6 @@ function Google() {
     const { findPartyByFbName } = useCsvData();
 
     // parse data from sheets
-    let googleLastUpdate = 0;
     const spendingAggr = {};
     const spendingAccounts = {};
     const amountsAggr = {};
@@ -52,7 +50,7 @@ function Google() {
         dataKey: 'value',
         label: labels.charts.outgoing,
     };
-    if (sheetsData.lastUpdate) {
+    if (sheetsData.lastUpdateGgl) {
         sheetsData.googleAds.forEach((pageData) => {
             const parentPartyName = findPartyForGoogleAccount(
                 pageData[sheetsConfig.GOOGLE.columns.ID]
@@ -122,18 +120,10 @@ function Google() {
                     }
                 });
             }
-
-            googleLastUpdate = Math.max(
-                googleLastUpdate,
-                getTimestampFromDate(
-                    pageData[sheetsConfig.GOOGLE.columns.UPDATED]
-                )
-            );
         });
     }
 
     // sort & preprocess aggregated data for charts
-    console.log(formatAggr);
     Object.entries(formatAggr).forEach(([fKey, value]) => {
         formatPie.data.push({
             name: fKey,
@@ -151,7 +141,7 @@ function Google() {
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
                 subtitle={labels.ads.google.spending.partiesDisclaimer}
-                timestamp={googleLastUpdate}
+                timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
         ) : null,
@@ -163,7 +153,7 @@ function Google() {
                 currency
                 data={Object.values(spendingAccounts).sort(sortBySpending)}
                 subtitle={labels.ads.google.spending.disclaimer}
-                timestamp={googleLastUpdate}
+                timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
         ) : null,
@@ -174,7 +164,7 @@ function Google() {
                 bars={columnVariants.amount}
                 data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
                 subtitle={labels.ads.amount.disclaimer}
-                timestamp={googleLastUpdate}
+                timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
         ) : null,
@@ -187,7 +177,7 @@ function Google() {
                     sortByNumericProp('num')
                 )}
                 subtitle={labels.ads.amount.disclaimer}
-                timestamp={googleLastUpdate}
+                timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
         ) : null,
@@ -199,7 +189,7 @@ function Google() {
                         pie={formatPie}
                         percent={false}
                         subtitle={labels.ads.google.format.disclaimer}
-                        timestamp={googleLastUpdate}
+                        timestamp={sheetsData.lastUpdateGgl}
                     />
                 </Col>
             </Row>
@@ -216,7 +206,7 @@ function Google() {
         );
     });
 
-    if (!sheetsData.lastUpdate || sheetsData.error) {
+    if (!sheetsData.lastUpdateGgl || sheetsData.error) {
         // waiting for data or error in loding
         return <Loading error={sheetsData.error} />;
     }
