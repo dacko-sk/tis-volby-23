@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import has from 'has';
 
 import { labels } from '../api/constants';
 import { setTitle, sortByTextProp } from '../api/helpers';
@@ -19,7 +18,7 @@ function Parties() {
 
     const links = [];
 
-    if (has(csvData, 'data')) {
+    if (csvData.data ?? false) {
         csvData.data.sort(sortByTextProp('fullName')).forEach((row) => {
             links.push(
                 <div key={row[labels.elections.name_key]}>
@@ -28,7 +27,7 @@ function Parties() {
                         to={routes.party(row[labels.elections.name_key])}
                     >
                         <figure className="flex-shrink-0 me-3">
-                            {has(row, 'logo') && <img src={row.logo} />}
+                            {(row.logo ?? false) && <img src={row.logo} />}
                         </figure>
 
                         <h3 className="my-2">{row.fullName}</h3>
