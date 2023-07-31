@@ -2,19 +2,25 @@ import logoAliancia from '../../public/img/parties/Aliancia.jpg';
 import logoApS from '../../public/img/parties/aps.jpg';
 import logoDemokrati from '../../public/img/parties/Demokrati.jpg';
 import logoHlas from '../../public/img/parties/Hlas.svg?url';
+import logoKarma from '../../public/img/parties/Karma.jpg';
 import logoKDH from '../../public/img/parties/KDH.svg?url';
 import logoKSS from '../../public/img/parties/KSS.svg?url';
+import logoKU from '../../public/img/parties/KU.png';
 import logoLSNS from '../../public/img/parties/LSNS.svg?url';
 import logoMF from '../../public/img/parties/MF.png';
 import logoMM from '../../public/img/parties/MM.jpg';
+import logoMS from '../../public/img/parties/MS.png';
 import logoOLaNO from '../../public/img/parties/OĽaNO.png';
 import logoPS from '../../public/img/parties/PS.png';
 import logoRepublika from '../../public/img/parties/Republika.png';
 import logoSaS from '../../public/img/parties/SASKA.jpg';
+import logoSHO from '../../public/img/parties/SHO.png';
 import logoSmeRodina from '../../public/img/parties/SmeRodina.png';
 import logoSmer from '../../public/img/parties/Smer.jpg';
 import logoSNS from '../../public/img/parties/SNS.png';
+import logoSrdce from '../../public/img/parties/Srdce.png';
 import logoSPS from '../../public/img/parties/SPS.png';
+import logoVB from '../../public/img/parties/VB.jpg';
 import logoZaLudi from '../../public/img/parties/za-ludi.svg?url';
 
 export const categories = {
@@ -46,11 +52,21 @@ export const parties = {
         share: 16.3,
         tag: 901,
     },
+    KARMA: {
+        logo: logoKarma,
+        slug: 'Karma',
+        tag: 918,
+    },
     KDH: {
         fullName: 'Kresťanskodemokratické hnutie',
         logo: logoKDH,
         share: 6.4,
         tag: 902,
+    },
+    'Kresťanská únia': {
+        logo: logoKU,
+        slug: 'KU',
+        tag: 919,
     },
     'Komunistická strana Slovenska': {
         logo: logoKSS,
@@ -70,6 +86,11 @@ export const parties = {
         logo: logoMF,
         slug: 'MF-ODS-ZR-RK-DS',
         tag: 912,
+    },
+    MySlovensko: {
+        logo: logoMS,
+        slug: 'MS',
+        tag: 920,
     },
     'Modri, Most-Hid': {
         fbName: 'Modrí-Most',
@@ -110,6 +131,11 @@ export const parties = {
         share: 8.3,
         tag: 908,
     },
+    'Slovenské Hnutie Obrody': {
+        logo: logoSHO,
+        slug: 'SHO',
+        tag: 921,
+    },
     'Sme Rodina': {
         fullName: 'SME RODINA',
         logo: logoSmeRodina,
@@ -131,6 +157,17 @@ export const parties = {
     SPRAVODLIVOSŤ: {
         slug: 'Spravodlivosť',
         tag: 915,
+    },
+    SRDCE: {
+        fullName: 'SRDCE vlastenci a dôchodcovia - SLOVENSKÁ NÁRODNÁ JEDNOTA',
+        logo: logoSrdce,
+        slug: 'Srdce',
+        tag: 922,
+    },
+    'Vlastenecký blok': {
+        logo: logoVB,
+        slug: 'VB',
+        tag: 923,
     },
     'Za Ľudí': {
         fullName: 'ZA ĽUDÍ',
