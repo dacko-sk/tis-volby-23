@@ -7,6 +7,7 @@ import { labels } from '../api/constants';
 import { contains, setTitle } from '../api/helpers';
 import { routes, segments } from '../api/routes';
 
+import useAdsData, { sheetsConfig } from '../context/AdsDataContext';
 import useData from '../context/DataContext';
 
 import { newsCategories } from './News';
@@ -19,7 +20,13 @@ function Search() {
     const query = params.query ?? null;
     const navigate = useNavigate();
 
-    const { csvData } = useData();
+    const { csvData, findPartyByFbName } = useData();
+    const {
+        findPartyForFbAccount,
+        findPartyForGoogleAccount,
+        mergedWeeksData,
+        sheetsData,
+    } = useAdsData();
 
     // parse data
     const parties = [];
@@ -35,10 +42,7 @@ function Search() {
                 const link = routes.party(row[labels.elections.name_key]);
                 parties.push(
                     <Col
-                        key={
-                            row[labels.elections.name_key] +
-                            row[labels.elections.municipality_key]
-                        }
+                        key={row[labels.elections.name_key]}
                         className="d-flex"
                         sm
                     >
@@ -47,10 +51,89 @@ function Search() {
                             className="d-flex flex-column justify-content-between w-100 cat-local"
                         >
                             <h3>{row[labels.elections.name_key]}</h3>
-                            <div className="type">{row.fullName}</div>
+                            <div className="town mt-3">{row.fullName}</div>
                         </Link>
                     </Col>
                 );
+            }
+        });
+    }
+
+    // parse data from sheets
+    const online = [];
+    if (sheetsData.lastUpdateFb) {
+        Object.entries(mergedWeeksData).forEach(([pageId, pageProps]) => {
+            // account name matches - list party
+            if (contains(pageProps.name, query)) {
+                const accountParty = findPartyForFbAccount(pageId);
+                if (accountParty) {
+                    const party = findPartyByFbName(accountParty);
+                    if (party) {
+                        const link = routes.party(
+                            party[labels.elections.name_key],
+                            segments.ONLINE
+                        );
+                        online.push(
+                            <Col key={`fb${pageId}`} className="d-flex" sm>
+                                <Link
+                                    to={link}
+                                    className="d-flex flex-column justify-content-between w-100 cat-local"
+                                >
+                                    <h3>{pageProps.name}</h3>
+                                    <div className="town my-3">
+                                        {party.fullName}
+                                    </div>
+                                    <div className="type">
+                                        {labels.ads.meta.title}
+                                    </div>
+                                </Link>
+                            </Col>
+                        );
+                    }
+                }
+            }
+        });
+    }
+    if (sheetsData.lastUpdateGgl) {
+        sheetsData.googleAds.forEach((pageData) => {
+            const accountName =
+                pageData[sheetsConfig.GOOGLE.columns.PAGE_NAME] ?? null;
+            // account name matches - list party
+            if (contains(accountName, query)) {
+                const accountParty = findPartyForGoogleAccount(
+                    pageData[sheetsConfig.GOOGLE.columns.ID]
+                );
+                if (accountParty) {
+                    const party = findPartyByFbName(accountParty);
+                    if (party) {
+                        const link = routes.party(
+                            party[labels.elections.name_key],
+                            segments.ONLINE
+                        );
+                        online.push(
+                            <Col
+                                key={`ggl${
+                                    pageData[sheetsConfig.GOOGLE.columns.ID]
+                                }`}
+                                className="d-flex"
+                                sm
+                            >
+                                <Link
+                                    to={link}
+                                    className="d-flex flex-column justify-content-between w-100 cat-regional"
+                                >
+                                    <h3>{accountName}</h3>
+                                    <div className="town my-3">
+                                        {party.fullName}
+                                    </div>
+                                    <div className="type">
+                                        {labels.ads.google.title}
+                                    </div>
+                                </Link>
+                            </Col>
+                        );
+                    }
+                }
             }
         });
     }
@@ -77,6 +160,15 @@ function Search() {
                 <AlertWithIcon className="my-4" variant="danger">
                     Hľadanému výrazu nezodpovedá žiadna zo strán, ktoré
                     kandidujú v parlamentných voľbách 2023.
+                </AlertWithIcon>
+            )}
+
+            <h2 className="my-4">Online účty strán</h2>
+            {online.length ? (
+                <Row className="tiles gx-4 gy-4">{online}</Row>
+            ) : (
+                <AlertWithIcon className="my-4" variant="danger">
+                    Hľadanému výrazu nezodpovedá žiaden online účet.
                 </AlertWithIcon>
             )}
 
