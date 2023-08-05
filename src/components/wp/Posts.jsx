@@ -18,6 +18,7 @@ import './News.scss';
 
 export const templates = {
     condensed: 'condensed',
+    featured: 'featured',
     list: 'list',
 };
 

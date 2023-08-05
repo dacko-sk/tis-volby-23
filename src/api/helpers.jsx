@@ -20,6 +20,9 @@ export const pctFormat = (value, options) => {
     return '';
 };
 
+export const badgePctFormat = (value) =>
+    Number(value) > -1 ? pctFormat(value) : 'N/A';
+
 export const humanPctFormat = (value) =>
     pctFormat(100 * value, { maximumFractionDigits: 2 });
 

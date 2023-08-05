@@ -24,6 +24,7 @@ import logoVB from '../../public/img/parties/VB.jpg';
 import logoZaLudi from '../../public/img/parties/za-ludi.svg?url';
 
 export const categories = {
+    analyses: 925,
     news: 877,
 };
 
@@ -304,6 +305,11 @@ export const labels = {
         noData: 'Neevidujeme žiaden účet strany s výdavkami na sponzorované príspevky na tejto platforme.',
         percent: 'Podiel',
         showMore: 'Zistiť viac o online kampani',
+    },
+    analysis: {
+        date: 'Hodnotenie ku dňu',
+        score: 'Celkové hodnotenie',
+        noData: 'Nie je dostupné hodnotenie kampane pre túto stranu.',
     },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',
