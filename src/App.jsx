@@ -11,6 +11,7 @@ import Online from './pages/Online';
 import News from './pages/News';
 import Parties from './pages/Parties';
 import Party from './pages/Party';
+import PartyAnalysis from './pages/party/PartyAnalysis';
 import PartyNews from './pages/party/PartyNews';
 import PartyOnline from './pages/party/PartyOnline';
 import PartyOverview from './pages/party/PartyOverview';
@@ -52,6 +53,10 @@ function App() {
                                 <Route
                                     path={segments.TRANSACTIONS}
                                     element={<PartyTransactions />}
+                                />
+                                <Route
+                                    path={segments.ANALYSIS}
+                                    element={<PartyAnalysis />}
                                 />
                                 <Route
                                     path={segments.ONLINE}

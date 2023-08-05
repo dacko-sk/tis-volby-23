@@ -14,6 +14,7 @@ export const segments = {
         has(siteConfig, 'homepage') && siteConfig.homepage
             ? siteConfig.homepage
             : '/',
+    ANALYSIS: 'hodnotenie',
     NEWS: 'aktuality',
     ONLINE: 'online',
     PARTIES: 'strany',
