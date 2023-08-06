@@ -2,7 +2,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
-import { labels } from '../../../api/constants';
 import {
     analysisLabels,
     campaignMetadata as cmd,
@@ -46,10 +45,10 @@ function AnalysisDetail({ article }) {
     });
 
     let headerRow = null;
-    let oldRatingsTable = null;
+    let historyTable = null;
     if (lastCol > 0) {
-        const headers = [<th key="title">{labels.analysis.date}</th>];
-        const ratings = [<td key="ratings">{labels.analysis.score}</td>];
+        const headers = [<th key="title">{analysisLabels.date}</th>];
+        const ratings = [<td key="ratings">{analysisLabels.total}</td>];
         analysis[cmd.date].forEach((date, di) => {
             headers.push(<th key={date}>{date}</th>);
             const cls = transparencyClass(analysis[cmd.score][di]);
@@ -62,9 +61,9 @@ function AnalysisDetail({ article }) {
             );
         });
         headerRow = <tr key="header">{headers}</tr>;
-        oldRatingsTable = (
+        historyTable = (
             <>
-                <h2 className="mt-4 mb-3">História hodnotení</h2>
+                <h2 className="mt-4 mb-3">{analysisLabels.history}</h2>
                 <Table
                     key="scores"
                     className="indicators-table mb-0"
@@ -147,23 +146,23 @@ function AnalysisDetail({ article }) {
         <div className="analysis">
             <div className="row gy-3 gy-lg-0">
                 <div className="col-lg-6">
-                    <h2 className="text-lg-center">{analysis[cmd.type][0]}</h2>
+                    <h2 className="text-lg-center">{analysisLabels.meta}</h2>
                     <Table responsive>
                         <tbody>
                             <tr>
-                                <th>Samosprava</th>
+                                <th>{analysisLabels.party}</th>
                                 <td className="text-end">
-                                    {analysis[cmd.municipality][0]}
+                                    {analysis[cmd.party][0]}
                                 </td>
                             </tr>
                             <tr>
-                                <th>Strana</th>
+                                <th>{analysisLabels.leader}</th>
                                 <td className="text-end">
-                                    {analysis[cmd.support][0]}
+                                    {analysis[cmd.leader][0]}
                                 </td>
                             </tr>
                             <tr>
-                                <th>{labels.analysis.date}</th>
+                                <th>{analysisLabels.date}</th>
                                 <td className="text-end">
                                     {analysis[cmd.date][lastCol]}
                                 </td>
@@ -172,7 +171,7 @@ function AnalysisDetail({ article }) {
                     </Table>
                 </div>
                 <div className="col-lg-6">
-                    <h2 className="text-lg-center">{labels.analysis.score}</h2>
+                    <h2 className="text-lg-center">{analysisLabels.total}</h2>
                     <Row className="hero-number justify-content-lg-center align-items-center mt-4 gx-2">
                         <Col xs="auto">
                             <span className={`badge me-1 score-${lastClass}`}>
@@ -186,7 +185,7 @@ function AnalysisDetail({ article }) {
                 </div>
             </div>
 
-            {oldRatingsTable}
+            {historyTable}
 
             {tables}
         </div>

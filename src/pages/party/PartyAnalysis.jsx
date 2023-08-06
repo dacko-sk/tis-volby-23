@@ -1,6 +1,7 @@
 import { useLocation, useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
+import { analysisLabels } from '../../api/analysisHelpers';
 import { categories, labels } from '../../api/constants';
 import { setTitle } from '../../api/helpers';
 
@@ -42,7 +43,7 @@ function PartyAnalysis() {
 
     let content = (
         <AlertWithIcon className="my-4" variant="danger">
-            {labels.analysis.noData}
+            {analysisLabels.noData}
         </AlertWithIcon>
     );
     if (isLoading || error) {
