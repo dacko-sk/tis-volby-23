@@ -1,7 +1,7 @@
 import Col from 'react-bootstrap/Col';
 import has from 'has';
 
-import { campaignMetadata as cmd } from '../../../api/constants';
+import { metaData as cmd } from '../../../api/constants';
 import { badgePctFormat, transparencyClass } from '../../../api/helpers';
 
 import useData from '../../../context/DataContext';
