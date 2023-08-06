@@ -321,11 +321,6 @@ export const labels = {
         percent: 'Podiel',
         showMore: 'Zistiť viac o online kampani',
     },
-    analysis: {
-        date: 'Hodnotenie ku dňu',
-        score: 'Celkové hodnotenie',
-        noData: 'Nie je dostupné hodnotenie kampane pre túto stranu.',
-    },
     disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
     donate: 'Darujte',
     donateLong: 'Darujte na kontrolu volieb',

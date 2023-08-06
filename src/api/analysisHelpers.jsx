@@ -1,9 +1,8 @@
 import { ecodeHTMLEntities } from './helpers';
 
 export const campaignMetadata = {
-    type: 'type',
-    municipality: 'municipality',
-    support: 'support',
+    party: 'party',
+    leader: 'leader',
     fb: 'fb',
     web: 'web',
     date: 'date',
@@ -24,6 +23,8 @@ export const transparencyIndicators = {
 };
 
 export const analysisLabels = {
+    date: 'Hodnotenie ku dňu',
+    history: 'História hodnotení',
     indicators: {
         [transparencyIndicators.account]: {
             title: 'Transparentný účet',
@@ -57,6 +58,11 @@ export const analysisLabels = {
             ],
         },
     },
+    leader: 'Volebný líder',
+    meta: 'Údaje o kampani',
+    noData: 'Nie je dostupné hodnotenie kampane pre túto stranu.',
+    party: 'Strana / koalícia',
+    total: 'Celkové hodnotenie',
     transparency: {
         [transparencyClasses.good]: 'transparentná kampaň',
         [transparencyClasses.average]: 'kampaň s výhradami',
