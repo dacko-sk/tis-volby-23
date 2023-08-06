@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table';
 import has from 'has';
 
 import { analysisLabels } from '../../../api/analysisHelpers';
-import { campaignMetadata as cmd, labels } from '../../../api/constants';
+import { metaData as cmd, labels } from '../../../api/constants';
 import { badgePctFormat, transparencyClass } from '../../../api/helpers';
 
 import useData from '../../../context/DataContext';

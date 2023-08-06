@@ -1,16 +1,19 @@
+import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
 import {
     analysisLabels,
-    campaignMetadata as cmd,
+    baseData as cbd,
+    metaData as cmd,
     parseAnalysisData,
     transparencyClass,
     transparencyClasses,
     transparencyIndicators,
 } from '../../../api/analysisHelpers';
-import { badgePctFormat, parseWpHtml } from '../../../api/helpers';
+import { badgePctFormat, fixUrl, parseWpHtml } from '../../../api/helpers';
+import { routes, segments } from '../../../api/routes';
 
 function AnalysisDetail({ article }) {
     const analysis =
@@ -24,15 +27,14 @@ function AnalysisDetail({ article }) {
         );
     }
 
-    const lastCol = analysis[cmd.score].length - 1;
-    if (lastCol < 0) {
+    if (analysis.lastColumn < 0) {
         return (
             <div className="article-body">
                 {parseWpHtml(article.content.rendered)}
             </div>
         );
     }
-    const lastClass = transparencyClass(analysis[cmd.score][lastCol]);
+    const lastClass = transparencyClass(analysis.lastScore);
     const words = analysisLabels.transparency[lastClass].split(' ');
     const lastLabel = [];
     words.forEach((word, index) => {
@@ -46,16 +48,16 @@ function AnalysisDetail({ article }) {
 
     let headerRow = null;
     let historyTable = null;
-    if (lastCol > 0) {
-        const headers = [<th key="title">{analysisLabels.date}</th>];
-        const ratings = [<td key="ratings">{analysisLabels.total}</td>];
-        analysis[cmd.date].forEach((date, di) => {
+    if (analysis.lastColumn > 0) {
+        const headers = [<th key="title">{analysisLabels[cbd.date]}</th>];
+        const ratings = [<td key="ratings">{analysisLabels[cbd.score]}</td>];
+        analysis.base[cbd.date].forEach((date, di) => {
             headers.push(<th key={date}>{date}</th>);
-            const cls = transparencyClass(analysis[cmd.score][di]);
+            const cls = transparencyClass(analysis.base[cbd.score][di]);
             ratings.push(
                 <td key={date}>
                     <span className={`badge me-1 score-${cls}`}>
-                        {badgePctFormat(analysis[cmd.score][di])}
+                        {badgePctFormat(analysis.base[cbd.score][di])}
                     </span>
                 </td>
             );
@@ -110,7 +112,7 @@ function AnalysisDetail({ article }) {
                                     color ? ` score-${color}` : ''
                                 }`}
                             >
-                                {analysisLabels.score[value]}
+                                {analysisLabels.badges[value]}
                             </span>
                         )}
                     </td>
@@ -150,32 +152,42 @@ function AnalysisDetail({ article }) {
                     <Table responsive>
                         <tbody>
                             <tr>
-                                <th>{analysisLabels.party}</th>
+                                <th>{analysisLabels[cmd.party]}</th>
                                 <td className="text-end">
-                                    {analysis[cmd.party][0]}
+                                    {analysis.meta[cmd.party]}
                                 </td>
                             </tr>
                             <tr>
-                                <th>{analysisLabels.leader}</th>
+                                <th>{analysisLabels[cmd.leader]}</th>
                                 <td className="text-end">
-                                    {analysis[cmd.leader][0]}
+                                    {analysis.meta[cmd.leader]}
                                 </td>
                             </tr>
                             <tr>
-                                <th>{analysisLabels.date}</th>
+                                <th>{analysisLabels[cbd.date]}</th>
                                 <td className="text-end">
-                                    {analysis[cmd.date][lastCol]}
+                                    {
+                                        analysis.base[cbd.date][
+                                            analysis.lastColumn
+                                        ]
+                                    }
                                 </td>
                             </tr>
                         </tbody>
                     </Table>
                 </div>
                 <div className="col-lg-6">
-                    <h2 className="text-lg-center">{analysisLabels.total}</h2>
+                    <h2 className="text-lg-center">
+                        {analysisLabels[cbd.score]}
+                    </h2>
                     <Row className="hero-number justify-content-lg-center align-items-center mt-4 gx-2">
                         <Col xs="auto">
                             <span className={`badge me-1 score-${lastClass}`}>
-                                {badgePctFormat(analysis[cmd.score][lastCol])}
+                                {badgePctFormat(
+                                    analysis.base[cbd.score][
+                                        analysis.lastColumn
+                                    ]
+                                )}
                             </span>
                         </Col>
                         <Col xs="auto">
@@ -188,6 +200,54 @@ function AnalysisDetail({ article }) {
             {historyTable}
 
             {tables}
+
+            <h2 className="mt-4 mb-3">{analysisLabels.references}</h2>
+            <Row className="mb-4">
+                {analysis.meta[cmd.fb] && (
+                    <Col sm={12} md="auto">
+                        <ul className="arrows">
+                            <li>
+                                <a
+                                    href={fixUrl(analysis.meta[cmd.fb])}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    {analysisLabels[cmd.fb]}
+                                </a>
+                            </li>
+                        </ul>
+                    </Col>
+                )}
+                {analysis.meta[cmd.web] && (
+                    <Col sm={12} md="auto">
+                        <ul className="arrows">
+                            <li>
+                                <a
+                                    href={fixUrl(analysis.meta[cmd.web])}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    {analysisLabels[cmd.web]}
+                                </a>
+                            </li>
+                        </ul>
+                    </Col>
+                )}
+                <Col sm={12} md="auto">
+                    <ul className="arrows">
+                        <li>
+                            <Link
+                                to={routes.article(
+                                    segments.NEWS,
+                                    'hodnotenie-kampani-pred-parlamentnymi-volbami-2023'
+                                )}
+                            >
+                                {analysisLabels.methodology}
+                            </Link>
+                        </li>
+                    </ul>
+                </Col>
+            </Row>
         </div>
     );
 }

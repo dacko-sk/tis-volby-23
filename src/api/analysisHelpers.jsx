@@ -1,10 +1,13 @@
-import { ecodeHTMLEntities } from './helpers';
+import { ecodeHTMLEntities, isNumeric } from './helpers';
 
-export const campaignMetadata = {
+export const metaData = {
     party: 'party',
     leader: 'leader',
     fb: 'fb',
     web: 'web',
+};
+
+export const baseData = {
     date: 'date',
     score: 'score',
 };
@@ -23,7 +26,7 @@ export const transparencyIndicators = {
 };
 
 export const analysisLabels = {
-    date: 'Hodnotenie ku dňu',
+    badges: ['nezistené/netýka sa', 'áno', 'čiastočne', 'nie'],
     history: 'História hodnotení',
     indicators: {
         [transparencyIndicators.account]: {
@@ -58,11 +61,10 @@ export const analysisLabels = {
             ],
         },
     },
-    leader: 'Volebný líder',
     meta: 'Údaje o kampani',
+    methodology: 'Metodika hodnotenia',
     noData: 'Nie je dostupné hodnotenie kampane pre túto stranu.',
-    party: 'Strana / koalícia',
-    total: 'Celkové hodnotenie',
+    references: 'Referencie',
     transparency: {
         [transparencyClasses.good]: 'transparentná kampaň',
         [transparencyClasses.average]: 'kampaň s výhradami',
@@ -75,13 +77,18 @@ export const analysisLabels = {
         [transparencyClasses.bad]: 'netransparentná',
         [transparencyClasses.unknown]: 'N/A',
     },
-    score: ['nezistené/netýka sa', 'áno', 'čiastočne', 'nie'],
+    [baseData.date]: 'Hodnotenie ku dňu',
+    [baseData.score]: 'Celkové hodnotenie',
+    [metaData.fb]: 'FB profil',
+    [metaData.leader]: 'Volebný líder',
+    [metaData.party]: 'Strana / koalícia',
+    [metaData.web]: 'Volebný web',
 };
 
 export const transparencyClass = (score) => {
     let cls = transparencyClasses.unknown;
     const num = Number(score);
-    if (!Number.isNaN(num) && num > -1) {
+    if (isNumeric(num) && num > -1) {
         cls = transparencyClasses.bad;
         if (score >= 40) {
             cls =
@@ -101,6 +108,7 @@ export const parseAnalysisData = (html) => {
         const endPos = html.indexOf(end);
 
         if (startPos > -1 && endPos > -1) {
+            // parse table
             const tableData = [];
             html.substring(startPos + start.length, endPos)
                 .replaceAll('<tr>', '')
@@ -116,37 +124,63 @@ export const parseAnalysisData = (html) => {
                                 .replaceAll(/<\/a>/g, '');
                             const num = Number(val.replaceAll(',', '.'));
                             cols.push(
-                                !val || Number.isNaN(num)
-                                    ? ecodeHTMLEntities(val)
-                                    : num
+                                val && isNumeric(num)
+                                    ? // not empty & numeric
+                                      num
+                                    : // string
+                                      ecodeHTMLEntities(val)
                             );
                         }
                     });
                     tableData.push(cols);
                 });
 
-            const baseProps = Object.keys(campaignMetadata);
-            let required = baseProps.length;
+            // extract data from parsed table
+            const metaProps = Object.keys(metaData);
+            const baseProps = Object.keys(baseData);
+            let required = metaProps.length + baseProps.length;
             Object.keys(transparencyIndicators).forEach((group) => {
                 required += analysisLabels.indicators[group].criteria.length;
             });
 
             if (tableData.length >= required) {
-                const analysis = {};
+                const analysis = {
+                    base: {},
+                    lastColumn: -1,
+                    lastScore: 0,
+                    meta: {},
+                };
                 let rowKey = 0;
 
+                // campaign metaData
+                metaProps.forEach((prop) => {
+                    // only first column is used
+                    [analysis.meta[prop]] = tableData[rowKey];
+                    rowKey += 1;
+                });
+
+                const validColumns = [];
+                // get valid columns by checking the score row - it is the last one from the baseProps
+                // if empty or not numeric, ignore the column
+                tableData[rowKey + baseProps.length - 1].forEach(
+                    (column, columnKey) => {
+                        if (column !== '' && isNumeric(column)) {
+                            validColumns.push(columnKey);
+                            analysis.lastColumn += 1;
+                            analysis.lastScore = column;
+                        }
+                    }
+                );
                 // base campaign data
                 baseProps.forEach((prop) => {
-                    // numeric check for score row - set to minus 1 (unknown) if score is not numeric
-                    if (prop === campaignMetadata.score) {
-                        tableData[rowKey].forEach((column, columnKey) => {
-                            const num = Number(column);
-                            if (Number.isNaN(num)) {
-                                tableData[rowKey][columnKey] = -1;
-                            }
-                        });
-                    }
-                    analysis[prop] = tableData[rowKey];
+                    // remove invalid columns
+                    tableData[rowKey].forEach((column, columnKey) => {
+                        if (!validColumns.includes(columnKey)) {
+                            tableData[rowKey].splice(columnKey, 1);
+                        }
+                    });
+                    // save valid columns as property value
+                    analysis.base[prop] = tableData[rowKey];
                     rowKey += 1;
                 });
 
@@ -155,11 +189,19 @@ export const parseAnalysisData = (html) => {
                     analysis[group] = {};
                     analysisLabels.indicators[group].criteria.forEach(
                         (criterium) => {
+                            // remove invalid columns
+                            tableData[rowKey].forEach((column, columnKey) => {
+                                if (!validColumns.includes(columnKey)) {
+                                    tableData[rowKey].splice(columnKey, 1);
+                                }
+                            });
+                            // save valid columns as property value
                             analysis[group][criterium] = tableData[rowKey];
                             rowKey += 1;
                         }
                     );
                 });
+
                 return analysis;
             }
         }
