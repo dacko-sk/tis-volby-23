@@ -1,9 +1,9 @@
 import { Col, Row } from 'react-bootstrap';
 
+import { wpCat } from '../api/constants';
 import { setTitle } from '../api/helpers';
 import { segments } from '../api/routes';
 
-import { newsCategories } from './News';
 import TotalAdsSpending from '../components/ads/TotalAdsSpending';
 import Top10 from '../components/charts/Top10';
 import Top10Ads from '../components/charts/Top10Ads';
@@ -51,9 +51,8 @@ function Home() {
 
             <h2 className="mt-4">Najnovšie aktuality</h2>
             <Posts
-                categories={newsCategories}
+                categories={[wpCat.news]}
                 limit={2}
-                section={segments.NEWS}
                 template={templates.condensed}
             />
         </section>

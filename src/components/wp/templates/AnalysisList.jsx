@@ -23,18 +23,22 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
     }
     const cls = transparencyClass(analysis.lastScore);
 
-    const { findInCsvData } = useData();
-    // TODO: get party logo by article tag
-    const csvRow = findInCsvData(
-        article.title.rendered,
-        analysis[cmd.municipality][0]
-    );
+    const { findPartyByWpTags } = useData();
+    const party = findPartyByWpTags(article.tags);
+    const logo =
+        party && (party.logo ?? false) ? (
+            <img
+                alt={analysisLabels.transparency[cls]}
+                className="p-3"
+                src={party.logo}
+            />
+        ) : null;
 
     return (
-        <Col className="px-0" md={12}>
+        <Col md={12}>
             <div
                 id={article.slug}
-                className={`article analysis-preview score-${cls} p-3`}
+                className={`article hover-bg analysis-preview score-${cls}`}
                 onClick={clickHandler}
                 onKeyUp={keyUpHandler}
                 role="link"
@@ -46,12 +50,8 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                             className="thumb mb-2 mb-md-0"
                             data-label={analysisLabels.transparencyShort[cls]}
                         >
-                            <figure className="text-center">
-                                <img
-                                    alt={analysisLabels.transparency[cls]}
-                                    className="p-3"
-                                    src={party.logo}
-                                />
+                            <figure className="text-center text-xxl-start">
+                                {logo}
                             </figure>
                         </div>
                     </Col>
@@ -59,10 +59,6 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                         <h2>{article.title.rendered}</h2>
                         <Table responsive>
                             <tbody>
-                                <tr>
-                                    <th>{analysisLabels[cmd.party]}</th>
-                                    <td>{analysis.meta[cmd.party]}</td>
-                                </tr>
                                 <tr>
                                     <th>{analysisLabels[cmd.leader]}</th>
                                     <td>{analysis.meta[cmd.leader]}</td>
@@ -83,7 +79,7 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                                     <td>
                                         {
                                             analysis.base[cbd.date][
-                                                analysis.lastCol
+                                                analysis.lastColumn
                                             ]
                                         }
                                     </td>

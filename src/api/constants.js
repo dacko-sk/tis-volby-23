@@ -338,6 +338,9 @@ export const labels = {
         outgoing: 'Výdavky',
         uniqeDonors: 'Počet unikátnych darcov',
     },
+    news: {
+        noData: 'Neboli nájdené žiadne články.',
+    },
     tis: 'Transparency International Slovensko',
     search: 'Vyhľadávanie',
     showMore: 'Zobraziť viac',
