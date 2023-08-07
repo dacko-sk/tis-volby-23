@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import { Link, useOutletContext } from 'react-router-dom';
 import has from 'has';
 
-import { colors, labels } from '../../api/constants';
+import { colors, labels, wpCat } from '../../api/constants';
 import {
     currencyFormat,
     dateFormat,
@@ -19,8 +19,6 @@ import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
 import LastUpdateTag from '../../components/general/LastUpdateTag';
 import Posts, { templates } from '../../components/wp/Posts';
 import TisBarChart from '../../components/charts/TisBarChart';
-
-import { newsCategories } from '../News';
 
 function PartyTransactions() {
     const party = useOutletContext();
@@ -169,9 +167,8 @@ function PartyTransactions() {
                 <>
                     <h2 className="mt-4">Najnovšie aktuality</h2>
                     <Posts
-                        categories={newsCategories}
+                        categories={[wpCat.news]}
                         limit={2}
-                        section={segments.NEWS}
                         showMoreLink={routes.party(party.slug, segments.NEWS)}
                         tags={[party.tag]}
                         template={templates.condensed}

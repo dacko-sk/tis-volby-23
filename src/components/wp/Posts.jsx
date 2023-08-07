@@ -10,6 +10,8 @@ import { scrollToTop } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 import { getAnalysedData, processArticles } from '../../api/wpHelpers';
 
+import useData from '../../context/DataContext';
+
 import AnalysisFeatured from './templates/AnalysisFeatured';
 import AnalysisList from './templates/AnalysisList';
 import NewsCondensed from './templates/NewsCondensed';
@@ -39,6 +41,7 @@ function Posts({
     const [totalPages, setTotalPages] = useState(0);
     const [activePage, setActivePage] = useState(1);
     const navigate = useNavigate();
+    const { findPartyByWpTags } = useData();
 
     const isAnalysis = categories.includes(wpCat.analyses);
 
@@ -73,8 +76,10 @@ function Posts({
     const navigateToArticle = (article) => {
         let route = routes.article(article.slug);
         if (isAnalysis && (article.analysis ?? false)) {
-            // TODO: get party slug by article tag
-            route = routes.party('PARTYSLUG', segments.ANALYSIS);
+            const party = findPartyByWpTags(article.tags);
+            if (party) {
+                route = routes.party(party.slug, segments.ANALYSIS);
+            }
         }
         navigate(route, {
             state: { article },
@@ -154,7 +159,7 @@ function Posts({
             </Row>
         ) : (
             <AlertWithIcon className="my-4" variant="danger">
-                {noResults ?? 'Neboli nájdené žiadne články.'}
+                {noResults ?? labels.news.noData}
             </AlertWithIcon>
         );
     }

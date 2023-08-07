@@ -9,7 +9,7 @@ import PartyTags from '../PartyTags';
 
 function NewsList({ article, clickHandler, keyUpHandler }) {
     return (
-        <Col className="" md={12}>
+        <Col md={12}>
             <div
                 id={article.slug}
                 className="article hover-bg"

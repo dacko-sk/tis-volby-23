@@ -3,14 +3,13 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { labels } from '../api/constants';
+import { labels, wpCat } from '../api/constants';
 import { contains, setTitle } from '../api/helpers';
 import { routes, segments } from '../api/routes';
 
 import useAdsData, { sheetsConfig } from '../context/AdsDataContext';
 import useData from '../context/DataContext';
 
-import { newsCategories } from './News';
 import AlertWithIcon from '../components/general/AlertWithIcon';
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';
@@ -174,9 +173,8 @@ function Search() {
 
             <h2 className="my-4">Aktuality</h2>
             <Posts
-                categories={newsCategories}
+                categories={[wpCat.news]}
                 noResults="Hľadaný výraz nebol nájdený v žiadnej z aktualít."
-                section={segments.NEWS}
                 search={query}
             />
         </section>

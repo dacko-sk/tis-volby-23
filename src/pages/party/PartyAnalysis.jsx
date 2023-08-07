@@ -20,7 +20,8 @@ function PartyAnalysis() {
             : {};
 
     // load article data from API (if needed)
-    const { isLoading, error, data } = useQuery(
+    // isInitialLoading flag will be true if query is enabled, there are no data yet (isLoading) and isFetching
+    const { isInitialLoading, error, data } = useQuery(
         [`party_analysis_${party[labels.elections.name_key]}`],
         () =>
             fetch(
@@ -33,7 +34,7 @@ function PartyAnalysis() {
         }
     );
 
-    if (!isLoading && !error && data && data.length) {
+    if (!isInitialLoading && !error && data && data.length) {
         // article successfully loaded from API - use it!
         article = {
             ...article,
@@ -46,7 +47,7 @@ function PartyAnalysis() {
             {analysisLabels.noData}
         </AlertWithIcon>
     );
-    if (isLoading || error) {
+    if (isInitialLoading || error) {
         content = <Loading error={error} />;
     } else if (article.title ?? false) {
         content = <AnalysisDetail article={article} />;

@@ -1,11 +1,7 @@
 import Col from 'react-bootstrap/Col';
 
 import { badgePctFormat } from '../../../api/helpers';
-import {
-    analysisLabels,
-    metaData as cmd,
-    transparencyClass,
-} from '../../../api/wpHelpers';
+import { analysisLabels, transparencyClass } from '../../../api/wpHelpers';
 
 import useData from '../../../context/DataContext';
 
@@ -20,12 +16,25 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     }
     const cls = transparencyClass(analysis.lastScore);
 
-    const { findInCsvData } = useData();
-    // TODO: get party logo by article tag
-    const csvRow = findInCsvData(
-        article.title.rendered,
-        analysis[cmd.municipality][0]
-    );
+    const { findPartyByWpTags } = useData();
+    const party = findPartyByWpTags(article.tags);
+    let logo = null;
+    let name = null;
+    if (party && (party.logo ?? false)) {
+        logo = (
+            <img
+                alt={analysisLabels.transparency[cls]}
+                className="p-3"
+                src={party.logo}
+            />
+        );
+    } else {
+        name = (
+            <div className="name text-center">
+                <span className="badge">{article.title.rendered}</span>
+            </div>
+        );
+    }
 
     return (
         <Col md>
@@ -41,16 +50,8 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
                     className="thumb mb-2 mb-md-0"
                     data-label={badgePctFormat(analysis.lastScore)}
                 >
-                    <figure className="text-center">
-                        <img
-                            alt={analysisLabels.transparency[cls]}
-                            className="p-3"
-                            src={party.logo}
-                        />
-                    </figure>
-                    <div className="name text-center">
-                        <span className="badge">{article.title.rendered}</span>
-                    </div>
+                    <figure className="text-center">{logo}</figure>
+                    {name}
                 </div>
             </div>
         </Col>

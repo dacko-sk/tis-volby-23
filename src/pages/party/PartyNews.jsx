@@ -1,36 +1,30 @@
-import { useEffect } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
-import has from 'has';
+import { useOutletContext } from 'react-router-dom';
 
+import { labels, wpCat } from '../../api/constants';
 import { setTitle } from '../../api/helpers';
-import { routes, segments } from '../../api/routes';
 
+import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Posts, { templates } from '../../components/wp/Posts';
-import { newsCategories } from '../News';
 
 function PartyNews() {
     const party = useOutletContext();
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        if (has(party, 'slug') && !has(party, 'tag')) {
-            // redirect to party landing page in case party does not have news tag
-            navigate(routes.party(party.slug));
-        }
-    }, [party]);
-
-    setTitle(`${party.fullName} : Aktuality`);
-
-    return (
-        <div className="subpage">
+    const content =
+        party.tag ?? false ? (
             <Posts
-                categories={newsCategories}
-                section={segments.NEWS}
+                categories={[wpCat.news]}
                 tags={[party.tag]}
                 template={templates.list}
             />
-        </div>
-    );
+        ) : (
+            <AlertWithIcon className="my-4" variant="danger">
+                {labels.news.noData}
+            </AlertWithIcon>
+        );
+
+    setTitle(`${party.fullName} : Aktuality`);
+
+    return <div className="subpage">{content}</div>;
 }
 
 export default PartyNews;

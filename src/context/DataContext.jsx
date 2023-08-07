@@ -2,7 +2,7 @@ import { createContext, useContext, useMemo, useState } from 'react';
 import has from 'has';
 
 import { labels, parties } from '../api/constants';
-import { compareStr, contains } from '../api/helpers';
+import { contains } from '../api/helpers';
 
 export const accountsFile =
     'https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/aggregation_no_returns.csv';
@@ -99,23 +99,18 @@ export const processAccountsData = (data) => {
     return data;
 };
 
-export const findRow = (csvData, name, mun) => {
-    // parse aggregated data
-    let matchedRow = null;
-    if (has(csvData, 'data')) {
+export const findByProperty = (csvData, property, value) => {
+    let party = null;
+    if (csvData.data ?? false) {
         csvData.data.some((row) => {
-            if (
-                (compareStr(mun, row[labels.elections.municipality_key]) ||
-                    compareStr(mun, row.municipalityShortName)) &&
-                compareStr(name, row[labels.elections.name_key])
-            ) {
-                matchedRow = row;
+            if (row[property] === value) {
+                party = row;
                 return true;
             }
             return false;
         });
     }
-    return matchedRow;
+    return party;
 };
 
 export const buildParserConfig = (processCallback, storeDataCallback) => {
@@ -143,19 +138,17 @@ export const DataProvider = function ({ children }) {
     const [csvData, setCsvData] = useState(initialState.csvData);
 
     // selectors
-    const findInCsvData = (name, mun) => findRow(csvData, name, mun);
-
-    const findPartyByFbName = (fbName) => {
+    const findPartyByFbName = (fbName) =>
+        findByProperty(csvData, 'fbName', fbName);
+    const findPartyByWpTags = (tags) => {
         let party = null;
-        if (csvData.data ?? false) {
-            csvData.data.some((row) => {
-                if (row.fbName === fbName) {
-                    party = row;
-                    return true;
-                }
-                return false;
-            });
-        }
+        tags.some((tag) => {
+            party = findByProperty(csvData, 'tag', tag);
+            if (party) {
+                return true;
+            }
+            return false;
+        });
         return party;
     };
 
@@ -163,8 +156,8 @@ export const DataProvider = function ({ children }) {
         () => ({
             csvData,
             setCsvData,
-            findInCsvData,
             findPartyByFbName,
+            findPartyByWpTags,
         }),
         [csvData]
     );
