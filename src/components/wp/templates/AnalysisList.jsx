@@ -1,44 +1,40 @@
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
-import has from 'has';
 
-import { analysisLabels } from '../../../api/analysisHelpers';
-import { metaData as cmd, labels } from '../../../api/constants';
-import { badgePctFormat, transparencyClass } from '../../../api/helpers';
+import { badgePctFormat } from '../../../api/helpers';
+import {
+    analysisLabels,
+    baseData as cbd,
+    metaData as cmd,
+    transparencyClass,
+} from '../../../api/wpHelpers';
 
 import useData from '../../../context/DataContext';
 
-import defaultImg from '../../../assets/img/user_grey.png';
-
 function AnalysisList({ article, clickHandler, keyUpHandler }) {
     const { analysis } = article;
-    if (has(analysis, 'error')) {
+    if (analysis.error ?? false) {
         console.log(analysis.error);
         return null;
     }
-    const lastCol = analysis[cmd.score].length - 1;
-    if (lastCol < 0) {
+    if (analysis.lastCol < 0) {
         return null;
     }
-    const cls = transparencyClass(analysis[cmd.score][lastCol]);
+    const cls = transparencyClass(analysis.lastScore);
 
     const { findInCsvData } = useData();
-    // find candidate in aggregated data
+    // TODO: get party logo by article tag
     const csvRow = findInCsvData(
         article.title.rendered,
         analysis[cmd.municipality][0]
     );
-    const isElected =
-        csvRow && has(csvRow, 'isElected') ? csvRow.isElected : false;
 
     return (
         <Col className="px-0" md={12}>
             <div
                 id={article.slug}
-                className={`article analysis-preview score-${cls}${
-                    isElected ? ' analysis-elected' : ''
-                } p-3`}
+                className={`article analysis-preview score-${cls} p-3`}
                 onClick={clickHandler}
                 onKeyUp={keyUpHandler}
                 role="link"
@@ -54,7 +50,7 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                                 <img
                                     alt={analysisLabels.transparency[cls]}
                                     className="p-3"
-                                    src={defaultImg}
+                                    src={party.logo}
                                 />
                             </figure>
                         </div>
@@ -64,29 +60,33 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                         <Table responsive>
                             <tbody>
                                 <tr>
-                                    <th>{labels.municipality}</th>
-                                    <td>{analysis[cmd.municipality][0]}</td>
+                                    <th>{analysisLabels[cmd.party]}</th>
+                                    <td>{analysis.meta[cmd.party]}</td>
                                 </tr>
                                 <tr>
-                                    <th>{labels.party}</th>
-                                    <td>{analysis[cmd.support][0]}</td>
+                                    <th>{analysisLabels[cmd.leader]}</th>
+                                    <td>{analysis.meta[cmd.leader]}</td>
                                 </tr>
                                 <tr>
-                                    <th>{labels.analysis}</th>
+                                    <th>{analysisLabels[cbd.score]}</th>
                                     <td className="score">
                                         <span
                                             className={`badge me-1 score-${cls}`}
                                         >
-                                            {badgePctFormat(
-                                                analysis[cmd.score][lastCol]
-                                            )}
+                                            {badgePctFormat(analysis.lastScore)}
                                         </span>
                                         {analysisLabels.transparency[cls]}
                                     </td>
                                 </tr>
                                 <tr className="d-none d-md-table-row">
-                                    <th>{labels.analysisDate}</th>
-                                    <td>{analysis[cmd.date][lastCol]}</td>
+                                    <th>{analysisLabels[cbd.date]}</th>
+                                    <td>
+                                        {
+                                            analysis.base[cbd.date][
+                                                analysis.lastCol
+                                            ]
+                                        }
+                                    </td>
                                 </tr>
                             </tbody>
                         </Table>

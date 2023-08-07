@@ -1,9 +1,9 @@
 import { useLocation, useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { analysisLabels } from '../../api/analysisHelpers';
-import { categories, labels } from '../../api/constants';
+import { labels, wpCat } from '../../api/constants';
 import { setTitle } from '../../api/helpers';
+import { analysisLabels, getAnalysedData } from '../../api/wpHelpers';
 
 import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Loading from '../../components/general/Loading';
@@ -24,7 +24,7 @@ function PartyAnalysis() {
         [`party_analysis_${party[labels.elections.name_key]}`],
         () =>
             fetch(
-                `https://cms.transparency.sk/wp-json/wp/v2/posts?categories=${categories.analyses}&tags=${party.tag}&tax_relation=AND`
+                `https://cms.transparency.sk/wp-json/wp/v2/posts?categories=${wpCat.analyses}&tags=${party.tag}&tax_relation=AND`
             ).then((response) => response.json()),
         {
             // run only if article data were not delivered via location.state
@@ -37,7 +37,7 @@ function PartyAnalysis() {
         // article successfully loaded from API - use it!
         article = {
             ...article,
-            ...data[0],
+            ...getAnalysedData(data)[0],
         };
     }
 
