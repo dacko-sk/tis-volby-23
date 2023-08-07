@@ -1,4 +1,5 @@
-import { dateTimeFormat, parseWpHtml } from '../../../api/helpers';
+import { dateTimeFormat } from '../../../api/helpers';
+import { parseWpHtml } from '../../../api/wpHelpers';
 
 import PartyTags from '../PartyTags';
 

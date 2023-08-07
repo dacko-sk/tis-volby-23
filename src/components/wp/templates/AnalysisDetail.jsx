@@ -3,21 +3,20 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
+import { badgePctFormat, fixUrl } from '../../../api/helpers';
+import { routes } from '../../../api/routes';
 import {
     analysisLabels,
     baseData as cbd,
     metaData as cmd,
-    parseAnalysisData,
+    parseWpHtml,
     transparencyClass,
     transparencyClasses,
     transparencyIndicators,
-} from '../../../api/analysisHelpers';
-import { badgePctFormat, fixUrl, parseWpHtml } from '../../../api/helpers';
-import { routes, segments } from '../../../api/routes';
+} from '../../../api/wpHelpers';
 
 function AnalysisDetail({ article }) {
-    const analysis =
-        article.analysis ?? parseAnalysisData(article.content.rendered);
+    const analysis = article.analysis ?? { error: 'no data received' };
     if (analysis.error ?? false) {
         console.log(analysis.error);
         return (
@@ -152,9 +151,9 @@ function AnalysisDetail({ article }) {
                     <Table responsive>
                         <tbody>
                             <tr>
-                                <th>{analysisLabels[cmd.party]}</th>
+                                <th>{analysisLabels.party}</th>
                                 <td className="text-end">
-                                    {analysis.meta[cmd.party]}
+                                    {article.title.rendered}
                                 </td>
                             </tr>
                             <tr>
@@ -238,7 +237,6 @@ function AnalysisDetail({ article }) {
                         <li>
                             <Link
                                 to={routes.article(
-                                    segments.NEWS,
                                     'hodnotenie-kampani-pred-parlamentnymi-volbami-2023'
                                 )}
                             >

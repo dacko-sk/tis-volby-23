@@ -1,7 +1,82 @@
+import parse, { attributesToProps, domToReact } from 'html-react-parser';
+
 import { ecodeHTMLEntities, isNumeric } from './helpers';
 
+const proxyHttpImages = (html) => {
+    const regex = /(http:\/\/cms.transparency.sk\/[^",]+.(png|jpe?g|gif|svg))/i;
+    return html.replace(regex, 'https://images.weserv.nl/?url=$1');
+};
+
+const parserOptions = {
+    replace: ({ name, attribs, children }) => {
+        if (name === 'img' && attribs && attribs.src) {
+            const props = {
+                ...attributesToProps(attribs),
+                // proxy image to force https
+                src: proxyHttpImages(attribs.src),
+                // add bootstrap 5 classes to images
+                className: 'figure-img img-fluid',
+            };
+            return <img {...props} />;
+        }
+        if (name === 'a') {
+            if (attribs && attribs.rel && attribs.rel.startsWith('lightbox')) {
+                // remove lightbox links
+                // will recursively run parser on children
+                return domToReact(children, parserOptions);
+            }
+            if (
+                children.length &&
+                children[0].type === 'text' &&
+                children[0].data.startsWith('Continue reading')
+            ) {
+                // remove "continue reading" links to WP domain
+                return <></>;
+            }
+        }
+        if (name === 'figure') {
+            // add bootstrap 5 classes to figures
+            return (
+                <figure className={`figure ${attribs.class || ''}`}>
+                    {domToReact(children, parserOptions)}
+                </figure>
+            );
+        }
+        if (name === 'figcaption') {
+            // add bootstrap 5 classes to figcaptions
+            return (
+                <figcaption className="figure-caption text-center">
+                    {domToReact(children, parserOptions)}
+                </figcaption>
+            );
+        }
+        // otherwise no replacement
+        return null;
+    },
+};
+
+export const parseWpHtml = (html) => parse(html, parserOptions);
+
+export const processArticles = (data) => {
+    const articles = [];
+    data.forEach((article) => {
+        articles.push({
+            ...article,
+            title: {
+                ...article.title,
+                // fix titles
+                rendered: ecodeHTMLEntities(article.title.rendered),
+            },
+        });
+    });
+    return articles;
+};
+
+/**
+ * Analysis helpers
+ */
+
 export const metaData = {
-    party: 'party',
     leader: 'leader',
     fb: 'fb',
     web: 'web',
@@ -64,6 +139,7 @@ export const analysisLabels = {
     meta: 'Údaje o kampani',
     methodology: 'Metodika hodnotenia',
     noData: 'Nie je dostupné hodnotenie kampane pre túto stranu.',
+    party: 'Strana / koalícia',
     references: 'Referencie',
     transparency: {
         [transparencyClasses.good]: 'transparentná kampaň',
@@ -81,7 +157,6 @@ export const analysisLabels = {
     [baseData.score]: 'Celkové hodnotenie',
     [metaData.fb]: 'FB profil',
     [metaData.leader]: 'Volebný líder',
-    [metaData.party]: 'Strana / koalícia',
     [metaData.web]: 'Volebný web',
 };
 
@@ -209,4 +284,22 @@ export const parseAnalysisData = (html) => {
     return {
         error: 'Corrupted table format',
     };
+};
+
+export const sortByScore = (a, b) => {
+    if ((a.analysis.lastScore ?? false) && (b.analysis.lastScore ?? false)) {
+        return b.analysis.lastScore - a.analysis.lastScore;
+    }
+    return -1;
+};
+
+export const getAnalysedData = (data) => {
+    const analysedData = [];
+    processArticles(data).forEach((article) => {
+        analysedData.push({
+            ...article,
+            analysis: parseAnalysisData(article.content.rendered),
+        });
+    });
+    return analysedData.sort(sortByScore);
 };

@@ -1,43 +1,37 @@
 import Col from 'react-bootstrap/Col';
-import has from 'has';
 
-import { metaData as cmd } from '../../../api/constants';
-import { badgePctFormat, transparencyClass } from '../../../api/helpers';
+import { badgePctFormat } from '../../../api/helpers';
+import {
+    analysisLabels,
+    metaData as cmd,
+    transparencyClass,
+} from '../../../api/wpHelpers';
 
 import useData from '../../../context/DataContext';
 
-import Media from '../Media';
-
-import defaultImg from '../../../assets/img/user_grey.png';
-
 function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     const { analysis } = article;
-    if (has(analysis, 'error')) {
+    if (analysis.error ?? false) {
         console.log(analysis.error);
         return null;
     }
-    const lastCol = analysis[cmd.score].length - 1;
-    if (lastCol < 0) {
+    if (analysis.lastCol < 0) {
         return null;
     }
-    const cls = transparencyClass(analysis[cmd.score][lastCol]);
+    const cls = transparencyClass(analysis.lastScore);
 
     const { findInCsvData } = useData();
-    // find candidate in aggregated data
+    // TODO: get party logo by article tag
     const csvRow = findInCsvData(
         article.title.rendered,
         analysis[cmd.municipality][0]
     );
-    const isElected =
-        csvRow && has(csvRow, 'isElected') ? csvRow.isElected : false;
 
     return (
         <Col md>
             <div
                 id={article.slug}
-                className={`article analysis-preview score-${cls}${
-                    isElected ? ' analysis-elected' : ''
-                }`}
+                className={`article analysis-preview score-${cls}`}
                 onClick={clickHandler}
                 onKeyUp={keyUpHandler}
                 role="link"
@@ -45,13 +39,13 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
             >
                 <div
                     className="thumb mb-2 mb-md-0"
-                    data-label={badgePctFormat(analysis[cmd.score][lastCol])}
+                    data-label={badgePctFormat(analysis.lastScore)}
                 >
                     <figure className="text-center">
-                        <Media
-                            alt={article.title.rendered}
-                            id={article.featured_media}
-                            fallback={defaultImg}
+                        <img
+                            alt={analysisLabels.transparency[cls]}
+                            className="p-3"
+                            src={party.logo}
                         />
                     </figure>
                     <div className="name text-center">

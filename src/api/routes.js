@@ -23,9 +23,8 @@ export const segments = {
 };
 
 export const routes = {
-    article: (page, slug) =>
-        segments.ROOT + (page && slug ? page + separators.url + slug : ''),
-    articles: (page) => segments.ROOT + (page || ''),
+    article: (slug) =>
+        segments.ROOT + (slug ? segments.NEWS + separators.url + slug : ''),
     home: segments.ROOT,
     news: segments.ROOT + segments.NEWS,
     online: segments.ROOT + segments.ONLINE,

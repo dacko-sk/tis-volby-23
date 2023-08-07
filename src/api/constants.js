@@ -25,7 +25,7 @@ import logoSPS from '../../public/img/parties/SPS.png';
 import logoVB from '../../public/img/parties/VB.jpg';
 import logoZaLudi from '../../public/img/parties/za-ludi.svg?url';
 
-export const categories = {
+export const wpCat = {
     analyses: 925,
     news: 877,
 };
@@ -349,12 +349,12 @@ export const settings = {
 };
 
 export const constants = {
-    categories,
     colors,
     errors,
     labels,
     parties,
     settings,
+    wpCat,
 };
 
 export default constants;

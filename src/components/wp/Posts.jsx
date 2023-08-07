@@ -5,10 +5,13 @@ import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 
-import { labels } from '../../api/constants';
+import { labels, wpCat } from '../../api/constants';
 import { scrollToTop } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
+import { getAnalysedData, processArticles } from '../../api/wpHelpers';
 
+import AnalysisFeatured from './templates/AnalysisFeatured';
+import AnalysisList from './templates/AnalysisList';
 import NewsCondensed from './templates/NewsCondensed';
 import NewsList from './templates/NewsList';
 import AlertWithIcon from '../general/AlertWithIcon';
@@ -28,7 +31,6 @@ function Posts({
     limit = false,
     noResults,
     search = '',
-    section = segments.NEWS,
     showMore = null,
     showMoreLink = null,
     tags = [],
@@ -36,6 +38,10 @@ function Posts({
 }) {
     const [totalPages, setTotalPages] = useState(0);
     const [activePage, setActivePage] = useState(1);
+    const navigate = useNavigate();
+
+    const isAnalysis = categories.includes(wpCat.analyses);
+
     const blocksize = limit || 10;
     const catParam = categories.length
         ? `&categories=${categories.join()}`
@@ -64,19 +70,24 @@ function Posts({
             })
     );
 
-    const navigate = useNavigate();
+    const navigateToArticle = (article) => {
+        let route = routes.article(article.slug);
+        if (isAnalysis && (article.analysis ?? false)) {
+            // TODO: get party slug by article tag
+            route = routes.party('PARTYSLUG', segments.ANALYSIS);
+        }
+        navigate(route, {
+            state: { article },
+        });
+    };
     const getClickHandler = (article) => (event) => {
         if (event.target.tagName.toLowerCase() !== 'a') {
-            navigate(routes.article(section, article.slug), {
-                state: { article },
-            });
+            navigateToArticle(article);
         }
     };
     const getKeyUpHandler = (article) => (event) => {
         if (event.keyCode === 13) {
-            navigate(routes.article(section, article.slug), {
-                state: { article },
-            });
+            navigateToArticle(article);
         }
     };
 
@@ -91,25 +102,47 @@ function Posts({
     if (isLoading || error) {
         content = <Loading error={error} />;
     } else {
-        data.forEach((article) => {
-            articles.push(
-                template === templates.condensed ? (
-                    <NewsCondensed
-                        key={article.slug}
-                        article={article}
-                        clickHandler={getClickHandler(article)}
-                        keyUpHandler={getKeyUpHandler(article)}
-                    />
-                ) : (
-                    <NewsList
-                        key={article.slug}
-                        article={article}
-                        clickHandler={getClickHandler(article)}
-                        keyUpHandler={getKeyUpHandler(article)}
-                    />
-                )
-            );
-        });
+        if (isAnalysis) {
+            getAnalysedData(data).forEach((article) => {
+                articles.push(
+                    template === templates.featured ? (
+                        <AnalysisFeatured
+                            key={article.slug}
+                            article={article}
+                            clickHandler={getClickHandler(article)}
+                            keyUpHandler={getKeyUpHandler(article)}
+                        />
+                    ) : (
+                        <AnalysisList
+                            key={article.slug}
+                            article={article}
+                            clickHandler={getClickHandler(article)}
+                            keyUpHandler={getKeyUpHandler(article)}
+                        />
+                    )
+                );
+            });
+        } else {
+            processArticles(data).forEach((article) => {
+                articles.push(
+                    template === templates.condensed ? (
+                        <NewsCondensed
+                            key={article.slug}
+                            article={article}
+                            clickHandler={getClickHandler(article)}
+                            keyUpHandler={getKeyUpHandler(article)}
+                        />
+                    ) : (
+                        <NewsList
+                            key={article.slug}
+                            article={article}
+                            clickHandler={getClickHandler(article)}
+                            keyUpHandler={getKeyUpHandler(article)}
+                        />
+                    )
+                );
+            });
+        }
 
         content = articles.length ? (
             <Row
@@ -133,7 +166,7 @@ function Posts({
                 <div className="buttons mt-3 text-center">
                     <Button
                         as={Link}
-                        to={showMoreLink || routes.articles(section)}
+                        to={showMoreLink || routes.news}
                         variant="secondary"
                     >
                         {showMore || labels.showMore}
