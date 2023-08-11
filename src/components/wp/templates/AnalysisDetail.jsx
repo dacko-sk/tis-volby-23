@@ -15,6 +15,8 @@ import {
     transparencyIndicators,
 } from '../../../api/wpHelpers';
 
+import IconTooltip from '../../general/IconTooltip';
+
 function AnalysisDetail({ article }) {
     const analysis = article.analysis ?? { error: 'no data received' };
     if (analysis.error ?? false) {
@@ -86,7 +88,15 @@ function AnalysisDetail({ article }) {
     Object.keys(transparencyIndicators).forEach((group) => {
         groups[group] = [];
         Object.entries(analysis[group]).forEach(([key, valuesArray]) => {
-            const cols = [<td key={key}>{key}</td>];
+            const tooltip = analysisLabels.indicators[group].criteria[key];
+            const cols = [
+                <td key={key}>
+                    <span className="d-flex align-items-center">
+                        {key}
+                        <IconTooltip id={key} tooltip={tooltip} />
+                    </span>
+                </td>,
+            ];
             valuesArray.forEach((value, vi) => {
                 let color = '';
                 switch (value) {
@@ -106,12 +116,14 @@ function AnalysisDetail({ article }) {
                 cols.push(
                     <td key={vk}>
                         {Number(value) > -1 && (
-                            <span
-                                className={`badge${
-                                    color ? ` score-${color}` : ''
-                                }`}
-                            >
-                                {analysisLabels.badges[value]}
+                            <span className="d-flex align-items-center">
+                                <span
+                                    className={`badge${
+                                        color ? ` score-${color}` : ''
+                                    }`}
+                                >
+                                    {analysisLabels.badges[value]}
+                                </span>
                             </span>
                         )}
                     </td>
@@ -151,9 +163,9 @@ function AnalysisDetail({ article }) {
                     <Table responsive>
                         <tbody>
                             <tr>
-                                <th>{analysisLabels.party}</th>
+                                <th>{analysisLabels[cmd.coalition]}</th>
                                 <td className="text-end">
-                                    {article.title.rendered}
+                                    {analysis.meta[cmd.coalition]}
                                 </td>
                             </tr>
                             <tr>
