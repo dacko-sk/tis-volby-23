@@ -2,6 +2,12 @@ import parse, { attributesToProps, domToReact } from 'html-react-parser';
 
 import { ecodeHTMLEntities, isNumeric } from './helpers';
 
+export const wpCat = {
+    analyses: 925,
+    assets: 926,
+    news: 877,
+};
+
 const proxyHttpImages = (html) => {
     const regex = /(http:\/\/cms.transparency.sk\/[^",]+.(png|jpe?g|gif|svg))/i;
     return html.replace(regex, 'https://images.weserv.nl/?url=$1');
@@ -32,6 +38,16 @@ const parserOptions = {
             ) {
                 // remove "continue reading" links to WP domain
                 return <></>;
+            }
+            if (attribs && attribs.href.startsWith('http://')) {
+                // fix http links to https
+                const props = {
+                    ...attributesToProps(attribs),
+                    // proxy image to force https
+                    href: attribs.href.replace('http://', 'https://'),
+                };
+                const content = domToReact(children, parserOptions);
+                return <a {...props}>{content}</a>;
             }
         }
         if (name === 'figure') {

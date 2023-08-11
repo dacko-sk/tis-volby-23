@@ -1,5 +1,5 @@
-import { wpCat } from '../api/constants';
 import { setTitle } from '../api/helpers';
+import { wpCat } from '../api/wpHelpers';
 
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';

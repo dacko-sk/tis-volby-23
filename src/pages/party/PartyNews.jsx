@@ -1,7 +1,8 @@
 import { useOutletContext } from 'react-router-dom';
 
-import { labels, wpCat } from '../../api/constants';
+import { labels } from '../../api/constants';
 import { setTitle } from '../../api/helpers';
+import { wpCat } from '../../api/wpHelpers';
 
 import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Posts, { templates } from '../../components/wp/Posts';

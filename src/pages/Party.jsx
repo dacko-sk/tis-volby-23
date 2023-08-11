@@ -101,6 +101,14 @@ function Party() {
                             Aktuality
                         </Nav.Link>
                     )}
+                    {(party.tag ?? false) && (
+                        <Nav.Link
+                            as={NavLink}
+                            to={routes.party(party.slug, segments.ASSETS)}
+                        >
+                            Majetkové priznania
+                        </Nav.Link>
+                    )}
                 </Nav>
             </div>
 

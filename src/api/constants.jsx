@@ -38,11 +38,6 @@ export const icons = {
     },
 };
 
-export const wpCat = {
-    analyses: 925,
-    news: 877,
-};
-
 // party object key matches with CSV account key
 export const parties = {
     Aliancia: {
@@ -358,7 +353,6 @@ export const constants = {
     labels,
     parties,
     settings,
-    wpCat,
 };
 
 export default constants;

@@ -12,6 +12,7 @@ import News from './pages/News';
 import Parties from './pages/Parties';
 import Party from './pages/Party';
 import PartyAnalysis from './pages/party/PartyAnalysis';
+import PartyAssets from './pages/party/PartyAssets';
 import PartyNews from './pages/party/PartyNews';
 import PartyOnline from './pages/party/PartyOnline';
 import PartyOverview from './pages/party/PartyOverview';
@@ -57,6 +58,10 @@ function App() {
                                 <Route
                                     path={segments.ANALYSIS}
                                     element={<PartyAnalysis />}
+                                />
+                                <Route
+                                    path={segments.ASSETS}
+                                    element={<PartyAssets />}
                                 />
                                 <Route
                                     path={segments.ONLINE}

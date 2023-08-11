@@ -1,36 +1,30 @@
-import { useLocation, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { labels } from '../../api/constants';
 import { setTitle } from '../../api/helpers';
-import { analysisLabels, getAnalysedData, wpCat } from '../../api/wpHelpers';
+import { analysisLabels, wpCat } from '../../api/wpHelpers';
 
 import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Loading from '../../components/general/Loading';
-import AnalysisDetail from '../../components/wp/templates/AnalysisDetail';
+import AssetsDetail from '../../components/wp/templates/AssetsDetail';
 
-function PartyAnalysis() {
+function PartyAssets() {
     const party = useOutletContext();
 
-    // try to set article data object from location.state
-    const location = useLocation();
-    let article =
-        location.state && (location.state.article ?? false)
-            ? location.state.article
-            : {};
+    let article = {};
 
     // load article data from API (if needed)
     // isInitialLoading flag will be true if query is enabled, there are no data yet (isLoading) and isFetching
     const { isInitialLoading, error, data } = useQuery(
-        [`party_analysis_${party[labels.elections.name_key]}`],
+        [`party_asets_${party[labels.elections.name_key]}`],
         () =>
             fetch(
-                `https://cms.transparency.sk/wp-json/wp/v2/posts?categories=${wpCat.analyses}&tags=${party.tag}&tax_relation=AND`
+                `https://cms.transparency.sk/wp-json/wp/v2/posts?categories=${wpCat.assets}&tags=${party.tag}&tax_relation=AND`
             ).then((response) => response.json()),
         {
-            // run only if article data were not delivered via location.state
-            // and only if party has WP tag
-            enabled: !(article.title ?? false) && !!(party.tag ?? false),
+            // run only if party has WP tag
+            enabled: !!(party.tag ?? false),
         }
     );
 
@@ -38,7 +32,7 @@ function PartyAnalysis() {
         // article successfully loaded from API - use it!
         article = {
             ...article,
-            ...getAnalysedData(data)[0],
+            ...data[0],
         };
     }
 
@@ -50,10 +44,10 @@ function PartyAnalysis() {
     if (isInitialLoading || error) {
         content = <Loading error={error} />;
     } else if (article.title ?? false) {
-        content = <AnalysisDetail article={article} />;
+        content = <AssetsDetail article={article} />;
     }
 
-    setTitle(`${party.fullName} : Hodnotenie`);
+    setTitle(`${party.fullName} : Majetkové priznania`);
 
     return (
         <div className="subpage">
@@ -62,4 +56,4 @@ function PartyAnalysis() {
     );
 }
 
-export default PartyAnalysis;
+export default PartyAssets;
