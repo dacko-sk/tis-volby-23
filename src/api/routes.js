@@ -15,6 +15,7 @@ export const segments = {
             ? siteConfig.homepage
             : '/',
     ANALYSIS: 'hodnotenie',
+    ASSETS: 'majetkove-priznania',
     NEWS: 'aktuality',
     ONLINE: 'online',
     PARTIES: 'strany',

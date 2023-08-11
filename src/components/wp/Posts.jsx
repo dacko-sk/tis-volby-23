@@ -5,10 +5,10 @@ import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 
-import { labels, wpCat } from '../../api/constants';
+import { labels } from '../../api/constants';
 import { scrollToTop } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
-import { getAnalysedData, processArticles } from '../../api/wpHelpers';
+import { getAnalysedData, processArticles, wpCat } from '../../api/wpHelpers';
 
 import useData from '../../context/DataContext';
 

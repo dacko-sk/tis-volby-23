@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import { Link, useOutletContext } from 'react-router-dom';
 import has from 'has';
 
-import { colors, labels, wpCat } from '../../api/constants';
+import { colors, labels } from '../../api/constants';
 import {
     currencyFormat,
     dateFormat,
@@ -12,6 +12,7 @@ import {
     setTitle,
 } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
+import { wpCat } from '../../api/wpHelpers';
 
 import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
 

@@ -129,13 +129,16 @@
   }
 }
 
+.emoji-icon:before {
+  display: inline-block;
+  font-style: normal;
+  margin-right: 0.25em;
+  text-decoration: none;
+}
+
 .article-date,
 .article-tags {
   font-style: italic;
-  &:before {
-    font-style: normal;
-    margin-right: 0.25em;
-  }
   a {
     color: $tis-dark-blue;
     display: inline-block;
@@ -146,12 +149,32 @@
   }
 }
 
-.article-date:before {
-  content: '📅';
+.article-date {
+  @extend .emoji-icon;
+  &:before {
+    content: '📅';
+  }
 }
 
-.article-tags:before {
-  content: '🔖';
+.article-tags {
+  @extend .emoji-icon;
+  &:before {
+    content: '🔖';
+  }
+}
+
+.file-icon {
+  @extend .emoji-icon;
+  &:before {
+    content: '📄';
+  }
+}
+
+.article-body {
+  // add file icon to all .pdf links in assets template
+  &.assets a[href$='.pdf'] {
+    @extend .file-icon;
+  }
 }
 
 ul.blocks-gallery-grid {

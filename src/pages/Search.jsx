@@ -3,9 +3,10 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { labels, wpCat } from '../api/constants';
+import { labels } from '../api/constants';
 import { contains, setTitle } from '../api/helpers';
 import { routes, segments } from '../api/routes';
+import { wpCat } from '../api/wpHelpers';
 
 import useAdsData, { sheetsConfig } from '../context/AdsDataContext';
 import useData from '../context/DataContext';

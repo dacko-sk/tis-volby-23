@@ -1,8 +1,7 @@
 import { Col, Row } from 'react-bootstrap';
 
-import { wpCat } from '../api/constants';
 import { setTitle } from '../api/helpers';
-import { segments } from '../api/routes';
+import { wpCat } from '../api/wpHelpers';
 
 import TotalAdsSpending from '../components/ads/TotalAdsSpending';
 import Top10 from '../components/charts/Top10';
