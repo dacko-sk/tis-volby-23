@@ -1,5 +1,4 @@
 import logoAliancia from '../../public/img/parties/Aliancia.jpg';
-import logoApS from '../../public/img/parties/aps.jpg';
 import logoDemokrati from '../../public/img/parties/Demokrati.jpg';
 import logoHlas from '../../public/img/parties/Hlas.svg?url';
 import logoKarma from '../../public/img/parties/Karma.jpg';
@@ -18,6 +17,7 @@ import logoSHO from '../../public/img/parties/SHO.png';
 import logoSmeRodina from '../../public/img/parties/SmeRodina.png';
 import logoSmer from '../../public/img/parties/Smer.jpg';
 import logoSNS from '../../public/img/parties/SNS.png';
+import logoSOS from '../../public/img/parties/SOS.svg?url';
 import logoSrdce from '../../public/img/parties/Srdce.png';
 import logoSPS from '../../public/img/parties/SPS.png';
 import logoVB from '../../public/img/parties/VB.jpg';
@@ -34,11 +34,6 @@ export const parties = {
         logo: logoAliancia,
         share: 2.1,
         tag: 899,
-    },
-    'Alternatíva pre Slovensko': {
-        logo: logoApS,
-        slug: 'ApS',
-        tag: 916,
     },
     Demokrati: {
         fullName: 'DEMOKRATI',
@@ -153,6 +148,12 @@ export const parties = {
         logo: logoSNS,
         share: 4.3,
         tag: 911,
+    },
+    'Spoločne občania Slovenska': {
+        fullName: 'SPOLOČNE OBČANIA SLOVENSKA',
+        logo: logoSOS,
+        slug: 'SOS',
+        tag: 916,
     },
     SPRAVODLIVOSŤ: {
         slug: 'Spravodlivosť',
