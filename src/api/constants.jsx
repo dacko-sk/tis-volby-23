@@ -10,9 +10,11 @@ import logoMF from '../../public/img/parties/MF.png';
 import logoMM from '../../public/img/parties/MM.jpg';
 import logoMS from '../../public/img/parties/MS.png';
 import logoOLaNO from '../../public/img/parties/OĽaNO.png';
+import logoPrincip from '../../public/img/parties/princip.jpg';
 import logoPS from '../../public/img/parties/PS.png';
 import logoRepublika from '../../public/img/parties/Republika.png';
 import logoSaS from '../../public/img/parties/SASKA.jpg';
+import logoSDKU from '../../public/img/parties/SDKU-DS.svg?url';
 import logoSHO from '../../public/img/parties/SHO.png';
 import logoSmeRodina from '../../public/img/parties/SmeRodina.png';
 import logoSmer from '../../public/img/parties/Smer.jpg';
@@ -41,7 +43,8 @@ export const icons = {
 // party object key matches with CSV account key
 export const parties = {
     Aliancia: {
-        fullName: 'SZÖVETSÉG - ALIANCIA',
+        fullName:
+            'SZÖVETSÉG - Magyarok. Nemzetiségek. Regiók. | ALIANCIA - Maďari. Národnosti. Regióny',
         logo: logoAliancia,
         share: 2.1,
         tag: 899,
@@ -119,6 +122,11 @@ export const parties = {
         slug: 'SPS',
         tag: 914,
     },
+    Princíp: {
+        fullName: 'PRINCÍP',
+        logo: logoPrincip,
+        tag: 924,
+    },
     PS: {
         fullName: 'Progresívne Slovensko',
         logo: logoPS,
@@ -136,6 +144,12 @@ export const parties = {
         logo: logoSaS,
         share: 8.3,
         tag: 908,
+    },
+    SDKÚ: {
+        fullName:
+            'SDKÚ - DS - Slovenská demokratická a kresťanská únia - Demokratická strana',
+        logo: logoSDKU,
+        tag: 927,
     },
     'Slovenské Hnutie Obrody': {
         logo: logoSHO,
