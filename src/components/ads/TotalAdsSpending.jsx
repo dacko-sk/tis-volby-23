@@ -28,7 +28,7 @@ function TotalAdsSpending() {
     }
 
     return (
-        <div className="total-spending">
+        <div className="total-spending mt-4">
             <Row className="gy-3 gy-lg-0 text-center mb-4">
                 <Col lg={6}>
                     <h2>{labels.ads.meta.totalSpendingTitle}</h2>

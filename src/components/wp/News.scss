@@ -5,6 +5,10 @@
   & > .col-md-12 + .col-md-12 {
     border-top: 1px solid $tis-grey;
   }
+  &.featured > * {
+    flex: 0 0 auto;
+    width: 50%;
+  }
 }
 
 .article {
@@ -191,11 +195,8 @@ ul.blocks-gallery-grid {
 }
 
 @media (min-width: map.get($grid-breakpoints, 'md')) {
-  .articles.featured {
-    & > .col-md {
-      flex: 0 0 auto;
-      width: 33.33333333%;
-    }
+  .articles.featured > * {
+    width: 33.33333333%;
   }
   .article {
     .thumb {
@@ -223,10 +224,8 @@ ul.blocks-gallery-grid {
 }
 
 @media (min-width: map.get($grid-breakpoints, 'lg')) {
-  .articles.featured {
-    & > .col-md {
-      width: 25%;
-    }
+  .articles.featured > * {
+    width: 25%;
   }
   .analysis-preview th {
     width: 33%;
@@ -234,10 +233,8 @@ ul.blocks-gallery-grid {
 }
 
 @media (min-width: map.get($grid-breakpoints, 'xl')) {
-  .articles.featured {
-    & > .col-md {
-      width: 20%;
-    }
+  .articles.featured > * {
+    width: 20%;
   }
 }
 
