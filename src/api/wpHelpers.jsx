@@ -140,7 +140,7 @@ export const analysisLabels = {
             title: 'Financovanie kampane',
             criteria: {
                 'Informovanie o financovaní kampane':
-                    'Strana prijíma dary na kampaň cez transparentný účet, o prijatých pôžičkách informuje v zákonnej lehote na webe strany',
+                    'Darcovia a veritelia strany sú prehľadne identifikovateľní prostredníctvom transparentného účtu a webu strany',
                 'Spôsob financovania':
                     'redvolebná kampaň je postavená na viacerých zdrojoch financovania, napríklad aktivizovaním sympatizantov cez posielanie drobných darov',
                 'Preverovanie pozadia veľkých darcov/veriteľov':
@@ -173,6 +173,7 @@ export const analysisLabels = {
     },
     meta: 'Údaje o kampani',
     methodology: 'Metodika hodnotenia',
+    noAssets: 'Nie sú dostupné majetkové priznania pre túto stranu.',
     noData: 'Nie je dostupné hodnotenie kampane pre túto stranu.',
     references: 'Referencie',
     transparency: {

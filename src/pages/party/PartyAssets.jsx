@@ -38,7 +38,7 @@ function PartyAssets() {
 
     let content = (
         <AlertWithIcon className="my-4" variant="danger">
-            {analysisLabels.noData}
+            {analysisLabels.noAssets}
         </AlertWithIcon>
     );
     if (isInitialLoading || error) {
