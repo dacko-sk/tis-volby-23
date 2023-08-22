@@ -30,6 +30,7 @@ export const templates = {
 function Posts({
     categories = [],
     categoriesExclude = [],
+    display = null,
     limit = false,
     noResults,
     search = '',
@@ -108,51 +109,55 @@ function Posts({
         content = <Loading error={error} />;
     } else {
         if (isAnalysis) {
-            getAnalysedData(data).forEach((article) => {
-                articles.push(
-                    template === templates.featured ? (
-                        <AnalysisFeatured
-                            key={article.slug}
-                            article={article}
-                            clickHandler={getClickHandler(article)}
-                            keyUpHandler={getKeyUpHandler(article)}
-                        />
-                    ) : (
-                        <AnalysisList
-                            key={article.slug}
-                            article={article}
-                            clickHandler={getClickHandler(article)}
-                            keyUpHandler={getKeyUpHandler(article)}
-                        />
-                    )
-                );
-            });
+            getAnalysedData(data)
+                .slice(...(display ? [0, display] : []))
+                .forEach((article) => {
+                    articles.push(
+                        template === templates.featured ? (
+                            <AnalysisFeatured
+                                key={article.slug}
+                                article={article}
+                                clickHandler={getClickHandler(article)}
+                                keyUpHandler={getKeyUpHandler(article)}
+                            />
+                        ) : (
+                            <AnalysisList
+                                key={article.slug}
+                                article={article}
+                                clickHandler={getClickHandler(article)}
+                                keyUpHandler={getKeyUpHandler(article)}
+                            />
+                        )
+                    );
+                });
         } else {
-            processArticles(data).forEach((article) => {
-                articles.push(
-                    template === templates.condensed ? (
-                        <NewsCondensed
-                            key={article.slug}
-                            article={article}
-                            clickHandler={getClickHandler(article)}
-                            keyUpHandler={getKeyUpHandler(article)}
-                        />
-                    ) : (
-                        <NewsList
-                            key={article.slug}
-                            article={article}
-                            clickHandler={getClickHandler(article)}
-                            keyUpHandler={getKeyUpHandler(article)}
-                        />
-                    )
-                );
-            });
+            processArticles(data)
+                .slice(...(display ? [0, display] : []))
+                .forEach((article) => {
+                    articles.push(
+                        template === templates.condensed ? (
+                            <NewsCondensed
+                                key={article.slug}
+                                article={article}
+                                clickHandler={getClickHandler(article)}
+                                keyUpHandler={getKeyUpHandler(article)}
+                            />
+                        ) : (
+                            <NewsList
+                                key={article.slug}
+                                article={article}
+                                clickHandler={getClickHandler(article)}
+                                keyUpHandler={getKeyUpHandler(article)}
+                            />
+                        )
+                    );
+                });
         }
 
         content = articles.length ? (
             <Row
                 className={`articles ${template}${
-                    template === templates.condensed ? ' my-3' : ''
+                    template === templates.featured ? ' gy-4' : ''
                 }`}
             >
                 {articles}

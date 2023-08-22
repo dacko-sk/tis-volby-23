@@ -37,7 +37,7 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     }
 
     return (
-        <Col md>
+        <Col>
             <div
                 id={article.slug}
                 className={`article analysis-preview score-${cls}`}
@@ -47,7 +47,7 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
                 tabIndex={0}
             >
                 <div
-                    className="thumb mb-2 mb-md-0"
+                    className="thumb"
                     data-label={badgePctFormat(analysis.lastScore)}
                 >
                     <figure className="text-center">{logo}</figure>
