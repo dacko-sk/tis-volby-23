@@ -30,7 +30,6 @@ export const templates = {
 function Posts({
     categories = [],
     categoriesExclude = [],
-    display = null,
     limit = false,
     noResults,
     search = '',
@@ -44,7 +43,9 @@ function Posts({
     const navigate = useNavigate();
     const { findPartyByWpTags } = useData();
 
-    const isAnalysis = categories.includes(wpCat.analyses);
+    const isAnalysis =
+        categories.includes(wpCat.analyses) ||
+        categories.includes(wpCat.featured);
 
     const blocksize = limit || 10;
     const catParam = categories.length
@@ -109,49 +110,45 @@ function Posts({
         content = <Loading error={error} />;
     } else {
         if (isAnalysis) {
-            getAnalysedData(data)
-                .slice(...(display ? [0, display] : []))
-                .forEach((article) => {
-                    articles.push(
-                        template === templates.featured ? (
-                            <AnalysisFeatured
-                                key={article.slug}
-                                article={article}
-                                clickHandler={getClickHandler(article)}
-                                keyUpHandler={getKeyUpHandler(article)}
-                            />
-                        ) : (
-                            <AnalysisList
-                                key={article.slug}
-                                article={article}
-                                clickHandler={getClickHandler(article)}
-                                keyUpHandler={getKeyUpHandler(article)}
-                            />
-                        )
-                    );
-                });
+            getAnalysedData(data).forEach((article) => {
+                articles.push(
+                    template === templates.featured ? (
+                        <AnalysisFeatured
+                            key={article.slug}
+                            article={article}
+                            clickHandler={getClickHandler(article)}
+                            keyUpHandler={getKeyUpHandler(article)}
+                        />
+                    ) : (
+                        <AnalysisList
+                            key={article.slug}
+                            article={article}
+                            clickHandler={getClickHandler(article)}
+                            keyUpHandler={getKeyUpHandler(article)}
+                        />
+                    )
+                );
+            });
         } else {
-            processArticles(data)
-                .slice(...(display ? [0, display] : []))
-                .forEach((article) => {
-                    articles.push(
-                        template === templates.condensed ? (
-                            <NewsCondensed
-                                key={article.slug}
-                                article={article}
-                                clickHandler={getClickHandler(article)}
-                                keyUpHandler={getKeyUpHandler(article)}
-                            />
-                        ) : (
-                            <NewsList
-                                key={article.slug}
-                                article={article}
-                                clickHandler={getClickHandler(article)}
-                                keyUpHandler={getKeyUpHandler(article)}
-                            />
-                        )
-                    );
-                });
+            processArticles(data).forEach((article) => {
+                articles.push(
+                    template === templates.condensed ? (
+                        <NewsCondensed
+                            key={article.slug}
+                            article={article}
+                            clickHandler={getClickHandler(article)}
+                            keyUpHandler={getKeyUpHandler(article)}
+                        />
+                    ) : (
+                        <NewsList
+                            key={article.slug}
+                            article={article}
+                            clickHandler={getClickHandler(article)}
+                            keyUpHandler={getKeyUpHandler(article)}
+                        />
+                    )
+                );
+            });
         }
 
         content = articles.length ? (
@@ -168,6 +165,11 @@ function Posts({
             </AlertWithIcon>
         );
     }
+
+    const title =
+        template === templates.featured && articles.length ? (
+            <h2 className="my-4">Top {articles.length} hodnotených kampaní</h2>
+        ) : null;
 
     let nav = null;
     if (articles.length) {
@@ -213,6 +215,7 @@ function Posts({
 
     return (
         <div>
+            {title}
             {content}
             {nav}
         </div>

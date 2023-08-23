@@ -43,10 +43,8 @@ function Home() {
 
             <Top10 />
 
-            {/* <h2 className="my-4">Top 10 hodnotených kampaní</h2>
-            <Posts
-                categories={[wpCat.analyses]}
-                display={10}
+            {/* <Posts
+                categories={[wpCat.featured]}
                 limit={30}
                 showMore="Zobraziť všetky strany"
                 showMoreLink={routes.parties}

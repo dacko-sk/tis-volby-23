@@ -5,6 +5,7 @@ import { ecodeHTMLEntities, isNumeric } from './helpers';
 export const wpCat = {
     analyses: 925,
     assets: 926,
+    featured: 928,
     news: 877,
 };
 
