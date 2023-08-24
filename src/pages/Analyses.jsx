@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 import { setTitle } from '../api/helpers';
-import { segments } from '../api/routes';
 
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
