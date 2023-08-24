@@ -79,14 +79,14 @@ function Party() {
                     >
                         Financovanie
                     </Nav.Link>
-                    {/* {(party.tag ?? false) && (
+                    {(party.tag ?? false) && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.party(party.slug, segments.ANALYSIS)}
                         >
                             Hodnotenie
                         </Nav.Link>
-                    )} */}
+                    )}
                     <Nav.Link
                         as={NavLink}
                         to={routes.party(party.slug, segments.ONLINE)}
@@ -101,14 +101,14 @@ function Party() {
                             Aktuality
                         </Nav.Link>
                     )}
-                    {/* {(party.tag ?? false) && (
+                    {(party.tag ?? false) && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.party(party.slug, segments.ASSETS)}
                         >
                             Majetkové priznania
                         </Nav.Link>
-                    )} */}
+                    )}
                 </Nav>
             </div>
 
