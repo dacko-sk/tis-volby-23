@@ -1,9 +1,10 @@
 import Col from 'react-bootstrap/Col';
 
 import { badgePctFormat } from '../../../api/helpers';
-import { analysisLabels, transparencyClass } from '../../../api/wpHelpers';
+import { transparencyClass } from '../../../api/wpHelpers';
 
 import useData from '../../../context/DataContext';
+import Media from '../Media';
 
 function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     const { analysis } = article;
@@ -18,23 +19,11 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
 
     const { findPartyByWpTags } = useData();
     const party = findPartyByWpTags(article.tags);
-    let logo = null;
-    let name = null;
-    if (party && (party.logo ?? false)) {
-        logo = (
-            <img
-                alt={analysisLabels.transparency[cls]}
-                className="p-3"
-                src={party.logo}
-            />
-        );
-    } else {
-        name = (
-            <div className="name text-center">
-                <span className="badge">{article.title.rendered}</span>
-            </div>
-        );
-    }
+    const logo = party && (party.logo ?? false) ? party.logo : null;
+    const name =
+        party && (party.fullName ?? false)
+            ? party.fullName
+            : article.title.rendered;
 
     return (
         <Col>
@@ -50,8 +39,17 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
                     className="thumb"
                     data-label={badgePctFormat(analysis.lastScore)}
                 >
-                    <figure className="text-center">{logo}</figure>
-                    {name}
+                    <figure className="text-center">
+                        <Media
+                            alt={article.title.rendered}
+                            id={article.featured_media}
+                            fallback={logo}
+                        />
+                    </figure>
+
+                    <div className="name text-center">
+                        <span className="badge">{name}</span>
+                    </div>
                 </div>
             </div>
         </Col>

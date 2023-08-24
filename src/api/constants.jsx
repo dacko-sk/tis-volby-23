@@ -67,7 +67,7 @@ export const parties = {
         tag: 918,
     },
     KDH: {
-        fullName: 'Kresťanskodemokratické hnutie',
+        fullName: 'Kresťansko­demokratické hnutie',
         logo: logoKDH,
         share: 6.4,
         tag: 902,

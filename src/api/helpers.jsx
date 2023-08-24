@@ -1,6 +1,6 @@
 import { labels } from './constants';
 
-export const isNumeric = (value) => !Number.isNaN(value);
+export const isNumeric = (value) => !Number.isNaN(Number(value));
 
 export const fixNumber = (value) =>
     Number(value.replace(',', '.').replace(' ', ''));

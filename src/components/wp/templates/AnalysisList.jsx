@@ -33,6 +33,10 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                 src={party.logo}
             />
         ) : null;
+    const name =
+        party && (party.fullName ?? false)
+            ? party.fullName
+            : article.title.rendered;
 
     return (
         <Col md={12}>
@@ -45,7 +49,7 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                 tabIndex={0}
             >
                 <Row className="align-items-center">
-                    <Col sm={4} md={5} lg={3}>
+                    <Col sm>
                         <div
                             className="thumb mb-2 mb-md-0"
                             data-label={analysisLabels.transparencyShort[cls]}
@@ -56,7 +60,7 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                         </div>
                     </Col>
                     <Col>
-                        <h2>{article.title.rendered}</h2>
+                        <h2>{name}</h2>
                         <Table responsive>
                             <tbody>
                                 <tr>
@@ -74,7 +78,7 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                                         {analysisLabels.transparency[cls]}
                                     </td>
                                 </tr>
-                                <tr className="d-none d-md-table-row">
+                                <tr className="d-none d-sm-table-row">
                                     <th>{analysisLabels[cbd.date]}</th>
                                     <td>
                                         {

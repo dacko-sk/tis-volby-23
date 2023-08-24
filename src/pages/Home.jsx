@@ -45,9 +45,8 @@ function Home() {
 
             <Posts
                 categories={[wpCat.featured]}
-                limit={30}
-                showMore="Zobraziť všetky strany"
-                showMoreLink={routes.parties}
+                showMore="Zobraziť všetky hodnotenia"
+                showMoreLink={routes.analyses}
                 template={templates.featured}
             />
 

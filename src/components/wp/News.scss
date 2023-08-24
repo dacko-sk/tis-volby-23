@@ -29,16 +29,21 @@
   &.analysis-preview {
     &:hover,
     &:focus {
+      img {
+        filter: saturate(100%);
+      }
       figure {
         border-style: solid;
       }
     }
-    & > .row > .col-lg-3 {
-      max-width: 250px;
+    & > .row > .col-sm {
+      max-width: 200px;
     }
     .thumb {
-      position: relative;
+      height: 0;
       overflow: hidden;
+      padding-top: 100%;
+      position: relative;
       &:after {
         content: attr(data-label);
         position: absolute;
@@ -52,22 +57,33 @@
         text-align: center;
         width: 150%;
       }
-      .name {
-        position: absolute;
-        bottom: 0.75em;
-        padding: 0 1em;
-        width: 100%;
-      }
       .badge {
         background-color: rgb(0 0 0 / 50%);
         font-size: 1em;
         white-space: normal;
       }
     }
+    .name {
+      position: absolute;
+      bottom: 0.75em;
+      padding: 0 1em;
+      width: 100%;
+    }
     figure {
       border-color: $tis-score-unknown;
       border-style: dotted;
       border-width: 2px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    img {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      filter: saturate(25%);
     }
     &.score-good {
       .thumb:after {
@@ -116,18 +132,12 @@
     &:hover,
     &:focus {
       background-color: transparent;
-      .thumb img {
-        filter: saturate(100%);
-      }
     }
     .thumb {
       &:after {
         font-size: 1.5em;
         line-height: 2.15rem;
         transform: translate(50%, -50%) rotate(45deg) translate(0, 150%);
-      }
-      img {
-        filter: saturate(25%);
       }
     }
   }
@@ -198,26 +208,6 @@ ul.blocks-gallery-grid {
   .articles.featured > * {
     width: 33.33333333%;
   }
-  .article {
-    .thumb {
-      height: 0;
-      overflow: hidden;
-      padding-top: 100%;
-      position: relative;
-      figure {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-      img {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
-  }
   .analysis-preview th {
     width: 170px;
   }
@@ -229,12 +219,6 @@ ul.blocks-gallery-grid {
   }
   .analysis-preview th {
     width: 33%;
-  }
-}
-
-@media (min-width: map.get($grid-breakpoints, 'xl')) {
-  .articles.featured > * {
-    width: 20%;
   }
 }
 

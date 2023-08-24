@@ -1,6 +1,7 @@
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 
 import { ecodeHTMLEntities, isNumeric } from './helpers';
+import { routes } from './routes';
 
 export const wpCat = {
     analyses: 925,
@@ -92,6 +93,9 @@ export const processArticles = (data) => {
 /**
  * Analysis helpers
  */
+export const methodologyPage = routes.article(
+    'ako-sme-hodnotili-transparentnost-kampani-pred-parlamentnymi-volbami-2023'
+);
 
 export const metaData = {
     coalition: 'coalition',
@@ -174,6 +178,8 @@ export const analysisLabels = {
     },
     meta: 'Údaje o kampani',
     methodology: 'Metodika hodnotenia',
+    noAnalyses:
+        'Sekcia sa pripravuje. Hodnotenia kampaní budeme zverejňovať postupne.',
     noAssets: 'Nie sú dostupné majetkové priznania pre túto stranu.',
     noData: 'Nie je dostupné hodnotenie kampane pre túto stranu.',
     references: 'Referencie',
@@ -261,7 +267,7 @@ export const parseAnalysisData = (html) => {
                 const analysis = {
                     base: {},
                     lastColumn: -1,
-                    lastScore: 0,
+                    lastScore: -1,
                     meta: {},
                 };
                 let rowKey = 0;
@@ -278,10 +284,12 @@ export const parseAnalysisData = (html) => {
                 // if empty or not numeric, ignore the column
                 tableData[rowKey + baseProps.length - 1].forEach(
                     (column, columnKey) => {
-                        if (column !== '' && isNumeric(column)) {
+                        if (column !== '') {
                             validColumns.push(columnKey);
                             analysis.lastColumn += 1;
-                            analysis.lastScore = column;
+                            analysis.lastScore = isNumeric(column)
+                                ? column
+                                : -1;
                         }
                     }
                 );

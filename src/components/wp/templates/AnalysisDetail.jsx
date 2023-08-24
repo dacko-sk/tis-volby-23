@@ -4,11 +4,11 @@ import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
 import { badgePctFormat, fixUrl } from '../../../api/helpers';
-import { routes } from '../../../api/routes';
 import {
     analysisLabels,
     baseData as cbd,
     metaData as cmd,
+    methodologyPage,
     parseWpHtml,
     transparencyClass,
     transparencyClasses,
@@ -247,11 +247,7 @@ function AnalysisDetail({ article }) {
                 <Col sm={12} md="auto">
                     <ul className="arrows">
                         <li>
-                            <Link
-                                to={routes.article(
-                                    'hodnotenie-kampani-pred-parlamentnymi-volbami-2023'
-                                )}
-                            >
+                            <Link to={methodologyPage}>
                                 {analysisLabels.methodology}
                             </Link>
                         </li>

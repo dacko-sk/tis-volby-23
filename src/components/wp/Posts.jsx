@@ -47,7 +47,7 @@ function Posts({
         categories.includes(wpCat.analyses) ||
         categories.includes(wpCat.featured);
 
-    const blocksize = limit || 10;
+    const blocksize = limit || (isAnalysis ? 30 : 10);
     const catParam = categories.length
         ? `&categories=${categories.join()}`
         : '';
@@ -168,7 +168,11 @@ function Posts({
 
     const title =
         template === templates.featured && articles.length ? (
-            <h2 className="my-4">Top {articles.length} hodnotených kampaní</h2>
+            <h2 className="my-4">
+                Top {articles.length} hodnoten
+                {articles.length < 5 ? 'é' : 'ých'} kampan
+                {articles.length < 5 ? 'e' : 'í'}
+            </h2>
         ) : null;
 
     let nav = null;
@@ -185,7 +189,7 @@ function Posts({
                     </Button>
                 </div>
             );
-        } else {
+        } else if (template !== templates.featured) {
             const items = [];
             for (let i = 1; i <= totalPages; i += 1) {
                 items.push(

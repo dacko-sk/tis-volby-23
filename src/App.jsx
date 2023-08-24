@@ -5,6 +5,7 @@ import { segments } from './api/routes';
 
 import ContextProviders from './context/ContextProviders';
 
+import Analyses from './pages/Analyses';
 import Article from './pages/Article';
 import Home from './pages/Home';
 import Online from './pages/Online';
@@ -33,15 +34,6 @@ function App() {
                     <Routes>
                         <Route path={segments.ROOT} element={<Layout />}>
                             <Route index element={<Home />} />
-                            <Route path={segments.NEWS} element={<News />} />
-                            <Route
-                                path={`${segments.NEWS}/:slug`}
-                                element={<Article />}
-                            />
-                            <Route
-                                path={`${segments.ONLINE}`}
-                                element={<Online />}
-                            />
                             <Route
                                 path={segments.PARTIES}
                                 element={<Parties />}
@@ -72,6 +64,19 @@ function App() {
                                     element={<PartyNews />}
                                 />
                             </Route>
+                            <Route
+                                path={`${segments.ONLINE}`}
+                                element={<Online />}
+                            />
+                            <Route path={segments.NEWS} element={<News />} />
+                            <Route
+                                path={`${segments.NEWS}/:slug`}
+                                element={<Article />}
+                            />
+                            <Route
+                                path={segments.ANALYSES}
+                                element={<Analyses />}
+                            />
                             <Route
                                 path={`${segments.SEARCH}/:query`}
                                 element={<Search />}
