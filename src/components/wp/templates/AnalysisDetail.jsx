@@ -8,8 +8,8 @@ import {
     analysisLabels,
     baseData as cbd,
     metaData as cmd,
-    methodologyPage,
     parseWpHtml,
+    resources,
     transparencyClass,
     transparencyClasses,
     transparencyIndicators,
@@ -247,7 +247,7 @@ function AnalysisDetail({ article }) {
                 <Col sm={12} md="auto">
                     <ul className="arrows">
                         <li>
-                            <Link to={methodologyPage}>
+                            <Link to={resources.methodology}>
                                 {analysisLabels.methodology}
                             </Link>
                         </li>

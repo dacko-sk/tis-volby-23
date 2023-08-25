@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import { setTitle } from '../api/helpers';
+import { analysisLabels, resources, wpCat } from '../api/wpHelpers';
 
+import AlertWithIcon from '../components/general/AlertWithIcon';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
-import { analysisLabels, methodologyPage, wpCat } from '../api/wpHelpers';
 
 export const title = 'Hodnotenie transparentnosti kampaní';
 
@@ -20,6 +21,14 @@ function Analyses() {
                 noResults={analysisLabels.noAnalyses}
                 template={templates.featured}
             />
+
+            <AlertWithIcon className="my-4" variant="primary">
+                Tlačová správa k prvému hodnoteniu transparentnosti kampaní:{' '}
+                <Link to={resources.pressRelease}>
+                    Len štyri predvolebné kampane sú transparentné
+                </Link>
+                .
+            </AlertWithIcon>
 
             <p className="mt-4">
                 Koncom septembra 2023 si slovenskí voliči v predčasných voľbách
@@ -43,8 +52,11 @@ function Analyses() {
                 monitorujeme a politikov nabádame k zvyšovaniu štandardov. Po
                 prezidentských voľbách 2019, parlamentných voľbách 2020 a
                 samosprávnych voľbách 2022 sme sa aj tentokrát bližšie pozreli
-                na spôsob vedenia kampaní politickými stranami a zostavili
-                hodnotenie ich transparentnosti.
+                na spôsob vedenia kampaní politickými stranami a zostavili{' '}
+                <Link to={resources.pressRelease}>
+                    hodnotenie ich transparentnosti
+                </Link>
+                .
             </p>
             <p>
                 Zamerali sme sa predovšetkým na informácie z transparentných
@@ -88,7 +100,7 @@ function Analyses() {
             </ul>
             <p className="mb-4">
                 Podrobnejšie výsledky nájdete v sekcii nižšie a v{' '}
-                <Link to={methodologyPage}>Metodike hodnotenia</Link>.
+                <Link to={resources.methodology}>Metodike hodnotenia</Link>.
             </p>
 
             <Posts

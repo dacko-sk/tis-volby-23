@@ -93,9 +93,14 @@ export const processArticles = (data) => {
 /**
  * Analysis helpers
  */
-export const methodologyPage = routes.article(
-    'ako-sme-hodnotili-transparentnost-kampani-pred-parlamentnymi-volbami-2023'
-);
+export const resources = {
+    methodology: routes.article(
+        'ako-sme-hodnotili-transparentnost-kampani-pred-parlamentnymi-volbami-2023'
+    ),
+    pressRelease: routes.article(
+        'len-styri-predvolebne-kampane-su-transparentne'
+    ),
+};
 
 export const metaData = {
     coalition: 'coalition',
