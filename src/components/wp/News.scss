@@ -223,6 +223,9 @@ ul.blocks-gallery-grid {
 }
 
 @media (min-width: map.get($grid-breakpoints, 'xxl')) {
+  .articles.featured > * {
+    width: 20%;
+  }
   .articles.condensed .article {
     .thumb {
       height: auto;

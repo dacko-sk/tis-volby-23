@@ -168,11 +168,7 @@ function Posts({
 
     const title =
         template === templates.featured && articles.length ? (
-            <h2 className="my-4">
-                Top {articles.length} hodnoten
-                {articles.length < 5 ? 'é' : 'ých'} kampan
-                {articles.length < 5 ? 'e' : 'í'}
-            </h2>
+            <h2 className="my-4">Top {articles.length} hodnotených kampaní</h2>
         ) : null;
 
     let nav = null;
