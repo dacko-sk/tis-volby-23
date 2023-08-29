@@ -148,8 +148,10 @@ export const processDataSheets = (data) => {
                 default: {
                     // load weekly reports from remaining sheets
                     const time = getTimestampFromDate(sheet.id);
-                    pd.lastUpdateFb = time;
-                    pd.weeks[time] = sheet.data.filter(
+                    if (time) {
+                        pd.lastUpdateFb = time;
+                    }
+                    pd.weeks[time || sheet.id] = sheet.data.filter(
                         filterPoliticAccounts(pd.partiesFb)
                     );
                 }

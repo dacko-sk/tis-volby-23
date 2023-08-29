@@ -15,8 +15,8 @@ function TotalAdsSpending() {
     let totalMeta = 0;
     let totalGoogle = 0;
     if (sheetsData.lastUpdateFb) {
-        Object.values(mergedWeeksData).forEach((pageProps) => {
-            totalMeta += pageProps.outgoing > 0 ? pageProps.outgoing : 0;
+        Object.values(mergedWeeksData).forEach((pageData) => {
+            totalMeta += pageData.outgoing;
         });
     }
     if (sheetsData.lastUpdateGgl) {

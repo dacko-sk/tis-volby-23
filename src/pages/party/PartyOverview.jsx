@@ -7,7 +7,7 @@ import has from 'has';
 import { colors, labels } from '../../api/constants';
 import {
     currencyFormat,
-    dateFormat,
+    fixNumber,
     isNumeric,
     setTitle,
 } from '../../api/helpers';
@@ -24,47 +24,35 @@ import TisBarChart from '../../components/charts/TisBarChart';
 function PartyTransactions() {
     const party = useOutletContext();
 
-    const { sheetsData, findPartyForFbAccount } = useAdsData();
+    const {
+        findPartyForFbAccount,
+        findPartyForGoogleAccount,
+        mergedWeeksData,
+        sheetsData,
+    } = useAdsData();
 
     setTitle(party.fullName);
 
-    const weeks = [];
-    let totalSpending = 0;
-    // add totals from precampaing
-    sheetsData.precampaign.forEach((pageData) => {
-        const accountParty = findPartyForFbAccount(
-            pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
-        );
-        if (
-            party.fbName === accountParty &&
-            isNumeric(pageData[sheetsConfig.FB_WEEKS.columns.SPENDING])
-        ) {
-            totalSpending += Number(
-                pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
-            );
+    // add FB totals from precampaing & all weeks (sheets) of campaing
+    let totalMeta = 0;
+    Object.entries(mergedWeeksData).forEach(([pageId, pageData]) => {
+        const accountParty = findPartyForFbAccount(pageId);
+        if (party.fbName === accountParty && isNumeric(pageData.outgoing)) {
+            totalMeta += pageData.outgoing;
         }
     });
-    // add totals from all weeks of campaing
-    Object.entries(sheetsData.weeks).forEach(([timestamp, weekData]) => {
-        let weekSpent = 0;
-        weekData.forEach((pageData) => {
-            const accountParty = findPartyForFbAccount(
-                pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
+
+    // add google totals
+    let totalGoogle = 0;
+    sheetsData.googleAds.forEach((pageData) => {
+        const accountParty = findPartyForGoogleAccount(
+            pageData[sheetsConfig.GOOGLE.columns.ID]
+        );
+        if (party.fbName === accountParty) {
+            totalGoogle += fixNumber(
+                pageData[sheetsConfig.GOOGLE.columns.SPENDING]
             );
-            if (
-                party.fbName === accountParty &&
-                isNumeric(pageData[sheetsConfig.FB_WEEKS.columns.SPENDING])
-            ) {
-                weekSpent += Number(
-                    pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
-                );
-            }
-        });
-        weeks.push({
-            name: dateFormat(timestamp),
-            outgoing: weekSpent,
-        });
-        totalSpending += weekSpent;
+        }
     });
 
     return (
@@ -123,27 +111,13 @@ function PartyTransactions() {
             </Row>
 
             <Row className="my-4">
-                <Col lg={6}>
-                    <TisBarChart
-                        bars={[
-                            {
-                                key: 'outgoing',
-                                name: labels.ads.meta.spending.label,
-                                color: colors.colorLightBlue,
-                            },
-                        ]}
-                        currency
-                        data={weeks}
-                        lastUpdate={false}
-                    />
-                </Col>
                 <Col lg={6} className="text-center">
                     <div className="total-spending">
                         <h2 className="mt-xxl-3">
                             {labels.ads.meta.totalSpendingTitle}
                         </h2>
                         <p className="hero-number">
-                            {currencyFormat(totalSpending)}
+                            {currencyFormat(totalMeta)}
                             <LastUpdateTag
                                 timestamp={sheetsData.lastUpdateFb || null}
                             >
@@ -151,18 +125,33 @@ function PartyTransactions() {
                             </LastUpdateTag>
                         </p>
                     </div>
-
-                    <div className="buttons mt-4">
-                        <Button
-                            as={Link}
-                            to={routes.party(party.slug, segments.ONLINE)}
-                            variant="secondary"
-                        >
-                            {labels.ads.showMore}
-                        </Button>
+                </Col>
+                <Col lg={6} className="text-center">
+                    <div className="total-spending">
+                        <h2 className="mt-xxl-3">
+                            {labels.ads.google.totalSpendingTitle}
+                        </h2>
+                        <p className="hero-number">
+                            {currencyFormat(totalGoogle)}
+                            <LastUpdateTag
+                                timestamp={sheetsData.lastUpdateFb || null}
+                            >
+                                {labels.ads.google.totalDisclaimer}
+                            </LastUpdateTag>
+                        </p>
                     </div>
                 </Col>
             </Row>
+
+            <div className="buttons my-4 text-center">
+                <Button
+                    as={Link}
+                    to={routes.party(party.slug, segments.ONLINE)}
+                    variant="secondary"
+                >
+                    {labels.ads.showMore}
+                </Button>
+            </div>
 
             {has(party, 'tag') && (
                 <>
