@@ -116,7 +116,6 @@ export const parties = {
         tag: 905,
     },
     'Pirátska strana': {
-        fbName: 'SPS',
         fullName: 'Pirátska strana - Slovensko',
         logo: logoSPS,
         slug: 'SPS',
@@ -181,6 +180,7 @@ export const parties = {
         tag: 916,
     },
     SPRAVODLIVOSŤ: {
+        fbName: 'Spravodlivosť',
         slug: 'Spravodlivosť',
         tag: 915,
     },
