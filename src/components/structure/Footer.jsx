@@ -10,50 +10,50 @@ import CookieBanner from '../general/CookieBanner';
 import DonateButton from '../general/DonateButton';
 import FbFeed from '../general/FbFeed';
 
-import logoAcf from '../../../public/img/ACF_logo.png';
-// import logoEu from '../../../public/img/eu-funded-blue.png';
+import logoEu from '../../../public/img/eu-funded-blue.png';
+import logoPontis from '../../../public/img/Logo_Pontis.png';
 import logoTis from '../../../public/img/tis-logo-blue.png';
-// import logoVisegrad from '../../../public/img/Visegrad_logo_black.png';
+import logoEuPontis from '../../../public/img/EÚ.png';
 
 function Footer() {
     return (
         <footer className="mt-auto">
-            <div className="footer-top py-5">
+            <div className="footer-donors my-4">
                 <Container>
-                    <h2 className="mb-3 text-center">Donori projektu</h2>
+                    <h2 className="mb-4 text-center">Donori projektu</h2>
                     <Row className="justify-content-around gy-4">
-                        {/* <Col
-                            className="d-flex justify-content-center mb-3 mb-md-0"
-                            xs={8}
-                            sm={7}
-                            md={5}
-                            lg={4}
-                            xl={3}
-                        >
-                            <img
-                                className="mw-100 align-self-center"
-                                src={logoVisegrad}
-                            />
-                        </Col> */}
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
                             xs={8}
                             sm={7}
-                            md={5}
-                            lg={4}
+                            md={4}
+                            // lg={4}
                             xl={3}
                         >
                             <img
                                 className="mw-100 align-self-center"
-                                src={logoAcf}
+                                src={logoEuPontis}
                             />
                         </Col>
-                        {/* <Col
+                        <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
                             xs={8}
                             sm={7}
-                            md={5}
-                            lg={4}
+                            md={4}
+                            // lg={4}
+                            xl={3}
+                        >
+                            <img
+                                className="mw-100 align-self-center"
+                                src={logoPontis}
+                            />
+                        </Col>
+                        <Col
+                            className="d-flex justify-content-center mb-3 mb-md-0"
+                            xs={8}
+                            sm={7}
+                            md={4}
+                            // lg={4}
                             xl={3}
                         >
                             <figure className="align-self-center m-0">
@@ -64,11 +64,11 @@ function Footer() {
                                     — Police.
                                 </figcaption>
                             </figure>
-                        </Col> */}
+                        </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <Col>
-                            <p className="donors mt-4 mb-4 fst-italic">
+                            <p className="donors my-4 fst-italic">
                                 Projekt ‘Aktívnym občianstvom ku kvalitnejšej
                                 samospráve (With Active Citizenship for a Better
                                 Selfgovernment)’ je podporený z programu ACF -
@@ -79,7 +79,12 @@ function Footer() {
                                 nadáciou.
                             </p>
                         </Col>
-                    </Row>
+                    </Row> */}
+                </Container>
+            </div>
+
+            <div className="footer-top py-5">
+                <Container>
                     <Row>
                         <Col md={6} lg={4}>
                             <h2 className="mb-3">Kontakt</h2>
