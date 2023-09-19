@@ -102,7 +102,7 @@ export const shortenUrl = (value) =>
 export const fixUrl = (url) =>
     url.startsWith('http') ? url : `https://${url}`;
 
-export const ecodeHTMLEntities = (rawStr) =>
+export const decodeHTMLEntities = (rawStr) =>
     rawStr
         ? rawStr.replace(
               /&#(\d+);/g,

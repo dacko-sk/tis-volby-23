@@ -1,6 +1,6 @@
 import parse, { attributesToProps, domToReact } from 'html-react-parser';
 
-import { ecodeHTMLEntities, isNumeric } from './helpers';
+import { decodeHTMLEntities, isNumeric } from './helpers';
 import { routes } from './routes';
 
 export const wpCat = {
@@ -83,7 +83,7 @@ export const processArticles = (data) => {
             title: {
                 ...article.title,
                 // fix titles
-                rendered: ecodeHTMLEntities(article.title.rendered),
+                rendered: decodeHTMLEntities(article.title.rendered),
             },
         });
     });
@@ -251,7 +251,7 @@ export const parseAnalysisData = (html) => {
                                     ? // not empty & numeric
                                       num
                                     : // string
-                                      ecodeHTMLEntities(val)
+                                      decodeHTMLEntities(val)
                             );
                         }
                     });

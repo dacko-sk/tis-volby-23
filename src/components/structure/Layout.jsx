@@ -55,12 +55,15 @@ function Layout() {
             // file is loaded and does not need reloading yet (we know the real last update time) - set timeout
             const minutes = reloadMinutes - outdatedMinutes;
             console.log(`CSV data will be reloaded in ${minutes} minutes`);
-            timer = setTimeout(() => {
-                readRemoteFile(
-                    `${accountsFile}?t=${currentTime}`,
-                    accountsConfig
-                );
-            }, minutes * 60 * 1000);
+            timer = setTimeout(
+                () => {
+                    readRemoteFile(
+                        `${accountsFile}?t=${currentTime}`,
+                        accountsConfig
+                    );
+                },
+                minutes * 60 * 1000
+            );
         }
         return () => {
             if (timer) {
