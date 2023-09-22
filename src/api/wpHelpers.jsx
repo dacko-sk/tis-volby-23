@@ -167,9 +167,9 @@ export const analysisLabels = {
                 'Volebný program':
                     'Strana na svojom webe v čase oficiálnej kampane zverejnila predvolebný program',
                 'Poskytnutie informácií z oficiálneho kontaktu strany':
-                    'Test funkčnosti oficiálneho kontaktu strany počas kampane, zaslanie otázky potenciálneho voliča s textom: “Dobrý deň, mohli by ste mi prosím poskytnúť informáciu, kde by sa do volieb bolo možné stretnúť s Vašim predsedom (príp. predsedníčkou) aj osobne? Viem sa dostaviť kdekoľvek v rámci Slovenska. Za odpoveď vopred ďakujem.“',
+                    'Test funkčnosti oficiálneho kontaktu strany počas kampane, zaslanie otázky potenciálneho voliča s textom: (1. Kolo): „Dobrý deň, mohli by ste mi prosím poskytnúť informáciu, kde by sa do volieb bolo možné stretnúť s Vašim predsedom (príp. predsedníčkou) aj osobne? Viem sa dostaviť kdekoľvek v rámci Slovenska. Za odpoveď vopred ďakujem.“, (2. Kolo): „Dobrý deň, chcel by som vedieť, či bude po voľbách možnosť uchádzať sa o miesto poslaneckých asistentov poslancov Vašej strany. Poprosím o detaily. Ďakujem.“',
                 'Odpoveď potenciálnemu voličovi cez sociálnu sieť':
-                    'Test ochoty strany komunikovať s voličom cez sociálnu sieť, zaslanie otázky potenciálneho voliča cez Messenger na FB profile strany s textom: „Mohli by ste mi prosím, ako Vášmu potenciálnemu voličovi, ozrejmiť, ako plánujete bojovať proti odvrátiteľným úmrtiam v slovenskom zdravotníctve? Vďaka za odpoveď“',
+                    'Test ochoty strany komunikovať s voličom cez sociálnu sieť, zaslanie otázky potenciálneho voliča cez Messenger na FB profile strany s textom: (1. Kolo): „Mohli by ste mi prosím, ako Vášmu potenciálnemu voličovi, ozrejmiť, ako plánujete bojovať proti odvrátiteľným úmrtiam v slovenskom zdravotníctve? Vďaka za odpoveď“, (2. Kolo): „Dobrý deň, zaujímalo by ma, či podporíte po voľbách prípadné zrušenie alebo reorganizáciu Špecializovaného trestného súdu a Špeciálnej prokuratúry.“',
                 'Kampaňový tím/spolupracujúce agentúry':
                     'Strana proaktívne informuje o spôsobe realizácie kampane, kampaňovom tíme a spolupracujúcich agentúrach, najmä na vlastnej webovej stránke, prípadne tieto informácie poskytla na vyžiadanie',
                 'Predvolebné akcie':
