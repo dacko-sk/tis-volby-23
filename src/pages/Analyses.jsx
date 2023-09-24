@@ -30,6 +30,14 @@ function Analyses() {
                 .
             </AlertWithIcon>
 
+            <AlertWithIcon className="my-4" variant="primary">
+                Tlačová správa k druhému hodnoteniu transparentnosti kampaní:{' '}
+                <Link to={resources.pressRelease2}>
+                    Víťazi posledných volieb vedú najmenej transparentné kampane
+                </Link>
+                .
+            </AlertWithIcon>
+
             <p className="mt-4">
                 Koncom septembra 2023 si slovenskí voliči v predčasných voľbách
                 vyberú nové zloženie parlamentu, z ktorého vzíde aj nová vláda.
@@ -66,11 +74,11 @@ function Analyses() {
                 priznanie.
             </p>
             <p>
-                Z 27 kandidujúcich subjektov sme hodnotenie spracovali pre 15 z
-                nich, ktoré mali päť týždňov pred volebným dňom a teda ku
-                22.8.2023 na transparentnom účte výdavky za aspoň 50-tisíc eur a
-                aspoň 10 väčších výdavkových transakcií. Hodnotenie plánujeme
-                tesne pred voľbami zopakovať.
+                Z 27 kandidujúcich subjektov sme prvé hodnotenie (zverejnené
+                25.8.2023) spracovali pre 15 strán a druhé hodnotenie
+                (zverejnené 25. 9. 2023) pre 17 strán, ktoré mali v čase
+                hodnotenia na transparentnom účte výdavky za aspoň 50-tisíc eur
+                a aspoň 10 väčších výdavkových transakcií.
             </p>
             <p>
                 Pre lepšiu prehľadnosť sme zvolili princíp semafora - pri každej

@@ -100,6 +100,9 @@ export const resources = {
     pressRelease: routes.article(
         'len-styri-predvolebne-kampane-su-transparentne'
     ),
+    pressRelease2: routes.article(
+        'vitazi-poslednych-volieb-vedu-najmenej-transparentne-kampane'
+    ),
 };
 
 export const metaData = {
@@ -339,9 +342,15 @@ export const parseAnalysisData = (html) => {
 };
 
 export const sortByScore = (a, b) => {
-    if ((a.analysis.lastScore ?? false) && (b.analysis.lastScore ?? false)) {
+    if (
+        (a.analysis.lastScore ?? false) &&
+        (b.analysis.lastScore ?? false) &&
+        a.analysis.lastScore !== b.analysis.lastScore
+    ) {
         return b.analysis.lastScore - a.analysis.lastScore;
     }
+    // if score is identical or invalid, sort by party name
+    // return a.title.rendered.localeCompare(b.title.rendered);
     return -1;
 };
 

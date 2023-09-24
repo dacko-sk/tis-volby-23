@@ -22,7 +22,7 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     const logo = party && (party.logo ?? false) ? party.logo : null;
     const name =
         party && (party.fullName ?? false)
-            ? party.fullName
+            ? party.fbName
             : article.title.rendered;
 
     return (
