@@ -214,18 +214,12 @@ ul.blocks-gallery-grid {
 }
 
 @media (min-width: map.get($grid-breakpoints, 'lg')) {
-  .articles.featured > * {
-    width: 25%;
-  }
   .analysis-preview th {
     width: calc(100% / 3);
   }
 }
 
 @media (min-width: map.get($grid-breakpoints, 'xxl')) {
-  .articles.featured > * {
-    width: calc(100% / 6);
-  }
   .articles.condensed .article {
     .thumb {
       height: auto;
