@@ -15,12 +15,22 @@
   --bs-btn-active-color: #fff;
 }
 
+.btn-outline-primary {
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+
 .btn-secondary {
   --bs-btn-color: #fff;
   --bs-btn-hover-color: #fff;
   --bs-btn-active-color: #fff;
   --bs-btn-hover-bg: #{$tis-dark-blue};
   --bs-btn-hover-border-color: #{$tis-dark-blue};
+}
+
+.btn-outline-secondary {
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
 }
 
 .btn-success {

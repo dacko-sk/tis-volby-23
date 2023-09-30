@@ -29,7 +29,7 @@ function Home() {
                 <Col lg={6}>
                     <ElectionsCountdown
                         start="2023-09-30T07:00:00"
-                        end="2023-09-30T20:00:00"
+                        end="2023-09-30T22:00:00"
                     />
                 </Col>
                 <Col lg={6}>
