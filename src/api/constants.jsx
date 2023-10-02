@@ -174,6 +174,7 @@ export const parties = {
         tag: 911,
     },
     'Spoločne občania Slovenska': {
+        fbName: 'SOS',
         fullName: 'SPOLOČNE OBČANIA SLOVENSKA',
         logo: logoSOS,
         slug: 'SOS',
