@@ -78,6 +78,7 @@ export const parties = {
         tag: 919,
     },
     'Komunistická strana Slovenska': {
+        fbName: 'KSS',
         logo: logoKSS,
         slug: 'KSS',
         tag: 903,
