@@ -40,6 +40,7 @@ export const sheetsConfig = {
             PAGE_NAME: 'Page name',
             SPENDING: 'Amount spent (EUR)',
         },
+        endDate: '27.9.2023',
     },
 };
 export const metaApiUrl = 'https://volby.transparency.sk/api/meta/ads_json.php';
@@ -147,11 +148,13 @@ export const processDataSheets = (data) => {
                 }
                 default: {
                     // load weekly reports from remaining sheets
-                    const time = getTimestampFromDate(sheet.id);
-                    if (time) {
+                    const time =
+                        getTimestampFromDate(sheet.id) ||
+                        getTimestampFromDate(sheetsConfig.FB_WEEKS.endDate);
+                    if (time > pd.lastUpdateFb) {
                         pd.lastUpdateFb = time;
                     }
-                    pd.weeks[time || sheet.id] = sheet.data.filter(
+                    pd.weeks[sheet.id] = sheet.data.filter(
                         filterPoliticAccounts(pd.partiesFb)
                     );
                 }
