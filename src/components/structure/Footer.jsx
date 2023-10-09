@@ -42,7 +42,7 @@ function Footer() {
                             lg={3}
                         >
                             <img
-                                className="mw-100 align-self-center"
+                                className="mw-100 px-5 align-self-center"
                                 src={logoPontis}
                             />
                         </Col>
