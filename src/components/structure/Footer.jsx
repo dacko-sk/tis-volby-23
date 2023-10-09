@@ -25,10 +25,9 @@ function Footer() {
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
                             xs={8}
-                            sm={7}
+                            sm={6}
                             md={4}
-                            // lg={4}
-                            xl={3}
+                            lg={3}
                         >
                             <img
                                 className="mw-100 align-self-center"
@@ -38,10 +37,9 @@ function Footer() {
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
                             xs={8}
-                            sm={7}
+                            sm={6}
                             md={4}
-                            // lg={4}
-                            xl={3}
+                            lg={3}
                         >
                             <img
                                 className="mw-100 align-self-center"
@@ -51,10 +49,9 @@ function Footer() {
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
                             xs={8}
-                            sm={7}
+                            sm={6}
                             md={4}
-                            // lg={4}
-                            xl={3}
+                            lg={3}
                         >
                             <figure className="align-self-center m-0">
                                 <img className="mw-100" src={logoEu} />
