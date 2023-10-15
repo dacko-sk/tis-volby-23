@@ -26,7 +26,7 @@ function Header() {
                         className="me-auto"
                     >
                         <Nav.Link as={NavLink} to={routes.home}>
-                            Úvod
+                            Voľby 2023
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.parties}>
                             Strany
