@@ -6,6 +6,7 @@ $tis-score-green: rgb(0, 205, 42);
 $tis-score-orange: rgb(255, 179, 0);
 $tis-score-red: rgb(215, 20, 26);
 $tis-score-unknown: rgb(168, 168, 168);
+$tis-banner-bg: rgb(230, 229, 227);
 
 $font-family: 'Ubuntu';
 $font-color: #333;
@@ -28,6 +29,10 @@ $container-max-widths: (
   lg: 960px,
   xl: 1140px,
   xxl: 1320px,
+) !default;
+
+$container-min-widths-inner: (
+  lg: 910px,
 ) !default;
 
 $font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
@@ -63,6 +68,11 @@ $nav-link-hover-color: $tis-light-blue;
 $nav-tabs-link-active-color: $tis-light-blue;
 $nav-tabs-border-radius: 0;
 $nav-pills-border-radius: 0;
+$dropdown-border-radius: 0;
+$dropdown-spacer: 0;
+$dropdown-link-hover-color: white;
+$dropdown-link-hover-bg: $tis-light-blue;
+$dropdown-min-width: 3rem;
 
 $btn-border-radius: 0;
 $btn-border-radius-lg: 0;

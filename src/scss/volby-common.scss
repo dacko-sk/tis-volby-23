@@ -79,6 +79,10 @@ ul.arrows {
   }
 }
 
+.col-container {
+  container: col-container / inline-size;
+}
+
 .layout-default {
   display: flex;
   flex-direction: column;
@@ -108,10 +112,6 @@ ul.arrows {
   .text-center & {
     text-align: inherit;
   }
-}
-
-.orange {
-  color: $tis-orange;
 }
 
 .btn-xl {
@@ -228,6 +228,10 @@ ul.arrows {
     color: $tis-orange;
     text-decoration: underline;
   }
+}
+
+.bg-banner {
+  background-color: $tis-banner-bg;
 }
 
 .rotate-animation {
@@ -348,5 +352,17 @@ footer h2 {
   }
   .tiles > * {
     max-width: 20%;
+  }
+}
+
+@container col-container (min-width: 0) {
+  .col-lg-6 {
+    width: 100%;
+  }
+}
+
+@container col-container (min-width: #{map.get($container-min-widths-inner, 'lg')}) {
+  .col-lg-6 {
+    width: 50%;
   }
 }

@@ -18,7 +18,7 @@ function Title({ children, secondary, multiline, uppercase }) {
             <h1 className={uppercase ? 'text-uppercase' : ''}>
                 {children}
                 {!!secondary && (
-                    <span className="orange">
+                    <span className="text-secondary">
                         {multiline ? <br /> : ' '}
                         {secondary}
                     </span>

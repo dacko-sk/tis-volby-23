@@ -45,12 +45,14 @@
     &:after {
       @extend .ms-1;
       color: $tis-orange;
+      position: relative;
+      top: -2px;
     }
     &.s-a:after {
-      content: '🠕';
+      content: '↑';
     }
     &.s-d:after {
-      content: '🠗';
+      content: '↓';
     }
   }
 }

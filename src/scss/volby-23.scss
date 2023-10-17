@@ -8,27 +8,3 @@ header {
   background-position-x: center;
   background-position-y: 20%;
 }
-
-.bg-banner {
-  background-color: $tis-banner-bg;
-}
-
-.elections .accordion-body {
-  padding: 0 calc(var(--bs-gutter-x) * 0.5);
-}
-
-.col-container {
-  container: col-container / inline-size;
-}
-
-@container col-container (min-width: 0) {
-  .col-lg-6 {
-    width: 100%;
-  }
-}
-
-@container col-container (min-width: #{map.get($container-min-widths-inner, 'lg')}) {
-  .col-lg-6 {
-    width: 50%;
-  }
-}
