@@ -40,21 +40,6 @@
 
 .table {
   --bs-table-bg: transparent;
-  th a {
-    --bs-link-color: #{$table-color};
-    &:after {
-      @extend .ms-1;
-      color: $tis-orange;
-      position: relative;
-      top: -2px;
-    }
-    &.s-a:after {
-      content: '↑';
-    }
-    &.s-d:after {
-      content: '↓';
-    }
-  }
 }
 
 @media (max-width: map.get($grid-breakpoints, 'lg')) {

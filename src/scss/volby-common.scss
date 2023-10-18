@@ -79,6 +79,32 @@ ul.arrows {
   }
 }
 
+th a {
+  --bs-link-color: #{$table-color};
+  &:after {
+    @extend .ms-1;
+    content: '↕';
+    position: relative;
+    padding-bottom: 5px;
+    top: -2px;
+  }
+  &.s-a,
+  &.s-d {
+    &::after {
+      color: white;
+      background-color: $tis-orange;
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+  }
+  &.s-a:after {
+    content: '↑';
+  }
+  &.s-d:after {
+    content: '↓';
+  }
+}
+
 .col-container {
   container: col-container / inline-size;
 }
