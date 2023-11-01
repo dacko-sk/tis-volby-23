@@ -9,7 +9,6 @@ import Top10 from '../components/charts/Top10';
 import Top10Ads from '../components/charts/Top10Ads';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
 import TotalSpending from '../components/accounts/TotalSpending';
-// import PartiesLogos from '../components/general/PartiesLogos';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
 import DonateButton from '../components/general/DonateButton';
@@ -53,8 +52,6 @@ function Home() {
             <TotalAdsSpending />
 
             <Top10Ads />
-
-            {/* <PartiesLogos /> */}
 
             <h2 className="mt-4 mb-3">Najnovšie aktuality</h2>
             <Posts
