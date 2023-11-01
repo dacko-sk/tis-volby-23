@@ -19,7 +19,7 @@
     "use-google-sheets": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.10",
+    "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.22.10",
     "@babel/preset-react": "^7.18.6",
     "@svgr/webpack": "^8.0.1",
