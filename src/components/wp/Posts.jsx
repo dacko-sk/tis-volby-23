@@ -47,7 +47,7 @@ function Posts({
         categories.includes(wpCat.analyses) ||
         categories.includes(wpCat.featured);
 
-    const blocksize = limit || (isAnalysis ? 30 : 10);
+    const blocksize = limit || (isAnalysis ? 40 : 10);
     const catParam = categories.length
         ? `&categories=${categories.join()}`
         : '';
