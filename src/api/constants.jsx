@@ -218,6 +218,12 @@ export const colors = {
     colorGrey,
 };
 
+export const elections = {
+    s22: 's22',
+    n20: 'n20',
+    p19: 'p19',
+};
+
 export const errors = {
     loading: 'Chyba pri načítaní dát. Prosím načítajte stránku znovu.',
 };
@@ -359,7 +365,10 @@ export const labels = {
     websiteTitle: 'Voľby',
 };
 
-export const settings = {
+export const links = {
+    [elections.p19]: 'https://volby.transparency.sk/prezident2019/',
+    [elections.n20]: 'https://volby.transparency.sk/parlament2020/',
+    [elections.s22]: 'https://volby.transparency.sk/samosprava2022/',
     donateUrl: 'https://transparency.sk/volby',
 };
 
@@ -368,8 +377,8 @@ export const constants = {
     errors,
     icons,
     labels,
+    links,
     parties,
-    settings,
 };
 
 export default constants;

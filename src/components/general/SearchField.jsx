@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { useDebouncedCallback } from 'use-debounce';
 import has from 'has';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { routes } from '../../api/routes';
 
 function SearchField() {
@@ -39,8 +39,8 @@ function SearchField() {
         <Form className="mt-2 mt-lg-0 mx-0 mx-lg-2" onSubmit={handleFormSumbit}>
             <InputGroup>
                 <Form.Control
-                    placeholder={labels.search}
-                    aria-label={labels.search}
+                    placeholder={t(labels.search.label)}
+                    aria-label={t(labels.search.label)}
                     aria-describedby="search-icon"
                     id="search"
                     onChange={handleInputChange}

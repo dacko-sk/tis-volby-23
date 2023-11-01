@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
+import { labels, t } from '../../api/dictionary';
+
 import DonateButton from './DonateButton';
 
 function DonateModal() {
@@ -48,13 +50,9 @@ function DonateModal() {
             show={show}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Nenechajme voľby bez kontroly!</Modal.Title>
+                <Modal.Title>{t(labels.donate.modalTitle)}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                Darujte už od 20 €, aby sme ustrážili férovosť volieb.
-                <br />
-                Ďakujeme.
-            </Modal.Body>
+            <Modal.Body>{t(labels.donate.modalText, true)}</Modal.Body>
             <Modal.Footer className="justify-content-center">
                 <DonateButton xl />
             </Modal.Footer>

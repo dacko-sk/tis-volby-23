@@ -4,7 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { SocialIcon } from 'react-social-icons';
 
-import { colorOrange } from '../../api/constants';
+import { colorOrange, elections as el, links } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 
 import CookieBanner from '../general/CookieBanner';
 import DonateButton from '../general/DonateButton';
@@ -20,7 +21,7 @@ function Footer() {
         <footer className="mt-auto">
             <div className="footer-donors my-4">
                 <Container>
-                    <h2 className="mb-4 text-center">Donori projektu</h2>
+                    <h2 className="mb-4 text-center">{t(labels.sponsors)}</h2>
                     <Row className="justify-content-around gy-4">
                         <Col
                             className="d-flex justify-content-center mb-3 mb-md-0"
@@ -84,7 +85,7 @@ function Footer() {
                 <Container>
                     <Row>
                         <Col md={6} lg={4}>
-                            <h2 className="mb-3">Kontakt</h2>
+                            <h2 className="mb-3">{t(labels.contact)}</h2>
                             <a
                                 href="https://www.transparency.sk"
                                 target="_blank"
@@ -97,7 +98,7 @@ function Footer() {
                                 />
                             </a>
                             <p className="mt-3">
-                                Transparency International Slovensko
+                                {t(labels.tis)}
                                 <br />
                                 Bajkalská 25
                                 <br />
@@ -118,7 +119,7 @@ function Footer() {
                                     www.transparency.sk
                                 </a>
                             </p>
-                            <h2 className="mt-4 mb-0">Sledujte nás</h2>
+                            <h2 className="mt-4 mb-0">{t(labels.followUs)}</h2>
                             <div className="social-icons my-3">
                                 <SocialIcon
                                     bgColor={colorOrange}
@@ -147,56 +148,45 @@ function Footer() {
                             </div>
                         </Col>
                         <Col md={6} lg={4}>
-                            <h2 className="mb-3">Užitočné informácie</h2>
+                            <h2 className="mb-3">{t(labels.usefulInfo)}</h2>
                             <ul className="arrows">
-                                <li>
-                                    <a
-                                        href="https://volby.transparency.sk/samosprava2022/"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        Samosprávne voľby 2022
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="https://volby.transparency.sk/parlament2020/"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        Parlamentné voľby 2020
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="https://volby.transparency.sk/prezident2019/"
-                                        target="_blank"
-                                        rel="noreferrer"
-                                    >
-                                        Prezidentské voľby 2019
-                                    </a>
-                                </li>
+                                {Object.keys(el).map((e) => (
+                                    <li key={e}>
+                                        <a
+                                            href={links[e]}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            {t(labels.elections[e])}
+                                        </a>
+                                    </li>
+                                ))}
+
                                 <li>
                                     <a
                                         href="https://transparency.sk/sk/sukromie/"
                                         target="_blank"
                                         rel="noreferrer"
                                     >
-                                        Ochrana súkromia
+                                        {t(labels.privacy)}
                                     </a>
                                 </li>
                             </ul>
                             <CookieBanner />
-                            <h2 className="mt-4 mb-0">Newsletter</h2>
+                            <h2 className="mt-4 mb-0">
+                                {t(labels.newsletter.title)}
+                            </h2>
                             <Button
                                 className="mt-3"
                                 href="https://eepurl.com/doWD8X"
                                 target="_blank"
                                 variant="secondary"
                             >
-                                Prihlásiť sa na newsletter
+                                {t(labels.newsletter.subscribe)}
                             </Button>
-                            <h2 className="mt-4 mb-0">Podporte Transparency</h2>
+                            <h2 className="mt-4 mb-0">
+                                {t(labels.supportTis)}
+                            </h2>
                             <DonateButton className="mt-3 mb-4" />
                         </Col>
                         <Col md={12} lg={4}>
@@ -213,10 +203,10 @@ function Footer() {
             <div className="footer-bottom py-3">
                 <Container>
                     <Row>
-                        <Col>© 2023 Transparency International Slovensko</Col>
+                        <Col>© 2023 {t(labels.tis)}</Col>
                         <Col xs="auto">
                             <a href="https://github.com/dacko-sk/tis-volby-23">
-                                Webové riešenie
+                                {t(labels.webDev)}
                             </a>
                         </Col>
                     </Row>

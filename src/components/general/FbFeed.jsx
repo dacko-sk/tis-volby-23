@@ -1,14 +1,14 @@
 import { memo, useEffect } from 'react';
 import { SocialIcon } from 'react-social-icons';
-import has from 'has';
 
 import { colorDarkBlue } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 
 import useCookies from '../../context/CookiesContext';
 
 const FbFeed = memo(({ appId, name, url }) => {
     const { cookies } = useCookies();
-    const consent = cookies && has(cookies, 'functional') && cookies.functional;
+    const consent = cookies && (cookies.functional ?? false) === true;
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -54,10 +54,7 @@ const FbFeed = memo(({ appId, name, url }) => {
                         <a href={url} className="d-block my-3">
                             {name}
                         </a>
-                        <p className="fst-italic">
-                            Pre zobrazenie facebook vlákna je potrebné prijať
-                            ukladanie Funkčných cookies v Nastaveniach cookies
-                        </p>
+                        <p className="fst-italic">{t(labels.fbFeed)}</p>
                     </div>
                 </blockquote>
             </div>

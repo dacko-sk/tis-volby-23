@@ -5,7 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import has from 'has';
+
+import { labels, t } from '../../api/dictionary';
 
 import useCookies, {
     generateSetter,
@@ -17,10 +18,10 @@ import './CookieBanner.scss';
 function CookieBanner() {
     const { cookies, setCookies } = useCookies();
     const [checkFunctional, setCheckFunctional] = useState(
-        cookies && has(cookies, 'functional') ? cookies.functional : false
+        cookies && (cookies.functional ?? false) ? cookies.functional : false
     );
     const [checkAnalytics, setCheckAnalytics] = useState(
-        cookies && has(cookies, 'analytics') ? cookies.analytics : false
+        cookies && (cookies.analytics ?? false) ? cookies.analytics : false
     );
 
     const checkFunctionalChange = (event) => {
@@ -57,28 +58,27 @@ function CookieBanner() {
     return (
         <div className="my-3">
             <Button variant="primary" onClick={openSettingsClick}>
-                Nastavenia cookies
+                {t(labels.cookies.settings)}
             </Button>
             {cookies.open && (
                 <Container fluid className="cookie-banner py-4">
                     <Row className="justify-content-center">
                         <Col xs="auto">
                             <p>
-                                Táto webová stránka používa cookies, aby vám
-                                priniesla čo najlepší online zážitok.{' '}
+                                {`${t(labels.cookies.about)} `}
                                 <a
                                     href="https://transparency.sk/sk/sukromie/"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    Zistiť viac
+                                    {t(labels.learnMore)}
                                 </a>
                             </p>
 
                             <Accordion flush className="my-3">
                                 <Accordion.Item eventKey="0">
                                     <Accordion.Header>
-                                        Voliteľné cookies
+                                        {t(labels.cookies.optional)}
                                     </Accordion.Header>
                                     <Accordion.Body>
                                         <Form className="d-flex justify-content-center flex-column flex-sm-row">
@@ -88,14 +88,20 @@ function CookieBanner() {
                                                 checked
                                                 type="switch"
                                                 id="cookies-necessary"
-                                                label="Nevyhnutné cookies"
+                                                label={t(
+                                                    labels.cookies.types
+                                                        .necessary
+                                                )}
                                             />
                                             <Form.Check
                                                 className="mx-2"
                                                 checked={checkFunctional}
                                                 onChange={checkFunctionalChange}
                                                 type="switch"
-                                                label="Funkčné cookies"
+                                                label={t(
+                                                    labels.cookies.types
+                                                        .functional
+                                                )}
                                                 id="cookies-functional"
                                             />
                                             <Form.Check
@@ -103,7 +109,10 @@ function CookieBanner() {
                                                 checked={checkAnalytics}
                                                 onChange={checkAnalyticsChange}
                                                 type="switch"
-                                                label="Analytické cookies"
+                                                label={t(
+                                                    labels.cookies.types
+                                                        .analytics
+                                                )}
                                                 id="cookies-analytics"
                                             />
                                         </Form>
@@ -117,21 +126,21 @@ function CookieBanner() {
                                     variant="success"
                                     onClick={rejectAllClick}
                                 >
-                                    Odmietnuť všetky
+                                    {t(labels.cookies.reject)}
                                 </Button>
                                 <Button
                                     className="mb-2 mb-sm-0 me-0 me-sm-3"
                                     variant="success"
                                     onClick={acceptSelectionClick}
                                 >
-                                    Potvrdiť výber
+                                    {t(labels.cookies.selected)}
                                 </Button>
                                 <Button
                                     // className="m-2"
                                     variant="secondary"
                                     onClick={acceptAllClick}
                                 >
-                                    Prijať všetky
+                                    {t(labels.cookies.accept)}
                                 </Button>
                             </div>
                         </Col>

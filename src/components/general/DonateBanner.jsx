@@ -1,4 +1,5 @@
-import { settings } from '../../api/constants';
+import { links } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 
 import banner from '../../../public/img/banner.png';
 
@@ -7,13 +8,9 @@ function DonateBanner() {
         <div className="bg-banner">
             <div className="container">
                 <div className="text-center py-4">
-                    <a
-                        href={settings.donateUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
+                    <a href={links.donateUrl} target="_blank" rel="noreferrer">
                         <img
-                            alt="Nenechajme voľby bez kontroly!"
+                            alt={t(labels.donate.modalTitle)}
                             className="mw-100"
                             src={banner}
                         />

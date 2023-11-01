@@ -110,6 +110,22 @@ export const decodeHTMLEntities = (rawStr) =>
           )
         : '';
 
+/**
+ * Break text separated by newline character to react fragments separated with <br/> tag
+ */
+export const nl2r = (text) =>
+    typeof text === 'string' && text.includes('\n')
+        ? text.split('\n').map((fragment, index) => {
+              const k = `${index}${fragment}`;
+              return (
+                  <span key={k}>
+                      {index > 0 && <br />}
+                      {fragment}
+                  </span>
+              );
+          })
+        : text;
+
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];
 

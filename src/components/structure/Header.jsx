@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import {
     getCurrentLanguage,
     languages,
@@ -22,7 +22,7 @@ function Header() {
         <Navbar bg="light" expand="lg">
             <Container>
                 <Navbar.Brand as={NavLink} to={routes.home()}>
-                    <img src={logo} alt={labels.tis} />
+                    <img src={logo} alt={t(labels.tis)} />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
@@ -32,19 +32,19 @@ function Header() {
                         className="me-auto"
                     >
                         <Nav.Link as={NavLink} to={routes.home()}>
-                            Voľby 2023
+                            {t(labels.home.navTitle)}
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.parties()}>
-                            Strany
+                            {t(labels.parties.navTitle)}
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.online()}>
-                            Online
+                            {t(labels.online.navTitle)}
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.news()}>
-                            Aktuality
+                            {t(labels.news.navTitle)}
                         </Nav.Link>
                         <Nav.Link as={NavLink} to={routes.analyses()}>
-                            Hodnotenia
+                            {t(labels.analyses.navTitle)}
                         </Nav.Link>
                     </Nav>
                     <SearchField />

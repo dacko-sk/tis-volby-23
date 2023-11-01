@@ -23,7 +23,7 @@
   "rules": {
     "jsx-a11y/alt-text": [0],
     "linebreak-style": ["error", "unix"],
-    "no-irregular-whitespace" : [1, {"skipStrings": true ,"skipTemplates": true}],
+    "no-irregular-whitespace" : [1, {"skipStrings": true ,"skipTemplates": true, "skipJSXText": true}],
     "react/jsx-no-useless-fragment": [0],
     "react/jsx-props-no-spreading": [1, {"html": "ignore"}],
     "react/prop-types": [0], // TODO: enable this

@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 
-import { labels, settings } from '../../api/constants';
+import { links } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 
 function DonateButton({ className, long, xl }) {
     return (
@@ -8,11 +9,11 @@ function DonateButton({ className, long, xl }) {
             className={`${className ? `${className} ` : ''}${
                 xl ? 'btn-xl ' : ''
             }text-uppercase fw-bold`}
-            href={settings.donateUrl}
+            href={links.donateUrl}
             target="_blank"
             variant="secondary"
         >
-            {long ? labels.donateLong : labels.donate}
+            {t(long ? labels.donate.buttonLong : labels.donate.buttonShort)}
         </Button>
     );
 }
