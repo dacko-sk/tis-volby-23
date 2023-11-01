@@ -45,7 +45,7 @@ function Home() {
             <Posts
                 categories={[wpCat.featured]}
                 showMore="Zobraziť všetky hodnotenia"
-                showMoreLink={routes.analyses}
+                showMoreLink={routes.analyses()}
                 template={templates.featured}
             />
 

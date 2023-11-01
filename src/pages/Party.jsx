@@ -46,7 +46,7 @@ function Party() {
     useEffect(() => {
         if (!party && (csvData.data ?? false)) {
             // redirect to home page in case party does not have transparent account
-            navigate(routes.home);
+            navigate(routes.home());
         }
     }, [party, csvData, navigate]);
 

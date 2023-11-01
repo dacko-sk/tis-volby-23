@@ -86,7 +86,7 @@ function Top10Ads({ maxItems = 10 }) {
             />
             <TisBarChart
                 bars={columnVariants.spending}
-                buttonLink={routes.online}
+                buttonLink={routes.online()}
                 buttonText={labels.ads.showMore}
                 currency
                 data={columnsGgl}

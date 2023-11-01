@@ -1,4 +1,3 @@
-import has from 'has';
 import siteConfig from '../../package.json';
 import { parties } from './constants';
 
@@ -9,46 +8,129 @@ export const separators = {
     url: '/',
 };
 
+export const languages = {
+    sk: 'sk',
+    en: 'en',
+};
+
+export const defaultLanguage = Object.values(languages)[0];
+
 export const segments = {
-    ROOT:
-        has(siteConfig, 'homepage') && siteConfig.homepage
-            ? siteConfig.homepage
-            : '/',
-    ANALYSES: 'hodnotenia',
-    ANALYSIS: 'hodnotenie',
-    ASSETS: 'majetkove-priznania',
-    NEWS: 'aktuality',
-    ONLINE: 'online',
-    PARTIES: 'strany',
-    SEARCH: 'vyhladavanie',
-    TRANSACTIONS: 'financovanie',
+    ANALYSES: 'ANALYSES',
+    ANALYSIS: 'ANALYSIS',
+    ASSETS: 'ASSETS',
+    NEWS: 'NEWS',
+    ONLINE: 'ONLINE',
+    PARTIES: 'PARTIES',
+    SEARCH: 'SEARCH',
+    TRANSACTIONS: 'TRANSACTIONS',
+};
+
+export const localSegments = {
+    [languages.sk]: {
+        [segments.ANALYSES]: 'hodnotenia',
+        [segments.ANALYSIS]: 'hodnotenie',
+        [segments.ASSETS]: 'majetkove-priznania',
+        [segments.NEWS]: 'aktuality',
+        [segments.ONLINE]: 'online',
+        [segments.PARTIES]: 'strany',
+        [segments.SEARCH]: 'vyhladavanie',
+        [segments.TRANSACTIONS]: 'financovanie',
+    },
+    [languages.en]: {
+        [segments.ANALYSES]: 'analyses',
+        [segments.ANALYSIS]: 'analysis',
+        [segments.ASSETS]: 'assets',
+        [segments.NEWS]: 'news',
+        [segments.ONLINE]: 'online',
+        [segments.PARTIES]: 'parties',
+        [segments.SEARCH]: 'search',
+        [segments.TRANSACTIONS]: 'transactions',
+    },
+};
+
+export const homepage = siteConfig.homepage ?? '/';
+
+export const getCurrentLanguage = () =>
+    document.location.pathname.substring(
+        homepage.length,
+        homepage.length + 2
+    ) === languages.en
+        ? languages.en
+        : languages.sk;
+
+export const languageRoot = (language) =>
+    homepage +
+    ((language || getCurrentLanguage()) === languages.en
+        ? languages.en + separators.url
+        : '');
+
+export const localizePath = (lang, path) => {
+    const cp = path ?? document.location.pathname;
+    const cl = getCurrentLanguage();
+    if (cl === lang) {
+        return cp;
+    }
+    const cr = languageRoot();
+    const cs = cp.substring(cr.length).split(separators.url);
+    const as = Object.entries(localSegments[cl]);
+    const ts = cs.map((segment) => {
+        let tk = null;
+        as.some(([key, translation]) => {
+            if (segment === translation) {
+                tk = key;
+                return true;
+            }
+            return false;
+        });
+        return tk ? localSegments[lang][tk] : segment;
+    });
+    return languageRoot(lang) + ts.join(separators.url);
+};
+
+export const urlSegment = (segment, lang) => {
+    return localSegments[lang || getCurrentLanguage()][segment] ?? segment;
 };
 
 export const routes = {
-    analyses: segments.ROOT + segments.ANALYSES,
-    article: (slug) =>
-        segments.ROOT + (slug ? segments.NEWS + separators.url + slug : ''),
-    home: segments.ROOT,
-    news: segments.ROOT + segments.NEWS,
-    online: segments.ROOT + segments.ONLINE,
-    parties: segments.ROOT + segments.PARTIES,
-    party: (slug, subpage) => {
+    analyses: (lang) =>
+        languageRoot(lang) + urlSegment(segments.ANALYSES, lang),
+    article: (slug, lang) =>
+        languageRoot(lang) +
+        (slug
+            ? urlSegment(segments.NEWS, lang) +
+              separators.url +
+              (slug === true ? ':slug' : slug)
+            : ''),
+    home: (lang) => languageRoot(lang),
+    news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
+    online: (lang) => languageRoot(lang) + urlSegment(segments.ONLINE, lang),
+    parties: (lang) => languageRoot(lang) + urlSegment(segments.PARTIES, lang),
+    party: (slug, subpage, lang) => {
         const niceSlug =
-            has(parties, slug) && has(parties[slug], 'slug')
-                ? parties[slug].slug
-                : slug;
+            slug === true
+                ? ':slug'
+                : encodeURIComponent(parties[slug]?.slug ?? slug).replaceAll(
+                      ' ',
+                      separators.space
+                  );
         return (
-            segments.ROOT +
+            languageRoot(lang) +
             (slug
-                ? segments.PARTIES +
+                ? urlSegment(segments.PARTIES, lang) +
                   separators.url +
-                  encodeURIComponent(niceSlug.replaceAll(' ', separators.space))
-                : '') +
-            (subpage ? separators.url + subpage : '')
+                  niceSlug +
+                  (subpage ? separators.url + urlSegment(subpage, lang) : '')
+                : '')
         );
     },
-    search: (query) =>
-        segments.ROOT + (query ? segments.SEARCH + separators.url + query : ''),
+    search: (query, lang) =>
+        languageRoot(lang) +
+        (query
+            ? urlSegment(segments.SEARCH, lang) +
+              separators.url +
+              (query === true ? ':query' : encodeURIComponent(query))
+            : ''),
 };
 
 export const decodeSlug = (slug) => slug.replaceAll(separators.space, ' ');

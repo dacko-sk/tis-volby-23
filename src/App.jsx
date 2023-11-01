@@ -1,7 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { segments } from './api/routes';
+import {
+    homepage,
+    languageRoot,
+    languages,
+    routes,
+    segments,
+    urlSegment,
+} from './api/routes';
 
 import ContextProviders from './context/ContextProviders';
 
@@ -32,60 +39,66 @@ function App() {
             <QueryClientProvider client={queryClient}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path={segments.ROOT} element={<Layout />}>
+                        <Route path={homepage} element={<Layout />}>
                             <Route index element={<Home />} />
-                            <Route
-                                path={segments.PARTIES}
-                                element={<Parties />}
-                            />
-                            <Route
-                                path={`${segments.PARTIES}/:slug`}
-                                element={<Party />}
-                            >
-                                <Route index element={<PartyOverview />} />
-                                <Route
-                                    path={segments.TRANSACTIONS}
-                                    element={<PartyTransactions />}
-                                />
-                                <Route
-                                    path={segments.ANALYSIS}
-                                    element={<PartyAnalysis />}
-                                />
-                                <Route
-                                    path={segments.ASSETS}
-                                    element={<PartyAssets />}
-                                />
-                                <Route
-                                    path={segments.ONLINE}
-                                    element={<PartyOnline />}
-                                />
-                                <Route
-                                    path={segments.NEWS}
-                                    element={<PartyNews />}
-                                />
-                            </Route>
-                            <Route
-                                path={`${segments.ONLINE}`}
-                                element={<Online />}
-                            />
-                            <Route path={segments.NEWS} element={<News />} />
-                            <Route
-                                path={`${segments.NEWS}/:slug`}
-                                element={<Article />}
-                            />
-                            <Route
-                                path={segments.ANALYSES}
-                                element={<Analyses />}
-                            />
-                            <Route
-                                path={`${segments.SEARCH}/:query`}
-                                element={<Search />}
-                            />
+
+                            {Object.keys(languages).map((lang) =>
+                                [
+                                    [routes.home(lang), Home],
+                                    [routes.analyses(lang), Analyses],
+                                    [routes.article(true, lang), Article],
+                                    [routes.news(lang), News],
+                                    [routes.online(lang), Online],
+                                    [routes.parties(lang), Parties],
+                                    [
+                                        routes.party(true, '', lang),
+                                        Party,
+                                        [
+                                            ['', PartyOverview],
+                                            [segments.ANALYSIS, PartyAnalysis],
+                                            [segments.ASSETS, PartyAssets],
+                                            [segments.ONLINE, PartyOnline],
+                                            [segments.NEWS, PartyNews],
+                                            [
+                                                segments.TRANSACTIONS,
+                                                PartyTransactions,
+                                            ],
+                                        ],
+                                    ],
+                                    [routes.search(true, lang), Search],
+                                ].map(([path, Page, subpages]) => (
+                                    <Route
+                                        key={path}
+                                        path={path}
+                                        element={<Page />}
+                                    >
+                                        {(subpages ?? []).map(
+                                            ([subSegment, SubPage]) => (
+                                                <Route
+                                                    key={path + subSegment}
+                                                    index={
+                                                        subSegment ? null : true
+                                                    }
+                                                    path={
+                                                        subSegment
+                                                            ? urlSegment(
+                                                                  subSegment,
+                                                                  lang
+                                                              )
+                                                            : null
+                                                    }
+                                                    element={<SubPage />}
+                                                />
+                                            )
+                                        )}
+                                    </Route>
+                                ))
+                            )}
 
                             {/* fallback */}
                             <Route
                                 path="*"
-                                element={<Navigate to={segments.ROOT} />}
+                                element={<Navigate to={languageRoot()} />}
                             />
                         </Route>
                     </Routes>

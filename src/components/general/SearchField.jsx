@@ -36,7 +36,7 @@ function SearchField() {
     }, [pathname]);
 
     return (
-        <Form className="mt-2 mt-lg-0 mx-0 mx-lg-3" onSubmit={handleFormSumbit}>
+        <Form className="mt-2 mt-lg-0 mx-0 mx-lg-2" onSubmit={handleFormSumbit}>
             <InputGroup>
                 <Form.Control
                     placeholder={labels.search}

@@ -141,7 +141,7 @@ function Search() {
     useEffect(() => {
         if (!query) {
             // redirect to root page if no query string is provided
-            navigate(routes.home);
+            navigate(routes.home());
         }
     }, [query]);
 

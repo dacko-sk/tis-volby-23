@@ -178,7 +178,7 @@ function Posts({
                 <div className="buttons mt-3 text-center">
                     <Button
                         as={Link}
-                        to={showMoreLink || routes.news}
+                        to={showMoreLink || routes.news()}
                         variant="secondary"
                     >
                         {showMore || labels.showMore}
