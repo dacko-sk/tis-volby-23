@@ -3,13 +3,13 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { labels } from '../api/constants';
+import { labels, t } from '../api/dictionary';
 import { contains, setTitle } from '../api/helpers';
 import { routes, segments } from '../api/routes';
 import { wpCat } from '../api/wpHelpers';
 
 import useAdsData, { sheetsConfig } from '../context/AdsDataContext';
-import useData from '../context/DataContext';
+import useData, { csvAggregatedKeys } from '../context/DataContext';
 
 import AlertWithIcon from '../components/general/AlertWithIcon';
 import Title from '../components/structure/Title';
@@ -34,15 +34,15 @@ function Search() {
         csvData.data.forEach((row) => {
             // party name matches - list party
             if (
-                contains(row[labels.elections.name_key], query) ||
+                contains(row[csvAggregatedKeys.name], query) ||
                 contains(row.fbName, query) ||
                 contains(row.fullName, query) ||
                 contains(row.slug, query)
             ) {
-                const link = routes.party(row[labels.elections.name_key]);
+                const link = routes.party(row[csvAggregatedKeys.name]);
                 parties.push(
                     <Col
-                        key={row[labels.elections.name_key]}
+                        key={row[csvAggregatedKeys.name]}
                         className="d-flex"
                         sm
                     >
@@ -50,7 +50,7 @@ function Search() {
                             to={link}
                             className="d-flex flex-column justify-content-between w-100 cat-local"
                         >
-                            <h3>{row[labels.elections.name_key]}</h3>
+                            <h3>{row[csvAggregatedKeys.name]}</h3>
                             <div className="town mt-3">{row.fullName}</div>
                         </Link>
                     </Col>
@@ -70,7 +70,7 @@ function Search() {
                     const party = findPartyByFbName(accountParty);
                     if (party) {
                         const link = routes.party(
-                            party[labels.elections.name_key],
+                            party[csvAggregatedKeys.name],
                             segments.ONLINE
                         );
                         online.push(
@@ -84,7 +84,7 @@ function Search() {
                                         {party.fullName}
                                     </div>
                                     <div className="type">
-                                        {labels.ads.meta.title}
+                                        {t(labels.ads.meta.title)}
                                     </div>
                                 </Link>
                             </Col>
@@ -107,7 +107,7 @@ function Search() {
                     const party = findPartyByFbName(accountParty);
                     if (party) {
                         const link = routes.party(
-                            party[labels.elections.name_key],
+                            party[csvAggregatedKeys.name],
                             segments.ONLINE
                         );
                         online.push(
@@ -127,7 +127,7 @@ function Search() {
                                         {party.fullName}
                                     </div>
                                     <div className="type">
-                                        {labels.ads.google.title}
+                                        {t(labels.ads.google.title)}
                                     </div>
                                 </Link>
                             </Col>
@@ -145,12 +145,13 @@ function Search() {
         }
     }, [query]);
 
-    setTitle(`Výsledky vyhľadávania výrazu „${query}“`);
+    setTitle(`${t(labels.search.results)} „${query}“`);
 
     return (
         <section className="search-results">
-            <Title multiline secondary={`„${query}“`}>
-                Výsledky vyhľadávania výrazu
+            <Title secondary={`„${query}“`}>
+                {t(labels.search.results)}
+                <br />
             </Title>
 
             <h2 className="my-4">Strany a hnutia</h2>
@@ -172,10 +173,10 @@ function Search() {
                 </AlertWithIcon>
             )}
 
-            <h2 className="my-4">Aktuality</h2>
+            <h2 className="my-4">{t(labels.news.navTitle)}</h2>
             <Posts
                 categories={[wpCat.news]}
-                noResults="Hľadaný výraz nebol nájdený v žiadnej z aktualít."
+                noResults={t(labels.news.noData)}
                 search={query}
             />
         </section>

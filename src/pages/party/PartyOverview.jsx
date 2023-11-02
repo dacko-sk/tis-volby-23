@@ -4,7 +4,8 @@ import Row from 'react-bootstrap/Row';
 import { Link, useOutletContext } from 'react-router-dom';
 import has from 'has';
 
-import { colors, labels } from '../../api/constants';
+import { colors } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import {
     currencyFormat,
     fixNumber,
@@ -63,24 +64,24 @@ function PartyTransactions() {
                         bars={[
                             {
                                 key: 'outgoing',
-                                name: labels.charts.outgoing,
+                                name: t(labels.charts.outgoing),
                                 color: colors.colorOrange,
                                 stackId: 'finance',
                             },
                             {
                                 key: 'incoming',
-                                name: labels.charts.incoming,
+                                name: t(labels.charts.incoming),
                                 color: colors.colorDarkBlue,
                                 stackId: 'finance',
                             },
                         ]}
                         data={[
                             {
-                                name: labels.charts.outgoing,
+                                name: t(labels.charts.outgoing),
                                 outgoing: party.sum_outgoing,
                             },
                             {
-                                name: labels.charts.incoming,
+                                name: t(labels.charts.incoming),
                                 incoming: party.sum_incoming,
                             },
                         ]}

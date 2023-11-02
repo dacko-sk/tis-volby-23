@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { scrollToTop } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 import { getAnalysedData, processArticles, wpCat } from '../../api/wpHelpers';
@@ -161,14 +161,16 @@ function Posts({
             </Row>
         ) : (
             <AlertWithIcon className="my-4" variant="danger">
-                {noResults ?? labels.news.noData}
+                {noResults ?? t(labels.news.noData)}
             </AlertWithIcon>
         );
     }
 
     const title =
         template === templates.featured && articles.length ? (
-            <h2 className="my-4">Top {articles.length} hodnotených kampaní</h2>
+            <h2 className="my-4">
+                {t(labels.analyses.top, [articles.length])}
+            </h2>
         ) : null;
 
     let nav = null;
@@ -181,7 +183,7 @@ function Posts({
                         to={showMoreLink || routes.news()}
                         variant="secondary"
                     >
-                        {showMore || labels.showMore}
+                        {showMore || t(labels.showMore)}
                     </Button>
                 </div>
             );

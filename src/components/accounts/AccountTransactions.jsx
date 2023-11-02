@@ -3,16 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 import { usePapaParse } from 'react-papaparse';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { currencyFormat, dateFormat } from '../../api/helpers';
 
-import { getFileName } from '../../context/DataContext';
+import { csvAccountKeys, getFileName } from '../../context/DataContext';
 
 import Loading from '../general/Loading';
 import PaginationWithGaps from '../general/PaginationWithGaps';
 
 const indexColumn = 'index';
-const allowedColumns = Object.entries(labels.account.tableCols);
+const allowedColumns = Object.keys(csvAccountKeys);
 
 const formatColumn = (column, value) => {
     switch (column) {
@@ -61,8 +61,8 @@ function AccountTransactions({ pageSize = 25, account }) {
     const totalPages = Math.ceil(transactions.data.length / pageSize);
 
     const headers = [];
-    allowedColumns.forEach(([colId, colName]) => {
-        headers.push(<th key={colId}>{colName}</th>);
+    allowedColumns.forEach((key) => {
+        headers.push(<th key={key}>{t(labels.account.tableCols[key])}</th>);
     });
     const rows = [];
     for (
@@ -73,10 +73,8 @@ function AccountTransactions({ pageSize = 25, account }) {
         const tx = transactions.data[i];
         if (tx) {
             const cols = [];
-            allowedColumns.forEach(([colId]) => {
-                cols.push(
-                    <td key={colId}>{formatColumn(colId, tx[colId])}</td>
-                );
+            allowedColumns.forEach((key) => {
+                cols.push(<td key={key}>{formatColumn(key, tx[key])}</td>);
             });
             rows.push(<tr key={tx[indexColumn]}>{cols}</tr>);
         } else {
@@ -86,9 +84,7 @@ function AccountTransactions({ pageSize = 25, account }) {
 
     return (
         <div className="account-transactions">
-            <h2 className="mt-4 mb-3">
-                Prehľad transakcií na transparentnom účte
-            </h2>
+            <h2 className="mt-4 mb-3">{t(labels.account.overview)}</h2>
             <Table striped bordered responsive hover id="acctount-table">
                 <thead>
                     <tr>{headers}</tr>
@@ -110,7 +106,7 @@ function AccountTransactions({ pageSize = 25, account }) {
                     target="_blank"
                     variant="secondary"
                 >
-                    Stiahnuť ako CSV
+                    {t(labels.account.download)}
                 </Button>
             </div>
         </div>

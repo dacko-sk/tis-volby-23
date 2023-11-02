@@ -13,6 +13,11 @@ export const languages = {
     en: 'en',
 };
 
+export const locales = {
+    [languages.sk]: 'sk-SK',
+    [languages.en]: 'en-US',
+};
+
 export const defaultLanguage = Object.values(languages)[0];
 
 export const segments = {
@@ -58,6 +63,8 @@ export const getCurrentLanguage = () =>
     ) === languages.en
         ? languages.en
         : languages.sk;
+
+export const getCurrentLocale = () => locales[getCurrentLanguage()];
 
 export const languageRoot = (language) =>
     homepage +

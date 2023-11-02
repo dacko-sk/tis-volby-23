@@ -21,7 +21,8 @@ import {
     tooltipNameFormat,
     verticalYaxisWidth,
 } from '../../api/chartHelpers';
-import { colors, labels } from '../../api/constants';
+import { colors } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import {
     currencyFormat,
     humanPctFormat,
@@ -42,33 +43,33 @@ export const columnVariants = {
     inOut: [
         {
             key: 'outgoing',
-            name: labels.charts.outgoing,
+            name: t(labels.charts.outgoing),
             color: colors.colorOrange,
         },
         {
             key: 'incoming',
-            name: labels.charts.incoming,
+            name: t(labels.charts.incoming),
             color: colors.colorDarkBlue,
         },
     ],
     donors: [
         {
             key: 'donors',
-            name: labels.charts.uniqeDonors,
+            name: t(labels.charts.uniqeDonors),
             color: colors.colorDarkBlue,
         },
     ],
     amount: [
         {
             key: 'num',
-            name: labels.ads.amount.label,
+            name: t(labels.ads.amount.label),
             color: colors.colorOrange,
         },
     ],
     spending: [
         {
             key: 'outgoing',
-            name: labels.charts.outgoing,
+            name: t(labels.charts.outgoing),
             color: colors.colorLightBlue,
         },
     ],
@@ -263,7 +264,7 @@ function TisBarChart({
             {buttonLink && (
                 <div className="buttons mt-3 text-center">
                     <Button as={Link} to={buttonLink} variant="secondary">
-                        {buttonText ?? labels.showMore}
+                        {buttonText ?? t(labels.showMore)}
                     </Button>
                 </div>
             )}

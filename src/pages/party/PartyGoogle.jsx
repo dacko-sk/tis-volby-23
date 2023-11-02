@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import { formatDefs } from '../../api/chartHelpers';
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import {
     fixNumber,
     sortByNumericProp,
@@ -42,7 +42,7 @@ function PartyGoogle() {
         data: [],
         nameKey: 'name',
         dataKey: 'value',
-        label: labels.charts.outgoing,
+        label: t(labels.charts.outgoing),
     };
     if (sheetsData.lastUpdateGgl) {
         sheetsData.googleAds.forEach((pageData) => {

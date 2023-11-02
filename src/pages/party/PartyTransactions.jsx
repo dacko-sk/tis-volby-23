@@ -1,8 +1,10 @@
 import Table from 'react-bootstrap/Table';
 import { useOutletContext } from 'react-router-dom';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { currencyFormat, setTitle, shortenUrl } from '../../api/helpers';
+
+import { csvAggregatedKeys } from '../../context/DataContext';
 
 import AccountTransactions from '../../components/accounts/AccountTransactions';
 
@@ -18,11 +20,11 @@ function PartyTransactions() {
             <Table striped bordered responsive hover>
                 <tbody>
                     <tr>
-                        <td>{labels.charts.incoming}</td>
+                        <td>{t(labels.charts.incoming)}</td>
                         <td>{currencyFormat(party.sum_incoming)}</td>
                     </tr>
                     <tr>
-                        <td>{labels.charts.outgoing}</td>
+                        <td>{t(labels.charts.outgoing)}</td>
                         <td>{currencyFormat(party.sum_outgoing)}</td>
                     </tr>
                     <tr>
@@ -38,20 +40,18 @@ function PartyTransactions() {
                         <td>{party.num_outgoing}</td>
                     </tr>
                     <tr>
-                        <td>{labels.charts.uniqeDonors}</td>
+                        <td>{t(labels.charts.uniqeDonors)}</td>
                         <td>{party.num_unique_donors}</td>
                     </tr>
                     <tr>
                         <td>{labels.elections.account}</td>
                         <td>
                             <a
-                                href={party[labels.elections.account_key]}
+                                href={party[csvAggregatedKeys.account]}
                                 target="_blank"
                                 rel="noreferrer"
                             >
-                                {shortenUrl(
-                                    party[labels.elections.account_key]
-                                )}
+                                {shortenUrl(party[csvAggregatedKeys.account])}
                             </a>
                         </td>
                     </tr>

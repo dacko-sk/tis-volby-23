@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import has from 'has';
 
 import { setTitle } from '../api/helpers';
 
@@ -11,13 +10,13 @@ import NewsDetail from '../components/wp/templates/NewsDetail';
 
 function Article() {
     const params = useParams();
-    const slug = has(params, 'slug') ? params.slug : null;
+    const slug = params.slug ?? null;
     const navigate = useNavigate();
 
     // try to set article data object from location.state
     const location = useLocation();
     let article =
-        location.state && has(location.state, 'article')
+        location.state && (location.state.article ?? false)
             ? location.state.article
             : {};
 
@@ -30,7 +29,7 @@ function Article() {
             ).then((response) => response.json()),
         {
             // run only if article data were not delivered via location.state
-            enabled: !has(article, 'title'),
+            enabled: !(article.title ?? false),
         }
     );
 
@@ -50,7 +49,7 @@ function Article() {
         }
     }, [isLoading, error, data, navigate, location.pathname, slug]);
 
-    if (!has(article, 'title') || error) {
+    if (!(article.title ?? false) || error) {
         // waiting for data or error in loding
         return <Loading error={error} />;
     }

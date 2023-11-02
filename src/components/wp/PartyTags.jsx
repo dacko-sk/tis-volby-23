@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom';
 import has from 'has';
 
-import { labels, parties } from '../../api/constants';
+import { parties } from '../../api/constants';
 import { decodeSlug, routes } from '../../api/routes';
 
-import useData from '../../context/DataContext';
+import useData, { csvAggregatedKeys } from '../../context/DataContext';
 
 function PartyTags({ tags, className }) {
     const { csvData } = useData();
@@ -17,7 +17,7 @@ function PartyTags({ tags, className }) {
         Object.entries(parties).forEach(([partyKey, partyProps]) => {
             if (tags.includes(partyProps.tag)) {
                 csvData.data.some((row) => {
-                    if (partyKey === row[labels.elections.name_key]) {
+                    if (partyKey === row[csvAggregatedKeys.name]) {
                         const tagName = has(partyProps, 'slug')
                             ? partyProps.slug
                             : partyKey;

@@ -1,4 +1,4 @@
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { getPartyChartLabel } from '../../api/chartHelpers';
 import { fixNumber, sortBySpending } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
@@ -76,26 +76,20 @@ function Top10Ads({ maxItems = 10 }) {
                 bars={columnVariants.spending}
                 currency
                 data={columnsFb}
-                subtitle={labels.ads.meta.spending.partiesDisclaimer}
+                subtitle={t(labels.ads.meta.spending.partiesDisclaimer)}
                 timestamp={sheetsData.lastUpdateFb}
-                title={labels.ads.meta.topTitle.replace(
-                    '%s',
-                    Math.min(maxItems, columnsFb.length)
-                )}
+                title={t(labels.ads.meta.topTitle)}
                 vertical
             />
             <TisBarChart
                 bars={columnVariants.spending}
                 buttonLink={routes.online()}
-                buttonText={labels.ads.showMore}
+                buttonText={t(labels.ads.showMore)}
                 currency
                 data={columnsGgl}
-                subtitle={labels.ads.google.spending.partiesDisclaimer}
+                subtitle={t(labels.ads.google.spending.partiesDisclaimer)}
                 timestamp={sheetsData.lastUpdateGgl}
-                title={labels.ads.google.topTitle.replace(
-                    '%s',
-                    Math.min(maxItems, columnsGgl.length)
-                )}
+                title={t(labels.ads.google.topTitle)}
                 vertical
             />
         </div>

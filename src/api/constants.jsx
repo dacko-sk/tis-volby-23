@@ -239,20 +239,6 @@ const phrases = {
 };
 
 export const labels = {
-    account: {
-        tableCols: {
-            account_name: 'Názov účtu',
-            date: 'Dátum',
-            amount: 'Suma',
-            // currency: 'Mena',
-            message: 'Popis platby',
-            tx_type: 'Druh platby',
-            vs: 'VS',
-            ss: 'ŠS',
-        },
-        totalDisclaimer:
-            'Súčet výdavkov na všetkých transparentných účtoch politických strán.',
-    },
     ads: {
         amount: {
             accountsTitle: `Počet reklám jednotlivých profilov`,
@@ -344,24 +330,12 @@ export const labels = {
     donateLong: 'Darujte na kontrolu volieb',
     elections: {
         account: 'Transparentný účet',
-        account_key: 'url',
-        name_key: 'name',
-    },
-    charts: {
-        disclaimer:
-            'Grafy obsahujú dáta z transparentných účtov manuálne vyhľadaných na stránkach bánk, očistené o vrátené platby.',
-        disclaimerClick: 'Po kliknutí na názov strany sa rozbalia podrobnosti.',
-        updated: 'Naposledy aktualizované',
-        incoming: 'Príjmy',
-        outgoing: 'Výdavky',
-        uniqeDonors: 'Počet unikátnych darcov',
     },
     news: {
         noData: 'Neboli nájdené žiadne články.',
     },
     tis: 'Transparency International Slovensko',
     search: 'Vyhľadávanie',
-    showMore: 'Zobraziť viac',
     websiteTitle: 'Voľby',
 };
 

@@ -1,6 +1,6 @@
 import has from 'has';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { currencyFormat } from '../../api/helpers';
 
 import useData from '../../context/DataContext';
@@ -28,7 +28,7 @@ function TotalSpending() {
 
     return (
         <div className="total-spending">
-            <h2>Celkové výdavky strán</h2>
+            <h2>{t(labels.account.totalSpending)}</h2>
             <div className="hero-number">
                 {csvData.data ?? false ? (
                     currencyFormat(total)
@@ -38,7 +38,7 @@ function TotalSpending() {
                 <LastUpdateTag
                     timestamp={has(csvData, 'data') ? csvData.lastUpdate : null}
                 >
-                    {labels.account.totalDisclaimer}
+                    {t(labels.account.totalDisclaimer)}
                 </LastUpdateTag>
             </div>
         </div>

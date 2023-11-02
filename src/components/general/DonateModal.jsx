@@ -52,7 +52,7 @@ function DonateModal() {
             <Modal.Header closeButton>
                 <Modal.Title>{t(labels.donate.modalTitle)}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{t(labels.donate.modalText, true)}</Modal.Body>
+            <Modal.Body>{t(labels.donate.modalText, [], true)}</Modal.Body>
             <Modal.Footer className="justify-content-center">
                 <DonateButton xl />
             </Modal.Footer>

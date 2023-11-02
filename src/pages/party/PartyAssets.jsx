@@ -1,9 +1,10 @@
 import { useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { labels } from '../../api/constants';
 import { setTitle } from '../../api/helpers';
 import { analysisLabels, wpCat } from '../../api/wpHelpers';
+
+import { csvAggregatedKeys } from '../../context/DataContext';
 
 import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Loading from '../../components/general/Loading';
@@ -17,7 +18,7 @@ function PartyAssets() {
     // load article data from API (if needed)
     // isInitialLoading flag will be true if query is enabled, there are no data yet (isLoading) and isFetching
     const { isInitialLoading, error, data } = useQuery(
-        [`party_asets_${party[labels.elections.name_key]}`],
+        [`party_asets_${party[csvAggregatedKeys.name]}`],
         () =>
             fetch(
                 `https://cms.transparency.sk/wp-json/wp/v2/posts?categories=${wpCat.assets}&tags=${party.tag}&tax_relation=AND`

@@ -1,5 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 
+import { labels, t } from '../api/dictionary';
 import { setTitle } from '../api/helpers';
 import { routes } from '../api/routes';
 import { wpCat } from '../api/wpHelpers';
@@ -14,14 +15,12 @@ import Posts, { templates } from '../components/wp/Posts';
 import DonateButton from '../components/general/DonateButton';
 
 function Home() {
-    setTitle('Úvod');
+    setTitle(t(labels.home.pageTitle));
 
     return (
         <section>
-            <Title uppercase secondary="2023">
-                Parlamentné
-                <br />
-                voľby
+            <Title secondaryWords={1} uppercase>
+                {t(labels.home.pageTitle)}
             </Title>
 
             <Row className="gy-3 gy-lg-0 text-center mb-4">
@@ -44,7 +43,7 @@ function Home() {
 
             <Posts
                 categories={[wpCat.featured]}
-                showMore="Zobraziť všetky hodnotenia"
+                showMore={t(labels.analyses.showAll)}
                 showMoreLink={routes.analyses()}
                 template={templates.featured}
             />
@@ -53,7 +52,7 @@ function Home() {
 
             <Top10Ads />
 
-            <h2 className="mt-4 mb-3">Najnovšie aktuality</h2>
+            <h2 className="mt-4 mb-3">{t(labels.news.latest)}</h2>
             <Posts
                 categories={[wpCat.news]}
                 limit={2}

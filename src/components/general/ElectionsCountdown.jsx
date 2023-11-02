@@ -1,5 +1,6 @@
 import Countdown from 'react-countdown';
 
+import { labels, t } from '../../api/dictionary';
 import { dateFormat } from '../../api/helpers';
 
 import './ElectionsCountdown.scss';
@@ -13,7 +14,9 @@ function ElectionsCountdown({ start = null, end }) {
     const renderer = ({ formatted, completed }) => {
         if (completed) {
             // Render a completed state
-            return <div className="hero-number">Voľby sa skončili</div>;
+            return (
+                <div className="hero-number">{t(labels.elections.over)}</div>
+            );
         }
         // Render a countdown
         return (
@@ -36,14 +39,17 @@ function ElectionsCountdown({ start = null, end }) {
 
     return dateCurrent > dateEnd ? (
         <div className="elections-countdown">
-            <h2>Dátum konania volieb</h2>
+            <h2>{t(labels.elections.date)}</h2>
             <div className="hero-number">{dateFormat(end)}</div>
         </div>
     ) : (
         <div className="elections-countdown">
             <h2>
-                Zostávajúci čas do
-                {dateCurrent > dateStart ? ' konca' : ''} volieb
+                {t(
+                    dateCurrent > dateStart
+                        ? labels.elections.timeTillend
+                        : labels.elections.timeTillstart
+                )}
             </h2>
             <Countdown
                 date={dateCurrent > dateStart ? dateEnd : dateStart}

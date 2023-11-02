@@ -1,15 +1,11 @@
-import has from 'has';
-
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { dateTimeFormat } from '../../api/helpers';
 
 import useData, { baseDate } from '../../context/DataContext';
 
 function LastUpdateTag({ children, timestamp }) {
     const { csvData } = useData();
-    const lastUpdate =
-        timestamp ??
-        (has(csvData, 'lastUpdate') ? csvData.lastUpdate : baseDate);
+    const lastUpdate = timestamp ?? csvData.lastUpdate ?? baseDate;
 
     return (
         <em className="disclaimer">
@@ -19,7 +15,7 @@ function LastUpdateTag({ children, timestamp }) {
                     <br />
                 </>
             )}
-            {labels.charts.updated} {dateTimeFormat(lastUpdate)}.
+            {t(labels.charts.updated)} {dateTimeFormat(lastUpdate)}.
         </em>
     );
 }

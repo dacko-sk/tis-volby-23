@@ -1,7 +1,7 @@
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 
-import { labels } from '../api/constants';
+import { labels, t } from '../api/dictionary';
 
 import Google from '../components/ads/Google';
 import Meta from '../components/ads/Meta';
@@ -10,15 +10,15 @@ import Title from '../components/structure/Title';
 function Online() {
     return (
         <section className="charts-page">
-            <Title>Online kampane</Title>
+            <Title>{t(labels.ads.pageTitle)}</Title>
             <Tab.Container id="providers" defaultActiveKey="facebook">
                 <div className="overflow-auto">
                     <Nav variant="tabs" className="flex-nowrap">
                         <Nav.Link eventKey="facebook">
-                            {labels.ads.meta.title}
+                            {t(labels.ads.meta.title)}
                         </Nav.Link>
                         <Nav.Link eventKey="google">
-                            {labels.ads.google.title}
+                            {t(labels.ads.google.title)}
                         </Nav.Link>
                     </Nav>
                 </div>

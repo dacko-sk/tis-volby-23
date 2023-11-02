@@ -1,6 +1,6 @@
 import has from 'has';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { getPartyChartLabel } from '../../api/chartHelpers';
 import { sortBySpending } from '../../api/helpers';
 import { routes } from '../../api/routes';
@@ -30,11 +30,10 @@ function Top10({ maxItems = 10 }) {
             className="mb-4"
             currency
             data={columns.sort(sortBySpending).slice(0, maxItems)}
-            subtitle={`${labels.charts.disclaimer} ${labels.charts.disclaimerClick}`}
-            title={`Top ${Math.min(
-                maxItems,
-                columns.length
-            )} kampaní podľa výdavkov a príjmov`}
+            subtitle={`${t(labels.charts.disclaimer)} ${t(
+                labels.charts.disclaimerClick
+            )}`}
+            title={t(labels.charts.top10)}
             vertical
         />
     );

@@ -1,4 +1,5 @@
 import { labels } from './constants';
+import { getCurrentLocale } from './routes';
 
 export const isNumeric = (value) => !Number.isNaN(Number(value));
 
@@ -6,7 +7,7 @@ export const fixNumber = (value) =>
     Number(value.replace(',', '.').replace(' ', ''));
 
 export const slovakFormat = (value, options) =>
-    new Intl.NumberFormat('sk-SK', options).format(value);
+    new Intl.NumberFormat(getCurrentLocale(), options).format(value);
 
 export const numFormat = (value) => slovakFormat(value, {});
 
@@ -51,7 +52,9 @@ export const wholeCurrencyFormat = (value) =>
 export const slovakDateFormat = (timestamp, options) => {
     const num = Number(timestamp);
     const input = Number.isNaN(num) ? timestamp : 1000 * num;
-    return new Intl.DateTimeFormat('sk-SK', options).format(new Date(input));
+    return new Intl.DateTimeFormat(getCurrentLocale(), options).format(
+        new Date(input)
+    );
 };
 
 export const dateTimeFormat = (timestamp) =>
@@ -125,6 +128,45 @@ export const nl2r = (text) =>
               );
           })
         : text;
+
+/**
+ * Highlight last n words of the sentence in text-secondary (orange) style
+ */
+export const secondarySentenceEnding = (textOrReact, wordsAmount, isLast) => {
+    if (isLast ?? true) {
+        const w = wordsAmount || 1;
+        if (typeof textOrReact === 'string') {
+            const words = textOrReact.split(' ');
+            return (
+                <span key={textOrReact}>
+                    {`${words.slice(0, words.length - w).join(' ')} `}
+                    <span className="text-secondary">
+                        {words.slice(-w).join(' ')}
+                    </span>
+                </span>
+            );
+        }
+        if (Array.isArray(textOrReact)) {
+            return textOrReact.map((item, index) =>
+                secondarySentenceEnding(
+                    item,
+                    w,
+                    index === textOrReact.length - 1
+                )
+            );
+        }
+        if (
+            typeof textOrReact === 'object' &&
+            (textOrReact.props.children ?? false)
+        ) {
+            const children = Object.values(textOrReact.props.children);
+            return children.map((child, index) =>
+                secondarySentenceEnding(child, w, index === children.length - 1)
+            );
+        }
+    }
+    return textOrReact;
+};
 
 export const sortByNumericProp = (prop, asc) => (a, b) =>
     asc ? a[prop] - b[prop] : b[prop] - a[prop];

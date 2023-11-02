@@ -1,13 +1,29 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 import has from 'has';
 
-import { labels, parties } from '../api/constants';
+import { parties } from '../api/constants';
 import { contains } from '../api/helpers';
 
 export const accountsFile =
     'https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/aggregation_no_returns.csv';
 export const baseDate = 1669068712;
 export const reloadMinutes = 70;
+
+export const csvAggregatedKeys = {
+    account: 'url',
+    name: 'name',
+};
+
+export const csvAccountKeys = {
+    account_name: 'account_name',
+    date: 'date',
+    amount: 'amount',
+    // currency: 'currency',
+    message: 'message',
+    tx_type: 'tx_type',
+    vs: 'vs',
+    ss: 'ss',
+};
 
 export const types = {
     regional: 'regional',
@@ -16,25 +32,25 @@ export const types = {
 
 export const getFileName = (account) => {
     if (
-        !has(account, labels.elections.name_key) ||
-        !has(account, labels.elections.account_key)
+        !has(account, csvAggregatedKeys.name) ||
+        !has(account, csvAggregatedKeys.account)
     ) {
         return null;
     }
     let fileName = null;
-    const match = account[labels.elections.account_key].match(
+    const match = account[csvAggregatedKeys.account].match(
         /.*(?:SK\d{12})?(\d{10}).*/
     );
     if (match && match.length > 1) {
         // #1) IBAN / 10 digits account number match
         [, fileName] = match;
-    } else if (account[labels.elections.account_key].length > 9) {
+    } else if (account[csvAggregatedKeys.account].length > 9) {
         // #2) last 10 characters
-        fileName = account[labels.elections.account_key].substr(-10);
+        fileName = account[csvAggregatedKeys.account].substr(-10);
     }
     return fileName
         ? `https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/accounts/${
-              account[labels.elections.name_key]
+              account[csvAggregatedKeys.name]
           } ${fileName}.csv`
         : null;
 };
@@ -47,7 +63,7 @@ export const processAccountsData = (data) => {
             lastUpdate = Math.max(lastUpdate, row.timestamp ?? 0);
 
             // trim certain columns
-            [labels.elections.account_key, labels.elections.name_key].forEach(
+            [csvAggregatedKeys.account, csvAggregatedKeys.name].forEach(
                 (column) => {
                     pd.data[index][column] = (row[column] ?? '').trim();
                 }
@@ -56,12 +72,12 @@ export const processAccountsData = (data) => {
             // fix errors in account numbers
             if (
                 contains(
-                    pd.data[index][labels.elections.account_key],
+                    pd.data[index][csvAggregatedKeys.account],
                     'transparentneucty.sk/?1/#/'
                 )
             ) {
-                pd.data[index][labels.elections.account_key] = pd.data[index][
-                    labels.elections.account_key
+                pd.data[index][csvAggregatedKeys.account] = pd.data[index][
+                    csvAggregatedKeys.account
                 ].replace('/?1/#/', '/#/');
             }
 
@@ -76,18 +92,18 @@ export const processAccountsData = (data) => {
             // copy full name & slug from account key as default
             pd.data[index] = {
                 ...pd.data[index],
-                fbName: pd.data[index][labels.elections.name_key],
-                fullName: pd.data[index][labels.elections.name_key],
-                slug: pd.data[index][labels.elections.name_key],
+                fbName: pd.data[index][csvAggregatedKeys.name],
+                fullName: pd.data[index][csvAggregatedKeys.name],
+                slug: pd.data[index][csvAggregatedKeys.name],
                 share: 0,
             };
 
             // merge data with party config
-            if (has(parties, pd.data[index][labels.elections.name_key])) {
+            if (has(parties, pd.data[index][csvAggregatedKeys.name])) {
                 pd.data[index] = {
                     ...pd.data[index],
                     // overwrite with config
-                    ...parties[pd.data[index][labels.elections.name_key]],
+                    ...parties[pd.data[index][csvAggregatedKeys.name]],
                 };
             }
         });

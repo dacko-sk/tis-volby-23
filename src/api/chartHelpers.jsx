@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { Sector } from 'recharts';
 import has from 'has';
 
-import { colors, labels, parties } from './constants';
+import { colors, parties } from './constants';
 import { shortenValue } from './helpers';
 import { routes, separators } from './routes';
 import { sheetsConfig } from '../context/AdsDataContext';
+import { csvAggregatedKeys } from '../context/DataContext';
 
 export const isMobile = window.innerWidth < 576;
 export const horizontalYaxisWidth = 80;
@@ -74,10 +75,10 @@ export const tickLabel = (value) => {
 
 export const getPartyChartLabel = (row, subpage) => {
     const n =
-        has(parties, row[labels.elections.name_key]) &&
-        has(parties[row[labels.elections.name_key]], 'slug')
-            ? parties[row[labels.elections.name_key]].slug
-            : row[labels.elections.name_key];
+        has(parties, row[csvAggregatedKeys.name]) &&
+        has(parties[row[csvAggregatedKeys.name]], 'slug')
+            ? parties[row[csvAggregatedKeys.name]].slug
+            : row[csvAggregatedKeys.name];
     return n + separators.newline + (subpage ?? '');
 };
 

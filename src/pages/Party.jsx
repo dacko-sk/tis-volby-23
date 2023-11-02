@@ -2,10 +2,11 @@ import { useEffect } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 
-import { labels, parties } from '../api/constants';
+import { parties } from '../api/constants';
+import { labels, t } from '../api/dictionary';
 import { decodeSlug, routes, segments } from '../api/routes';
 
-import useData from '../context/DataContext';
+import useData, { csvAggregatedKeys } from '../context/DataContext';
 
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
@@ -35,7 +36,7 @@ function Party() {
         }
         // find aggregated data for the account
         csvData.data.some((row) => {
-            if (accountKey === row[labels.elections.name_key]) {
+            if (accountKey === row[csvAggregatedKeys.name]) {
                 party = row;
                 return true;
             }
@@ -71,34 +72,34 @@ function Party() {
             <div className="overflow-auto">
                 <Nav variant="tabs" className="flex-nowrap">
                     <Nav.Link as={NavLink} to={routes.party(party.slug)} end>
-                        Prehľad
+                        {t(labels.party.overview)}
                     </Nav.Link>
                     <Nav.Link
                         as={NavLink}
                         to={routes.party(party.slug, segments.TRANSACTIONS)}
                     >
-                        Financovanie
+                        {t(labels.party.funding)}
                     </Nav.Link>
                     {(party.tag ?? false) && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.party(party.slug, segments.ANALYSIS)}
                         >
-                            Hodnotenie
+                            {t(labels.analysis.navTitle)}
                         </Nav.Link>
                     )}
                     <Nav.Link
                         as={NavLink}
                         to={routes.party(party.slug, segments.ONLINE)}
                     >
-                        Online
+                        {t(labels.online.navTitle)}
                     </Nav.Link>
                     {(party.tag ?? false) && (
                         <Nav.Link
                             as={NavLink}
                             to={routes.party(party.slug, segments.NEWS)}
                         >
-                            Aktuality
+                            {t(labels.news.navTitle)}
                         </Nav.Link>
                     )}
                     {(party.tag ?? false) && (
@@ -106,7 +107,7 @@ function Party() {
                             as={NavLink}
                             to={routes.party(party.slug, segments.ASSETS)}
                         >
-                            Majetkové priznania
+                            {t(labels.party.assets)}
                         </Nav.Link>
                     )}
                 </Nav>
