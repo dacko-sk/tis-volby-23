@@ -42,6 +42,21 @@
   --bs-table-bg: transparent;
 }
 
+.tabs-scrollable {
+  @extend .overflow-auto;
+  .nav-tabs {
+    @extend .flex-nowrap;
+  }
+  .nav-link {
+    @extend #{'.text-nowrap', '.position-relative'};
+    // fix unnecessary scrollbar caused by the overflow-auto of wrapper and negative bottom margin of BS tab
+    margin-bottom: 0;
+    bottom: calc(-1 * var(--bs-nav-tabs-border-width));
+    border-bottom: var(--bs-nav-tabs-border-width) solid
+      var(--bs-nav-tabs-border-color);
+  }
+}
+
 @media (max-width: map.get($grid-breakpoints, 'lg')) {
   .navbar-nav {
     --bs-nav-link-padding-x: 0.5em;

@@ -69,8 +69,8 @@ function Party() {
                 )}
                 {party.fullName}
             </Title>
-            <div className="overflow-auto">
-                <Nav variant="tabs" className="flex-nowrap">
+            <div className="tabs-scrollable">
+                <Nav variant="tabs">
                     <Nav.Link as={NavLink} to={routes.party(party.slug)} end>
                         {t(labels.party.overview)}
                     </Nav.Link>

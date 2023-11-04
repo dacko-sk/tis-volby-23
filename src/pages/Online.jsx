@@ -12,8 +12,8 @@ function Online() {
         <section className="charts-page">
             <Title>{t(labels.ads.pageTitle)}</Title>
             <Tab.Container id="providers" defaultActiveKey="facebook">
-                <div className="overflow-auto">
-                    <Nav variant="tabs" className="flex-nowrap">
+                <div className="tabs-scrollable">
+                    <Nav variant="tabs">
                         <Nav.Link eventKey="facebook">
                             {t(labels.ads.meta.title)}
                         </Nav.Link>
