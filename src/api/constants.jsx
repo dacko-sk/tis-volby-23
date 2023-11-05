@@ -228,117 +228,6 @@ export const errors = {
     loading: 'Chyba pri načítaní dát. Prosím načítajte stránku znovu.',
 };
 
-const phrases = {
-    attr: 'Za správne označenú reklamu vyhodnocujeme statusy, v TEXTE ktorých je uvedený objednávateľ a dodávateľ reklamy. Statusy bez textu vyhodnocujeme ako "Nezistené".',
-    campaignStart: 'od oficiálneho začiatku kampane 9. júna 2023.',
-    google: 'ktoré prostredníctvom služieb Google Ads a Google Display & Video 360 uverejnili reklamy v hodnote nad 100 €',
-    meta: 'na sociálnych sieťach platformy Meta',
-    preCampaignStart: 'od začiatku predkampane 11. decembra 2022.',
-    weeklyProfiles:
-        'ktorých výdavky počas posledných 90 dní predkampane od 11. marca 2023 alebo týždňové výdavky od začiatku kampane 9. júna 2023 presiahli 100 €.',
-};
-
-export const labels = {
-    ads: {
-        amount: {
-            accountsTitle: `Počet reklám jednotlivých profilov`,
-            disclaimer: `Počet reklám ${phrases.preCampaignStart}`,
-            label: 'Počet reklám',
-            partiesTitle:
-                'Súčet počtov reklám všetkých profilov politickej strany',
-            partyAccountsTitle: `Počet reklám jednotlivých profilov strany`,
-        },
-        google: {
-            disclaimer:
-                'Politickú reklamu strán a ich politikov, zverejnenú prostredníctvom služieb Google Ads a Google Display & Video 360, sledujeme vďaka údajom, ktoré publikuje spoločnosť Google v Centre transparentnosti reklám. Sumy sú uvedené bez DPH.',
-            format: {
-                disclaimer:
-                    'Podiel jednotlivých formátov Google reklamy na celkových výdavkoch.',
-                title: 'Formáty reklamy',
-            },
-            spending: {
-                accountsTitle: `Profily s výdavkami na reklamu nad 100 €`,
-                disclaimer: `Zobrazené sú len politické účty, ${phrases.google} ${phrases.preCampaignStart}`,
-                partiesDisclaimer: `Započítané sú len politické účty, ${phrases.google} ${phrases.preCampaignStart} Pre kompletný zoznam započítaných straníckych profilov a podrobnejšie dáta o online kampani, kliknite na názov strany.`,
-                partiesTitle: `Súčet výdavkov všetkých profilov politickej strany s výdavkami na reklamu nad 100 €`,
-                partyAccountsTitle: `Profily strany s výdavkami na reklamu nad 100 €`,
-            },
-            title: 'Google',
-            topTitle: `Top %s Google kampaní`,
-            totalDisclaimer: `Súčet výdavkov politických účtov, ${phrases.google} ${phrases.preCampaignStart}`,
-            totalSpendingTitle: 'Výdavky na Google reklamu',
-        },
-        meta: {
-            attribution: {
-                allTitle: 'Bilancia všetkých strán',
-                amount: 'Počet',
-                campaign: 'Kampaň',
-                disclaimer: `Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani ${phrases.campaignStart} ${phrases.attr}`,
-                pctTitle: 'Rebríček správnosti označovania',
-                pctDisclaimer: `Podiel správne označených reklám podľa zákona o volebnej kampani ${phrases.campaignStart} ${phrases.attr}`,
-                precampaign: `Predkampaň`,
-                title: 'Označenie objednávateľa a dodávateľa',
-            },
-            demography: {
-                ages: 'Vekové skupiny',
-                agesDisclaimer: `Podiel zásahu reklám vo vekových skupinách obyvateľstva ${phrases.preCampaignStart}`,
-                genders: 'Pohlavia',
-                gendersDisclaimer: `Podiel zásahu reklám medzi pohlaviami ${phrases.preCampaignStart}`,
-                title: 'Demografické rozloženie reklamy',
-            },
-            disclaimer:
-                'Politickú reklamu strán a ich politikov na sociálnych sieťach Facebook a Instagram sledujeme vďaka údajom, ktoré publikuje spoločnosť Meta v knižnici Meta Ad Library. Sumy sú uvedené bez DPH.',
-            ranges: {
-                accountsTitle: `Najviac inzerujúce profily od začiatku predkampane`,
-                disclaimer: `Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných ${phrases.preCampaignStart}`,
-                estimate: 'Odhadované výdavky',
-                partiesTitle: `Rozsah výdavkov všetkých profilov politickej strany od začiatku predkampane`,
-                partyAccountsTitle: `Najviac inzerujúce profily strany od začiatku predkampane`,
-                range: 'Skutočný rozsah výdavkov',
-            },
-            regions: {
-                allDisclaimer: `Podiel zásahu online reklamy všetkých strán v krajoch Slovenska ${phrases.preCampaignStart} Pre podrobnejšiu analýzu cielenia strán na regióny vzhľadom na veľkosť krajov, kliknite na názov strany.`,
-                diffAvg: 'Odchýlka od priemerného zásahu strany v SR',
-                diffAvgDisclaimer:
-                    'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',
-                disclaimer: `Podiel zásahu online reklamy v krajoch Slovenska ${phrases.preCampaignStart} Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.`,
-                label: 'Podiel zásahu reklám',
-                sizeDisclaimer: '',
-                sizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
-                title: 'Regionálne rozloženie reklamy',
-            },
-            spending: {
-                accountsTitle: `Profily s týždennými výdavkami na reklamu nad 100 €`,
-                disclaimer: `Zobrazené sú len profily, ${phrases.weeklyProfiles}`,
-                label: 'Týždňové výdavky na reklamu',
-                partiesDisclaimer: `Započítané sú len profily ${phrases.meta}, ${phrases.weeklyProfiles} Pre kompletný zoznam započítaných straníckych profilov a podrobnejšie dáta o online kampani, kliknite na názov strany.`,
-                partiesTitle:
-                    'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami na reklamu nad 100 €',
-                partyAccountsTitle: `Profily strany s týždennými výdavkami na reklamu nad 100 €`,
-            },
-            title: 'Meta',
-            topTitle: `Top %s Meta kampaní`,
-            totalDisclaimer: `Súčet výdavkov na politickú reklamu ${phrases.meta}. Započítane sú všetky profily, ${phrases.weeklyProfiles}`,
-            totalSpendingTitle: 'Výdavky na Meta reklamu',
-        },
-        noData: 'Neevidujeme žiaden účet strany s výdavkami na sponzorované príspevky na tejto platforme.',
-        percent: 'Podiel',
-        showMore: 'Zistiť viac o online kampani',
-    },
-    disclaimerAccount: 'Príjmy aj výdavky sú očistené o vrátené platby.',
-    donate: 'Darujte',
-    donateLong: 'Darujte na kontrolu volieb',
-    elections: {
-        account: 'Transparentný účet',
-    },
-    news: {
-        noData: 'Neboli nájdené žiadne články.',
-    },
-    tis: 'Transparency International Slovensko',
-    search: 'Vyhľadávanie',
-    websiteTitle: 'Voľby',
-};
-
 export const links = {
     [elections.p19]: 'https://volby.transparency.sk/prezident2019/',
     [elections.n20]: 'https://volby.transparency.sk/parlament2020/',
@@ -350,7 +239,6 @@ export const constants = {
     colors,
     errors,
     icons,
-    labels,
     links,
     parties,
 };

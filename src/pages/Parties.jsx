@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 
+import { setTitle } from '../api/browserHelpers';
 import { labels, t } from '../api/dictionary';
-import { setTitle, sortByTextProp } from '../api/helpers';
+import { sortByTextProp } from '../api/helpers';
 import { routes } from '../api/routes';
 
 import useData, { csvAggregatedKeys } from '../context/DataContext';

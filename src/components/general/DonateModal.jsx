@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { labels, t } from '../../api/dictionary';
 
 import DonateButton from './DonateButton';
+import { nl2r } from '../../api/helpers';
 
 function DonateModal() {
     const [show, setShow] = useState(false);
@@ -52,7 +53,7 @@ function DonateModal() {
             <Modal.Header closeButton>
                 <Modal.Title>{t(labels.donate.modalTitle)}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>{t(labels.donate.modalText, [], true)}</Modal.Body>
+            <Modal.Body>{nl2r(t(labels.donate.modalText))}</Modal.Body>
             <Modal.Footer className="justify-content-center">
                 <DonateButton xl />
             </Modal.Footer>

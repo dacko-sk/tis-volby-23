@@ -1,4 +1,3 @@
-import { labels } from './constants';
 import { getCurrentLocale } from './routes';
 
 export const isNumeric = (value) => !Number.isNaN(Number(value));
@@ -198,11 +197,3 @@ export const swapName = (name) => {
     const [first, second] = name.split(' ');
     return first && second ? `${second} ${first}` : name;
 };
-
-export const setTitle = (title) => {
-    document.title = `${title} : ${labels.websiteTitle} : ${labels.tis}`;
-};
-
-export const scrollToTop = () => window.scrollTo(0, 0);
-
-export const openInNewTab = (url) => window.open(url, '_blank').focus();

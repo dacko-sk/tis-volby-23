@@ -1,5 +1,5 @@
+import { setTitle } from '../api/browserHelpers';
 import { labels, t } from '../api/dictionary';
-import { setTitle } from '../api/helpers';
 import { wpCat } from '../api/wpHelpers';
 
 import Title from '../components/structure/Title';

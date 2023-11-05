@@ -1,5 +1,4 @@
 import { Link, useParams } from 'react-router-dom';
-import has from 'has';
 
 import { parties } from '../../api/constants';
 import { decodeSlug, routes } from '../../api/routes';
@@ -13,14 +12,12 @@ function PartyTags({ tags, className }) {
 
     const items = [];
     // parse data
-    if (has(csvData, 'data')) {
+    if (csvData.data ?? false) {
         Object.entries(parties).forEach(([partyKey, partyProps]) => {
             if (tags.includes(partyProps.tag)) {
                 csvData.data.some((row) => {
                     if (partyKey === row[csvAggregatedKeys.name]) {
-                        const tagName = has(partyProps, 'slug')
-                            ? partyProps.slug
-                            : partyKey;
+                        const tagName = partyProps.slug ?? partyKey;
                         items.push(
                             <Link key={partyKey} to={routes.party(tagName)}>
                                 {currentParty === tagName ? (

@@ -1,7 +1,7 @@
 import { Col, Row } from 'react-bootstrap';
 
+import { setTitle } from '../api/browserHelpers';
 import { labels, t } from '../api/dictionary';
-import { setTitle } from '../api/helpers';
 import { routes } from '../api/routes';
 import { wpCat } from '../api/wpHelpers';
 

@@ -3,6 +3,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import { setTitle } from '../../api/browserHelpers';
 import {
     ageDefs,
     attributionDefs,
@@ -10,9 +11,9 @@ import {
     getPartyChartLabel,
     regionDefs,
 } from '../../api/chartHelpers';
-import { colors, labels } from '../../api/constants';
+import { colors } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import {
-    setTitle,
     sortByName,
     sortByNumericProp,
     sortBySpending,
@@ -29,15 +30,15 @@ import Loading from '../general/Loading';
 import TisPieChart from '../charts/TisPieChart';
 
 const chartKeys = {
-    SPENDING_PARTIES: labels.ads.meta.spending.partiesTitle,
-    SPENDING_ACCOUNTS: labels.ads.meta.spending.accountsTitle,
-    RANGES_PARTIES: labels.ads.meta.ranges.partiesTitle,
-    RANGES_ACCOUNTS: labels.ads.meta.ranges.accountsTitle,
-    AMOUNTS_PARTIES: labels.ads.amount.partiesTitle,
-    AMOUNTS_ACCOUNTS: labels.ads.amount.accountsTitle,
-    REGIONS: labels.ads.meta.regions.title,
-    DEMOGRAPHY: labels.ads.meta.demography.title,
-    ATTRIBUTION: labels.ads.meta.attribution.title,
+    SPENDING_PARTIES: 'SPENDING_PARTIES',
+    SPENDING_ACCOUNTS: 'SPENDING_ACCOUNTS',
+    RANGES_PARTIES: 'RANGES_PARTIES',
+    RANGES_ACCOUNTS: 'RANGES_ACCOUNTS',
+    AMOUNTS_PARTIES: 'AMOUNTS_PARTIES',
+    AMOUNTS_ACCOUNTS: 'AMOUNTS_ACCOUNTS',
+    REGIONS: 'REGIONS',
+    DEMOGRAPHY: 'DEMOGRAPHY',
+    ATTRIBUTION: 'ATTRIBUTION',
 };
 
 function Meta() {
@@ -99,7 +100,7 @@ function Meta() {
         color: colors.colorLightBlue,
         nameKey: 'name',
         dataKey: 'value',
-        label: labels.ads.meta.attribution.amount,
+        label: t(labels.ads.meta.attribution.amount),
     };
     let timestamp = 0;
 
@@ -344,7 +345,7 @@ function Meta() {
                 bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
-                subtitle={labels.ads.meta.spending.partiesDisclaimer}
+                subtitle={t(labels.ads.meta.spending.partiesDisclaimer)}
                 timestamp={sheetsData.lastUpdateFb}
                 vertical
             />
@@ -356,7 +357,7 @@ function Meta() {
                 bars={columnVariants.spending}
                 currency
                 data={spending.sort(sortBySpending)}
-                subtitle={labels.ads.meta.spending.disclaimer}
+                subtitle={t(labels.ads.meta.spending.disclaimer)}
                 timestamp={sheetsData.lastUpdateFb}
                 vertical
             />
@@ -364,7 +365,7 @@ function Meta() {
         [chartKeys.RANGES_PARTIES]: (
             <FbRangesChart
                 data={Object.values(partiesAggr).sort(sortByNumericProp('est'))}
-                subtitle={labels.ads.meta.ranges.disclaimer}
+                subtitle={t(labels.ads.meta.ranges.disclaimer)}
                 timestamp={timestamp}
                 vertical
             />
@@ -374,7 +375,7 @@ function Meta() {
         ) ? (
             <FbRangesChart
                 data={pages.sort(sortByNumericProp('est'))}
-                subtitle={labels.ads.meta.ranges.disclaimer}
+                subtitle={t(labels.ads.meta.ranges.disclaimer)}
                 timestamp={timestamp}
                 vertical
             />
@@ -385,7 +386,7 @@ function Meta() {
             <TisBarChart
                 bars={columnVariants.amount}
                 data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
-                subtitle={labels.ads.amount.disclaimer}
+                subtitle={t(labels.ads.amount.disclaimer)}
                 timestamp={timestamp}
                 vertical
             />
@@ -396,7 +397,7 @@ function Meta() {
             <TisBarChart
                 bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
-                subtitle={labels.ads.amount.disclaimer}
+                subtitle={t(labels.ads.amount.disclaimer)}
                 timestamp={timestamp}
                 vertical
             />
@@ -406,7 +407,7 @@ function Meta() {
                 bars={regionsBars}
                 data={regionsPercentages}
                 percent
-                subtitle={labels.ads.meta.regions.allDisclaimer}
+                subtitle={t(labels.ads.meta.regions.allDisclaimer)}
                 timestamp={timestamp}
                 vertical
             />
@@ -418,9 +419,11 @@ function Meta() {
                         bars={genderBars}
                         data={genderPercentages}
                         percent
-                        subtitle={labels.ads.meta.demography.gendersDisclaimer}
+                        subtitle={t(
+                            labels.ads.meta.demography.gendersDisclaimer
+                        )}
                         timestamp={timestamp}
-                        title={labels.ads.meta.demography.genders}
+                        title={t(labels.ads.meta.demography.genders)}
                         vertical
                     />
                 </Col>
@@ -429,9 +432,9 @@ function Meta() {
                         bars={ageBars}
                         data={agePercentages}
                         percent
-                        subtitle={labels.ads.meta.demography.agesDisclaimer}
+                        subtitle={t(labels.ads.meta.demography.agesDisclaimer)}
                         timestamp={timestamp}
-                        title={labels.ads.meta.demography.ages}
+                        title={t(labels.ads.meta.demography.ages)}
                         vertical
                     />
                 </Col>
@@ -445,9 +448,9 @@ function Meta() {
                     <TisPieChart
                         pie={attributionsPie}
                         percent={false}
-                        subtitle={labels.ads.meta.attribution.disclaimer}
+                        subtitle={t(labels.ads.meta.attribution.disclaimer)}
                         timestamp={timestamp}
-                        title={labels.ads.meta.attribution.allTitle}
+                        title={t(labels.ads.meta.attribution.allTitle)}
                     />
                 </Col>
                 <Col xl={6}>
@@ -455,9 +458,9 @@ function Meta() {
                         bars={attributionsBars}
                         data={attributionsPercentages}
                         percent
-                        subtitle={labels.ads.meta.attribution.pctDisclaimer}
+                        subtitle={t(labels.ads.meta.attribution.pctDisclaimer)}
                         timestamp={timestamp}
-                        title={labels.ads.meta.attribution.pctTitle}
+                        title={t(labels.ads.meta.attribution.pctTitle)}
                         vertical
                     />
                 </Col>
@@ -465,15 +468,22 @@ function Meta() {
         ) : null,
     };
 
-    const accordions = [];
-    Object.values(chartKeys).forEach((chartKey) => {
-        accordions.push(
-            <Accordion.Item key={chartKey} eventKey={chartKey}>
-                <Accordion.Header>{chartKey}</Accordion.Header>
-                <Accordion.Body>{charts[chartKey]}</Accordion.Body>
-            </Accordion.Item>
-        );
-    });
+    const accordions = [
+        [chartKeys.SPENDING_PARTIES, labels.ads.meta.spending.partiesTitle],
+        [chartKeys.SPENDING_ACCOUNTS, labels.ads.meta.spending.accountsTitle],
+        [chartKeys.RANGES_PARTIES, labels.ads.meta.ranges.partiesTitle],
+        [chartKeys.RANGES_ACCOUNTS, labels.ads.meta.ranges.accountsTitle],
+        [chartKeys.AMOUNTS_PARTIES, labels.ads.amount.partiesTitle],
+        [chartKeys.AMOUNTS_ACCOUNTS, labels.ads.amount.accountsTitle],
+        [chartKeys.REGIONS, labels.ads.meta.regions.title],
+        [chartKeys.DEMOGRAPHY, labels.ads.meta.demography.title],
+        [chartKeys.ATTRIBUTION, labels.ads.meta.attribution.title],
+    ].map(([key, label]) => (
+        <Accordion.Item key={key} eventKey={key}>
+            <Accordion.Header>{t(label)}</Accordion.Header>
+            <Accordion.Body>{charts[key]}</Accordion.Body>
+        </Accordion.Item>
+    ));
 
     if (!metaApiData.lastUpdate || metaApiData.error) {
         // waiting for data or error in loding
@@ -496,7 +506,7 @@ function Meta() {
     return (
         <div>
             <AlertWithIcon className="my-4" variant="primary">
-                {labels.ads.meta.disclaimer}
+                {t(labels.ads.meta.disclaimer)}
             </AlertWithIcon>
             <Accordion
                 className="mt-4"

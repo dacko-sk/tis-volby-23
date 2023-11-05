@@ -12,7 +12,6 @@ import {
     XAxis,
     YAxis,
 } from 'recharts';
-import has from 'has';
 
 import {
     horizontalYaxisWidth,
@@ -114,15 +113,15 @@ function TisBarChart({
                 dataKey={bar.key}
                 fill={bar.color}
                 name={bar.name}
-                label={has(bar, 'label') ? bar.label : null}
-                stackId={has(bar, 'stackId') ? bar.stackId : null}
+                label={bar.label ?? null}
+                stackId={bar.stackId ?? null}
             >
                 {parsedData.map((dataObj) => (
                     <Cell
                         key={`cell-${dataObj[bar.key]}`}
                         fill={dataObj.color ?? bar.color}
                     >
-                        {has(bar, 'labelList') ? bar.labelList : null}
+                        {bar.labelList ?? null}
                     </Cell>
                 ))}
             </Bar>

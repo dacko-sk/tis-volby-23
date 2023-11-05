@@ -1,7 +1,7 @@
 import { useOutletContext } from 'react-router-dom';
 
-import { labels } from '../../api/constants';
-import { setTitle } from '../../api/helpers';
+import { setTitle } from '../../api/browserHelpers';
+import { labels, t } from '../../api/dictionary';
 import { wpCat } from '../../api/wpHelpers';
 
 import AlertWithIcon from '../../components/general/AlertWithIcon';
@@ -19,7 +19,7 @@ function PartyNews() {
             />
         ) : (
             <AlertWithIcon className="my-4" variant="danger">
-                {labels.news.noData}
+                {t(labels.news.noData)}
             </AlertWithIcon>
         );
 

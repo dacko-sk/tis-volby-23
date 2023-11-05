@@ -16,7 +16,8 @@ import {
     tooltipNameFormat,
     verticalYaxisWidth,
 } from '../../api/chartHelpers';
-import { colors, labels } from '../../api/constants';
+import { colors } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { numFormat, wholeCurrencyFormat } from '../../api/helpers';
 import { separators } from '../../api/routes';
 
@@ -148,12 +149,12 @@ function FbRangesChart({
                                 key="range"
                                 dataKey="range"
                                 fill={colors.colorDarkBlue}
-                                name={labels.ads.meta.ranges.range}
+                                name={t(labels.ads.meta.ranges.range)}
                             />
                             <Scatter
                                 dataKey="est"
                                 fill={colors.colorOrange}
-                                name={labels.ads.meta.ranges.estimate}
+                                name={t(labels.ads.meta.ranges.estimate)}
                             />
                         </ComposedChart>
                     </ResponsiveContainer>

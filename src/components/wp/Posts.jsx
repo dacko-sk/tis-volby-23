@@ -5,8 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 
+import { scrollToTop } from '../../api/browserHelpers';
 import { labels, t } from '../../api/dictionary';
-import { scrollToTop } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 import { getAnalysedData, processArticles, wpCat } from '../../api/wpHelpers';
 

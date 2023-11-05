@@ -10,7 +10,8 @@ import {
     genderDefs,
     regionDefs,
 } from '../../api/chartHelpers';
-import { colors, labels } from '../../api/constants';
+import { colors } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { sortByNumericProp, sortBySpending } from '../../api/helpers';
 
 import useAdsData from '../../context/AdsDataContext';
@@ -24,12 +25,12 @@ import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Loading from '../../components/general/Loading';
 
 const chartKeys = {
-    SPENDING: labels.ads.meta.spending.partyAccountsTitle,
-    RANGES: labels.ads.meta.ranges.partyAccountsTitle,
-    AMOUNTS: labels.ads.amount.partyAccountsTitle,
-    REGIONS: labels.ads.meta.regions.title,
-    DEMOGRAPHY: labels.ads.meta.demography.title,
-    ATTRIBUTION: labels.ads.meta.attribution.title,
+    SPENDING: 'SPENDING',
+    RANGES: 'RANGES',
+    AMOUNTS: 'AMOUNTS',
+    REGIONS: 'REGIONS',
+    DEMOGRAPHY: 'DEMOGRAPHY',
+    ATTRIBUTION: 'ATTRIBUTION',
 };
 
 function PartyMeta() {
@@ -61,8 +62,8 @@ function PartyMeta() {
         nameKey: 'name',
         dataKey: 'value',
         innerKey: 'size',
-        label: labels.ads.meta.regions.label,
-        innerLabel: labels.ads.meta.regions.sizeLabel,
+        label: t(labels.ads.meta.regions.label),
+        innerLabel: t(labels.ads.meta.regions.sizeLabel),
     };
     const regionsCols = {};
     let regionsDiffs = [];
@@ -73,14 +74,14 @@ function PartyMeta() {
         color: colors.colorLightBlue,
         nameKey: 'name',
         dataKey: 'value',
-        label: labels.ads.percent,
+        label: t(labels.ads.percent),
     };
     const agesPie = {
         data: [],
         color: colors.colorDarkBlue,
         nameKey: 'name',
         dataKey: 'value',
-        label: labels.ads.percent,
+        label: t(labels.ads.percent),
     };
     const attributions = {};
     const attrOptional = {};
@@ -89,14 +90,14 @@ function PartyMeta() {
         color: colors.colorLightBlue,
         nameKey: 'name',
         dataKey: 'value',
-        label: labels.ads.meta.attribution.amount,
+        label: t(labels.ads.meta.attribution.amount),
     };
     const attrOptionalPie = {
         data: [],
         color: colors.colorLightBlue,
         nameKey: 'name',
         dataKey: 'value',
-        label: labels.ads.meta.attribution.amount,
+        label: t(labels.ads.meta.attribution.amount),
     };
     let timestamp = 0;
 
@@ -239,7 +240,7 @@ function PartyMeta() {
                 currency
                 data={spending.sort(sortBySpending)}
                 timestamp={sheetsData.lastUpdateFb}
-                subtitle={labels.ads.meta.spending.disclaimer}
+                subtitle={t(labels.ads.meta.spending.disclaimer)}
                 vertical
             />
         ) : null,
@@ -247,7 +248,7 @@ function PartyMeta() {
             <FbRangesChart
                 data={ranges.sort(sortByNumericProp('est'))}
                 timestamp={timestamp}
-                subtitle={labels.ads.meta.ranges.disclaimer}
+                subtitle={t(labels.ads.meta.ranges.disclaimer)}
                 vertical
             />
         ) : null,
@@ -256,7 +257,7 @@ function PartyMeta() {
                 bars={columnVariants.amount}
                 data={amounts.sort(sortByNumericProp('num'))}
                 timestamp={timestamp}
-                subtitle={labels.ads.amount.disclaimer}
+                subtitle={t(labels.ads.amount.disclaimer)}
                 vertical
             />
         ) : null,
@@ -265,13 +266,7 @@ function PartyMeta() {
                 <Col xl={6}>
                     <TisPieChart
                         pie={regionsPie}
-                        subtitle={
-                            <>
-                                {labels.ads.meta.regions.disclaimer}
-                                <br />
-                                {labels.ads.meta.regions.sizeDisclaimer}
-                            </>
-                        }
+                        subtitle={t(labels.ads.meta.regions.disclaimer)}
                         timestamp={timestamp}
                     />
                 </Col>
@@ -281,13 +276,13 @@ function PartyMeta() {
                         bars={[
                             {
                                 key: 'value',
-                                name: labels.ads.meta.regions.diffAvg,
+                                name: t(labels.ads.meta.regions.diffAvg),
                                 color: '#000',
                             },
                         ]}
                         data={regionsDiffs}
                         diffFromAverage
-                        subtitle={labels.ads.meta.regions.diffAvgDisclaimer}
+                        subtitle={t(labels.ads.meta.regions.diffAvgDisclaimer)}
                         timestamp={timestamp}
                         vertical
                     />
@@ -300,16 +295,18 @@ function PartyMeta() {
                     <TisPieChart
                         pie={gendersPie}
                         timestamp={timestamp}
-                        subtitle={labels.ads.meta.demography.gendersDisclaimer}
-                        title={labels.ads.meta.demography.genders}
+                        subtitle={t(
+                            labels.ads.meta.demography.gendersDisclaimer
+                        )}
+                        title={t(labels.ads.meta.demography.genders)}
                     />
                 </Col>
                 <Col xl={6}>
                     <TisPieChart
                         pie={agesPie}
-                        subtitle={labels.ads.meta.demography.agesDisclaimer}
+                        subtitle={t(labels.ads.meta.demography.agesDisclaimer)}
                         timestamp={timestamp}
-                        title={labels.ads.meta.demography.ages}
+                        title={t(labels.ads.meta.demography.ages)}
                     />
                 </Col>
             </Row>
@@ -322,24 +319,28 @@ function PartyMeta() {
                     <TisPieChart
                         pie={attributionsPie}
                         percent={false}
-                        subtitle={labels.ads.meta.attribution.disclaimer}
+                        subtitle={t(labels.ads.meta.attribution.disclaimer)}
                         timestamp={timestamp}
-                        // title={labels.ads.meta.attribution.campaign}
+                        // title={t(labels.ads.meta.attribution.campaign)}
                     />
                 </Col>
             </Row>
         ) : null,
     };
 
-    const accordions = [];
-    Object.values(chartKeys).forEach((chartKey) => {
-        accordions.push(
-            <Accordion.Item key={chartKey} eventKey={chartKey}>
-                <Accordion.Header>{chartKey}</Accordion.Header>
-                <Accordion.Body>{charts[chartKey]}</Accordion.Body>
-            </Accordion.Item>
-        );
-    });
+    const accordions = [
+        [chartKeys.SPENDING, labels.ads.meta.spending.partyAccountsTitle],
+        [chartKeys.RANGES, labels.ads.meta.ranges.partyAccountsTitle],
+        [chartKeys.AMOUNTS, labels.ads.amount.partyAccountsTitle],
+        [chartKeys.REGIONS, labels.ads.meta.regions.title],
+        [chartKeys.DEMOGRAPHY, labels.ads.meta.demography.title],
+        [chartKeys.ATTRIBUTION, labels.ads.meta.attribution.title],
+    ].map(([key, label]) => (
+        <Accordion.Item key={key} eventKey={key}>
+            <Accordion.Header>{t(label)}</Accordion.Header>
+            <Accordion.Body>{charts[key]}</Accordion.Body>
+        </Accordion.Item>
+    ));
 
     const onSelect = (ak) => {
         // open/close accordion
@@ -370,7 +371,7 @@ function PartyMeta() {
     } else {
         content = (
             <AlertWithIcon className="my-4" variant="danger">
-                {labels.ads.noData}
+                {t(labels.ads.noData)}
             </AlertWithIcon>
         );
     }
@@ -378,7 +379,7 @@ function PartyMeta() {
     return (
         <div className="ads-provider">
             <AlertWithIcon className="my-4" variant="primary">
-                {labels.ads.meta.disclaimer}
+                {t(labels.ads.meta.disclaimer)}
             </AlertWithIcon>
             {content}
         </div>

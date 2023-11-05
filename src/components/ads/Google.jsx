@@ -5,9 +5,9 @@ import Row from 'react-bootstrap/Row';
 
 import { formatDefs, getPartyChartLabel } from '../../api/chartHelpers';
 import { labels, t } from '../../api/dictionary';
+import { setTitle } from '../../api/browserHelpers';
 import {
     fixNumber,
-    setTitle,
     sortByNumericProp,
     sortBySpending,
 } from '../../api/helpers';
@@ -22,11 +22,11 @@ import Loading from '../general/Loading';
 import TisPieChart from '../charts/TisPieChart';
 
 const chartKeys = {
-    SPENDING_PARTIES: labels.ads.google.spending.partiesTitle,
-    SPENDING_ACCOUNTS: labels.ads.google.spending.accountsTitle,
-    AMOUNTS_PARTIES: labels.ads.amount.partiesTitle,
-    AMOUNTS_ACCOUNTS: labels.ads.amount.accountsTitle,
-    FORMATS: labels.ads.google.format.title,
+    SPENDING_PARTIES: 'SPENDING_PARTIES',
+    SPENDING_ACCOUNTS: 'SPENDING_ACCOUNTS',
+    AMOUNTS_PARTIES: 'AMOUNTS_PARTIES',
+    AMOUNTS_ACCOUNTS: 'AMOUNTS_ACCOUNTS',
+    FORMATS: 'FORMATS',
 };
 
 function Google() {
@@ -140,7 +140,7 @@ function Google() {
                 bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAggr).sort(sortBySpending)}
-                subtitle={labels.ads.google.spending.partiesDisclaimer}
+                subtitle={t(labels.ads.google.spending.partiesDisclaimer)}
                 timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
@@ -152,7 +152,7 @@ function Google() {
                 bars={columnVariants.spending}
                 currency
                 data={Object.values(spendingAccounts).sort(sortBySpending)}
-                subtitle={labels.ads.google.spending.disclaimer}
+                subtitle={t(labels.ads.google.spending.disclaimer)}
                 timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
@@ -163,7 +163,7 @@ function Google() {
             <TisBarChart
                 bars={columnVariants.amount}
                 data={Object.values(amountsAggr).sort(sortByNumericProp('num'))}
-                subtitle={labels.ads.amount.disclaimer}
+                subtitle={t(labels.ads.amount.disclaimer)}
                 timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
@@ -176,7 +176,7 @@ function Google() {
                 data={Object.values(amountsAccounts).sort(
                     sortByNumericProp('num')
                 )}
-                subtitle={labels.ads.amount.disclaimer}
+                subtitle={t(labels.ads.amount.disclaimer)}
                 timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
@@ -188,7 +188,7 @@ function Google() {
                         currency
                         pie={formatPie}
                         percent={false}
-                        subtitle={labels.ads.google.format.disclaimer}
+                        subtitle={t(labels.ads.google.format.disclaimer)}
                         timestamp={sheetsData.lastUpdateGgl}
                     />
                 </Col>
@@ -196,15 +196,18 @@ function Google() {
         ) : null,
     };
 
-    const accordions = [];
-    Object.values(chartKeys).forEach((chartKey) => {
-        accordions.push(
-            <Accordion.Item key={chartKey} eventKey={chartKey}>
-                <Accordion.Header>{chartKey}</Accordion.Header>
-                <Accordion.Body>{charts[chartKey]}</Accordion.Body>
-            </Accordion.Item>
-        );
-    });
+    const accordions = [
+        [chartKeys.SPENDING_PARTIES, labels.ads.google.spending.partiesTitle],
+        [chartKeys.SPENDING_ACCOUNTS, labels.ads.google.spending.accountsTitle],
+        [chartKeys.AMOUNTS_PARTIES, labels.ads.amount.partiesTitle],
+        [chartKeys.AMOUNTS_ACCOUNTS, labels.ads.amount.accountsTitle],
+        [chartKeys.FORMATS, labels.ads.google.format.title],
+    ].map(([key, label]) => (
+        <Accordion.Item key={key} eventKey={key}>
+            <Accordion.Header>{t(label)}</Accordion.Header>
+            <Accordion.Body>{charts[key]}</Accordion.Body>
+        </Accordion.Item>
+    ));
 
     if (!sheetsData.lastUpdateGgl || sheetsData.error) {
         // waiting for data or error in loding
@@ -227,7 +230,7 @@ function Google() {
     return (
         <div>
             <AlertWithIcon className="my-4" variant="primary">
-                {labels.ads.google.disclaimer}
+                {t(labels.ads.google.disclaimer)}
             </AlertWithIcon>
             <Accordion
                 className="mt-4"

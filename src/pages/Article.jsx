@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { setTitle } from '../api/helpers';
+import { setTitle } from '../api/browserHelpers';
 
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';

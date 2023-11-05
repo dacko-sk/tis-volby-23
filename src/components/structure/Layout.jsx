@@ -5,7 +5,7 @@ import has from 'has';
 import useGoogleSheets from 'use-google-sheets';
 import { useQuery } from '@tanstack/react-query';
 
-import { scrollToTop } from '../../api/helpers';
+import { scrollToTop } from '../../api/browserHelpers';
 
 import useAdsData, {
     loadingErrorMetaApi,

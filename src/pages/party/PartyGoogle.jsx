@@ -22,9 +22,9 @@ import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Loading from '../../components/general/Loading';
 
 const chartKeys = {
-    SPENDING: labels.ads.google.spending.partyAccountsTitle,
-    AMOUNTS: labels.ads.amount.partyAccountsTitle,
-    FORMATS: labels.ads.google.format.title,
+    SPENDING: 'SPENDING',
+    AMOUNTS: 'AMOUNTS',
+    FORMATS: 'FORMATS',
 };
 
 function PartyGoogle() {
@@ -113,7 +113,7 @@ function PartyGoogle() {
                 bars={columnVariants.spending}
                 currency
                 data={spending}
-                subtitle={labels.ads.google.spending.disclaimer}
+                subtitle={t(labels.ads.google.spending.disclaimer)}
                 timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
@@ -122,7 +122,7 @@ function PartyGoogle() {
             <TisBarChart
                 bars={columnVariants.amount}
                 data={amounts}
-                subtitle={labels.ads.amount.disclaimer}
+                subtitle={t(labels.ads.amount.disclaimer)}
                 timestamp={sheetsData.lastUpdateGgl}
                 vertical
             />
@@ -134,7 +134,7 @@ function PartyGoogle() {
                         currency
                         pie={formatPie}
                         percent={false}
-                        subtitle={labels.ads.google.format.disclaimer}
+                        subtitle={t(labels.ads.google.format.disclaimer)}
                         timestamp={sheetsData.lastUpdateGgl}
                     />
                 </Col>
@@ -142,15 +142,16 @@ function PartyGoogle() {
         ) : null,
     };
 
-    const accordions = [];
-    Object.values(chartKeys).forEach((chartKey) => {
-        accordions.push(
-            <Accordion.Item key={chartKey} eventKey={chartKey}>
-                <Accordion.Header>{chartKey}</Accordion.Header>
-                <Accordion.Body>{charts[chartKey]}</Accordion.Body>
-            </Accordion.Item>
-        );
-    });
+    const accordions = [
+        [chartKeys.SPENDING, labels.ads.google.spending.partyAccountsTitle],
+        [chartKeys.AMOUNTS, labels.ads.amount.partyAccountsTitle],
+        [chartKeys.FORMATS, labels.ads.google.format.title],
+    ].map(([key, label]) => (
+        <Accordion.Item key={key} eventKey={key}>
+            <Accordion.Header>{t(label)}</Accordion.Header>
+            <Accordion.Body>{charts[key]}</Accordion.Body>
+        </Accordion.Item>
+    ));
 
     const onSelect = (ak) => {
         // open/close accordion
@@ -181,7 +182,7 @@ function PartyGoogle() {
     } else {
         content = (
             <AlertWithIcon className="my-4" variant="danger">
-                {labels.ads.noData}
+                {t(labels.ads.noData)}
             </AlertWithIcon>
         );
     }
@@ -189,7 +190,7 @@ function PartyGoogle() {
     return (
         <div className="ads-provider">
             <AlertWithIcon className="my-4" variant="primary">
-                {labels.ads.google.disclaimer}
+                {t(labels.ads.google.disclaimer)}
             </AlertWithIcon>
             {content}
         </div>

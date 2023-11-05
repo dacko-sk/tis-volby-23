@@ -3,8 +3,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import { setTitle } from '../api/browserHelpers';
 import { labels, t } from '../api/dictionary';
-import { contains, setTitle } from '../api/helpers';
+import { contains } from '../api/helpers';
 import { routes, segments } from '../api/routes';
 import { wpCat } from '../api/wpHelpers';
 

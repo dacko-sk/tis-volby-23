@@ -1,7 +1,7 @@
 import { useLocation, useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { setTitle } from '../../api/helpers';
+import { setTitle } from '../../api/browserHelpers';
 import { analysisLabels, getAnalysedData, wpCat } from '../../api/wpHelpers';
 
 import { csvAggregatedKeys } from '../../context/DataContext';

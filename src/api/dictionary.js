@@ -1,12 +1,24 @@
 import { elections as el } from './constants';
-import { nl2r } from './helpers';
 import { getCurrentLanguage, languages } from './routes';
 
 import { csvAccountKeys as ak } from '../context/DataContext';
 
 export const labels = {
     account: {
+        allTransactions: [
+            'Zobraziť všetky transakcie',
+            'Show all transactions',
+        ],
+        balance: ['Zostatok', 'Balance'],
         download: ['Stiahnuť ako CSV', 'Download as CSV'],
+        expensesAmount: ['Počet výdavkov', 'Number of expenses'],
+        incomesAmount: ['Počet príjmov', 'Number of incomes'],
+        info: ['Informácie o kampani', 'Campaign details'],
+        overview: [
+            'Prehľad transakcií na transparentnom účte',
+            'Transparent Account Transactions',
+        ],
+        partySpending: ['Priebežné výdavky strany', 'Party spending'],
         tableCols: {
             [ak.account_name]: ['Názov účtu', 'Account name'],
             [ak.date]: ['Dátum', 'Date'],
@@ -21,102 +33,208 @@ export const labels = {
             'Sum of spendings on accounts of all political parties.',
         ],
         totalSpending: ['Celkové výdavky strán', 'Total parties spending'],
-        overview: [
-            'Prehľad transakcií na transparentnom účte',
-            'Transparent Account Transactions',
-        ],
     },
     ads: {
         amount: {
-            accountsTitle: `Počet reklám jednotlivých profilov`,
-            // disclaimer: `Počet reklám ${phrases.preCampaignStart}`,
+            accountsTitle: [
+                'Počet reklám jednotlivých profilov',
+                'Number of ads of individual profiles',
+            ],
+            disclaimer: [
+                'Počet reklám od začiatku predkampane 11. decembra 2022.',
+                'Number of ads since the beginning of precampaign on December 2, 2022.',
+            ],
             label: ['Počet reklám', 'Amount of ads'],
-            partiesTitle:
+            partiesTitle: [
                 'Súčet počtov reklám všetkých profilov politickej strany',
-            partyAccountsTitle: `Počet reklám jednotlivých profilov strany`,
+                'Sum of ads amounts of all party profiles',
+            ],
+            partyAccountsTitle: [
+                'Počet reklám jednotlivých profilov strany',
+                'Number of ads of party individual profiles',
+            ],
         },
         google: {
-            disclaimer:
+            disclaimer: [
                 'Politickú reklamu strán a ich politikov, zverejnenú prostredníctvom služieb Google Ads a Google Display & Video 360, sledujeme vďaka údajom, ktoré publikuje spoločnosť Google v Centre transparentnosti reklám. Sumy sú uvedené bez DPH.',
+                'Political ads of parties and their politicians published in Google Ads and Google Display & Video 360 platforms is monitored thanks to the data published by Google in Google Ads Transparency Center. Amounts are without VAT.',
+            ],
             format: {
-                disclaimer:
+                disclaimer: [
                     'Podiel jednotlivých formátov Google reklamy na celkových výdavkoch.',
-                title: 'Formáty reklamy',
+                    'Share of individual Google Ads formats in total expenses.',
+                ],
+                title: ['Formáty reklamy', 'Ad format'],
             },
             spending: {
-                accountsTitle: `Profily s výdavkami na reklamu nad 100 €`,
-                // disclaimer: `Zobrazené sú len politické účty, ${phrases.google} ${phrases.preCampaignStart}`,
+                accountsTitle: [
+                    'Profily s výdavkami na reklamu nad 100 €',
+                    'Profiles with advertising expenses exceeding 100 €',
+                ],
+                disclaimer: [
+                    'Zobrazené sú len politické účty, ktoré prostredníctvom služieb Google Ads a Google Display & Video 360 uverejnili reklamy v hodnote nad 100 € od začiatku predkampane 11. decembra 2022.',
+                    'We list only profiles whose spending on Google Ads and Google Display & Video 360 platforms exceeded 100 € since the beginning of precampaign on December 2, 2022.',
+                ],
                 partiesDisclaimer: [
                     'Započítané sú len politické účty, ktoré prostredníctvom služieb Google Ads a Google Display & Video 360 uverejnili reklamy v hodnote nad 100 € od začiatku predkampane 11. decembra 2022. Pre kompletný zoznam započítaných straníckych profilov a podrobnejšie dáta o online kampani, kliknite na názov strany.',
-                    'Including political accounts whose spending on Google Ads and Google Display & Video 360 platforms exceeded 100 € since the beginning of precampaign (December 11th 2022). Click the party name for complete list of included profiles.',
+                    'Including political profiles whose spending on Google Ads and Google Display & Video 360 platforms exceeded 100 € since the beginning of precampaign on December 2, 2022. Click the party name for complete list of included profiles.',
                 ],
-                partiesTitle: `Súčet výdavkov všetkých profilov politickej strany s výdavkami na reklamu nad 100 €`,
-                partyAccountsTitle: `Profily strany s výdavkami na reklamu nad 100 €`,
+                partiesTitle: [
+                    'Súčet výdavkov všetkých profilov politickej strany s výdavkami na reklamu nad 100 €',
+                    'Sum of advertising expenses of all profiles of the party exceeding 100 €',
+                ],
+                partyAccountsTitle: [
+                    'Profily strany s výdavkami na reklamu nad 100 €',
+                    'Profiles of the party with advertising expenses exceeding 100 €',
+                ],
             },
             title: ['Google'],
             topTitle: ['Top 10 Google kampaní', 'Top 10 Google campaigns'],
-            // totalDisclaimer: `Súčet výdavkov politických účtov, ${phrases.google} ${phrases.preCampaignStart}`,
-            totalSpendingTitle: 'Výdavky na Google reklamu',
+            totalDisclaimer: [
+                'Súčet výdavkov politických účtov, ktoré prostredníctvom služieb Google Ads a Google Display & Video 360 uverejnili reklamy v hodnote nad 100 € od začiatku predkampane 11. decembra 2022.',
+                'Sum of expenses of profiles whose spending on Google Ads and Google Display & Video 360 platforms exceeded 100 € since the beginning of precampaign on December 2, 2022.',
+            ],
+            totalSpendingTitle: [
+                'Výdavky na Google reklamu',
+                'Advertising expenses in Google',
+            ],
         },
         meta: {
             attribution: {
-                allTitle: 'Bilancia všetkých strán',
-                amount: 'Počet',
-                campaign: 'Kampaň',
-                // disclaimer: `Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani ${phrases.campaignStart} ${phrases.attr}`,
-                pctTitle: 'Rebríček správnosti označovania',
-                // pctDisclaimer: `Podiel správne označených reklám podľa zákona o volebnej kampani ${phrases.campaignStart} ${phrases.attr}`,
-                precampaign: `Predkampaň`,
-                title: 'Označenie objednávateľa a dodávateľa',
+                allTitle: [
+                    'Bilancia všetkých strán',
+                    'Attribution by all parties',
+                ],
+                amount: ['Počet', 'Amount'],
+                campaign: ['Kampaň', 'Campaign'],
+                disclaimer: [
+                    'Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023. Za správne označenú reklamu vyhodnocujeme statusy, v TEXTE ktorých je uvedený objednávateľ a dodávateľ reklamy. Statusy bez textu vyhodnocujeme ako "Nezistené".',
+                    'Mandatory attribution of customer & supplier since the beginning of campaign on June 9, 2023. We evaluate status as correctly labeled if it contains "objednávateľ" and "dodávateľ" words in the TEXT. Statuses with no text are evaluated as "not detected"',
+                ],
+                pctTitle: [
+                    'Rebríček správnosti označovania',
+                    'Chart of attribution correctness',
+                ],
+                pctDisclaimer: [
+                    'Podiel správne označených reklám podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023. Za správne označenú reklamu vyhodnocujeme statusy, v TEXTE ktorých je uvedený objednávateľ a dodávateľ reklamy. Statusy bez textu vyhodnocujeme ako "Nezistené".',
+                    'Share of correctly labeled ads since the beginning of campaign on June 9, 2023. We evaluate status as correctly labeled if it contains "objednávateľ" and "dodávateľ" words in the TEXT. Statuses with no text are evaluated as "not detected"',
+                ],
+                precampaign: ['Predkampaň', 'Precampaign'],
+                title: [
+                    'Označenie objednávateľa a dodávateľa',
+                    'Attribution of customer and supplier',
+                ],
             },
             demography: {
-                ages: 'Vekové skupiny',
-                // agesDisclaimer: `Podiel zásahu reklám vo vekových skupinách obyvateľstva ${phrases.preCampaignStart}`,
-                genders: 'Pohlavia',
-                // gendersDisclaimer: `Podiel zásahu reklám medzi pohlaviami ${phrases.preCampaignStart}`,
-                title: 'Demografické rozloženie reklamy',
+                ages: ['Vekové skupiny', 'Age groups'],
+                agesDisclaimer: [
+                    'Podiel zásahu reklám vo vekových skupinách obyvateľstva od začiatku predkampane 11. decembra 2022.',
+                    'Distribution of ads impressions between age groups since the beginning of precampaign on December 2, 2022.',
+                ],
+                genders: ['Pohlavia', 'Genders'],
+                gendersDisclaimer: [
+                    'Podiel zásahu reklám medzi pohlaviami od začiatku predkampane 11. decembra 2022.',
+                    'Distribution of ads impressions between genders since the beginning of precampaign on December 2, 2022.',
+                ],
+                title: [
+                    'Demografické rozloženie reklamy',
+                    'Ads demographic distribution',
+                ],
             },
-            disclaimer:
+            disclaimer: [
                 'Politickú reklamu strán a ich politikov na sociálnych sieťach Facebook a Instagram sledujeme vďaka údajom, ktoré publikuje spoločnosť Meta v knižnici Meta Ad Library. Sumy sú uvedené bez DPH.',
+                'Political ads of parties and their politicians published on Facebook and Instagram platforms is monitored thanks to the data published by Meta in Meta Ad Library. Amounts are without VAT.',
+            ],
             ranges: {
-                accountsTitle: `Najviac inzerujúce profily od začiatku predkampane`,
-                // disclaimer: `Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných ${phrases.preCampaignStart}`,
-                estimate: 'Odhadované výdavky',
-                partiesTitle: `Rozsah výdavkov všetkých profilov politickej strany od začiatku predkampane`,
-                partyAccountsTitle: `Najviac inzerujúce profily strany od začiatku predkampane`,
-                range: 'Skutočný rozsah výdavkov',
+                accountsTitle: [
+                    'Najviac inzerujúce profily od začiatku predkampane',
+                    'Profiles with highest advertising expenses range since the beginning of precampaign',
+                ],
+                disclaimer: [
+                    'Meta uvádza výdavky za reklamu v 100-eurových intervaloch, preto nie je možné urciť presnú sumu. Zobrazujeme celý interval a odhad výdavkov, ktorý je súčtom stredov intervalov všetkých reklám daného profilu zobrazovaných od začiatku predkampane 11. decembra 2022.',
+                    'Meta publishes advertising expenses in 100-eur intervals, therefore it is not possible to determine the exact amount. We show the whole interval and expenses estimate, which is the sum of middles of expenses intervals of all ads of the profile since the beginning of precampaign on December 2, 2022.',
+                ],
+                estimate: ['Odhadované výdavky', 'Estimated expenses'],
+                partiesTitle: [
+                    'Rozsah výdavkov všetkých profilov politickej strany od začiatku predkampane',
+                    'Advertising expenses range of all profiles of the party since the beginning of precampaign',
+                ],
+                partyAccountsTitle: [
+                    'Najviac inzerujúce profily strany od začiatku predkampane',
+                    'Profiles of the party with highest advertising expenses range since the beginning of precampaign',
+                ],
+                range: ['Skutočný rozsah výdavkov', 'Real expenses interval'],
             },
             regions: {
-                // allDisclaimer: `Podiel zásahu online reklamy všetkých strán v krajoch Slovenska ${phrases.preCampaignStart} Pre podrobnejšiu analýzu cielenia strán na regióny vzhľadom na veľkosť krajov, kliknite na názov strany.`,
-                diffAvg: 'Odchýlka od priemerného zásahu strany v SR',
-                diffAvgDisclaimer:
+                allDisclaimer: [
+                    'Podiel zásahu online reklamy všetkých strán v krajoch Slovenska od začiatku predkampane 11. decembra 2022. Pre podrobnejšiu analýzu cielenia strán na regióny vzhľadom na veľkosť krajov, kliknite na názov strany.',
+                    'Distribution of ads impressions of all parties between regions of Slovakia since the beginning of precampaign on December 2, 2022. Click the party name for detailed analysis of party targeting on regions based on their sizes.',
+                ],
+                diffAvg: [
+                    'Odchýlka od priemerného zásahu strany v SR',
+                    'Deviation from average impressions in Slovakia',
+                ],
+                diffAvgDisclaimer: [
                     'Odchýlka zásahu reklamy na jedného obyvateľa kraja od priemerného zásahu strany v celej SR.',
-                // disclaimer: `Podiel zásahu online reklamy v krajoch Slovenska ${phrases.preCampaignStart} Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.`,
-                label: 'Podiel zásahu reklám',
-                sizeDisclaimer: '',
-                sizeLabel: 'Podiel populácie SR žijúcej v tomto kraji',
-                title: 'Regionálne rozloženie reklamy',
+                    'Difference between impression per one citizen and average impressions in Slovakia',
+                ],
+                disclaimer: [
+                    'Podiel zásahu online reklamy v krajoch Slovenska od začiatku predkampane 11. decembra 2022. Vnútorný graf zobrazuje veľkosti krajov podľa počtu obyvateľov.',
+                    'Distribution of ads impressions between regions of Slovakia since the beginning of precampaign on December 2, 2022. The inner chart shows sizes of regions based on number of citizens.',
+                ],
+                label: ['Podiel zásahu reklám', 'Distribution of impressions'],
+                sizeLabel: [
+                    'Podiel populácie SR žijúcej v tomto kraji',
+                    'Share of citizens living in this region',
+                ],
+                title: [
+                    'Regionálne rozloženie reklamy',
+                    'Regional distribution of ads',
+                ],
             },
             spending: {
-                accountsTitle: `Profily s týždennými výdavkami na reklamu nad 100 €`,
-                // disclaimer: `Zobrazené sú len profily, ${phrases.weeklyProfiles}`,
-                label: 'Týždňové výdavky na reklamu',
+                accountsTitle: [
+                    'Profily s týždennými výdavkami na reklamu nad 100 €',
+                    'Profiles with weekly advertising expenses exceeding 100 €',
+                ],
+                disclaimer: [
+                    'Zobrazené sú len profily, ktorých výdavky počas posledných 90 dní predkampane od 11. marca 2023 alebo týždňové výdavky od začiatku kampane 9. júna 2023 presiahli 100 €.',
+                    'Includes Meta profiles whose advertising expenses during last 90 days of precampaign from March 11, 2023 or weekly expenses from the beginning of campaign on June 9, 2023 exceeded 100 €',
+                ],
+                label: [
+                    'Týždňové výdavky na reklamu',
+                    'Weekly advertising expenses',
+                ],
                 partiesDisclaimer: [
                     'Započítané sú len profily na sociálnych sieťach platformy Meta, ktorých výdavky počas posledných 90 dní predkampane od 11. marca 2023 alebo týždňové výdavky od začiatku kampane 9. júna 2023 presiahli 100 €. Pre kompletný zoznam započítaných straníckych profilov a podrobnejšie dáta o online kampani, kliknite na názov strany.',
-                    'Includes Meta profiles whose spending in last 90 days of precampaing (from March 11th 2023) or weekly spending from campaign start (June 9th 2023) exceeded 100 €. Click the party name for complete list of included profiles.',
+                    'Includes Meta profiles whose advertising expenses during last 90 days of precampaign from March 11, 2023 or weekly expenses from the beginning of campaign on June 9, 2023 exceeded 100 €. Click the party name for complete list of included profiles.',
                 ],
-                partiesTitle:
+                partiesTitle: [
                     'Súčet výdavkov všetkých profilov politickej strany s týždennými výdavkami na reklamu nad 100 €',
-                partyAccountsTitle: `Profily strany s týždennými výdavkami na reklamu nad 100 €`,
+                    'Sum of advertising expenses of all profiles of the party with weekly expenses exceeding 100 €',
+                ],
+                partyAccountsTitle: [
+                    'Profily strany s týždennými výdavkami na reklamu nad 100 €',
+                    'Party profiles with weekly advertising expenses exceeding 100 €',
+                ],
             },
             title: ['Meta'],
             topTitle: ['Top 10 Meta kampaní', 'Top 10 Meta campaigns'],
-            // totalDisclaimer: `Súčet výdavkov na politickú reklamu ${phrases.meta}. Započítane sú všetky profily, ${phrases.weeklyProfiles}`,
-            totalSpendingTitle: 'Výdavky na Meta reklamu',
+            totalDisclaimer: [
+                'Súčet výdavkov na politickú reklamu na sociálnych sieťach platformy Meta. Započítane sú všetky profily, ktorých výdavky počas posledných 90 dní predkampane od 11. marca 2023 alebo týždňové výdavky od začiatku kampane 9. júna 2023 presiahli 100 €.',
+                'Sum of advertising expenses on social networks of Meta. Includes Meta profiles whose advertising expenses during last 90 days of precampaign from March 11, 2023 or weekly expenses from the beginning of campaign on June 9, 2023 exceeded 100 €',
+            ],
+            totalSpendingTitle: [
+                'Výdavky na Meta reklamu',
+                'Advertising expenses in Meta',
+            ],
         },
-        noData: 'Neevidujeme žiaden účet strany s výdavkami na sponzorované príspevky na tejto platforme.',
+        noData: [
+            'Neevidujeme žiaden účet strany s výdavkami na sponzorované príspevky na tejto platforme.',
+            'We did not find any profiles of the party with sponsored ads on this platform.',
+        ],
         pageTitle: ['Online kampane', 'Online campaigns'],
-        percent: 'Podiel',
+        percent: ['Podiel', 'Share'],
         showMore: [
             'Zistiť viac o online kampani',
             'Learn more about Online Campaigns',
@@ -138,7 +256,7 @@ export const labels = {
     charts: {
         disclaimer: [
             'Grafy obsahujú dáta z transparentných účtov, očistené o vrátené platby.',
-            'Graphs contains data from transparent accounts, with filtered return payments.',
+            'Graphs contains data from transparent accounts net of return payments.',
         ],
         disclaimerClick: [
             'Po kliknutí na názov strany sa rozbalia podrobnosti.',
@@ -151,7 +269,7 @@ export const labels = {
             'Top 10 kampaní podľa výdavkov a príjmov',
             'Top 10 campaigns by incomes and spendings',
         ],
-        uniqeDonors: ['Počet unikátnych darcov', 'No. of unique donors'],
+        uniqeDonors: ['Počet unikátnych darcov', 'Number of unique donors'],
     },
     contact: ['Kontakt', 'Contact'],
     cookies: {
@@ -170,6 +288,10 @@ export const labels = {
             necessary: ['Nevyhnutné cookies', 'Necessary'],
         },
     },
+    disclaimerAccount: [
+        'Príjmy aj výdavky sú očistené o vrátené platby.',
+        'Income and expenses are net of return payments.',
+    ],
     donate: {
         buttonShort: ['Darujte', 'Donate'],
         buttonLong: [
@@ -178,7 +300,7 @@ export const labels = {
         ],
         modalTitle: [
             'Nenechajme voľby bez kontroly!',
-            `Don't let the elections without watch!`,
+            "Don't let the elections without watch!",
         ],
         modalText: [
             'Darujte už od 20 €, aby sme ustrážili férovosť volieb.\nĎakujeme.',
@@ -190,6 +312,7 @@ export const labels = {
         [el.p19]: ['Prezidentské\nvoľby 2019', 'President\nelections 2019'],
         [el.n20]: ['Parlamentné\nvoľby 2020', 'Parliamentary\nelections 2020'],
         [el.s22]: ['Samosprávne\nvoľby 2022', 'Municipal\nelections 2022'],
+        account: ['Transparentný účet', 'Transparent account'],
         date: ['Dátum konania volieb', 'Elections date'],
         over: ['Voľby sa skončili', 'Elections ended'],
         timeTillstart: ['Zostávajúci čas do volieb', 'Time to elections start'],
@@ -225,7 +348,7 @@ export const labels = {
         subscribe: ['Prihlásiť sa na newsletter', 'Subscribe to Newsletter'],
     },
     online: {
-        navTitle: ['Online', 'Online'],
+        navTitle: ['Online'],
     },
     parties: {
         list: [
@@ -260,7 +383,7 @@ export const labels = {
     webDev: ['Webové riešenie', 'Web development'],
 };
 
-export const t = (label, replacements, breaks) => {
+export const t = (label, replacements) => {
     let tl = label;
     if (Array.isArray(label)) {
         tl = label[0] ?? '';
@@ -276,5 +399,5 @@ export const t = (label, replacements, breaks) => {
             return replacements.length > 0 ? replacements.shift() : match;
         });
     }
-    return breaks ? nl2r(tl) : tl;
+    return tl;
 };

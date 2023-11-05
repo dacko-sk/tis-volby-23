@@ -4,20 +4,15 @@ import Row from 'react-bootstrap/Row';
 import { Link, useOutletContext } from 'react-router-dom';
 import has from 'has';
 
+import { setTitle } from '../../api/browserHelpers';
 import { colors } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
-import {
-    currencyFormat,
-    fixNumber,
-    isNumeric,
-    setTitle,
-} from '../../api/helpers';
+import { currencyFormat, fixNumber, isNumeric } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 import { wpCat } from '../../api/wpHelpers';
 
 import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
 
-// import AccountTransactions from '../../components/accounts/AccountTransactions';
 import LastUpdateTag from '../../components/general/LastUpdateTag';
 import Posts, { templates } from '../../components/wp/Posts';
 import TisBarChart from '../../components/charts/TisBarChart';
@@ -92,7 +87,9 @@ function PartyTransactions() {
                 </Col>
                 <Col lg={6} className="text-center">
                     <div className="total-spending">
-                        <h2 className="mt-xxl-4">Priebežné výdavky strany</h2>
+                        <h2 className="mt-xxl-4">
+                            {t(labels.account.partySpending)}
+                        </h2>
                         <p className="hero-number">
                             {currencyFormat(party.sum_outgoing)}
                             <LastUpdateTag timestamp={party.timestamp} />
@@ -105,7 +102,7 @@ function PartyTransactions() {
                             to={routes.party(party.slug, segments.TRANSACTIONS)}
                             variant="secondary"
                         >
-                            Zobraziť všetky transakcie
+                            {t(labels.account.allTransactions)}
                         </Button>
                     </div>
                 </Col>
@@ -115,14 +112,14 @@ function PartyTransactions() {
                 <Col lg={6} className="text-center">
                     <div className="total-spending">
                         <h2 className="mt-xxl-3">
-                            {labels.ads.meta.totalSpendingTitle}
+                            {t(labels.ads.meta.totalSpendingTitle)}
                         </h2>
                         <p className="hero-number">
                             {currencyFormat(totalMeta)}
                             <LastUpdateTag
                                 timestamp={sheetsData.lastUpdateFb || null}
                             >
-                                {labels.ads.meta.totalDisclaimer}
+                                {t(labels.ads.meta.totalDisclaimer)}
                             </LastUpdateTag>
                         </p>
                     </div>
@@ -130,14 +127,14 @@ function PartyTransactions() {
                 <Col lg={6} className="text-center">
                     <div className="total-spending">
                         <h2 className="mt-xxl-3">
-                            {labels.ads.google.totalSpendingTitle}
+                            {t(labels.ads.google.totalSpendingTitle)}
                         </h2>
                         <p className="hero-number">
                             {currencyFormat(totalGoogle)}
                             <LastUpdateTag
                                 timestamp={sheetsData.lastUpdateFb || null}
                             >
-                                {labels.ads.google.totalDisclaimer}
+                                {t(labels.ads.google.totalDisclaimer)}
                             </LastUpdateTag>
                         </p>
                     </div>
@@ -150,13 +147,13 @@ function PartyTransactions() {
                     to={routes.party(party.slug, segments.ONLINE)}
                     variant="secondary"
                 >
-                    {labels.ads.showMore}
+                    {t(labels.ads.showMore)}
                 </Button>
             </div>
 
             {has(party, 'tag') && (
                 <>
-                    <h2 className="mt-4">Najnovšie aktuality</h2>
+                    <h2 className="mt-4">{t(labels.news.latest)}</h2>
                     <Posts
                         categories={[wpCat.news]}
                         limit={2}

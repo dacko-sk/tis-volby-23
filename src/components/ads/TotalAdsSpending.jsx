@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 
-import { labels } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
 import { currencyFormat, fixNumber } from '../../api/helpers';
 
 import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
@@ -31,7 +31,7 @@ function TotalAdsSpending() {
         <div className="total-spending mt-4">
             <Row className="gy-3 gy-lg-0 text-center mb-4">
                 <Col lg={6}>
-                    <h2>{labels.ads.meta.totalSpendingTitle}</h2>
+                    <h2>{t(labels.ads.meta.totalSpendingTitle)}</h2>
                     <div className="hero-number">
                         {sheetsData.lastUpdateFb ? (
                             currencyFormat(totalMeta)
@@ -41,12 +41,12 @@ function TotalAdsSpending() {
                         <LastUpdateTag
                             timestamp={sheetsData.lastUpdateFb || null}
                         >
-                            {labels.ads.meta.totalDisclaimer}
+                            {t(labels.ads.meta.totalDisclaimer)}
                         </LastUpdateTag>
                     </div>
                 </Col>
                 <Col lg={6}>
-                    <h2>{labels.ads.google.totalSpendingTitle}</h2>
+                    <h2>{t(labels.ads.google.totalSpendingTitle)}</h2>
                     <div className="hero-number">
                         {sheetsData.lastUpdateGgl ? (
                             currencyFormat(totalGoogle)
@@ -56,7 +56,7 @@ function TotalAdsSpending() {
                         <LastUpdateTag
                             timestamp={sheetsData.lastUpdateGgl || null}
                         >
-                            {labels.ads.google.totalDisclaimer}
+                            {t(labels.ads.google.totalDisclaimer)}
                         </LastUpdateTag>
                     </div>
                 </Col>

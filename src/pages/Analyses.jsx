@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { setTitle } from '../api/browserHelpers';
 import { labels, t } from '../api/dictionary';
-import { setTitle } from '../api/helpers';
 import { analysisLabels, resources, wpCat } from '../api/wpHelpers';
 
 import AlertWithIcon from '../components/general/AlertWithIcon';

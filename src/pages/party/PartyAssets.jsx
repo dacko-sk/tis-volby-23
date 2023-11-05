@@ -1,7 +1,8 @@
 import { useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import { setTitle } from '../../api/helpers';
+import { setTitle } from '../../api/browserHelpers';
+import { labels, t } from '../../api/dictionary';
 import { analysisLabels, wpCat } from '../../api/wpHelpers';
 
 import { csvAggregatedKeys } from '../../context/DataContext';
@@ -48,7 +49,7 @@ function PartyAssets() {
         content = <AssetsDetail article={article} />;
     }
 
-    setTitle(`${party.fullName} : Majetkové priznania`);
+    setTitle(`${party.fullName} : ${t(labels.party.assets)}`);
 
     return (
         <div className="subpage">
