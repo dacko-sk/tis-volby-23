@@ -42,33 +42,33 @@ export const columnVariants = {
     inOut: [
         {
             key: 'outgoing',
-            name: t(labels.charts.outgoing),
+            name: labels.charts.outgoing,
             color: colors.colorOrange,
         },
         {
             key: 'incoming',
-            name: t(labels.charts.incoming),
+            name: labels.charts.incoming,
             color: colors.colorDarkBlue,
         },
     ],
     donors: [
         {
             key: 'donors',
-            name: t(labels.charts.uniqeDonors),
+            name: labels.charts.uniqeDonors,
             color: colors.colorDarkBlue,
         },
     ],
     amount: [
         {
             key: 'num',
-            name: t(labels.ads.amount.label),
+            name: labels.ads.amount.label,
             color: colors.colorOrange,
         },
     ],
     spending: [
         {
             key: 'outgoing',
-            name: t(labels.charts.outgoing),
+            name: labels.charts.outgoing,
             color: colors.colorLightBlue,
         },
     ],
@@ -97,36 +97,30 @@ function TisBarChart({
         return null;
     }
 
-    const barElements = [];
-    const dataKeys = [];
-    bars.forEach((bar) => {
-        dataKeys.push(bar.key);
-    });
+    const dataKeys = bars.map((bar) => bar.key);
     const parsedData = diffFromAverage
         ? prepareAvgDeltaPctData(data, dataKeys)
         : data;
 
-    bars.forEach((bar) => {
-        barElements.push(
-            <Bar
-                key={bar.key}
-                dataKey={bar.key}
-                fill={bar.color}
-                name={bar.name}
-                label={bar.label ?? null}
-                stackId={bar.stackId ?? null}
-            >
-                {parsedData.map((dataObj) => (
-                    <Cell
-                        key={`cell-${dataObj[bar.key]}`}
-                        fill={dataObj.color ?? bar.color}
-                    >
-                        {bar.labelList ?? null}
-                    </Cell>
-                ))}
-            </Bar>
-        );
-    });
+    const barElements = bars.map((bar) => (
+        <Bar
+            key={bar.key}
+            dataKey={bar.key}
+            fill={bar.color}
+            name={t(bar.name)}
+            label={bar.label ?? null}
+            stackId={bar.stackId ?? null}
+        >
+            {parsedData.map((dataObj) => (
+                <Cell
+                    key={`cell-${dataObj[bar.key]}`}
+                    fill={dataObj.color ?? bar.color}
+                >
+                    {bar.labelList ?? null}
+                </Cell>
+            ))}
+        </Bar>
+    ));
 
     let labelLines = 1;
     parsedData.forEach((row) => {

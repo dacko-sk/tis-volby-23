@@ -276,7 +276,7 @@ function PartyMeta() {
                         bars={[
                             {
                                 key: 'value',
-                                name: t(labels.ads.meta.regions.diffAvg),
+                                name: labels.ads.meta.regions.diffAvg,
                                 color: '#000',
                             },
                         ]}

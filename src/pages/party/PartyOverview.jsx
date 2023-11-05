@@ -59,13 +59,13 @@ function PartyTransactions() {
                         bars={[
                             {
                                 key: 'outgoing',
-                                name: t(labels.charts.outgoing),
+                                name: labels.charts.outgoing,
                                 color: colors.colorOrange,
                                 stackId: 'finance',
                             },
                             {
                                 key: 'incoming',
-                                name: t(labels.charts.incoming),
+                                name: labels.charts.incoming,
                                 color: colors.colorDarkBlue,
                                 stackId: 'finance',
                             },
