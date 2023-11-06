@@ -3,16 +3,16 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
+import { labels, t } from '../../../api/dictionary';
 import { badgePctFormat, fixUrl } from '../../../api/helpers';
 import {
-    analysisLabels,
-    baseData as cbd,
-    metaData as cmd,
+    baseData as abd,
+    metaData as amd,
     parseWpHtml,
     resources,
     transparencyClass,
-    transparencyClasses,
-    transparencyIndicators,
+    transparencyClasses as atc,
+    transparencyIndicators as ati,
 } from '../../../api/wpHelpers';
 
 import IconTooltip from '../../general/IconTooltip';
@@ -36,7 +36,7 @@ function AnalysisDetail({ article }) {
         );
     }
     const lastClass = transparencyClass(analysis.lastScore);
-    const words = analysisLabels.transparency[lastClass].split(' ');
+    const words = t(labels.analysis.transparency[lastClass]).split(' ');
     const lastLabel = [];
     words.forEach((word, index) => {
         if (index < words.length - 1) {
@@ -50,15 +50,17 @@ function AnalysisDetail({ article }) {
     let headerRow = null;
     let historyTable = null;
     if (analysis.lastColumn > 0) {
-        const headers = [<th key="title">{analysisLabels[cbd.date]}</th>];
-        const ratings = [<td key="ratings">{analysisLabels[cbd.score]}</td>];
-        analysis.base[cbd.date].forEach((date, di) => {
+        const headers = [<th key="title">{t(labels.analysis[abd.date])}</th>];
+        const ratings = [
+            <td key="ratings">{t(labels.analysis[abd.score])}</td>,
+        ];
+        analysis.base[abd.date].forEach((date, di) => {
             headers.push(<th key={date}>{date}</th>);
-            const cls = transparencyClass(analysis.base[cbd.score][di]);
+            const cls = transparencyClass(analysis.base[abd.score][di]);
             ratings.push(
                 <td key={date}>
                     <span className={`badge me-1 score-${cls}`}>
-                        {badgePctFormat(analysis.base[cbd.score][di])}
+                        {badgePctFormat(analysis.base[abd.score][di])}
                     </span>
                 </td>
             );
@@ -66,7 +68,7 @@ function AnalysisDetail({ article }) {
         headerRow = <tr key="header">{headers}</tr>;
         historyTable = (
             <>
-                <h2 className="mt-4 mb-3">{analysisLabels.history}</h2>
+                <h2 className="mt-4 mb-3">{t(labels.analysis.history)}</h2>
                 <Table
                     key="scores"
                     className="indicators-table mb-0"
@@ -85,15 +87,20 @@ function AnalysisDetail({ article }) {
     }
 
     const groups = {};
-    Object.keys(transparencyIndicators).forEach((group) => {
+    Object.keys(ati).forEach((group) => {
         groups[group] = [];
-        Object.entries(analysis[group]).forEach(([key, valuesArray]) => {
-            const tooltip = analysisLabels.indicators[group].criteria[key];
+        analysis[group].forEach((valuesArray, index) => {
+            const key = group + index;
             const cols = [
                 <td key={key}>
                     <span className="d-flex align-items-center">
-                        {key}
-                        <IconTooltip id={key} tooltip={tooltip} />
+                        {t(labels.analysis.indicators[group][index].name)}
+                        <IconTooltip
+                            id={key}
+                            tooltip={t(
+                                labels.analysis.indicators[group][index].desc
+                            )}
+                        />
                     </span>
                 </td>,
             ];
@@ -101,13 +108,13 @@ function AnalysisDetail({ article }) {
                 let color = '';
                 switch (value) {
                     case 1:
-                        color = transparencyClasses.good;
+                        color = atc.good;
                         break;
                     case 2:
-                        color = transparencyClasses.average;
+                        color = atc.average;
                         break;
                     case 3:
-                        color = transparencyClasses.bad;
+                        color = atc.bad;
                         break;
                     default:
                         break;
@@ -122,7 +129,7 @@ function AnalysisDetail({ article }) {
                                         color ? ` score-${color}` : ''
                                     }`}
                                 >
-                                    {analysisLabels.badges[value]}
+                                    {t(labels.analysis.badges)[value]}
                                 </span>
                             </span>
                         )}
@@ -137,7 +144,7 @@ function AnalysisDetail({ article }) {
     Object.keys(groups).forEach((group) => {
         tables.push(
             <h2 key={`${group}title`} className="mt-4 mb-3">
-                {analysisLabels.indicators[group].title}
+                {t(labels.analysis.indicatorTitles[group])}
             </h2>
         );
         tables.push(
@@ -159,26 +166,28 @@ function AnalysisDetail({ article }) {
         <div className="analysis">
             <div className="row gy-3 gy-lg-0">
                 <div className="col-lg-6">
-                    <h2 className="text-lg-center">{analysisLabels.meta}</h2>
+                    <h2 className="text-lg-center">
+                        {t(labels.analysis.meta)}
+                    </h2>
                     <Table responsive>
                         <tbody>
                             <tr>
-                                <th>{analysisLabels[cmd.coalition]}</th>
+                                <th>{t(labels.analysis[amd.coalition])}</th>
                                 <td className="text-end">
-                                    {analysis.meta[cmd.coalition]}
+                                    {t(analysis.meta[amd.coalition])}
                                 </td>
                             </tr>
                             <tr>
-                                <th>{analysisLabels[cmd.leader]}</th>
+                                <th>{t(labels.analysis[amd.leader])}</th>
                                 <td className="text-end">
-                                    {analysis.meta[cmd.leader]}
+                                    {analysis.meta[amd.leader]}
                                 </td>
                             </tr>
                             <tr>
-                                <th>{analysisLabels[cbd.date]}</th>
+                                <th>{t(labels.analysis[abd.date])}</th>
                                 <td className="text-end">
                                     {
-                                        analysis.base[cbd.date][
+                                        analysis.base[abd.date][
                                             analysis.lastColumn
                                         ]
                                     }
@@ -189,13 +198,13 @@ function AnalysisDetail({ article }) {
                 </div>
                 <div className="col-lg-6">
                     <h2 className="text-lg-center">
-                        {analysisLabels[cbd.score]}
+                        {t(labels.analysis[abd.score])}
                     </h2>
                     <Row className="hero-number justify-content-lg-center align-items-center mt-4 gx-2">
                         <Col xs="auto">
                             <span className={`badge me-1 score-${lastClass}`}>
                                 {badgePctFormat(
-                                    analysis.base[cbd.score][
+                                    analysis.base[abd.score][
                                         analysis.lastColumn
                                     ]
                                 )}
@@ -212,33 +221,33 @@ function AnalysisDetail({ article }) {
 
             {tables}
 
-            <h2 className="mt-4 mb-3">{analysisLabels.references}</h2>
+            <h2 className="mt-4 mb-3">{t(labels.analysis.references)}</h2>
             <Row className="mb-4">
-                {analysis.meta[cmd.fb] && (
+                {analysis.meta[amd.fb] && (
                     <Col sm={12} md="auto">
                         <ul className="arrows">
                             <li>
                                 <a
-                                    href={fixUrl(analysis.meta[cmd.fb])}
+                                    href={fixUrl(analysis.meta[amd.fb])}
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    {analysisLabels[cmd.fb]}
+                                    {t(labels.analysis[amd.fb])}
                                 </a>
                             </li>
                         </ul>
                     </Col>
                 )}
-                {analysis.meta[cmd.web] && (
+                {analysis.meta[amd.web] && (
                     <Col sm={12} md="auto">
                         <ul className="arrows">
                             <li>
                                 <a
-                                    href={fixUrl(analysis.meta[cmd.web])}
+                                    href={fixUrl(analysis.meta[amd.web])}
                                     target="_blank"
                                     rel="noreferrer"
                                 >
-                                    {analysisLabels[cmd.web]}
+                                    {t(labels.analysis[amd.web])}
                                 </a>
                             </li>
                         </ul>
@@ -248,7 +257,7 @@ function AnalysisDetail({ article }) {
                     <ul className="arrows">
                         <li>
                             <Link to={resources.methodology}>
-                                {analysisLabels.methodology}
+                                {t(labels.analysis.methodology)}
                             </Link>
                         </li>
                     </ul>

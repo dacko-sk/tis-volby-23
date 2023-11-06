@@ -130,85 +130,10 @@ export const transparencyIndicators = {
     information: 'information',
 };
 
-export const analysisLabels = {
-    badges: ['nezistené/netýka sa', 'áno', 'čiastočne', 'nie'],
-    history: 'História hodnotení',
-    indicators: {
-        [transparencyIndicators.account]: {
-            title: 'Transparentný účet',
-            criteria: {
-                'Označovanie platiteľov a príjemcov':
-                    'Na transparentnom účte sú precízne označené vklady strany a príjemcovia platieb, vďaka čomu je možné identifikovať komu strana za kampaň platí',
-                'Podrobnosť účtu':
-                    'Transparentnosť kampane nie je znižovaná využívaním súhrnných platieb, najčastejšie pre agentúry, ktoré predstavujú značnú časť výdavkov v kampani',
-                'Popisovanie výdavkov':
-                    'Predvolebná kampaň strany je kontrolovateľná vďaka zrozumiteľným a výstižným popisom, ktoré vysvetľujú účel jednotlivých platieb',
-                'Časová reálnosť výdavkov':
-                    'Výdavky na transparentom účte zodpovedajú reálnemu priebehu predvolebnej kampane. Strana sa vyhýba väčším zálohovým platbám, či využívaniu faktúr s dlhou dobou splatnosti',
-                'Identifikácia bilboardovej kampane':
-                    'Na transparentnom účte je možné identifikovať výdavky na outdoorovú kampaň strany, minimálne v rozsahu mesačných výdavkov na tento typ reklamy',
-            },
-        },
-        [transparencyIndicators.financing]: {
-            title: 'Financovanie kampane',
-            criteria: {
-                'Informovanie o financovaní kampane':
-                    'Darcovia a veritelia strany sú prehľadne identifikovateľní prostredníctvom transparentného účtu a webu strany',
-                'Spôsob financovania':
-                    'redvolebná kampaň je postavená na viacerých zdrojoch financovania, napríklad aktivizovaním sympatizantov cez posielanie drobných darov',
-                'Preverovanie pozadia veľkých darcov/veriteľov':
-                    'Strana si preveruje väčších darcov/veriteľov a je ochotná na požiadanie poskytnúť detaily o príklade takéhoto preverovania',
-                'Informovanie o predkampani':
-                    'Transparentnosť kampane strana zvýšila dobrovoľným využívaním transparentného účtu už v čase predkampane, prípadne na vyžiadanie poskytla informáciu o celkovej výške financií vynaložených na predkampaň',
-                'Plán kampane':
-                    'Strana proaktívne informuje o plánovanej výške kampane a spôsobe jej financovania, prípadne na vyžiadanie poskytla tieto informácie',
-            },
-        },
-        [transparencyIndicators.information]: {
-            title: 'Informovanosť o kampani',
-            criteria: {
-                'Volebný program':
-                    'Strana na svojom webe v čase oficiálnej kampane zverejnila predvolebný program',
-                'Poskytnutie informácií z oficiálneho kontaktu strany':
-                    'Test funkčnosti oficiálneho kontaktu strany počas kampane, zaslanie otázky potenciálneho voliča s textom: (1. Kolo): „Dobrý deň, mohli by ste mi prosím poskytnúť informáciu, kde by sa do volieb bolo možné stretnúť s Vašim predsedom (príp. predsedníčkou) aj osobne? Viem sa dostaviť kdekoľvek v rámci Slovenska. Za odpoveď vopred ďakujem.“, (2. Kolo): „Dobrý deň, chcel by som vedieť, či bude po voľbách možnosť uchádzať sa o miesto poslaneckých asistentov poslancov Vašej strany. Poprosím o detaily. Ďakujem.“',
-                'Odpoveď potenciálnemu voličovi cez sociálnu sieť':
-                    'Test ochoty strany komunikovať s voličom cez sociálnu sieť, zaslanie otázky potenciálneho voliča cez Messenger na FB profile strany s textom: (1. Kolo): „Mohli by ste mi prosím, ako Vášmu potenciálnemu voličovi, ozrejmiť, ako plánujete bojovať proti odvrátiteľným úmrtiam v slovenskom zdravotníctve? Vďaka za odpoveď“, (2. Kolo): „Dobrý deň, zaujímalo by ma, či podporíte po voľbách prípadné zrušenie alebo reorganizáciu Špecializovaného trestného súdu a Špeciálnej prokuratúry.“',
-                'Kampaňový tím/spolupracujúce agentúry':
-                    'Strana proaktívne informuje o spôsobe realizácie kampane, kampaňovom tíme a spolupracujúcich agentúrach, najmä na vlastnej webovej stránke, prípadne tieto informácie poskytla na vyžiadanie',
-                'Predvolebné akcie':
-                    'Strana v priebehu oficiálnej kampane poskytuje informácie o svojich predvolebných akciách, najmä na webovej stránke alebo sociálnej sieti',
-                'Označovanie inzercie':
-                    'Strana v zmysle zákona označuje precízne politickú inzerciu na sociálnej sieti doplnením informácie o objednávateľovi a dodávateľovi reklamy',
-                'Majetkové priznanie lídra':
-                    'Predseda strany na vyžiadanie Transparency vyplnil rozšírené majetkové priznanie a súhlasil s jeho zverejnením',
-            },
-        },
-    },
-    meta: 'Údaje o kampani',
-    methodology: 'Metodika hodnotenia',
-    noAnalyses:
-        'Sekcia sa pripravuje. Hodnotenia kampaní budeme zverejňovať postupne.',
-    noAssets: 'Nie sú dostupné majetkové priznania pre túto stranu.',
-    noData: 'Nie je dostupné hodnotenie kampane pre túto stranu.',
-    references: 'Referencie',
-    transparency: {
-        [transparencyClasses.good]: 'transparentná kampaň',
-        [transparencyClasses.average]: 'kampaň s výhradami',
-        [transparencyClasses.bad]: 'netransparentná kampaň',
-        [transparencyClasses.unknown]: 'nedostatok dát / nehodnotené',
-    },
-    transparencyShort: {
-        [transparencyClasses.good]: 'transparentná',
-        [transparencyClasses.average]: 's výhradami',
-        [transparencyClasses.bad]: 'netransparentná',
-        [transparencyClasses.unknown]: 'N/A',
-    },
-    [baseData.date]: 'Hodnotenie ku dňu',
-    [baseData.score]: 'Celkové hodnotenie',
-    [metaData.coalition]: 'Koalícia',
-    [metaData.fb]: 'FB profil',
-    [metaData.leader]: 'Volebný líder',
-    [metaData.web]: 'Volebný web',
+export const indicatorsCriteria = {
+    [transparencyIndicators.account]: 5,
+    [transparencyIndicators.financing]: 5,
+    [transparencyIndicators.information]: 7,
 };
 
 export const transparencyClass = (score) => {
@@ -266,9 +191,7 @@ export const parseAnalysisData = (html) => {
             const baseProps = Object.keys(baseData);
             let required = metaProps.length + baseProps.length;
             Object.keys(transparencyIndicators).forEach((group) => {
-                required += Object.keys(
-                    analysisLabels.indicators[group].criteria
-                ).length;
+                required += indicatorsCriteria[group];
             });
 
             if (tableData.length >= required) {
@@ -316,20 +239,20 @@ export const parseAnalysisData = (html) => {
 
                 // transparency analysis indicators
                 Object.keys(transparencyIndicators).forEach((group) => {
-                    analysis[group] = {};
-                    Object.keys(
-                        analysisLabels.indicators[group].criteria
-                    ).forEach((criterium) => {
-                        // remove invalid columns
-                        tableData[rowKey].forEach((column, columnKey) => {
-                            if (!validColumns.includes(columnKey)) {
-                                tableData[rowKey].splice(columnKey, 1);
-                            }
-                        });
-                        // save valid columns as property value
-                        analysis[group][criterium] = tableData[rowKey];
-                        rowKey += 1;
-                    });
+                    analysis[group] = [];
+                    Array.from({ length: indicatorsCriteria[group] }).forEach(
+                        () => {
+                            // remove invalid columns
+                            tableData[rowKey].forEach((column, columnKey) => {
+                                if (!validColumns.includes(columnKey)) {
+                                    tableData[rowKey].splice(columnKey, 1);
+                                }
+                            });
+                            // save valid columns as property value
+                            analysis[group].push(tableData[rowKey]);
+                            rowKey += 1;
+                        }
+                    );
                 });
 
                 return analysis;

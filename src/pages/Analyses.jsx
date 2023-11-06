@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { setTitle } from '../api/browserHelpers';
 import { labels, t } from '../api/dictionary';
-import { analysisLabels, resources, wpCat } from '../api/wpHelpers';
+import { resources, wpCat } from '../api/wpHelpers';
 
 import AlertWithIcon from '../components/general/AlertWithIcon';
 import Title from '../components/structure/Title';
@@ -17,7 +17,7 @@ function Analyses() {
 
             <Posts
                 categories={[wpCat.featured]}
-                noResults={analysisLabels.noAnalyses}
+                noResults={t(labels.analysis.noAnalyses)}
                 template={templates.featured}
             />
 
@@ -112,7 +112,7 @@ function Analyses() {
 
             <Posts
                 categories={[wpCat.analyses]}
-                noResults={analysisLabels.noAnalyses}
+                noResults={t(labels.analysis.noAnalyses)}
             />
         </section>
     );

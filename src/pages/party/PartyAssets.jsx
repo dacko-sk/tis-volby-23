@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { setTitle } from '../../api/browserHelpers';
 import { labels, t } from '../../api/dictionary';
-import { analysisLabels, wpCat } from '../../api/wpHelpers';
+import { wpCat } from '../../api/wpHelpers';
 
 import { csvAggregatedKeys } from '../../context/DataContext';
 
@@ -40,7 +40,7 @@ function PartyAssets() {
 
     let content = (
         <AlertWithIcon className="my-4" variant="danger">
-            {analysisLabels.noAssets}
+            {t(labels.analysis.noAssets)}
         </AlertWithIcon>
     );
     if (isInitialLoading || error) {

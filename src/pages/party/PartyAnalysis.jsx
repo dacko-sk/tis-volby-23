@@ -2,7 +2,8 @@ import { useLocation, useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { setTitle } from '../../api/browserHelpers';
-import { analysisLabels, getAnalysedData, wpCat } from '../../api/wpHelpers';
+import { labels, t } from '../../api/dictionary';
+import { getAnalysedData, wpCat } from '../../api/wpHelpers';
 
 import { csvAggregatedKeys } from '../../context/DataContext';
 
@@ -45,7 +46,7 @@ function PartyAnalysis() {
 
     let content = (
         <AlertWithIcon className="my-4" variant="danger">
-            {analysisLabels.noData}
+            {t(labels.analysis.noData)}
         </AlertWithIcon>
     );
     if (isInitialLoading || error) {

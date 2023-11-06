@@ -2,6 +2,12 @@ import { elections as el } from './constants';
 import { getCurrentLanguage, languages } from './routes';
 
 import { csvAccountKeys as ak } from '../context/DataContext';
+import {
+    baseData as abd,
+    metaData as amd,
+    transparencyClasses as atc,
+    transparencyIndicators as ati,
+} from './wpHelpers';
 
 export const labels = {
     account: {
@@ -251,7 +257,155 @@ export const labels = {
         showAll: ['Zobraziť všetky hodnotenia', 'Show all analyses'],
     },
     analysis: {
+        [abd.date]: ['Hodnotenie ku dňu', 'Evaluation date'],
+        [abd.score]: ['Celkové hodnotenie', 'Overall score'],
+        [amd.coalition]: ['Koalícia', 'Coalition'],
+        [amd.fb]: ['FB profil', 'FB profile'],
+        [amd.leader]: ['Volebný líder', 'Elections leader'],
+        [amd.web]: ['Volebný web', 'Elections web'],
+        badges: [
+            ['nezistené/netýka sa', 'áno', 'čiastočne', 'nie'],
+            ['N/A', 'yes', 'partially', 'no'],
+        ],
+        history: ['História hodnotení', 'Evaluations history'],
+        indicators: {
+            [ati.account]: [
+                {
+                    name: ['Označovanie platiteľov a príjemcov'],
+                    desc: [
+                        'Na transparentnom účte sú precízne označené vklady strany a príjemcovia platieb, vďaka čomu je možné identifikovať komu strana za kampaň platí',
+                    ],
+                },
+                {
+                    name: ['Podrobnosť účtu', 'Account complexity'],
+                    desc: [
+                        'Transparentnosť kampane nie je znižovaná využívaním súhrnných platieb, najčastejšie pre agentúry, ktoré predstavujú značnú časť výdavkov v kampani',
+                    ],
+                },
+                {
+                    name: ['Popisovanie výdavkov'],
+                    desc: [
+                        'Predvolebná kampaň strany je kontrolovateľná vďaka zrozumiteľným a výstižným popisom, ktoré vysvetľujú účel jednotlivých platieb',
+                    ],
+                },
+                {
+                    name: ['Časová reálnosť výdavkov'],
+                    desc: [
+                        'Výdavky na transparentom účte zodpovedajú reálnemu priebehu predvolebnej kampane. Strana sa vyhýba väčším zálohovým platbám, či využívaniu faktúr s dlhou dobou splatnosti',
+                    ],
+                },
+                {
+                    name: ['Identifikácia bilboardovej kampane'],
+                    desc: [
+                        'Na transparentnom účte je možné identifikovať výdavky na outdoorovú kampaň strany, minimálne v rozsahu mesačných výdavkov na tento typ reklamy',
+                    ],
+                },
+            ],
+            [ati.financing]: [
+                {
+                    name: ['Informovanie o financovaní kampane'],
+                    desc: [
+                        'Darcovia a veritelia strany sú prehľadne identifikovateľní prostredníctvom transparentného účtu a webu strany',
+                    ],
+                },
+                {
+                    name: ['Spôsob financovania'],
+                    desc: [
+                        'Predvolebná kampaň je postavená na viacerých zdrojoch financovania, napríklad aktivizovaním sympatizantov cez posielanie drobných darov',
+                    ],
+                },
+                {
+                    name: ['Preverovanie pozadia veľkých darcov/veriteľov'],
+                    desc: [
+                        'Strana si preveruje väčších darcov/veriteľov a je ochotná na požiadanie poskytnúť detaily o príklade takéhoto preverovania',
+                    ],
+                },
+                {
+                    name: ['Informovanie o predkampani'],
+                    desc: [
+                        'Transparentnosť kampane strana zvýšila dobrovoľným využívaním transparentného účtu už v čase predkampane, prípadne na vyžiadanie poskytla informáciu o celkovej výške financií vynaložených na predkampaň',
+                    ],
+                },
+                {
+                    name: ['Plán kampane'],
+                    desc: [
+                        'Strana proaktívne informuje o plánovanej výške kampane a spôsobe jej financovania, prípadne na vyžiadanie poskytla tieto informácie',
+                    ],
+                },
+            ],
+            [ati.information]: [
+                {
+                    name: ['Volebný program'],
+                    desc: [
+                        'Strana na svojom webe v čase oficiálnej kampane zverejnila predvolebný program',
+                    ],
+                },
+                {
+                    name: [
+                        'Poskytnutie informácií z oficiálneho kontaktu strany',
+                    ],
+                    desc: [
+                        'Test funkčnosti oficiálneho kontaktu strany počas kampane, zaslanie otázky potenciálneho voliča s textom: (1. Kolo): „Dobrý deň, mohli by ste mi prosím poskytnúť informáciu, kde by sa do volieb bolo možné stretnúť s Vašim predsedom (príp. predsedníčkou) aj osobne? Viem sa dostaviť kdekoľvek v rámci Slovenska. Za odpoveď vopred ďakujem.“, (2. Kolo): „Dobrý deň, chcel by som vedieť, či bude po voľbách možnosť uchádzať sa o miesto poslaneckých asistentov poslancov Vašej strany. Poprosím o detaily. Ďakujem.“',
+                    ],
+                },
+                {
+                    name: ['Odpoveď potenciálnemu voličovi cez sociálnu sieť'],
+                    desc: [
+                        'Test ochoty strany komunikovať s voličom cez sociálnu sieť, zaslanie otázky potenciálneho voliča cez Messenger na FB profile strany s textom: (1. Kolo): „Mohli by ste mi prosím, ako Vášmu potenciálnemu voličovi, ozrejmiť, ako plánujete bojovať proti odvrátiteľným úmrtiam v slovenskom zdravotníctve? Vďaka za odpoveď“, (2. Kolo): „Dobrý deň, zaujímalo by ma, či podporíte po voľbách prípadné zrušenie alebo reorganizáciu Špecializovaného trestného súdu a Špeciálnej prokuratúry.“',
+                    ],
+                },
+                {
+                    name: ['Kampaňový tím/spolupracujúce agentúry'],
+                    desc: [
+                        'Strana proaktívne informuje o spôsobe realizácie kampane, kampaňovom tíme a spolupracujúcich agentúrach, najmä na vlastnej webovej stránke, prípadne tieto informácie poskytla na vyžiadanie',
+                    ],
+                },
+                {
+                    name: ['Predvolebné akcie'],
+                    desc: [
+                        'Strana v priebehu oficiálnej kampane poskytuje informácie o svojich predvolebných akciách, najmä na webovej stránke alebo sociálnej sieti',
+                    ],
+                },
+                {
+                    name: ['Označovanie inzercie'],
+                    desc: [
+                        'Strana v zmysle zákona označuje precízne politickú inzerciu na sociálnej sieti doplnením informácie o objednávateľovi a dodávateľovi reklamy',
+                    ],
+                },
+                {
+                    name: ['Majetkové priznanie lídra'],
+                    desc: [
+                        'Predseda strany na vyžiadanie Transparency vyplnil rozšírené majetkové priznanie a súhlasil s jeho zverejnením',
+                    ],
+                },
+            ],
+        },
+        indicatorTitles: {
+            [ati.account]: ['Transparentný účet'],
+            [ati.financing]: ['Financovanie kampane'],
+            [ati.information]: ['Informovanosť o kampani'],
+        },
+        meta: ['Údaje o kampani', 'Campaign details'],
+        methodology: ['Metodika hodnotenia'],
         navTitle: ['Hodnotenie', 'Analysis'],
+        noAnalyses: [
+            'Sekcia sa pripravuje. Hodnotenia kampaní budeme zverejňovať postupne.',
+        ],
+        noAssets: ['Nie sú dostupné majetkové priznania pre túto stranu.'],
+        noData: ['Nie je dostupné hodnotenie kampane pre túto stranu.'],
+        references: ['Referencie', 'References'],
+        transparency: {
+            [atc.good]: ['transparentná kampaň'],
+            [atc.average]: ['kampaň s výhradami'],
+            [atc.bad]: ['netransparentná kampaň'],
+            [atc.unknown]: ['nedostatok dát / nehodnotené'],
+        },
+        transparencyShort: {
+            [atc.good]: ['transparentná'],
+            [atc.average]: ['s výhradami'],
+            [atc.bad]: ['netransparentná'],
+            [atc.unknown]: ['N/A'],
+        },
     },
     charts: {
         disclaimer: [
@@ -347,6 +501,7 @@ export const labels = {
         title: ['Newsletter'],
         subscribe: ['Prihlásiť sa na newsletter', 'Subscribe to Newsletter'],
     },
+    nie: ['nie', 'no'],
     online: {
         navTitle: ['Online'],
     },
@@ -390,6 +545,8 @@ export const t = (label, replacements) => {
         if (getCurrentLanguage() === languages.en) {
             tl = label[1] ?? tl;
         }
+    } else if (labels[label] ?? false) {
+        return t(labels[label], replacements);
     }
     if (Array.isArray(replacements)) {
         // Use a regular expression to match placeholders (%s or %i)

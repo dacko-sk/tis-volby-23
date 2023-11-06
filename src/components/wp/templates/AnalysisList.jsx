@@ -2,11 +2,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
+import { labels, t } from '../../../api/dictionary';
 import { badgePctFormat } from '../../../api/helpers';
 import {
-    analysisLabels,
-    baseData as cbd,
-    metaData as cmd,
+    baseData as abd,
+    metaData as amd,
     transparencyClass,
 } from '../../../api/wpHelpers';
 
@@ -28,7 +28,7 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
     const logo =
         party && (party.logo ?? false) ? (
             <img
-                alt={analysisLabels.transparency[cls]}
+                alt={t(labels.analysis.transparency[cls])}
                 className="p-3"
                 src={party.logo}
             />
@@ -52,7 +52,9 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                     <Col sm>
                         <div
                             className="thumb mb-2 mb-md-0"
-                            data-label={analysisLabels.transparencyShort[cls]}
+                            data-label={t(
+                                labels.analysis.transparencyShort[cls]
+                            )}
                         >
                             <figure className="text-center text-xxl-start">
                                 {logo}
@@ -64,25 +66,25 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                         <Table responsive>
                             <tbody>
                                 <tr>
-                                    <th>{analysisLabels[cmd.leader]}</th>
-                                    <td>{analysis.meta[cmd.leader]}</td>
+                                    <th>{t(labels.analysis[amd.leader])}</th>
+                                    <td>{analysis.meta[amd.leader]}</td>
                                 </tr>
                                 <tr>
-                                    <th>{analysisLabels[cbd.score]}</th>
+                                    <th>{t(labels.analysis[abd.score])}</th>
                                     <td className="score">
                                         <span
                                             className={`badge me-1 score-${cls}`}
                                         >
                                             {badgePctFormat(analysis.lastScore)}
                                         </span>
-                                        {analysisLabels.transparency[cls]}
+                                        {t(labels.analysis.transparency[cls])}
                                     </td>
                                 </tr>
                                 <tr className="d-none d-sm-table-row">
-                                    <th>{analysisLabels[cbd.date]}</th>
+                                    <th>{t(labels.analysis[abd.date])}</th>
                                     <td>
                                         {
-                                            analysis.base[cbd.date][
+                                            analysis.base[abd.date][
                                                 analysis.lastColumn
                                             ]
                                         }
