@@ -5,7 +5,7 @@ import has from 'has';
 import { colors, parties } from './constants';
 import { shortenValue } from './helpers';
 import { routes, separators } from './routes';
-import { sheetsConfig } from '../context/AdsDataContext';
+import { csvConfig, csvFiles } from '../context/AdsDataContext';
 import { csvAggregatedKeys } from '../context/DataContext';
 
 export const isMobile = window.innerWidth < 576;
@@ -53,10 +53,11 @@ export const ageDefs = {
     '65+': colors.colorOrange,
 };
 
+const googleColumns = csvConfig[csvFiles.GOOGLE].columns;
 export const formatDefs = {
-    [sheetsConfig.GOOGLE.columns.VIDEO]: colors.colorOrange,
-    [sheetsConfig.GOOGLE.columns.IMAGE]: colors.colorDarkBlue,
-    [sheetsConfig.GOOGLE.columns.TEXT]: colors.colorLightBlue,
+    [googleColumns.VIDEO]: colors.colorOrange,
+    [googleColumns.IMAGE]: colors.colorDarkBlue,
+    [googleColumns.TEXT]: colors.colorLightBlue,
 };
 
 export const tooltipNameFormat = (value) => {

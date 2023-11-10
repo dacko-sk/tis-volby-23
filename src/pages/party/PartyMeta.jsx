@@ -24,16 +24,16 @@ import TisPieChart from '../../components/charts/TisPieChart';
 import AlertWithIcon from '../../components/general/AlertWithIcon';
 import Loading from '../../components/general/Loading';
 
-const chartKeys = {
-    SPENDING: 'SPENDING',
-    RANGES: 'RANGES',
-    AMOUNTS: 'AMOUNTS',
-    REGIONS: 'REGIONS',
-    DEMOGRAPHY: 'DEMOGRAPHY',
-    ATTRIBUTION: 'ATTRIBUTION',
-};
-
-function PartyMeta() {
+function PartyMeta({
+    chartKeys = {
+        SPENDING: 'SPENDING',
+        RANGES: 'RANGES',
+        AMOUNTS: 'AMOUNTS',
+        REGIONS: 'REGIONS',
+        DEMOGRAPHY: 'DEMOGRAPHY',
+        ATTRIBUTION: 'ATTRIBUTION',
+    },
+}) {
     const party = useOutletContext();
     const [activeKeys, setActiveKeys] = useState([chartKeys.SPENDING]);
     const [loadedCharts, setLoadedCharts] = useState([chartKeys.SPENDING]);

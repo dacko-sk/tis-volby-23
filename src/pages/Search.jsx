@@ -9,14 +9,14 @@ import { contains } from '../api/helpers';
 import { routes, segments } from '../api/routes';
 import { wpCat } from '../api/wpHelpers';
 
-import useAdsData, { sheetsConfig } from '../context/AdsDataContext';
+import useAdsData, { csvConfig, csvFiles } from '../context/AdsDataContext';
 import useData, { csvAggregatedKeys } from '../context/DataContext';
 
 import AlertWithIcon from '../components/general/AlertWithIcon';
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';
 
-function Search() {
+function Search({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
     const params = useParams();
     const query = params.query ?? null;
     const navigate = useNavigate();
@@ -97,12 +97,11 @@ function Search() {
     }
     if (sheetsData.lastUpdateGgl) {
         sheetsData.googleAds.forEach((pageData) => {
-            const accountName =
-                pageData[sheetsConfig.GOOGLE.columns.PAGE_NAME] ?? null;
+            const accountName = pageData[googleColumns.PAGE_NAME] ?? null;
             // account name matches - list party
             if (contains(accountName, query)) {
                 const accountParty = findPartyForGoogleAccount(
-                    pageData[sheetsConfig.GOOGLE.columns.ID]
+                    pageData[googleColumns.ID]
                 );
                 if (accountParty) {
                     const party = findPartyByFbName(accountParty);
@@ -113,9 +112,7 @@ function Search() {
                         );
                         online.push(
                             <Col
-                                key={`ggl${
-                                    pageData[sheetsConfig.GOOGLE.columns.ID]
-                                }`}
+                                key={`ggl${pageData[googleColumns.ID]}`}
                                 className="d-flex"
                                 sm
                             >

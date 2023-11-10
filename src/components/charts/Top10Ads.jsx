@@ -3,12 +3,15 @@ import { getPartyChartLabel } from '../../api/chartHelpers';
 import { fixNumber, sortBySpending } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 
-import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
+import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';
 import useData from '../../context/DataContext';
 
 import TisBarChart, { columnVariants } from './TisBarChart';
 
-function Top10Ads({ maxItems = 10 }) {
+function Top10Ads({
+    googleColumns = csvConfig[csvFiles.GOOGLE].columns,
+    maxItems = 10,
+}) {
     const {
         findPartyForFbAccount,
         findPartyForGoogleAccount,
@@ -41,15 +44,13 @@ function Top10Ads({ maxItems = 10 }) {
     if (sheetsData.lastUpdateGgl) {
         sheetsData.googleAds.forEach((pageData) => {
             const parentPartyName = findPartyForGoogleAccount(
-                pageData[sheetsConfig.GOOGLE.columns.ID]
+                pageData[googleColumns.ID]
             );
             const party = findPartyByFbName(parentPartyName);
             const partyChartLabel = party
                 ? getPartyChartLabel(party, segments.ONLINE)
                 : parentPartyName;
-            const outgoing = fixNumber(
-                pageData[sheetsConfig.GOOGLE.columns.SPENDING]
-            );
+            const outgoing = fixNumber(pageData[googleColumns.SPENDING]);
             if (parentPartyName) {
                 if (spendingGgl[parentPartyName] ?? false) {
                     spendingGgl[parentPartyName].outgoing += outgoing;

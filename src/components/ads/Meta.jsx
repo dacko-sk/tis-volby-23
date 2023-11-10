@@ -29,19 +29,19 @@ import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
 import TisPieChart from '../charts/TisPieChart';
 
-const chartKeys = {
-    SPENDING_PARTIES: 'SPENDING_PARTIES',
-    SPENDING_ACCOUNTS: 'SPENDING_ACCOUNTS',
-    RANGES_PARTIES: 'RANGES_PARTIES',
-    RANGES_ACCOUNTS: 'RANGES_ACCOUNTS',
-    AMOUNTS_PARTIES: 'AMOUNTS_PARTIES',
-    AMOUNTS_ACCOUNTS: 'AMOUNTS_ACCOUNTS',
-    REGIONS: 'REGIONS',
-    DEMOGRAPHY: 'DEMOGRAPHY',
-    ATTRIBUTION: 'ATTRIBUTION',
-};
-
-function Meta() {
+function Meta({
+    chartKeys = {
+        SPENDING_PARTIES: 'SPENDING_PARTIES',
+        SPENDING_ACCOUNTS: 'SPENDING_ACCOUNTS',
+        RANGES_PARTIES: 'RANGES_PARTIES',
+        RANGES_ACCOUNTS: 'RANGES_ACCOUNTS',
+        AMOUNTS_PARTIES: 'AMOUNTS_PARTIES',
+        AMOUNTS_ACCOUNTS: 'AMOUNTS_ACCOUNTS',
+        REGIONS: 'REGIONS',
+        DEMOGRAPHY: 'DEMOGRAPHY',
+        ATTRIBUTION: 'ATTRIBUTION',
+    },
+}) {
     const [activeKeys, setActiveKeys] = useState([chartKeys.SPENDING_PARTIES]);
     const [loadedCharts, setLoadedCharts] = useState([
         chartKeys.SPENDING_PARTIES,

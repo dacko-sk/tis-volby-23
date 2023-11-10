@@ -12,7 +12,7 @@ import {
     sortBySpending,
 } from '../../api/helpers';
 
-import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
+import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';
 
 import TisBarChart, {
     columnVariants,
@@ -27,7 +27,7 @@ const chartKeys = {
     FORMATS: 'FORMATS',
 };
 
-function PartyGoogle() {
+function PartyGoogle({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
     const party = useOutletContext();
     const [activeKeys, setActiveKeys] = useState([chartKeys.SPENDING]);
     const [loadedCharts, setLoadedCharts] = useState([chartKeys.SPENDING]);
@@ -47,18 +47,13 @@ function PartyGoogle() {
     if (sheetsData.lastUpdateGgl) {
         sheetsData.googleAds.forEach((pageData) => {
             const parentPartyName = findPartyForGoogleAccount(
-                pageData[sheetsConfig.GOOGLE.columns.ID]
+                pageData[googleColumns.ID]
             );
             // only continue if the account belongs to the currently viewed party
             if (party.fbName === parentPartyName) {
-                const accountName =
-                    pageData[sheetsConfig.GOOGLE.columns.PAGE_NAME] ?? null;
-                const outgoing = fixNumber(
-                    pageData[sheetsConfig.GOOGLE.columns.SPENDING]
-                );
-                const num = fixNumber(
-                    pageData[sheetsConfig.GOOGLE.columns.AMOUNT]
-                );
+                const accountName = pageData[googleColumns.PAGE_NAME] ?? null;
+                const outgoing = fixNumber(pageData[googleColumns.SPENDING]);
+                const num = fixNumber(pageData[googleColumns.AMOUNT]);
 
                 // single profiles charts
                 if (spendingAccounts[accountName] ?? false) {

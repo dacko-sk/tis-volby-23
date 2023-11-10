@@ -13,7 +13,7 @@ import {
 } from '../../api/helpers';
 import { segments } from '../../api/routes';
 
-import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
+import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';
 import useCsvData from '../../context/DataContext';
 
 import TisBarChart, { columnVariants } from '../charts/TisBarChart';
@@ -21,15 +21,16 @@ import AlertWithIcon from '../general/AlertWithIcon';
 import Loading from '../general/Loading';
 import TisPieChart from '../charts/TisPieChart';
 
-const chartKeys = {
-    SPENDING_PARTIES: 'SPENDING_PARTIES',
-    SPENDING_ACCOUNTS: 'SPENDING_ACCOUNTS',
-    AMOUNTS_PARTIES: 'AMOUNTS_PARTIES',
-    AMOUNTS_ACCOUNTS: 'AMOUNTS_ACCOUNTS',
-    FORMATS: 'FORMATS',
-};
-
-function Google() {
+function Google({
+    chartKeys = {
+        SPENDING_PARTIES: 'SPENDING_PARTIES',
+        SPENDING_ACCOUNTS: 'SPENDING_ACCOUNTS',
+        AMOUNTS_PARTIES: 'AMOUNTS_PARTIES',
+        AMOUNTS_ACCOUNTS: 'AMOUNTS_ACCOUNTS',
+        FORMATS: 'FORMATS',
+    },
+    googleColumns = csvConfig[csvFiles.GOOGLE].columns,
+}) {
     const [activeKeys, setActiveKeys] = useState([chartKeys.SPENDING_PARTIES]);
     const [loadedCharts, setLoadedCharts] = useState([
         chartKeys.SPENDING_PARTIES,
@@ -53,18 +54,15 @@ function Google() {
     if (sheetsData.lastUpdateGgl) {
         sheetsData.googleAds.forEach((pageData) => {
             const parentPartyName = findPartyForGoogleAccount(
-                pageData[sheetsConfig.GOOGLE.columns.ID]
+                pageData[googleColumns.ID]
             );
-            const accountName =
-                pageData[sheetsConfig.GOOGLE.columns.PAGE_NAME] ?? null;
+            const accountName = pageData[googleColumns.PAGE_NAME] ?? null;
             const party = findPartyByFbName(parentPartyName);
             const partyChartLabel = party
                 ? getPartyChartLabel(party, segments.ONLINE)
                 : parentPartyName;
-            const outgoing = fixNumber(
-                pageData[sheetsConfig.GOOGLE.columns.SPENDING]
-            );
-            const num = fixNumber(pageData[sheetsConfig.GOOGLE.columns.AMOUNT]);
+            const outgoing = fixNumber(pageData[googleColumns.SPENDING]);
+            const num = fixNumber(pageData[googleColumns.AMOUNT]);
 
             // aggregated party charts
             if (parentPartyName) {

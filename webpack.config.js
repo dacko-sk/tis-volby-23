@@ -112,7 +112,7 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.csv$/i,
-                    type: 'asset',
+                    type: 'asset/resource',
                 },
             ],
         },
@@ -127,7 +127,7 @@ module.exports = (env, argv) => {
             chunkFilename: isEnvProduction
                 ? 'static/js/[name].[contenthash:8].chunk.js'
                 : 'static/js/[name].chunk.js',
-            assetModuleFilename: 'static/media/[name].[hash][ext]',
+            assetModuleFilename: 'static/assets/[name].[hash][ext]',
         },
         plugins,
         resolve: {

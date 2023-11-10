@@ -3,12 +3,14 @@ import { Col, Row } from 'react-bootstrap';
 import { labels, t } from '../../api/dictionary';
 import { currencyFormat, fixNumber } from '../../api/helpers';
 
-import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
+import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';
 
 import LastUpdateTag from '../general/LastUpdateTag';
 import Loading from '../general/Loading';
 
-function TotalAdsSpending() {
+function TotalAdsSpending({
+    googleColumns = csvConfig[csvFiles.GOOGLE].columns,
+}) {
     const { sheetsData, mergedWeeksData } = useAdsData();
 
     // parse data
@@ -21,9 +23,7 @@ function TotalAdsSpending() {
     }
     if (sheetsData.lastUpdateGgl) {
         sheetsData.googleAds.forEach((pageData) => {
-            totalGoogle += fixNumber(
-                pageData[sheetsConfig.GOOGLE.columns.SPENDING]
-            );
+            totalGoogle += fixNumber(pageData[googleColumns.SPENDING]);
         });
     }
 

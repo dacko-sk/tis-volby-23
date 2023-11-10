@@ -2,18 +2,17 @@ import { useEffect } from 'react';
 import { usePapaParse } from 'react-papaparse';
 import { Outlet, useLocation } from 'react-router-dom';
 import has from 'has';
-import useGoogleSheets from 'use-google-sheets';
 import { useQuery } from '@tanstack/react-query';
 
 import { scrollToTop } from '../../api/browserHelpers';
 
 import useAdsData, {
+    loadingErrorCsv,
     loadingErrorMetaApi,
-    loadingErrorSheets,
     metaApiUrl,
+    csvConfig,
     processDataMetaApi,
-    processDataSheets,
-    sheetsId,
+    processCsvFiles,
 } from '../../context/AdsDataContext';
 import useData, {
     accountsFile,
@@ -27,8 +26,6 @@ import Header from './Header';
 import Footer from './Footer';
 import DonateBanner from '../general/DonateBanner';
 import DonateModal from '../general/DonateModal';
-
-// import accountsFile from '../../../public/csv/aggregation_no_returns_v2.csv';
 
 function Layout() {
     const { metaApiData, setSheetsData, setMetaApiData } = useAdsData();
@@ -73,24 +70,39 @@ function Layout() {
     }, [reloadData]);
 
     // load ads data from google sheet
-    const {
-        data: gsData,
-        loading: gsLoading,
-        error: gsError,
-    } = useGoogleSheets({
-        apiKey: process.env.REACT_APP_SHEETS_API_KEY,
-        sheetId: sheetsId,
-    });
-    // store ads data in context provider once loaded
     useEffect(() => {
-        if (gsError) {
-            const parsed = loadingErrorSheets(gsError);
-            setSheetsData(parsed);
-        } else if (!gsLoading && gsData) {
-            const parsed = processDataSheets(gsData);
-            setSheetsData(parsed);
-        }
-    }, [gsData, gsLoading, gsError]);
+        const csvFiles = Object.entries(csvConfig);
+        let filesData = {};
+        Promise.all(
+            csvFiles.map(
+                ([key, config]) =>
+                    new Promise((resolve, reject) => {
+                        readRemoteFile(config.file, {
+                            worker: false,
+                            header: true,
+                            dynamicTyping: false, // do not resolve types
+                            skipEmptyLines: true,
+                            complete: (csv) => {
+                                filesData = { ...filesData, [key]: csv };
+                                return resolve(key);
+                            },
+                            error: reject,
+                        });
+                    })
+            )
+        )
+            .then((results) => {
+                const pd =
+                    results.length === csvFiles.length
+                        ? processCsvFiles(filesData)
+                        : loadingErrorCsv('Failed to load all files');
+                setSheetsData(pd);
+            })
+            .catch((error) => {
+                const pd = loadingErrorCsv(error);
+                setSheetsData(pd);
+            });
+    }, []);
 
     // load ads data from meta API & reload every 12 hours
     const d = new Date();

@@ -11,13 +11,15 @@ import { currencyFormat, fixNumber, isNumeric } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
 import { wpCat } from '../../api/wpHelpers';
 
-import useAdsData, { sheetsConfig } from '../../context/AdsDataContext';
+import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';
 
 import LastUpdateTag from '../../components/general/LastUpdateTag';
 import Posts, { templates } from '../../components/wp/Posts';
 import TisBarChart from '../../components/charts/TisBarChart';
 
-function PartyTransactions() {
+function PartyTransactions({
+    googleColumns = csvConfig[csvFiles.GOOGLE].columns,
+}) {
     const party = useOutletContext();
 
     const {
@@ -42,12 +44,10 @@ function PartyTransactions() {
     let totalGoogle = 0;
     sheetsData.googleAds.forEach((pageData) => {
         const accountParty = findPartyForGoogleAccount(
-            pageData[sheetsConfig.GOOGLE.columns.ID]
+            pageData[googleColumns.ID]
         );
         if (party.fbName === accountParty) {
-            totalGoogle += fixNumber(
-                pageData[sheetsConfig.GOOGLE.columns.SPENDING]
-            );
+            totalGoogle += fixNumber(pageData[googleColumns.SPENDING]);
         }
     });
 

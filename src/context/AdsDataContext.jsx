@@ -2,18 +2,26 @@ import { createContext, useContext, useMemo, useState } from 'react';
 
 import { getTimestampFromDate, isNumeric } from '../api/helpers';
 
-export const sheetsId = '1EmyYjnUuhJkqPSolIimi5X91GVeXKTg68XT9BBgQK7E';
-export const sheetsConfig = {
-    PARTY_ACCOUNTS: {
-        name: 'Stranícke účty',
+import accounts from '../../public/csv/online/accounts.csv';
+import google from '../../public/csv/online/Google.csv';
+import meta from '../../public/csv/online/Meta.csv';
+
+export const csvFiles = {
+    PARTY_ACCOUNTS: 'PARTY_ACCOUNTS',
+    GOOGLE: 'GOOGLE',
+    META: 'META',
+};
+
+export const csvConfig = {
+    [csvFiles.PARTY_ACCOUNTS]: {
         columns: {
             PARTY: 'Strana',
             FB_ACCOUNTS: 'FB Účty',
             GOOGLE_ACCOUNTS: 'Google účty',
         },
+        file: accounts,
     },
-    GOOGLE: {
-        name: 'Google reklama',
+    [csvFiles.GOOGLE]: {
         columns: {
             ID: 'ID',
             PAGE_NAME: 'Inzerent',
@@ -24,25 +32,19 @@ export const sheetsConfig = {
             TEXT: 'Textová',
             UPDATED: 'Aktualizácia',
         },
+        file: google,
     },
-    FB_PRECAMPAIGN: {
-        name: 'Predkampaň 11.3.-8.6.',
-        columns: {
-            ACCOUNTS: 'Účty',
-            PAGE_ID: 'Page ID',
-            PAGE_NAME: 'Page name',
-            SPENDING: 'Amount spent (EUR)',
-        },
-    },
-    FB_WEEKS: {
+    [csvFiles.META]: {
         columns: {
             PAGE_ID: 'Page ID',
             PAGE_NAME: 'Page name',
             SPENDING: 'Amount spent (EUR)',
         },
         endDate: '27.9.2023',
+        file: meta,
     },
 };
+
 export const metaApiUrl = 'https://volby.transparency.sk/api/meta/ads_json.php';
 
 const initialState = {
@@ -51,8 +53,7 @@ const initialState = {
         partiesFb: {},
         partiesGgl: {},
         googleAds: [],
-        precampaign: [],
-        weeks: {},
+        metaAds: [],
         lastUpdateFb: 0,
         lastUpdateGgl: 0,
     },
@@ -65,11 +66,11 @@ const initialState = {
 
 const filterPoliticAccounts = (partiesFb) => (pageData) => {
     let isPolitic = false;
-    if (pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID] ?? false) {
+    if (pageData[csvConfig[csvFiles.META].columns.PAGE_ID] ?? false) {
         Object.values(partiesFb).some((partyAccounts) => {
             if (
                 partyAccounts.includes(
-                    pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
+                    pageData[csvConfig[csvFiles.META].columns.PAGE_ID]
                 )
             ) {
                 isPolitic = true;
@@ -81,57 +82,40 @@ const filterPoliticAccounts = (partiesFb) => (pageData) => {
     return isPolitic;
 };
 
-export const loadingErrorSheets = (error) => {
+export const loadingErrorCsv = (error) => {
     return { ...initialState.sheetsData, error };
 };
 
-export const processDataSheets = (data) => {
-    if (Array.isArray(data)) {
-        const pd = { ...initialState.sheetsData };
-        data.forEach((sheet) => {
-            switch (sheet.id ?? '') {
-                case sheetsConfig.PARTY_ACCOUNTS.name: {
-                    // first sheet is parties accounts list
-                    sheet.data.forEach((row) => {
-                        if (
-                            row[
-                                sheetsConfig.PARTY_ACCOUNTS.columns.FB_ACCOUNTS
-                            ] ??
-                            false
-                        ) {
-                            pd.partiesFb[
-                                row[sheetsConfig.PARTY_ACCOUNTS.columns.PARTY]
-                            ] = row[
-                                sheetsConfig.PARTY_ACCOUNTS.columns.FB_ACCOUNTS
-                            ]
-                                .replaceAll(' ', '')
-                                .split(',');
+export const processCsvFiles = (allData) => {
+    const pd = { ...initialState.sheetsData };
+    Object.keys(csvFiles).forEach((key) => {
+        if (Array.isArray(allData[key].data)) {
+            switch (key) {
+                case csvFiles.PARTY_ACCOUNTS: {
+                    allData[key].data.forEach((row) => {
+                        if (row[csvConfig[key].columns.FB_ACCOUNTS] ?? false) {
+                            pd.partiesFb[row[csvConfig[key].columns.PARTY]] =
+                                row[csvConfig[key].columns.FB_ACCOUNTS]
+                                    .replaceAll(' ', '')
+                                    .split(',');
                         }
                         if (
-                            row[
-                                sheetsConfig.PARTY_ACCOUNTS.columns
-                                    .GOOGLE_ACCOUNTS
-                            ] ??
+                            row[csvConfig[key].columns.GOOGLE_ACCOUNTS] ??
                             false
                         ) {
-                            pd.partiesGgl[
-                                row[sheetsConfig.PARTY_ACCOUNTS.columns.PARTY]
-                            ] = row[
-                                sheetsConfig.PARTY_ACCOUNTS.columns
-                                    .GOOGLE_ACCOUNTS
-                            ]
-                                .replaceAll(' ', '')
-                                .split(',');
+                            pd.partiesGgl[row[csvConfig[key].columns.PARTY]] =
+                                row[csvConfig[key].columns.GOOGLE_ACCOUNTS]
+                                    .replaceAll(' ', '')
+                                    .split(',');
                         }
                     });
                     break;
                 }
-                case sheetsConfig.GOOGLE.name: {
-                    // load Google spending from second sheet
-                    pd.googleAds = sheet.data;
-                    sheet.data.forEach((pageData) => {
+                case csvFiles.GOOGLE: {
+                    pd.googleAds = allData[key].data;
+                    allData[key].data.forEach((pageData) => {
                         const time = getTimestampFromDate(
-                            pageData[sheetsConfig.GOOGLE.columns.UPDATED]
+                            pageData[csvConfig[key].columns.UPDATED]
                         );
                         if (time > pd.lastUpdateGgl) {
                             pd.lastUpdateGgl = time;
@@ -139,30 +123,19 @@ export const processDataSheets = (data) => {
                     });
                     break;
                 }
-                case sheetsConfig.FB_PRECAMPAIGN.name: {
-                    // load precampaing spending from third sheet
-                    pd.precampaign = sheet.data.filter(
+                case csvFiles.META:
+                default: {
+                    pd.metaAds = allData[key].data.filter(
                         filterPoliticAccounts(pd.partiesFb)
                     );
-                    break;
-                }
-                default: {
-                    // load weekly reports from remaining sheets
-                    const time =
-                        getTimestampFromDate(sheet.id) ||
-                        getTimestampFromDate(sheetsConfig.FB_WEEKS.endDate);
-                    if (time > pd.lastUpdateFb) {
-                        pd.lastUpdateFb = time;
-                    }
-                    pd.weeks[sheet.id] = sheet.data.filter(
-                        filterPoliticAccounts(pd.partiesFb)
+                    pd.lastUpdateFb = getTimestampFromDate(
+                        csvConfig[key].endDate
                     );
                 }
             }
-        });
-        return pd;
-    }
-    return data;
+        }
+    });
+    return pd;
 };
 
 export const loadingErrorMetaApi = (error, originalData) => {
@@ -228,61 +201,36 @@ export const AdsDataProvider = function ({ children }) {
 
     const mergedWeeksData = () => {
         const pages = {};
-        // add precampaign data
-        sheetsData.precampaign.forEach((pageData) => {
-            if (isNumeric(pageData[sheetsConfig.FB_WEEKS.columns.SPENDING])) {
+        // add weekly spending from all weeks
+        sheetsData.metaAds.forEach((pageData) => {
+            if (
+                isNumeric(pageData[csvConfig[csvFiles.META].columns.SPENDING])
+            ) {
                 if (
-                    pages[pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]] ??
+                    pages[pageData[csvConfig[csvFiles.META].columns.PAGE_ID]] ??
                     false
                 ) {
                     pages[
-                        pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
+                        pageData[csvConfig[csvFiles.META].columns.PAGE_ID]
                     ].outgoing += Number(
-                        pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
+                        pageData[csvConfig[csvFiles.META].columns.SPENDING]
                     );
                 } else {
-                    pages[pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]] = {
-                        name: pageData[sheetsConfig.FB_WEEKS.columns.PAGE_NAME],
-                        outgoing: Number(
-                            pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
-                        ),
-                    };
+                    pages[pageData[csvConfig[csvFiles.META].columns.PAGE_ID]] =
+                        {
+                            name: pageData[
+                                csvConfig[csvFiles.META].columns.PAGE_NAME
+                            ],
+                            outgoing: Number(
+                                pageData[
+                                    csvConfig[csvFiles.META].columns.SPENDING
+                                ]
+                            ),
+                        };
                 }
             }
         });
-        // add weekly spending from all weeks
-        Object.values(sheetsData.weeks).forEach((weekData) => {
-            weekData.forEach((pageData) => {
-                if (
-                    isNumeric(pageData[sheetsConfig.FB_WEEKS.columns.SPENDING])
-                ) {
-                    if (
-                        pages[
-                            pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
-                        ] ??
-                        false
-                    ) {
-                        pages[
-                            pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]
-                        ].outgoing += Number(
-                            pageData[sheetsConfig.FB_WEEKS.columns.SPENDING]
-                        );
-                    } else {
-                        pages[pageData[sheetsConfig.FB_WEEKS.columns.PAGE_ID]] =
-                            {
-                                name: pageData[
-                                    sheetsConfig.FB_WEEKS.columns.PAGE_NAME
-                                ],
-                                outgoing: Number(
-                                    pageData[
-                                        sheetsConfig.FB_WEEKS.columns.SPENDING
-                                    ]
-                                ),
-                            };
-                    }
-                }
-            });
-        });
+
         return pages;
     };
 
