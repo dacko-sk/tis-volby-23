@@ -5,11 +5,14 @@ import Row from 'react-bootstrap/Row';
 
 import { setTitle } from '../../api/browserHelpers';
 import {
-    ageDefs,
-    attributionDefs,
-    genderDefs,
+    ageColors,
+    attributionColors,
+    attributionKeys,
+    genderColors,
+    genderKeys,
     getPartyChartLabel,
-    regionDefs,
+    regionOptions,
+    regionKeys,
 } from '../../api/chartHelpers';
 import { colors } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
@@ -144,15 +147,15 @@ function Meta({
                     // create initial object for party
                     if (!(regionsAggr[partyChartLabel] ?? false)) {
                         regionsAggr[partyChartLabel] = {};
-                        Object.keys(regionDefs).forEach((regionKey) => {
-                            regionsAggr[partyChartLabel][regionKey] = 0;
+                        Object.keys(regionKeys).forEach((key) => {
+                            regionsAggr[partyChartLabel][key] = 0;
                         });
                     }
                     // aggregate regions from all acounts of the party
-                    Object.keys(regionDefs).forEach((regionKey) => {
-                        if (pageProps.regions[regionKey] ?? false) {
-                            regionsAggr[partyChartLabel][regionKey] +=
-                                pageProps.regions[regionKey];
+                    Object.keys(regionKeys).forEach((key) => {
+                        if (pageProps.regions[key] ?? false) {
+                            regionsAggr[partyChartLabel][key] +=
+                                pageProps.regions[key];
                         }
                     });
                 }
@@ -182,15 +185,15 @@ function Meta({
                     // create initial object for party
                     if (!(attributionsAggr[partyChartLabel] ?? false)) {
                         attributionsAggr[partyChartLabel] = {};
-                        Object.keys(attributionDefs).forEach((aKey) => {
-                            attributionsAggr[partyChartLabel][aKey] = 0;
+                        Object.keys(attributionKeys).forEach((key) => {
+                            attributionsAggr[partyChartLabel][key] = 0;
                         });
                     }
                     // aggregate attributions from all acounts of the party
-                    Object.keys(attributionDefs).forEach((aKey) => {
-                        if (pageProps.attribution.mandatory[aKey] ?? false) {
-                            attributionsAggr[partyChartLabel][aKey] +=
-                                pageProps.attribution.mandatory[aKey];
+                    Object.keys(attributionKeys).forEach((key) => {
+                        if (pageProps.attribution.mandatory[key] ?? false) {
+                            attributionsAggr[partyChartLabel][key] +=
+                                pageProps.attribution.mandatory[key];
                         }
                     });
                 }
@@ -214,11 +217,11 @@ function Meta({
             }
 
             if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
-                Object.keys(attributionDefs).forEach((aKey) => {
-                    if (pageProps.attribution.mandatory[aKey] ?? false) {
-                        attributions[aKey] =
-                            (attributions[aKey] ?? 0) +
-                            pageProps.attribution.mandatory[aKey];
+                Object.keys(attributionKeys).forEach((key) => {
+                    if (pageProps.attribution.mandatory[key] ?? false) {
+                        attributions[key] =
+                            (attributions[key] ?? 0) +
+                            pageProps.attribution.mandatory[key];
                     }
                 });
             }
@@ -233,23 +236,21 @@ function Meta({
                     name: partyChartLabel,
                 };
                 let sum = 0;
-                Object.values(partyRegions).forEach((regionShare) => {
-                    sum += regionShare;
+                Object.values(partyRegions).forEach((share) => {
+                    sum += share;
                 });
-                Object.entries(partyRegions).forEach(
-                    ([regionKey, regionShare]) => {
-                        dataPoint[regionKey] = regionShare / sum;
-                    }
-                );
+                Object.entries(partyRegions).forEach(([key, share]) => {
+                    dataPoint[key] = share / sum;
+                });
                 regionsPercentages.push(dataPoint);
             }
         );
         regionsPercentages.sort(sortByName);
-        Object.entries(regionDefs).forEach(([regionKey, regionProps]) => {
+        Object.entries(regionOptions).forEach(([key, options]) => {
             regionsBars.push({
-                key: regionKey,
-                name: regionProps.name,
-                color: regionProps.color,
+                key,
+                name: t(labels.ads.meta.regions.regionLabels[key]),
+                color: options.color,
                 stackId: 'regions',
             });
         });
@@ -260,21 +261,21 @@ function Meta({
                     name: partyChartLabel,
                 };
                 let sum = 0;
-                Object.values(partyGenders).forEach((gShare) => {
-                    sum += gShare;
+                Object.values(partyGenders).forEach((share) => {
+                    sum += share;
                 });
-                Object.entries(partyGenders).forEach(([gKey, gShare]) => {
-                    dataPoint[gKey] = gShare / sum;
+                Object.entries(partyGenders).forEach(([key, share]) => {
+                    dataPoint[key] = share / sum;
                 });
                 genderPercentages.push(dataPoint);
             }
         );
-        genderPercentages.sort(sortByNumericProp('female'));
-        Object.entries(genderDefs).forEach(([gKey, gProps]) => {
+        genderPercentages.sort(sortByNumericProp(genderKeys.female));
+        Object.entries(genderColors).forEach(([key, color]) => {
             genderBars.push({
-                key: gKey,
-                name: gProps.name,
-                color: gProps.color,
+                key,
+                name: t(labels.ads.meta.demography.genderLabels[key]),
+                color,
                 stackId: 'genders',
             });
         });
@@ -293,10 +294,10 @@ function Meta({
             agePercentages.push(dataPoint);
         });
         agePercentages.sort(sortByName);
-        Object.entries(ageDefs).forEach(([age, color]) => {
+        Object.entries(ageColors).forEach(([key, color]) => {
             ageBars.push({
-                key: age,
-                name: age,
+                key,
+                name: key,
                 color,
                 stackId: 'ages',
             });
@@ -311,27 +312,28 @@ function Meta({
                 Object.values(partyAttr).forEach((amount) => {
                     sum += amount;
                 });
-                Object.entries(partyAttr).forEach(([aKey, amount]) => {
-                    dataPoint[aKey] = amount / sum;
+                Object.entries(partyAttr).forEach(([key, amount]) => {
+                    dataPoint[key] = amount / sum;
                 });
                 if (sum) {
                     attributionsPercentages.push(dataPoint);
                 }
             }
         );
-        attributionsPercentages.sort(sortByNumericProp('YES'));
-        Object.entries(attributionDefs).forEach(([aKey, aProps]) => {
-            if (attributions[aKey] ?? false) {
+        attributionsPercentages.sort(sortByNumericProp(attributionKeys.YES));
+        Object.entries(attributionColors).forEach(([key, color]) => {
+            const name = t(labels.ads.meta.attribution.attrLabels[key]);
+            if (attributions[key] ?? false) {
                 attributionsPie.data.push({
-                    name: aProps.name,
-                    value: attributions[aKey],
-                    color: aProps.color,
+                    name,
+                    value: attributions[key],
+                    color,
                 });
             }
             attributionsBars.push({
-                key: aKey,
-                name: aProps.name,
-                color: aProps.color,
+                key,
+                name,
+                color,
                 stackId: 'attr',
             });
         });

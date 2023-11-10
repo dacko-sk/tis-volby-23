@@ -7,10 +7,10 @@ import { useQuery } from '@tanstack/react-query';
 import { scrollToTop } from '../../api/browserHelpers';
 
 import useAdsData, {
+    csvConfig,
     loadingErrorCsv,
     loadingErrorMetaApi,
     metaApiUrl,
-    csvConfig,
     processDataMetaApi,
     processCsvFiles,
 } from '../../context/AdsDataContext';

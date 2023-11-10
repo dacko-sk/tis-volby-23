@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Sector } from 'recharts';
-import has from 'has';
 
 import { colors, parties } from './constants';
 import { shortenValue } from './helpers';
@@ -12,38 +11,56 @@ export const isMobile = window.innerWidth < 576;
 export const horizontalYaxisWidth = 80;
 export const verticalYaxisWidth = isMobile ? 120 : 180;
 
-export const regionDefs = {
-    BA: {
-        name: 'Bratislavský kraj',
+export const regionKeys = {
+    BA: 'BA',
+    BB: 'BB',
+    KE: 'KE',
+    NR: 'NR',
+    PO: 'PO',
+    TN: 'TN',
+    TT: 'TT',
+    ZA: 'ZA',
+};
+export const regionOptions = {
+    [regionKeys.BA]: {
         size: 677024,
         color: colors.colorLightBlue,
     },
-    BB: {
-        name: 'Banskobystrický kraj',
+    [regionKeys.BB]: {
         size: 643102,
         color: colors.colorOrange,
     },
-    KE: { name: 'Košický kraj', size: 802092, color: '#c19c00' },
-    NR: { name: 'Nitriansky kraj', size: 671508, color: '#75066e' },
-    PO: { name: 'Prešovský kraj', size: 827028, color: '#cd2b26' },
-    TN: { name: 'Trenčiansky kraj', size: 582567, color: colors.colorDarkBlue },
-    TT: { name: 'Trnavský kraj', size: 565324, color: '#1f1a17' },
-    ZA: { name: 'Žilinský kraj', size: 691136, color: '#18943c' },
+    [regionKeys.KE]: { size: 802092, color: '#c19c00' },
+    [regionKeys.NR]: { size: 671508, color: '#75066e' },
+    [regionKeys.PO]: { size: 827028, color: '#cd2b26' },
+    [regionKeys.TN]: { size: 582567, color: colors.colorDarkBlue },
+    [regionKeys.TT]: { size: 565324, color: '#1f1a17' },
+    [regionKeys.ZA]: { size: 691136, color: '#18943c' },
 };
 
-export const genderDefs = {
-    female: { name: 'Ženy', color: colors.colorOrange },
-    male: { name: 'Muži', color: colors.colorDarkBlue },
-    unknown: { name: 'Nezistené', color: colors.colorGrey },
+export const genderKeys = {
+    female: 'female',
+    male: 'male',
+    unknown: 'unknown',
+};
+export const genderColors = {
+    [genderKeys.female]: colors.colorOrange,
+    [genderKeys.male]: colors.colorDarkBlue,
+    [genderKeys.unknown]: colors.colorGrey,
 };
 
-export const attributionDefs = {
-    YES: { name: 'Správne označené', color: colors.colorDarkBlue },
-    NO: { name: 'Neoznačené', color: colors.colorOrange },
-    'N/A': { name: 'Nezistené', color: colors.colorGrey },
+export const attributionKeys = {
+    YES: 'YES',
+    NO: 'NO',
+    'N/A': 'N/A',
+};
+export const attributionColors = {
+    [attributionKeys.YES]: colors.colorDarkBlue,
+    [attributionKeys.NO]: colors.colorOrange,
+    [attributionKeys['N/A']]: colors.colorGrey,
 };
 
-export const ageDefs = {
+export const ageColors = {
     '13-17': '#1f1a17',
     '18-24': '#c19c00',
     '25-34': '#18943c',
@@ -76,10 +93,8 @@ export const tickLabel = (value) => {
 
 export const getPartyChartLabel = (row, subpage) => {
     const n =
-        has(parties, row[csvAggregatedKeys.name]) &&
-        has(parties[row[csvAggregatedKeys.name]], 'slug')
-            ? parties[row[csvAggregatedKeys.name]].slug
-            : row[csvAggregatedKeys.name];
+        parties[row[csvAggregatedKeys.name]]?.slug ??
+        row[csvAggregatedKeys.name];
     return n + separators.newline + (subpage ?? '');
 };
 

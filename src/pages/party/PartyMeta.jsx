@@ -5,10 +5,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import {
-    ageDefs,
-    attributionDefs,
-    genderDefs,
-    regionDefs,
+    ageColors,
+    attributionColors,
+    attributionKeys,
+    genderColors,
+    regionOptions,
 } from '../../api/chartHelpers';
 import { colors } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
@@ -124,63 +125,57 @@ function PartyMeta({
                 }
 
                 if (loadedCharts.includes(chartKeys.REGIONS)) {
-                    Object.entries(regionDefs).forEach(
-                        ([regionKey, regionProps]) => {
-                            if (pageProps.regions[regionKey] ?? false) {
-                                const label = regionProps.name;
-                                if (regions[regionKey] ?? false) {
-                                    regions[regionKey].value +=
-                                        pageProps.regions[regionKey];
-                                } else {
-                                    regions[regionKey] = {
-                                        name: label,
-                                        value: pageProps.regions[regionKey],
-                                        size: regionProps.size,
-                                        color:
-                                            regionProps.color ??
-                                            colors.colorOrange,
-                                    };
-                                }
-                                const val =
-                                    pageProps.regions[regionKey] /
-                                    regionProps.size;
-                                if (regionsCols[regionKey] ?? false) {
-                                    regionsCols[regionKey].value += val;
-                                } else {
-                                    regionsCols[regionKey] = {
-                                        name: label,
-                                        value: val,
-                                        color:
-                                            regionProps.color ??
-                                            colors.colorDarkBlue,
-                                    };
-                                }
+                    Object.entries(regionOptions).forEach(([key, options]) => {
+                        if (pageProps.regions[key] ?? false) {
+                            const name = t(
+                                labels.ads.meta.regions.regionLabels[key]
+                            );
+                            if (regions[key] ?? false) {
+                                regions[key].value += pageProps.regions[key];
+                            } else {
+                                regions[key] = {
+                                    name,
+                                    value: pageProps.regions[key],
+                                    size: options.size,
+                                    color: options.color ?? colors.colorOrange,
+                                };
+                            }
+                            const val = pageProps.regions[key] / options.size;
+                            if (regionsCols[key] ?? false) {
+                                regionsCols[key].value += val;
+                            } else {
+                                regionsCols[key] = {
+                                    name,
+                                    value: val,
+                                    color:
+                                        options.color ?? colors.colorDarkBlue,
+                                };
                             }
                         }
-                    );
+                    });
                 }
 
                 if (loadedCharts.includes(chartKeys.DEMOGRAPHY)) {
                     Object.entries(pageProps.demography).forEach(
-                        ([dKey, dSize]) => {
-                            const [gender, age] = dKey.split('|');
-                            genders[gender] = (genders[gender] ?? 0) + dSize;
-                            ages[age] = (ages[age] ?? 0) + dSize;
+                        ([key, size]) => {
+                            const [gender, age] = key.split('|');
+                            genders[gender] = (genders[gender] ?? 0) + size;
+                            ages[age] = (ages[age] ?? 0) + size;
                         }
                     );
                 }
 
                 if (loadedCharts.includes(chartKeys.ATTRIBUTION)) {
-                    Object.keys(attributionDefs).forEach((aKey) => {
-                        if (pageProps.attribution.mandatory[aKey] ?? false) {
-                            attributions[aKey] =
-                                (attributions[aKey] ?? 0) +
-                                pageProps.attribution.mandatory[aKey];
+                    Object.keys(attributionKeys).forEach((key) => {
+                        if (pageProps.attribution.mandatory[key] ?? false) {
+                            attributions[key] =
+                                (attributions[key] ?? 0) +
+                                pageProps.attribution.mandatory[key];
                         }
-                        if (pageProps.attribution.optional[aKey] ?? false) {
-                            attrOptional[aKey] =
-                                (attrOptional[aKey] ?? 0) +
-                                pageProps.attribution.optional[aKey];
+                        if (pageProps.attribution.optional[key] ?? false) {
+                            attrOptional[key] =
+                                (attrOptional[key] ?? 0) +
+                                pageProps.attribution.optional[key];
                         }
                     });
                 }
@@ -195,42 +190,44 @@ function PartyMeta({
             sortByNumericProp('value')
         );
 
-        Object.entries(genderDefs).forEach(([gKey, gProps]) => {
-            if (genders[gKey] ?? false) {
+        Object.entries(genderColors).forEach(([key, color]) => {
+            if (genders[key] ?? false) {
                 gendersPie.data.push({
-                    name: gProps.name,
-                    value: genders[gKey],
-                    color: gProps.color,
-                });
-            }
-        });
-
-        Object.entries(ageDefs).forEach(([age, color]) => {
-            if (ages[age] ?? false) {
-                agesPie.data.push({
-                    name: age,
-                    value: ages[age],
+                    name: t(labels.ads.meta.demography.genderLabels[key]),
+                    value: genders[key],
                     color,
                 });
             }
         });
 
-        Object.entries(attributionDefs).forEach(([aKey, aProps]) => {
-            if (attributions[aKey] ?? false) {
-                attributionsPie.data.push({
-                    name: aProps.name,
-                    value: attributions[aKey],
-                    color: aProps.color,
-                });
-            }
-            if (attrOptional[aKey] ?? false) {
-                attrOptionalPie.data.push({
-                    name: aProps.name,
-                    value: attrOptional[aKey],
-                    color: aProps.color,
+        Object.entries(ageColors).forEach(([key, color]) => {
+            if (ages[key] ?? false) {
+                agesPie.data.push({
+                    name: key,
+                    value: ages[key],
+                    color,
                 });
             }
         });
+
+        Object.entries(attributionColors).forEach(([key, color]) => {
+            const name = t(labels.ads.meta.attribution.attrLabels[key]);
+            if (attributions[key] ?? false) {
+                attributionsPie.data.push({
+                    name,
+                    value: attributions[key],
+                    color,
+                });
+            }
+            if (attrOptional[key] ?? false) {
+                attrOptionalPie.data.push({
+                    name,
+                    value: attrOptional[key],
+                    color,
+                });
+            }
+        });
+        console.log(attributions);
     }
 
     const charts = {

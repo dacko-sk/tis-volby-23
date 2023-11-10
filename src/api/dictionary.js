@@ -8,6 +8,11 @@ import {
     transparencyClasses as atc,
     transparencyIndicators as ati,
 } from './wpHelpers';
+import {
+    attributionKeys as ca,
+    genderKeys as cg,
+    regionKeys as cr,
+} from './chartHelpers';
 
 export const labels = {
     account: {
@@ -112,6 +117,11 @@ export const labels = {
                     'Attribution by all parties',
                 ],
                 amount: ['Počet', 'Amount'],
+                attrLabels: {
+                    [ca.YES]: ['Správne označené', 'Correctly tagged'],
+                    [ca.NO]: ['Neoznačené', 'Untagged'],
+                    [ca['N/A']]: ['Nezistené', 'Unknown'],
+                },
                 campaign: ['Kampaň', 'Campaign'],
                 disclaimer: [
                     'Povinné označenie objednávateľa a dodávateľa podľa zákona o volebnej kampani od oficiálneho začiatku kampane 9. júna 2023. Za správne označenú reklamu vyhodnocujeme statusy, v TEXTE ktorých je uvedený objednávateľ a dodávateľ reklamy. Statusy bez textu vyhodnocujeme ako "Nezistené".',
@@ -142,6 +152,11 @@ export const labels = {
                     'Podiel zásahu reklám medzi pohlaviami od začiatku predkampane 11. decembra 2022.',
                     'Distribution of ads impressions between genders since the beginning of precampaign on December 2, 2022.',
                 ],
+                genderLabels: {
+                    [cg.female]: ['Ženy', 'Females'],
+                    [cg.male]: ['Muži', 'Males'],
+                    [cg.unknown]: ['Nezistené', 'Unknown'],
+                },
                 title: [
                     'Demografické rozloženie reklamy',
                     'Ads demographic distribution',
@@ -189,6 +204,16 @@ export const labels = {
                     'Distribution of ads impressions between regions of Slovakia since the beginning of precampaign on December 2, 2022. The inner chart shows sizes of regions based on number of citizens.',
                 ],
                 label: ['Podiel zásahu reklám', 'Distribution of impressions'],
+                regionLabels: {
+                    [cr.BA]: ['Bratislavský kraj', 'Bratislava region'],
+                    [cr.BB]: ['Banskobystrický kraj', 'Banská Bystrica region'],
+                    [cr.KE]: ['Košický kraj', 'Košice region'],
+                    [cr.NR]: ['Nitriansky kraj', 'Nitra region'],
+                    [cr.PO]: ['Prešovský kraj', 'Prešov region'],
+                    [cr.TN]: ['Trenčiansky kraj', 'Trenčín region'],
+                    [cr.TT]: ['Trnavský kraj', 'Trnava region'],
+                    [cr.ZA]: ['Žilinský kraj', 'Žilina region'],
+                },
                 sizeLabel: [
                     'Podiel populácie SR žijúcej v tomto kraji',
                     'Share of citizens living in this region',
@@ -416,7 +441,6 @@ export const labels = {
             'Po kliknutí na názov strany sa rozbalia podrobnosti.',
             'Click the party name for details.',
         ],
-        updated: ['Naposledy aktualizované', 'Last updated on'],
         incoming: ['Príjmy', 'Incomes'],
         outgoing: ['Výdavky', 'Expenses'],
         top10: [
@@ -424,6 +448,7 @@ export const labels = {
             'Top 10 campaigns by incomes and spendings',
         ],
         uniqeDonors: ['Počet unikátnych darcov', 'Number of unique donors'],
+        updated: ['Naposledy aktualizované', 'Last updated on'],
     },
     contact: ['Kontakt', 'Contact'],
     cookies: {
