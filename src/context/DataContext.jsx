@@ -4,8 +4,26 @@ import has from 'has';
 import { parties } from '../api/constants';
 import { contains } from '../api/helpers';
 
-export const accountsFile =
-    'https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/aggregation_no_returns.csv';
+import aggregatedAcounts from '../../public/csv/transparent/aggregation_no_returns.csv';
+// import all csv files from the accounts folder via webpack
+const accountsFolder = require.context(
+    '../../public/csv/transparent/accounts',
+    false,
+    /\.csv$/
+);
+const accountFile = (filename) => {
+    let found = null;
+    accountsFolder.keys().some((key) => {
+        if (key.endsWith(filename)) {
+            found = key;
+            return true;
+        }
+        return false;
+    });
+    return found ? accountsFolder(found) : null;
+};
+
+export const accountsFile = aggregatedAcounts;
 export const baseDate = 1669068712;
 export const reloadMinutes = 70;
 
@@ -49,9 +67,7 @@ export const getFileName = (account) => {
         fileName = account[csvAggregatedKeys.account].substr(-10);
     }
     return fileName
-        ? `https://raw.githubusercontent.com/matusv/elections-slovakia-2023/main/accounts/${
-              account[csvAggregatedKeys.name]
-          } ${fileName}.csv`
+        ? accountFile(`${account[csvAggregatedKeys.name]} ${fileName}.csv`)
         : null;
 };
 
@@ -131,12 +147,15 @@ export const findByProperty = (csvData, property, value) => {
 
 export const buildParserConfig = (processCallback, storeDataCallback) => {
     return {
-        worker: true, // must be false for local files
+        worker: false, // must be false for local files
         header: true,
         dynamicTyping: true,
         skipEmptyLines: true,
         complete: (results) => {
-            const data = processCallback(results);
+            const data =
+                typeof processCallback === 'function'
+                    ? processCallback(results)
+                    : results;
             storeDataCallback(data);
         },
     };

@@ -6,7 +6,11 @@ import { usePapaParse } from 'react-papaparse';
 import { labels, t } from '../../api/dictionary';
 import { currencyFormat, dateFormat } from '../../api/helpers';
 
-import { csvAccountKeys, getFileName } from '../../context/DataContext';
+import {
+    buildParserConfig,
+    csvAccountKeys,
+    getFileName,
+} from '../../context/DataContext';
 
 import Loading from '../general/Loading';
 import PaginationWithGaps from '../general/PaginationWithGaps';
@@ -37,15 +41,7 @@ function AccountTransactions({ pageSize = 25, account }) {
 
     // load data on first load
     useEffect(() => {
-        const parserConfig = {
-            worker: true, // must be false for local files
-            header: true,
-            dynamicTyping: true,
-            skipEmptyLines: true,
-            complete: (data) => {
-                setTransactions(data);
-            },
-        };
+        const parserConfig = buildParserConfig(null, setTransactions);
         readRemoteFile(file, parserConfig);
     }, []);
 
