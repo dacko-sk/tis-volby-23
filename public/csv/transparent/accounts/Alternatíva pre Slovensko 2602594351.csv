@@ -1,0 +1,6 @@
+index,date,amount,tx_type,account_name,message,ks,vs,ss,note
+0,2023-07-23,-4.8,Bezhotovostná platba,,,,,,"tlač, viazanie"
+1,2023-07-13,-31.3,Bezhotovostná platba,,,,,,"kopirovanie, tlac"
+2,2023-07-13,-43.5,Bezhotovostná platba,,,,,,skolenie 11.7.2023
+3,2023-07-13,-70.0,Bezhotovostná platba,,,,,,web design
+4,2023-07-13,150.0,Bezhotovostný príjem,"Česnek Viktor, Ing.,",/DO2023-07-12/SP,,,,"Česnek Viktor, Ing.,"

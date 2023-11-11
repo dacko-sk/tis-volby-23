@@ -1,0 +1,57 @@
+index,date,amount,currency,account_name,message,vs
+0,2023-10-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.10.2023 do 31.10.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 2 x prijaté platby: 0,00, 3 x debet - elektronicky: 0,00",
+1,2023-10-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 30.10.2023","VS: 495000303
+ŠS: 5032809677
+KS: 6898"
+2,2023-10-10,-1300,EUR,,"Odoslaná platba elektronicky, ",
+3,2023-10-10,1300,EUR,Hudec Jan,"Prijatá platba, ",
+4,2023-10-09,-700,EUR,,"Odoslaná platba elektronicky, ",
+5,2023-10-09,50,EUR,Maros Varga,"Prijatá platba, Podpora QR web",
+6,2023-10-02,-2500,EUR,,"Odoslaná platba elektronicky, Letaky",
+7,2023-09-30,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.09.2023 do 30.09.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 12 x prijaté platby: 0,00, 12 x debet - elektronicky: 0,00",
+8,2023-09-29,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 28.09.2023","VS: 495000271
+ŠS: 5032809677
+KS: 6898"
+9,2023-09-29,-1500,EUR,,"Odoslaná platba elektronicky, ",VS: 2333101859
+10,2023-09-29,250,EUR,ORVISKA KATARINA,"Prijatá platba, Mgr. Katarina Orviska",
+11,2023-09-29,2500,EUR,Hamrozy Patrik,"Prijatá platba, ",
+12,2023-09-28,400,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
+13,2023-09-26,1000,EUR,Marian Liptak,"Prijatá platba, ",ŠS: 4008510309
+14,2023-09-25,-480,EUR,,"Odoslaná platba elektronicky, ",VS: 23025
+15,2023-09-25,1000,EUR,"FINTECH, S. R. O.","Prijatá platba, Reklama",
+16,2023-09-21,-357.4,EUR,,"Odoslaná platba elektronicky, ",VS: 230100334
+17,2023-09-21,-356.4,EUR,,"Odoslaná platba elektronicky, ",VS: 2333101797
+18,2023-09-21,-507.6,EUR,,"Odoslaná platba elektronicky, ",VS: 202309022
+19,2023-09-21,-503.76,EUR,,"Odoslaná platba elektronicky, Bilbord TN",VS: 202309001
+20,2023-09-21,1700,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
+21,2023-09-18,-2500,EUR,,"Odoslaná platba elektronicky, Zaloha plachty",
+22,2023-09-18,1400,EUR,"FINTECH, S. R. O.","Prijatá platba, Reklama",
+23,2023-09-15,500,EUR,HUDEC JAN,"Prijatá platba, ",
+24,2023-09-13,-5000,EUR,,"Odoslaná platba elektronicky, Zaloha placty",
+25,2023-09-13,1500,EUR,KARMA,"Prijatá platba, ",
+26,2023-09-13,3000,EUR,"FINTECH, S. R. O.","Prijatá platba, ",
+27,2023-09-06,-304.8,EUR,,"Odoslaná platba elektronicky, TLAC LETAK",VS: 2023450
+28,2023-09-06,-1225.2,EUR,,"Odoslaná platba elektronicky, WEB KARMA24",VS: 202308008
+29,2023-09-06,-80,EUR,,"Odoslaná platba elektronicky, Spravny poplatok za vydanie rozhodnutia. MK/A/2023/21293 zo dna 06.09.2023.",VS: 3451230360
+30,2023-09-06,500,EUR,Silvia Kissova,"Prijatá platba, Silvia Kissova",
+31,2023-09-06,300,EUR,Viliam Kapusta,"Prijatá platba, Mgr. Viliam Kapusta",
+32,2023-09-06,999.99,EUR,Marek Grussmann,"Prijatá platba, ",
+33,2023-09-05,-40,EUR,,"Odoslaná platba elektronicky, SP akcia doprava",VS: 221004
+34,2023-09-04,-5,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.08.2023","VS: 497000243
+ŠS: 5032809677
+KS: 6898"
+35,2023-09-04,-10,EUR,,"Výber hotovosti kartou, Suma: 10 EUR 30.08.2023 Miesto: TRENCIN, MIEROVE NAM. 37 TRENCIN","VS: 401000243
+ŠS: 5032809677
+KS: 0608"
+36,2023-08-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.08.2023 do 31.08.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 3 x prijaté platby: 0,00, 2 x debet - elektronicky: 0,00",
+37,2023-08-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 30.08.2023","VS: 495000242
+ŠS: 5032809677
+KS: 6898"
+38,2023-08-31,-7000,EUR,Modify Studio,"Odoslaná platba elektronicky, ",VS: 2023077
+39,2023-08-30,-0.2,EUR,,"Poplatok za platbu, ",
+40,2023-08-30,2990,EUR,ADRIANA SZABOOVA,"Prijatá platba, Karma politicka strana transparentn y ucet",ŠS: 4009563308
+41,2023-08-22,5000,EUR,Jan Barton,"Prijatá platba, ",VS: 911
+42,2023-08-21,-5000,EUR,Modify Studio,"Odoslaná platba elektronicky, ",VS: 2023077
+43,2023-08-21,2121,EUR,KARMA,"Prijatá platba, ",
+44,2023-08-11,1000,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
+45,2023-08-09,1000,EUR,Marian Liptak,"Prijatá platba, ",ŠS: 4003262308

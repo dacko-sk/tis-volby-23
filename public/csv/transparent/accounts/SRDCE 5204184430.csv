@@ -1,0 +1,115 @@
+index,Unnamed: 0,account_name,date,amount,currency,message,tx_type,vs,ss
+0,0,,2023-10-31,-5.0,EUR,Poplatok za vedenie účtu,Poplatok,,
+1,1,,2023-10-31,-5.0,EUR,Zverejňovanie účtu,Poplatok,,
+2,2,obec Selice,2023-10-08,-6.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),1752023.0,42285089.0
+3,3,Dolný Hričov,2023-10-08,-5.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),202341.0,42285089.0
+4,4,"Fibra print, s.r.o.",2023-10-08,-342.0,EUR,úhrada reklamných predmetov,Okamžitá platba (EB),2300829.0,42285089.0
+5,5,obec Veľká lúka,2023-10-05,-5.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),112023.0,42285089.0
+6,6,obec Rúbaň,2023-10-05,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023341.0,42285089.0
+7,7,obec Tehla,2023-10-05,-6.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023243.0,42285089.0
+8,8,obec Klokočov,2023-10-04,-3.3,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),20230060.0,42285089.0
+9,9,obec Jablonica,2023-10-04,-10.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),2023.0,42285089.0
+10,10,obec Zubné,2023-10-04,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),10230001.0,42285089.0
+11,11,obec Sklabiňa,2023-10-04,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),202323.0,42285089.0
+12,12,obec Fačkov,2023-10-04,-10.0,EUR,odvysielanie oznamy,Okamžitá platba (EB),1202309.0,42285089.0
+13,13,obec Rabčice,2023-10-04,-6.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023059.0,42285089.0
+14,14,obec Veľké Rovnéo,2023-10-03,-6.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023000059.0,42285089.0
+15,15,obec Batizovce,2023-10-03,-5.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),2023014.0,42285089.0
+16,16,obec Detvianska Huta,2023-10-01,-10.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),2023000024.0,42285089.0
+17,17,,2023-09-30,-5.0,EUR,Zverejňovanie účtu,Poplatok,,
+18,18,,2023-09-30,-5.0,EUR,Poplatok za vedenie účtu,Poplatok,,
+19,19,HLP grafik,2023-09-29,-454.8,EUR,úhrada výroby plagátov a baneru,Platobný príkaz na úhradu / FIT 2.0 (EB),20230184.0,42285089.0
+20,20,obec Gemerská Ves,2023-09-29,-4.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),11.0,42285089.0
+21,21,obec Veľké Turovce,2023-09-28,-6.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023000008.0,42285089.0
+22,22,obec Pozba,2023-09-28,-7.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),202318.0,42285089.0
+23,23,FUJASOVA ZUZANA,2023-09-28,120.0,EUR,Z.Fujasova Lastovicia 9 Nove Zamky prispevok kampa,Bezhotovostný vklad,,
+24,24,OBECNY URAD,2023-09-28,6.0,EUR,omyl platba 2x uhradene,Bezhotovostný vklad,312023.0,
+25,25,obec Vieska,2023-09-27,-5.0,EUR,odvysielanie oznamu - doplatok,Okamžitá platba (EB),2023000076.0,42285089.0
+26,26,obec Rudník,2023-09-27,-4.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),1002023.0,42285089.0
+27,27,obec Nezbudská Lúčka,2023-09-27,-12.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),20235.0,42285089.0
+28,28,mesto Hronský Beňadik,2023-09-27,-8.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),20235.0,42285089.0
+29,29,obec Sekule,2023-09-27,-12.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),442023.0,42285089.0
+30,30,obec  Bešeňov,2023-09-27,-10.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),20230084.0,42285089.0
+31,31,obec Bánov,2023-09-27,-8.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023000206.0,42285089.0
+32,32,Kohaut Andrej,2023-09-26,50.0,EUR,kohaut prispevok,Bezhotovostný vklad,,
+33,33,obec Senohrad,2023-09-26,-5.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),12023.0,42285089.0
+34,34,obec  Horné Hámre,2023-09-26,-20.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023103.0,42285089.0
+35,35,obec Krpeľany,2023-09-26,-5.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),2023104.0,42285089.0
+36,36,obec Domadice,2023-09-26,-6.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),20230002.0,42285089.0
+37,37,obec Prievaly,2023-09-26,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),62023.0,42285089.0
+38,38,obec Nesluša,2023-09-26,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),202314.0,42285089.0
+39,39,obec Rosina,2023-09-26,-10.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),20230054.0,42285089.0
+40,40,obec Uhliská,2023-09-26,-4.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),202356.0,42285089.0
+41,41,obec Holumnica,2023-09-26,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),20230026.0,42285089.0
+42,42,obec Párnica,2023-09-26,-14.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),52023067.0,42285089.0
+43,43,obec Breza,2023-09-26,-6.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),242023.0,42285089.0
+44,44,mesto Želiezovce,2023-09-26,-4.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),5010300274.0,42285089.0
+45,45,obec Horné Pršany,2023-09-26,-6.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),312023.0,42285089.0
+46,46,obec Lúčky,2023-09-26,-7.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023119.0,42285089.0
+47,47,obec  Bardoňovo,2023-09-26,-3.3,EUR,odvysielanie príhovoru,Okamžitá platba (EB),20235.0,42285089.0
+48,48,Bežný účet 5193505509,2023-09-26,-725.0,EUR,refakturacia nákladov na tlačovú konferenciu hotel Falkensteiner,Platobný príkaz na úhradu / FIT 2.0 (EB),42285089.0,17082023.0
+49,49,Bežný účet 5193505509,2023-09-26,-18302.04,EUR,refakturacia nákladov na zloženie volebnej kaucie,Platobný príkaz na úhradu / FIT 2.0 (EB),42285089.0,29062023.0
+50,50,Bežný účet 5193505509,2023-09-26,-1587.6,EUR,refakturácia reklamných predmetov FIBRA s. r. o.,Platobný príkaz na úhradu / FIT 2.0 (EB),42285089.0,23062023.0
+51,51,Bežný účet 5193505509,2023-09-26,-3080.76,EUR,refakturácia reklamných predmetov od FIBRA s. r. o.,Platobný príkaz na úhradu / FIT 2.0 (EB),42285089.0,26052023.0
+52,52,Bežný účet 5193505509,2023-09-26,-429.6,EUR,refakturácia úhrady reklamných predmetov od FIBRI s.r.o.,Platobný príkaz na úhradu / FIT 2.0 (EB),42285089.0,11052023.0
+53,53,Vladimír Zeman,2023-09-26,20000.0,EUR,pôžička na úhradu nákladov na voľby,Bezhotovostný vklad,450629.0,42285089.0
+54,54,obec Horné Pršany,2023-09-26,-6.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),312003.0,42285089.0
+55,55,obec Dolná Strehová,2023-09-26,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2112300243.0,42285089.0
+56,56,obec Rudina,2023-09-26,-40.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023000035.0,42285089.0
+57,57,obec Zbyňov,2023-09-25,-10.0,EUR,Odvysielanie oznamu,Okamžitá platba (EB),20239.0,42285089.0
+58,58,mesto Hriňová,2023-09-25,-6.0,EUR,,Okamžitá platba (EB),1319300393.0,42285089.0
+59,59,obec Štôla,2023-09-25,-14.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),202313.0,42285089.0
+60,60,emacher  s. r o.,2023-09-25,-1200.0,EUR,úhrada strihu video prezentácií 4K,Platobný príkaz na úhradu / FIT 2.0 (EB),2023003312.0,42285089.0
+61,61,DIGITRA Net,2023-09-25,-43.2,EUR,baner 2ks,Okamžitá platba (EB),162023414.0,42285089.0
+62,62,obec Ožďany,2023-09-25,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),202340.0,42285089.0
+63,63,obec Šuja,2023-09-25,-4.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),20236.0,42285089.0
+64,64,obec Mlynčeky,2023-09-25,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023142.0,42285089.0
+65,65,obec Ťapešovo,2023-09-25,-20.0,EUR,odvyseilanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023330006.0,42285089.0
+66,66,obec Bitarová,2023-09-25,-4.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),202318.0,42285089.0
+67,67,obec Žiar,2023-09-25,-5.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),323017.0,42285089.0
+68,68,obec Rajecká Lesná,2023-09-25,-8.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),20234.0,42285089.0
+69,69,Lubomir Gergel,2023-09-25,400.0,EUR,"Lubomir Gergel, Kratka 6, Humenne - DAR",Bezhotovostný vklad,,
+70,70,Haulík Peter,2023-09-24,120.0,EUR,Haulik,Bezhotovostný vklad,,
+71,71,obec Lopušné Pažite,2023-09-24,-10.0,EUR,odvysielanie oznamu,Platobný príkaz na úhradu / FIT 2.0 (EB),24092023.0,42285089.0
+72,72,obec Jesenské,2023-09-24,-10.0,EUR,hlásenie v miestnom rozhlase,Platobný príkaz na úhradu / FIT 2.0 (EB),1823.0,42285089.0
+73,73,obec Divina,2023-09-24,-20.0,EUR,vyhlásenie v miestnom rozhlase,Platobný príkaz na úhradu / FIT 2.0 (EB),2023032.0,42285089.0
+74,74,obec Rakša,2023-09-24,-10.0,EUR,platený oznam,Platobný príkaz na úhradu / FIT 2.0 (EB),622023.0,42285089.0
+75,75,obec Podvysoká,2023-09-24,-14.0,EUR,vyhlásenie v miestnom rozhlase,Platobný príkaz na úhradu / FIT 2.0 (EB),4.0,42285089.0
+76,76,obec Ďanová,2023-09-24,-5.0,EUR,vyhlásenie v MR,Okamžitá platba (EB),2308.0,42285089.0
+77,77,obec B odorová,2023-09-24,-6.0,EUR,vyhlásenie v miestnom rozhlase,Platobný príkaz na úhradu / FIT 2.0 (EB),6002.0,42285089.0
+78,78,obec Bešeňová,2023-09-24,-20.0,EUR,rozhlasový príhovor,Platobný príkaz na úhradu / FIT 2.0 (EB),2492023.0,42285089.0
+79,79,obec Čepčín,2023-09-24,-14.0,EUR,oznam v miestnom rozhlase,Platobný príkaz na úhradu / FIT 2.0 (EB),4018.0,42285089.0
+80,80,obec Vieska,2023-09-24,-5.0,EUR,odvysielanie oznamu,Okamžitá platba (EB),2023000076.0,42285089.0
+81,81,obec Oravský Podzámok,2023-09-24,-20.0,EUR,Odvysielanie oznamu,Okamžitá platba (EB),2023020.0,42285089.0
+82,82,obec Priechod,2023-09-21,-8.0,EUR,oznam obecný rozhlas,Platobný príkaz na úhradu / FIT 2.0 (EB),202323.0,42285089.0
+83,83,mesto Rajec,2023-09-21,-10.0,EUR,odvysielanie oznamu v mestskom rozhlase,Okamžitá platba (EB),9114300121.0,42285089.0
+84,84,obec Záhorce,2023-09-21,-20.0,EUR,odvysielanie oznamu v miestnom rozhlase,Okamžitá platba (EB),2023000018.0,42285089.0
+85,85,obec Pôtor,2023-09-21,-10.0,EUR,úhrada za vysielanie obecného rozhlasu,Platobný príkaz na úhradu / FIT 2.0 (EB),2023004.0,40085089.0
+86,86,obec Turová,2023-09-19,-6.0,EUR,odvysielanie príhovoru obecnom rozhlase,Platobný príkaz na úhradu / FIT 2.0 (EB),202312.0,42285089.0
+87,87,obec Železná Breznica,2023-09-19,-10.0,EUR,odvysielanie oznamu v mr,Platobný príkaz na úhradu / FIT 2.0 (EB),2023051.0,42285089.0
+88,88,"RENGL Slovensko, s. r. o.",2023-09-13,-641.09,EUR,výlepne plochy,Okamžitá platba (EB),1025155.0,42407397.0
+89,89,Lubomir Gergel,2023-09-13,200.0,EUR,DAR,Bezhotovostný vklad,,
+90,90,,2023-08-31,-5.0,EUR,Zverejňovanie účtu,Poplatok,,
+91,91,,2023-08-31,-5.0,EUR,Poplatok za vedenie účtu,Poplatok,,
+92,92,"Fibra print, s.r.o.",2023-08-25,-443.4,EUR,reklamné tričká,Okamžitá platba (EB),2300686.0,42285069.0
+93,93,"ISPA, spol. sr. o",2023-08-25,-194.4,EUR,billboard - Píriová,Okamžitá platba (EB),23950221.0,42285089.0
+94,94,"RENGL Slovensko, s. r. o.",2023-08-25,-139.1,EUR,plagátová kampaň voľby 2023 - Píriová,Okamžitá platba (EB),1025141.0,42285089.0
+95,95,Jaroslav Moravčík fotograf,2023-08-25,-45.0,EUR,výroba kalendárikov - Píriová,Platobný príkaz na úhradu / FIT 2.0 (EB),382003.0,42285069.0
+96,96,Jaroslav Moravčík fotograf,2023-08-25,-230.0,EUR,foto portréty a grafika Piriová Hamšík Mikloško,Platobný príkaz na úhradu / FIT 2.0 (EB),372003.0,42285089.0
+97,97,Lubomir Gergel,2023-08-22,200.0,EUR,DAR,Bezhotovostný vklad,,
+98,98,Bartur s.r.o.,2023-08-17,-370.0,EUR,úhrada grafických prác,Okamžitá platba (EB),122023.0,42285089.0
+99,99,Bežný účet 5193505509,2023-08-17,-21600.0,EUR,refakturácia úhrady billboardov,Platobný príkaz na úhradu / FIT 2.0 (EB),2200962.0,42285089.0
+100,100,Vladimír Zeman,2023-08-17,25000.0,EUR,pôžička,Bezhotovostný vklad,450629.0,42285089.0
+101,101,SRDCE - SNJ - SV,2023-08-17,200.0,EUR,Miklosko+Piriova prevod prop.material+ fotograf,Bezhotovostný vklad,42285089.0,17082023.0
+102,102,"Hamšík Ivan, Ing.",2023-08-15,100.0,EUR,PRISPEVOK,Bezhotovostný vklad,,
+103,103,MIKLOSKO MARIAN,2023-08-14,100.0,EUR,JUDr. Marian Miklosko - vyroba bilbordov -reklama,Bezhotovostný vklad,,22091960.0
+104,104,"Gavač Allan, Ing.",2023-08-13,2000.0,EUR,konzultacna cinnost,Bezhotovostný vklad - okamžitá platba,,3021963.0
+105,105,Píriová Magdaléna,2023-08-11,300.0,EUR,Prenajom reklamnej plochy billboard,Bezhotovostný vklad - okamžitá platba,,7111972.0
+106,106,"Gavač Allan, Ing.",2023-08-11,1000.0,EUR,konzultacna cinnost,Bezhotovostný vklad - okamžitá platba,,3021963.0
+107,107,Lubomir Gergel,2023-08-11,200.0,EUR,Lubomir Gergel - DAR,Bezhotovostný vklad,,
+108,108,,2023-07-31,-5.0,EUR,Zverejňovanie účtu,Poplatok,,
+109,109,,2023-07-31,-5.0,EUR,Poplatok za vedenie účtu,Poplatok,,
+110,110,,2023-06-30,-5.0,EUR,Zverejňovanie účtu,Poplatok,,
+111,111,,2023-06-30,-0.5,EUR,Poplatok za vedenie účtu,Poplatok,,
+112,112,MV SR,2023-06-30,-17000.0,EUR,,Platobný príkaz na úhradu / FIT 2.0 (EB),42285089.0,30062023.0
+113,113,SRDCE - SNJ - SV,2023-06-29,18302.04,EUR,prevod z pôvodného transparentného účtu,Bezhotovostný vklad,4228508929.0,29062023.0

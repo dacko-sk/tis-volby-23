@@ -1,0 +1,732 @@
+index,date,amount,currency,account_name,message,vs
+0,2023-10-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.10.2023 do 31.10.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 3 x prijaté platby: 0,00, 27 x debet - elektronicky: 0,00",
+1,2023-10-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 30.10.2023","VS: 495000303
+ŠS: 5032806830
+KS: 6898"
+2,2023-10-31,-3,EUR,,"Poplatok platobné karty, Miesto: MC BUSINESS DEBETNA CL Suma: 3 EUR 30.10.2023","VS: 295000303
+ŠS: 3400429124
+KS: 6898"
+3,2023-10-16,-348,EUR,"micropix, s.r.o.","Odoslaná platba elektronicky, Vyroba letakov / pozvanky - volby NR SR 2023",VS: 23063
+4,2023-10-16,-1596,EUR,"H and K Plus s.r.o., ICO: 51471965","Odoslaná platba elektronicky, Reklama v obecnych rozhlasoch - volby NR SR 2023",VS: 20230127
+5,2023-10-16,-50,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Facebook ads kampan - volby NR SR 2023",VS: 202300100
+6,2023-10-16,-848,EUR,FriTom Media s.r.o.,"Odoslaná platba elektronicky, Letaky,kalendare,graficka praca - volby NR SR 2023",VS: 202310001
+7,2023-10-16,-120,EUR,"TRANSNET, spol. s r.o.","Odoslaná platba elektronicky, Marketingove sluzby - volby NR SR 2023",VS: 2023014
+8,2023-10-16,-267,EUR,Denis Strapec,"Odoslaná platba elektronicky, Letaky A5 - volby NR SR 2023",VS: 230168
+9,2023-10-16,-199.2,EUR,"micropix, s.r.o.","Odoslaná platba elektronicky, Vyroba letakov - volby NR SR 2023",VS: 23065
+10,2023-10-16,2850,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - volby NR SR 2023",VS: 16102023
+11,2023-10-09,-1500,EUR,Mestske kulturne stredisko Beni Egressyho,"Odoslaná platba elektronicky, Prenajom miestnosti v MsKs Komarno- dna 27.9.2023 - kampan NR SR 2023","VS: 1023082
+KS: 0308"
+12,2023-10-09,-1440,EUR,"SAD Dunajska Streda, a.s.","Odoslaná platba elektronicky, Prenajom reklamnych nosicov na autobusoch SAD za 9/2023 - kampan NR SR 2023",VS: 552300023
+13,2023-10-09,-3398,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Graficke a marketingove sluzby za 9/2023 - kampan NR SR 2023",VS: 202300099
+14,2023-10-09,-804,EUR,"VALEUR, s.r.o.","Odoslaná platba elektronicky, Letaky s programom A4 - kampan NR SR 2023",VS: 7082023
+15,2023-10-09,-9120,EUR,Interregionalny vyskumno-rozvojovy institut,"Odoslaná platba elektronicky, Organizovanie spolocenskej akcie s cielom a rozvoju kultury - kampan NR SR 2023",VS: 20230004
+16,2023-10-09,-3000,EUR,Ladislav Toth - SOUND SERVIS,"Odoslaná platba elektronicky, Technicke zabezpecenie ozvucenia a prenajom podia dna 14.9.2023",VS: 612023
+17,2023-10-09,-360,EUR,Frantisek Fazekas - Graphic Design,"Odoslaná platba elektronicky, Poskytnuta sluzba - potlac na dresy - kampan NR SR 2023",VS: 312023
+18,2023-10-09,-1396.8,EUR,MultiMedia s.r.o.,"Odoslaná platba elektronicky, Samolepiace folie, CLV plagat, plagaty",VS: 230900039
+19,2023-10-09,20000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - volby NR SR 2023",VS: 09102023
+20,2023-10-05,-2,EUR,Ministerstvo financii SR - odbor suhrnneho vykaznicta statu,"Odoslaná platba elektronicky, Vratenie neprijateho daru do statneho rozpoctu",
+21,2023-10-04,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 02.10.2023","VS: 497000276
+ŠS: 5032806830
+KS: 6898"
+22,2023-10-04,-389.84,EUR,,"Transakcia platobnou kartou, Suma: 389,84 EUR 02.10.2023 Miesto: FACEBK *F2M6XRBDA2 fb.me/ads","VS: 405000276
+ŠS: 5032806830
+KS: 0608"
+23,2023-10-03,414,EUR,JANOS MERY,"Prijatá platba, Ajandek - dar",
+24,2023-10-02,-414,EUR,"Web and go design, s.r.o. ICO: 52378373","Odoslaná platba elektronicky, Tlac letakov A6 a plagatov A3 - kampan NR SR 2023",VS: 20230223
+25,2023-10-02,-100,EUR,"Grafis Media, s.r.o.","Odoslaná platba elektronicky, Plagaty A3 - Karaffa Attila kampan NR SR 2023",VS: 10230232
+26,2023-10-02,-1110,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Facebook kampane, graficke prace - kampan NR SR 2023","VS: 202300096
+KS: 0308"
+27,2023-10-02,-300,EUR,Karol Bodo,"Odoslaná platba elektronicky, Videozaznam pocas kampane - volby NR SR 2023","VS: 2301026
+KS: 0308"
+28,2023-10-02,-486,EUR,EPS Design s.r.o.,"Odoslaná platba elektronicky, Bannery,letaky,graficka praca - kampan NR SR 2023",VS: 20230096
+29,2023-10-02,-5689.2,EUR,REVI-SK. spol. s r.o.,"Odoslaná platba elektronicky, Reklamne sluzby, prenajom, tlac, vylep - kampan NR SR 2023",VS: 202309037
+30,2023-10-02,-450,EUR,Adlion s.r.o.,"Odoslaná platba elektronicky, Bannery,letaky,plagaty - kampan NR SR 2023","VS: 230073
+KS: 0308"
+31,2023-10-02,-30,EUR,Obec Ziharec,"Odoslaná platba elektronicky, Najomne za prenajom nebytovych priestorov v budove Kulturno - spolocenskeho a informacneho centra Ziharec dna 20.9.2023 - kampan NR SR 2023",VS: 1319300050
+32,2023-10-02,-200,EUR,OZ Matusova zem - Matyusfold PT,"Odoslaná platba elektronicky, Uverejnenie inzeratu c. August a September 2023 - kampan NR SR 2023",VS: 2023058
+33,2023-10-02,-600,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Facebook reklamy - Menyhart Jozsef - kampan NR SR 2023","VS: 202300097
+KS: 0308"
+34,2023-10-02,-620,EUR,Mesto Kralovsky Chlmec,"Odoslaná platba elektronicky, Najomne za uzivanie nebytoveho priestoru v MsKs dna 24.9.2023 v case od 16:00 do 20:00 - kampan NR SR 2023",VS: 9117300034
+35,2023-09-30,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.09.2023 do 30.09.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 45 x prijaté platby: 0,00, 93 x debet - elektronicky: 0,00",
+36,2023-09-29,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 497000271
+ŠS: 5032806830
+KS: 6898"
+37,2023-09-29,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 497000271
+ŠS: 5032806830
+KS: 6898"
+38,2023-09-29,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 497000271
+ŠS: 5032806830
+KS: 6898"
+39,2023-09-29,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 497000271
+ŠS: 5032806830
+KS: 6898"
+40,2023-09-29,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 497000271
+ŠS: 5032806830
+KS: 6898"
+41,2023-09-29,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 497000271
+ŠS: 5032806830
+KS: 6898"
+42,2023-09-29,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK H4DN9RKDA2 fb.me/ads","VS: 405000271
+ŠS: 5032806830
+KS: 0608"
+43,2023-09-29,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK XXHYRRBDA2 fb.me/ads","VS: 405000271
+ŠS: 5032806830
+KS: 0608"
+44,2023-09-29,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK TE5W2STCA2 fb.me/ads","VS: 405000271
+ŠS: 5032806830
+KS: 0608"
+45,2023-09-29,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK JVXVWR3DA2 fb.me/ads","VS: 405000271
+ŠS: 5032806830
+KS: 0608"
+46,2023-09-29,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK NTCLZRKCA2 fb.me/ads","VS: 405000271
+ŠS: 5032806830
+KS: 0608"
+47,2023-09-29,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK GGEJNRXCA2 fb.me/ads","VS: 405000271
+ŠS: 5032806830
+KS: 0608"
+48,2023-09-29,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK QDFSWR3DA2 fb.me/ads","VS: 405000271
+ŠS: 5032806830
+KS: 0608"
+49,2023-09-29,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 497000271
+ŠS: 5032806830
+KS: 6898"
+50,2023-09-29,-3,EUR,,"Poplatok platobné karty, Miesto: MC BUSINESS DEBETNA CL Suma: 3 EUR 28.09.2023","VS: 295000271
+ŠS: 3400429124
+KS: 6898"
+51,2023-09-29,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 28.09.2023","VS: 495000271
+ŠS: 5032806830
+KS: 6898"
+52,2023-09-29,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 297000271
+ŠS: 3400429124
+KS: 6898"
+53,2023-09-29,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK S3XVNRXCA2 fb.me/ads","VS: 205000271
+ŠS: 3400429124
+KS: 0608"
+54,2023-09-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.09.2023","VS: 497000270
+ŠS: 5032806830
+KS: 6898"
+55,2023-09-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.09.2023","VS: 497000270
+ŠS: 5032806830
+KS: 6898"
+56,2023-09-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.09.2023","VS: 497000270
+ŠS: 5032806830
+KS: 6898"
+57,2023-09-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.09.2023","VS: 497000270
+ŠS: 5032806830
+KS: 6898"
+58,2023-09-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.09.2023","VS: 497000270
+ŠS: 5032806830
+KS: 6898"
+59,2023-09-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.09.2023","VS: 497000270
+ŠS: 5032806830
+KS: 6898"
+60,2023-09-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.09.2023","VS: 497000270
+ŠS: 5032806830
+KS: 6898"
+61,2023-09-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.09.2023","VS: 497000270
+ŠS: 5032806830
+KS: 6898"
+62,2023-09-28,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 27.09.2023 Miesto: FACEBK CYPDYRFCA2 fb.me/ads","VS: 405000270
+ŠS: 5032806830
+KS: 0608"
+63,2023-09-28,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 26.09.2023 Miesto: FACEBK XEB4LRFDA2 fb.me/ads","VS: 405000270
+ŠS: 5032806830
+KS: 0608"
+64,2023-09-28,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 26.09.2023 Miesto: FACEBK QPUJ8RKDA2 fb.me/ads","VS: 405000270
+ŠS: 5032806830
+KS: 0608"
+65,2023-09-28,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 26.09.2023 Miesto: FACEBK 8VWEMSPCA2 fb.me/ads","VS: 405000270
+ŠS: 5032806830
+KS: 0608"
+66,2023-09-28,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 26.09.2023 Miesto: FACEBK 7HZFYRKCA2 fb.me/ads","VS: 405000270
+ŠS: 5032806830
+KS: 0608"
+67,2023-09-28,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 26.09.2023 Miesto: FACEBK GG688RKDA2 fb.me/ads","VS: 405000270
+ŠS: 5032806830
+KS: 0608"
+68,2023-09-28,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 26.09.2023 Miesto: FACEBK N2V8MRXCA2 fb.me/ads","VS: 405000270
+ŠS: 5032806830
+KS: 0608"
+69,2023-09-28,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 26.09.2023 Miesto: FACEBK PKMCQRBDA2 fb.me/ads","VS: 405000270
+ŠS: 5032806830
+KS: 0608"
+70,2023-09-27,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 26.09.2023","VS: 497000269
+ŠS: 5032806830
+KS: 6898"
+71,2023-09-27,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 25.09.2023","VS: 497000269
+ŠS: 5032806830
+KS: 6898"
+72,2023-09-27,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 25.09.2023","VS: 497000269
+ŠS: 5032806830
+KS: 6898"
+73,2023-09-27,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 25.09.2023","VS: 497000269
+ŠS: 5032806830
+KS: 6898"
+74,2023-09-27,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 26.09.2023 Miesto: FACEBK JFLLLSPCA2 fb.me/ads","VS: 405000269
+ŠS: 5032806830
+KS: 0608"
+75,2023-09-27,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 25.09.2023 Miesto: FACEBK 8VSF7RKDA2 fb.me/ads","VS: 405000269
+ŠS: 5032806830
+KS: 0608"
+76,2023-09-27,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 25.09.2023 Miesto: FACEBK CXKRPRBDA2 fb.me/ads","VS: 405000269
+ŠS: 5032806830
+KS: 0608"
+77,2023-09-27,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 25.09.2023 Miesto: FACEBK 5L3PWRFCA2 fb.me/ads","VS: 405000269
+ŠS: 5032806830
+KS: 0608"
+78,2023-09-27,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 25.09.2023 Miesto: FACEBK MTGCLRXCA2 fb.me/ads","VS: 405000269
+ŠS: 5032806830
+KS: 0608"
+79,2023-09-27,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 25.09.2023 Miesto: FACEBK ZMKVKSPCA2 fb.me/ads","VS: 405000269
+ŠS: 5032806830
+KS: 0608"
+80,2023-09-27,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 25.09.2023","VS: 497000269
+ŠS: 5032806830
+KS: 6898"
+81,2023-09-27,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 25.09.2023","VS: 497000269
+ŠS: 5032806830
+KS: 6898"
+82,2023-09-27,-697.2,EUR,"DUEL - PRESS, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzeratu v denniku Uj Szo dna 26.9.2023 - kampan NR SR 2023",VS: 7022301605
+83,2023-09-27,-710,EUR,MsKS Benedeka Csaplara - Csaplar Benedek VMK,"Odoslaná platba elektronicky, Prenajom v meste Dunajska Streda dna 26.9.2023 - divadelna sala,zasadacia miestnost,vstupna aula, satna - kampan NR SR 2023",VS: 230045
+84,2023-09-27,-8520,EUR,Annamaria Corosova - FLASH COMPANY,"Odoslaná platba elektronicky, Tlac - bannery,vreckove kalendare,letaky,plagaty - kampan NR SR 2023",VS: 23196
+85,2023-09-27,10000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - volby NR SR 2023",VS: 27092023
+86,2023-09-27,-1369.64,EUR,Judr. Tibor Nagy,"Odoslaná platba elektronicky, Uverejnenie inzercie v Castrum Novum . kampan NR SR 2023","VS: 2023002
+KS: 0308"
+87,2023-09-27,-828,EUR,Arnold Kovac - PrintAli,"Odoslaná platba elektronicky, Vyroba letakov A5 - kampan NR SR 2023","VS: 20230657
+KS: 0308"
+88,2023-09-27,-182.4,EUR,Kolozsi Peter - KOLOREK,"Odoslaná platba elektronicky, Plosny inzerat Horvath Zoltan v KN Gratise 19/23","VS: 2023168
+KS: 0308"
+89,2023-09-27,1435,EUR,MOZES SZABOLCS,"Prijatá platba, Dar - Szabolcs MOzes",
+90,2023-09-27,11,EUR,BARTOS GERGELY,"Prijatá platba, Dar - Bartos",
+91,2023-09-27,2730,EUR,NAGY DAVID,"Prijatá platba, ",
+92,2023-09-27,-1500,EUR,"CreAD SK, s.r.o.","Odoslaná platba elektronicky, Marketingove sluzby - kampan NR SR 2023",VS: 23134
+93,2023-09-27,2596.8,EUR,Jozsef Berenyi,"Prijatá platba, Dar/Ajndek",
+94,2023-09-27,500,EUR,Csaba Furik,"Prijatá platba, Dar, Furik Csaba Maly Hores",
+95,2023-09-26,-996,EUR,"DUEL - PRESS, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzeratu v denniku Uj Szo dna 27.9.2023 - kampan NR SR 2023",VS: 7012300642
+96,2023-09-26,-5700,EUR,Amavera s.r.o.,"Odoslaná platba elektronicky, Facebook reklama, reklamne sluzby - kampan NR SR 2023",VS: 20230035
+97,2023-09-26,-91,EUR,GF Design s.r.o.,"Odoslaná platba elektronicky, Letaky A5-obojtranna farebna potlac - kampan NR SR 2023",VS: 20230076
+98,2023-09-26,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 25.09.2023 Miesto: FACEBK KDQRKT7DA2 fb.me/ads","VS: 405000268
+ŠS: 5032806830
+KS: 0608"
+99,2023-09-26,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 24.09.2023 Miesto: FACEBK U748UR3DA2 fb.me/ads","VS: 405000268
+ŠS: 5032806830
+KS: 0608"
+100,2023-09-26,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 24.09.2023 Miesto: FACEBK 7AGYXRTCA2 fb.me/ads","VS: 405000268
+ŠS: 5032806830
+KS: 0608"
+101,2023-09-26,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 24.09.2023 Miesto: FACEBK QHTKXRTCA2 fb.me/ads","VS: 405000268
+ŠS: 5032806830
+KS: 0608"
+102,2023-09-26,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 24.09.2023 Miesto: FACEBK TBTSJSPCA2 fb.me/ads","VS: 405000268
+ŠS: 5032806830
+KS: 0608"
+103,2023-09-26,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 24.09.2023 Miesto: FACEBK M78HNRBDA2 fb.me/ads","VS: 405000268
+ŠS: 5032806830
+KS: 0608"
+104,2023-09-26,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 24.09.2023 Miesto: FACEBK RT9UXRTCA2 fb.me/ads","VS: 405000268
+ŠS: 5032806830
+KS: 0608"
+105,2023-09-26,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 24.09.2023","VS: 497000268
+ŠS: 5032806830
+KS: 6898"
+106,2023-09-26,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 24.09.2023","VS: 497000268
+ŠS: 5032806830
+KS: 6898"
+107,2023-09-26,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 24.09.2023","VS: 497000268
+ŠS: 5032806830
+KS: 6898"
+108,2023-09-26,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 24.09.2023","VS: 497000268
+ŠS: 5032806830
+KS: 6898"
+109,2023-09-26,10000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - volby NR SR 2023",VS: 26092023
+110,2023-09-26,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 25.09.2023","VS: 497000268
+ŠS: 5032806830
+KS: 6898"
+111,2023-09-26,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 24.09.2023","VS: 497000268
+ŠS: 5032806830
+KS: 6898"
+112,2023-09-26,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 24.09.2023","VS: 497000268
+ŠS: 5032806830
+KS: 6898"
+113,2023-09-26,-1240.8,EUR,"CLIENT SERVICE, s.r.o.","Odoslaná platba elektronicky, Letaky A5, plagaty A3, billboardovy plagat, lepenie - kampan NR SR 2023",VS: 10230559
+114,2023-09-26,-1036.8,EUR,EPS Design s.r.o.,"Odoslaná platba elektronicky, Bannery do exterieru - volby NR SR 2023",VS: 20230093
+115,2023-09-26,-1344,EUR,"DUEL - PRESS, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzeratu v denniku Uj Szo dna 27.9.2023-kampan NR SR 2023",VS: 7012300641
+116,2023-09-26,450,EUR,VALAKOVICS NIKOLAS,"Prijatá platba, Dar - Gabriel Nyul",
+117,2023-09-26,-50,EUR,Sport klub Tomasov,"Odoslaná platba elektronicky, Prenajom reklamnej plochy v obci Tomasov - volby NR SR 2023",VS: 2023010
+118,2023-09-26,1500,EUR,Peter Koponcei,"Prijatá platba, dar_Koponcei",
+119,2023-09-26,200,EUR,Jozef Zelinsky,"Prijatá platba, Dar",
+120,2023-09-26,500,EUR,Zsolt Baranyay,"Prijatá platba, dar",VS: 780703
+121,2023-09-26,-222,EUR,"Fantazia media, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzercie v casopise Slovo Salanov 7/2023 - kampan NR SR 2023",VS: 2023184
+122,2023-09-25,80,EUR,KARAFFA ATTILA,"Prijatá platba, Dar",
+123,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 23.09.2023 Miesto: FACEBK UDUUGRFDA2 fb.me/ads","VS: 405000267
+ŠS: 5032806830
+KS: 0608"
+124,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 23.09.2023 Miesto: FACEBK CGCQGRFDA2 fb.me/ads","VS: 405000267
+ŠS: 5032806830
+KS: 0608"
+125,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 23.09.2023 Miesto: FACEBK A4WNSR3DA2 fb.me/ads","VS: 405000267
+ŠS: 5032806830
+KS: 0608"
+126,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 23.09.2023 Miesto: FACEBK 6V55JT7DA2 fb.me/ads","VS: 405000267
+ŠS: 5032806830
+KS: 0608"
+127,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 23.09.2023 Miesto: FACEBK PSA7MRBDA2 fb.me/ads","VS: 405000267
+ŠS: 5032806830
+KS: 0608"
+128,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 23.09.2023","VS: 497000267
+ŠS: 5032806830
+KS: 6898"
+129,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 23.09.2023","VS: 497000267
+ŠS: 5032806830
+KS: 6898"
+130,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 23.09.2023","VS: 497000267
+ŠS: 5032806830
+KS: 6898"
+131,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 23.09.2023","VS: 497000267
+ŠS: 5032806830
+KS: 6898"
+132,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 23.09.2023","VS: 497000267
+ŠS: 5032806830
+KS: 6898"
+133,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 22.09.2023","VS: 497000266
+ŠS: 5032806830
+KS: 6898"
+134,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 22.09.2023","VS: 497000266
+ŠS: 5032806830
+KS: 6898"
+135,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 22.09.2023","VS: 497000266
+ŠS: 5032806830
+KS: 6898"
+136,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 22.09.2023","VS: 497000266
+ŠS: 5032806830
+KS: 6898"
+137,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 22.09.2023","VS: 497000266
+ŠS: 5032806830
+KS: 6898"
+138,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 22.09.2023 Miesto: FACEBK LLW5SR3DA2 fb.me/ads","VS: 405000266
+ŠS: 5032806830
+KS: 0608"
+139,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 22.09.2023 Miesto: FACEBK 9DNYRR3DA2 fb.me/ads","VS: 405000266
+ŠS: 5032806830
+KS: 0608"
+140,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 22.09.2023 Miesto: FACEBK KS3WGT7DA2 fb.me/ads","VS: 405000266
+ŠS: 5032806830
+KS: 0608"
+141,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 22.09.2023 Miesto: FACEBK 4CVBVRTCA2 fb.me/ads","VS: 405000266
+ŠS: 5032806830
+KS: 0608"
+142,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 22.09.2023 Miesto: FACEBK 4V34HSPCA2 fb.me/ads","VS: 405000266
+ŠS: 5032806830
+KS: 0608"
+143,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 21.09.2023","VS: 497000265
+ŠS: 5032806830
+KS: 6898"
+144,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 21.09.2023","VS: 497000265
+ŠS: 5032806830
+KS: 6898"
+145,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.09.2023","VS: 497000265
+ŠS: 5032806830
+KS: 6898"
+146,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 21.09.2023","VS: 497000265
+ŠS: 5032806830
+KS: 6898"
+147,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.09.2023","VS: 497000265
+ŠS: 5032806830
+KS: 6898"
+148,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 21.09.2023","VS: 497000265
+ŠS: 5032806830
+KS: 6898"
+149,2023-09-25,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 21.09.2023","VS: 497000265
+ŠS: 5032806830
+KS: 6898"
+150,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 21.09.2023 Miesto: FACEBK QP5CGT7DA2 fb.me/ads","VS: 405000265
+ŠS: 5032806830
+KS: 0608"
+151,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 21.09.2023 Miesto: FACEBK 7EYXQR3DA2 fb.me/ads","VS: 405000265
+ŠS: 5032806830
+KS: 0608"
+152,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 20.09.2023 Miesto: FACEBK 9CJ9JRBDA2 fb.me/ads","VS: 405000265
+ŠS: 5032806830
+KS: 0608"
+153,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 21.09.2023 Miesto: FACEBK PJT9KRBDA2 fb.me/ads","VS: 405000265
+ŠS: 5032806830
+KS: 0608"
+154,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 20.09.2023 Miesto: FACEBK LBDLESPCA2 fb.me/ads","VS: 405000265
+ŠS: 5032806830
+KS: 0608"
+155,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 21.09.2023 Miesto: FACEBK PZ8MFT7DA2 fb.me/ads","VS: 405000265
+ŠS: 5032806830
+KS: 0608"
+156,2023-09-25,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 21.09.2023 Miesto: FACEBK P73TQR3DA2 fb.me/ads","VS: 405000265
+ŠS: 5032806830
+KS: 0608"
+157,2023-09-25,-216,EUR,"ISCON, s.r.o.","Odoslaná platba elektronicky, Vyvesenie plachty na bigboard/US Steel Kosice-Saca/-kampan NR SR 2023",VS: 1262023
+158,2023-09-25,-14160,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Google ads kampane - volby NR SR 2023",VS: 202300095
+159,2023-09-25,-4100,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Facebook kampane-Nove Zamky - volby NR SR 2023","VS: 202300094
+KS: 0308"
+160,2023-09-25,-3360,EUR,Cruel Creatives s.r.o.,"Odoslaná platba elektronicky, Konzultacie v oblasti digitalneho marketingu za september/2023 - volby NR SR 2023","VS: 2315146
+KS: 0308"
+161,2023-09-25,-120,EUR,Kolozsi Peter - KOLOREK,"Odoslaná platba elektronicky, Plosny inzerat v KN Gratise c. 19/23 - kampan NR SR 2023",VS: 2023171
+162,2023-09-25,-3628,EUR,Graphic s.r.o.,"Odoslaná platba elektronicky, Marketingove sluzby-bannery,reklamne predmety,graficka uprava - kampan NR SR 2023",VS: 20230202
+163,2023-09-25,120,EUR,HALASZ BELA,"Prijatá platba, dar",
+164,2023-09-25,-204,EUR,"Petit Press, a.s.","Odoslaná platba elektronicky, Inzerat 28.8.2023 My kandidati Nitrianskeho kraja priloha A4 - kampan NR SR 2023","VS: 2335108973
+KS: 0308"
+165,2023-09-25,15000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - volby NR SR 2023",VS: 25092023
+166,2023-09-25,-354,EUR,Kolozsi Peter - KOLOREK,"Odoslaná platba elektronicky, Plosny inzerat v KN Gratise c. 19/23 - kampan NR SR 2023","VS: 2023162
+KS: 0308"
+167,2023-09-25,-2016,EUR,MultiMedia s.r.o.,"Odoslaná platba elektronicky, Tlaciarenske sluzby, vylep billboardov - kampan NR SR 2023",VS: 230900038
+168,2023-09-25,-4000,EUR,WADO s.r.o.,"Odoslaná platba elektronicky, Marketingove prace - kampan NR SR 2023","VS: 2023035
+KS: 0308"
+169,2023-09-25,-216,EUR,Arnold Kovac - PrintAli,"Odoslaná platba elektronicky, Vyroba plagatov A2/poster/ - kampan NR SR 2023","VS: 20230658
+KS: 0308"
+170,2023-09-25,-384,EUR,B.S.Moto s.r.o.,"Odoslaná platba elektronicky, Prenajom reklamnej tabule za 8/2023, 9/2023 - kampan NR SR 2023",VS: 112302039
+171,2023-09-25,-204,EUR,Arnold Kovac - PrintAli,"Odoslaná platba elektronicky, Billboardy v ramci kampane NR SR 2023","VS: 20230606
+KS: 0308"
+172,2023-09-25,25000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - volby NR SR 2023",VS: 25092023
+173,2023-09-25,1300,EUR,Jozsef Menyhart,"Prijatá platba, ",
+174,2023-09-25,300,EUR,Jozef Zelinsky,"Prijatá platba, Dar",
+175,2023-09-25,5000,EUR,Aneta Forrova,"Prijatá platba, Aneta Forrova DAR",VS: 20230922
+176,2023-09-25,2000,EUR,Farkas Tibor,"Prijatá platba, Dar",
+177,2023-09-22,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 20.09.2023 Miesto: FACEBK 8P9NJRBDA2 fb.me/ads","VS: 405000264
+ŠS: 5032806830
+KS: 0608"
+178,2023-09-22,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 20.09.2023 Miesto: FACEBK DXRNTRTCA2 fb.me/ads","VS: 405000264
+ŠS: 5032806830
+KS: 0608"
+179,2023-09-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.09.2023","VS: 497000264
+ŠS: 5032806830
+KS: 6898"
+180,2023-09-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 20.09.2023","VS: 497000264
+ŠS: 5032806830
+KS: 6898"
+181,2023-09-22,-7398,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Google Ads kampan, administracia Google Ads kampane - volby do NR SR 2023",VS: 202300093
+182,2023-09-22,894,EUR,BARTOS GERGELY,"Prijatá platba, Dar - Bartos",
+183,2023-09-22,216,EUR,JANOS MERY,"Prijatá platba, ajandek (dar)",
+184,2023-09-22,2500,EUR,Farkas Tibor,"Prijatá platba, Dar",
+185,2023-09-21,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 19.09.2023 Miesto: FACEBK PF66ERXCA2 fb.me/ads","VS: 405000264
+ŠS: 5032806830
+KS: 0608"
+186,2023-09-21,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 19.09.2023 Miesto: FACEBK JVL6CRFDA2 fb.me/ads","VS: 405000264
+ŠS: 5032806830
+KS: 0608"
+187,2023-09-21,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 19.09.2023","VS: 497000264
+ŠS: 5032806830
+KS: 6898"
+188,2023-09-21,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 19.09.2023","VS: 497000264
+ŠS: 5032806830
+KS: 6898"
+189,2023-09-21,-50,EUR,Mesto Senec,"Odoslaná platba elektronicky, Prenajom kinosaly na predvolebny miting dna 13.9.2023 - kampan NR SR 2023",VS: 357
+190,2023-09-21,-384,EUR,Annamaria Corosova - FLASH COMPANY,"Odoslaná platba elektronicky, Prenajom reklamnej plochy, tlac vreckovych kalendarov a letakov - kampan NR SR 2023",VS: 23191
+191,2023-09-21,-168,EUR,Annamaria Corosova - FLASH COMPANY,"Odoslaná platba elektronicky, Inzercia v BEST / Michalovsky okres - kampan NR SR 2023",VS: 23190
+192,2023-09-21,-216,EUR,KEMAR s.r.o.,"Odoslaná platba elektronicky, Vyroba letakov A5 - kampan NR SR 2023",VS: 20230508
+193,2023-09-21,-348,EUR,KOLOZSI PETER-KOLOREK,"Odoslaná platba elektronicky, Plosny inzerat v KN Gratise c. 19/23 - kampan NR SR 2023",VS: 2023169
+194,2023-09-21,-364.8,EUR,KOLOZSI PETER-KOLOREK,"Odoslaná platba elektronicky, Plosny inzerat Ivan Tamas v KN Gratise c. 18,19/23 - kampan NR SR 2023",VS: 2023164
+195,2023-09-21,-140,EUR,WADO s.r.o.,"Odoslaná platba elektronicky, Marketingove prace - kampan NR SR 2023",VS: 2023034
+196,2023-09-21,-169.2,EUR,Mestske kulturne stredisko,"Odoslaná platba elektronicky, Uverejnenie reklamnej inzercie v 9. cisle regionalneho mesacnika Parkany es Videke - Sturovo a okolie - kampan NR SR 2023","VS: 2023035
+KS: 0308"
+197,2023-09-21,-182.21,EUR,Mestske kulturne stredisko,"Odoslaná platba elektronicky, Uverejnenie reklamnej inzercie v 9.cisle regionalneho mesacnika Parkany es Videke - Sturovo a okolie - kampan NR SR 2023","VS: 2023034
+KS: 0308"
+198,2023-09-21,-1524,EUR,"BEKI Design, s.r.o.","Odoslaná platba elektronicky, Letaky,plagaty,bannery - kampan NR SR 2023",VS: 2300924
+199,2023-09-21,354,EUR,"Marcinko Adrian, Bc.","Prijatá platba, Dar",
+200,2023-09-21,2500,EUR,Tibor Csenger,"Prijatá platba, Dar -Tibor Csenger Zeliezovce","VS: 20092023
+KS: 0968"
+201,2023-09-21,2000,EUR,Adrianna Gergelypapp,"Prijatá platba, ",
+202,2023-09-21,100,EUR,KARAFFA ATTILA,"Prijatá platba, Dar",
+203,2023-09-21,50,EUR,KARAFFA ATTILA,"Prijatá platba, Dar",
+204,2023-09-20,15000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - kampan NR SR 2023",VS: 20092023
+205,2023-09-20,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 18.09.2023","VS: 497000262
+ŠS: 5032806830
+KS: 6898"
+206,2023-09-20,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 18.09.2023","VS: 497000262
+ŠS: 5032806830
+KS: 6898"
+207,2023-09-20,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 18.09.2023 Miesto: FACEBK LYC4DSPCA2 fb.me/ads","VS: 405000262
+ŠS: 5032806830
+KS: 0608"
+208,2023-09-20,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 18.09.2023 Miesto: FACEBK KAJ5RRTCA2 fb.me/ads","VS: 405000262
+ŠS: 5032806830
+KS: 0608"
+209,2023-09-20,-120,EUR,"Polnoprojekt NITRA, s.r.o.","Odoslaná platba elektronicky, Poskytnutie priestoru pre reklamny banner od 20.9.2023 do 27.9.2023 na spravodajskom portali www.polnoinfo.sk - kampan NR SR 2023",VS: 20230066
+210,2023-09-20,-2917.08,EUR,GRAPHIC s.r.o.,"Odoslaná platba elektronicky, Marketingove sluzby - kampan NR SR 2023",VS: 20230201
+211,2023-09-20,-298.03,EUR,FaxCopy a.s.,"Odoslaná platba elektronicky, Tlac, kopirovacie a rozmnozovacie sluzby - kampan NR SR 2023",VS: 2506349
+212,2023-09-20,-282.54,EUR,FaxCopy a.s.,"Odoslaná platba elektronicky, Kopirovacie a rozmnozovacie sluzby - kampan NR SR 2023",VS: 2509051
+213,2023-09-20,580.57,EUR,MARIAN PAULISZ,"Prijatá platba, Dar",
+214,2023-09-20,-600,EUR,Vox Juventae,"Odoslaná platba elektronicky, Bannerova reklama Ivan Tamas - kampan NR SR 2023",VS: *********
+215,2023-09-20,-9780,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Google Ads kampan - kampan NR SR 2023",VS: 202300088
+216,2023-09-20,-500,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Facebook kampan - Korosi Agocs Ildiko",VS: 202300089
+217,2023-09-20,-1000,EUR,Vox Juventae,"Odoslaná platba elektronicky, Bannerova reklama Pal Attila - kampan NR SR 2023",VS: 057012023
+218,2023-09-19,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 17.09.2023 Miesto: FACEBK VPXEQRTCA2 fb.me/ads","VS: 405000261
+ŠS: 5032806830
+KS: 0608"
+219,2023-09-19,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 17.09.2023","VS: 497000261
+ŠS: 5032806830
+KS: 6898"
+220,2023-09-19,-11000,EUR,InStar Digital s.r.o.,"Odoslaná platba elektronicky, Online reklama,videa,grafika,distribucia letakov - kampan NR SR 2023",VS: 20230002
+221,2023-09-18,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 16.09.2023 Miesto: FACEBK BU97WQKDA2 fb.me/ads","VS: 405000260
+ŠS: 5032806830
+KS: 0608"
+222,2023-09-18,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 16.09.2023 Miesto: FACEBK HZE9PRTCA2 fb.me/ads","VS: 405000260
+ŠS: 5032806830
+KS: 0608"
+223,2023-09-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 16.09.2023","VS: 497000260
+ŠS: 5032806830
+KS: 6898"
+224,2023-09-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 16.09.2023","VS: 497000260
+ŠS: 5032806830
+KS: 6898"
+225,2023-09-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 15.09.2023","VS: 497000259
+ŠS: 5032806830
+KS: 6898"
+226,2023-09-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 15.09.2023","VS: 497000259
+ŠS: 5032806830
+KS: 6898"
+227,2023-09-18,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 15.09.2023 Miesto: FACEBK 92HZLRKCA2 fb.me/ads","VS: 405000259
+ŠS: 5032806830
+KS: 0608"
+228,2023-09-18,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 15.09.2023 Miesto: FACEBK CYXH7RFDA2 fb.me/ads","VS: 405000259
+ŠS: 5032806830
+KS: 0608"
+229,2023-09-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 13.09.2023","VS: 497000257
+ŠS: 5032806830
+KS: 6898"
+230,2023-09-18,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 13.09.2023 Miesto: FACEBK TQQLGR3DA2 fb.me/ads","VS: 405000257
+ŠS: 5032806830
+KS: 0608"
+231,2023-09-18,-1872,EUR,Ing. Szilard Nemeth-REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Reklamne predmety/pera s potlacou - kampan NR SR 2023",VS: 20230368
+232,2023-09-18,-5000,EUR,GRAPHIC s.r.o.,"Odoslaná platba elektronicky, Marketingove sluzby-bannery,reklamne predmety,tricka,graficka uprava - kampan NR SR 2023",VS: 20230199
+233,2023-09-18,-72,EUR,"STEFE THS, s.r.o.","Odoslaná platba elektronicky, Prenajom zasadacej miestnosti dna 6.9.2023 - kampan NR SR 2023",VS: 5212220164
+234,2023-09-18,-864,EUR,"Euroko, spol. s.r.o.","Odoslaná platba elektronicky, Expresne silikonove naramky s potlacou - kampan NR SR 2023",VS: 2400011927
+235,2023-09-18,-2400,EUR,MEDIAL Net s.r.o.,"Odoslaná platba elektronicky, Distribucia letakov - kampan NR SR 2023","VS: 23010107
+KS: 0308"
+236,2023-09-18,-1680,EUR,"DUEL - PRESS, s.r.o.","Odoslaná platba elektronicky, Inzercia v denniku Uj Szo dna 19.9.2023, 22.9.2023 - kampan NR SR 2023","VS: 7012300615
+KS: 0308"
+237,2023-09-18,30000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - kampan NR SR 2023",VS: 18092023
+238,2023-09-18,-7000,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Prenajom BB. ploch, FB reklamy,tlac reklamnych predmetov,Google ads - kampan NR SR 2023","VS: 202300083
+KS: 0308"
+239,2023-09-18,500,EUR,Ing. Tomas Tanko,"Prijatá platba, ","VS: 20230917
+ŠS: 890408"
+240,2023-09-18,7000,EUR,Miklos Viola,"Prijatá platba, Viola Miklos, Guta",KS: 0308
+241,2023-09-15,-3660,EUR,Amavera s.r.o.,"Odoslaná platba elektronicky, Facebook reklama, reklamne sluzby - kampan NR SR 2023",VS: 20230026
+242,2023-09-14,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 12.09.2023","VS: 497000256
+ŠS: 5032806830
+KS: 6898"
+243,2023-09-14,-613.28,EUR,,"Transakcia platobnou kartou, Suma: 613,28 EUR 12.09.2023 Miesto: FACEBK LNZ2HRFCA2 fb.me/ads","VS: 405000256
+ŠS: 5032806830
+KS: 0608"
+244,2023-09-14,250,EUR,Jozef Zelinsky,"Prijatá platba, Dar",
+245,2023-09-14,-5124,EUR,Ing. Szilard Nemeth - REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Vyroba letakov A5 - kampan NR SR 2023",VS: 20230370
+246,2023-09-13,-4500,EUR,Interregionalny vyskumno - rozvojovy institut,"Odoslaná platba elektronicky, Organizovanie spolocenskej akcie s cielom a rozvoju kultury - kampan NR SR 2023",VS: 20230003
+247,2023-09-13,-0.66,EUR,Mesto Kosice,"Odoslaná platba elektronicky, Dan za uzivanie verejneho priestranstva - Mesto Kosice, kampan NR SR 2023","VS: 3323000584
+KS: 0308"
+248,2023-09-13,-21600,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Google ads - youtube kampane - volby NR SR 2023","VS: 202300084
+KS: 0308"
+249,2023-09-13,-400,EUR,OZ Matusova zem - Matyusfold PT,"Odoslaná platba elektronicky, Inzerat AA, September/2023 titulna strana - kampan NR SR 2023",VS: 2023056
+250,2023-09-13,-320.4,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Vyroba A5 letakov - kampan NR SR 2023","VS: 202300079
+KS: 0308"
+251,2023-09-13,-1290,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Vyroba - roll up a banner s potlacou - volby NR SR 2023","VS: 202300085
+KS: 0308"
+252,2023-09-13,-325,EUR,OZ Matusova zem - Matyusfold PT,"Odoslaná platba elektronicky, Inzerat AA, September/2023 - kandidati Galantskeho okresu -kampan NR SR 2023",VS: 2023057
+253,2023-09-13,320.4,EUR,Istvan Takacs,"Prijatá platba, Takacs Istvan - dar",
+254,2023-09-13,1000,EUR,Ildiko Agocs K;rosi,"Prijatá platba, Dar",
+255,2023-09-12,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 10.09.2023","VS: 497000254
+ŠS: 5032806830
+KS: 6898"
+256,2023-09-12,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 10.09.2023 Miesto: FACEBK PLKGGRTCA2 fb.me/ads","VS: 405000254
+ŠS: 5032806830
+KS: 0608"
+257,2023-09-12,-360,EUR,Ing. Szilard Nemeth - REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Vyroba letakov, falc na DL - kampan NR SR 2023",VS: 20230369
+258,2023-09-12,-17000,EUR,Talamon s.r.o.,"Odoslaná platba elektronicky, Poskytnutie reklamnych sluzieb - kampan NR SR 2023",VS: 23097
+259,2023-09-12,-2040,EUR,"H and K Plus s.r.o., ICO: 51471965","Odoslaná platba elektronicky, SMS reklama a prieskum - volby NR SR 2023",VS: 20230110
+260,2023-09-12,300,EUR,Jozsef Menyhart,"Prijatá platba, ",
+261,2023-09-11,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 08.09.2023","VS: 497000252
+ŠS: 5032806830
+KS: 6898"
+262,2023-09-11,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 08.09.2023 Miesto: FACEBK APSN2SPCA2 fb.me/ads","VS: 405000252
+ŠS: 5032806830
+KS: 0608"
+263,2023-09-11,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 07.09.2023","VS: 497000251
+ŠS: 5032806830
+KS: 6898"
+264,2023-09-11,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 07.09.2023 Miesto: FACEBK GN645RBDA2 fb.me/ads","VS: 405000251
+ŠS: 5032806830
+KS: 0608"
+265,2023-09-11,-400,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Vyroba bannerov - kampan NR SR 2023","VS: 202300080
+KS: 0308"
+266,2023-09-11,50000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - kampan NR SR 2023",VS: 11092023
+267,2023-09-11,2000,EUR,Tamas Ivan,"Prijatá platba, DAR_Tamas Ivan",
+268,2023-09-11,400,EUR,Nemethi Bartolomej,"Prijatá platba, DAR - Nemethi / molino /",
+269,2023-09-11,-10759.16,EUR,"Red Post, s.r.o.","Odoslaná platba elektronicky, Zaloha za distribuciu letakov - kampan NR SR 2023",VS: 2023038
+270,2023-09-11,-240,EUR,"Red Post, s.r.o.","Odoslaná platba elektronicky, Distribucia letakov - vyrovnanie zaplatenej zalohy - kampan NR SR 2023",VS: 5412023
+271,2023-09-11,-660,EUR,"DUEL - PRESS, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzeratu v denniku Uj Szo dna 14.9.2023 - kampan NR SR 2023","VS: 7012300595
+KS: 0308"
+272,2023-09-11,-3627,EUR,web positive s.r.o.,"Odoslaná platba elektronicky, Graficke prace, IT vyvojarske prace - kampan NR SR 2023","VS: 2692023
+KS: 0308"
+273,2023-09-08,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 06.09.2023","VS: 497000250
+ŠS: 5032806830
+KS: 6898"
+274,2023-09-08,-600,EUR,,"Transakcia platobnou kartou, Suma: 600 EUR 06.09.2023 Miesto: FACEBK DE6MYS7DA2 fb.me/ads","VS: 405000250
+ŠS: 5032806830
+KS: 0608"
+275,2023-09-08,100,EUR,Ladislav Kocsis,"Prijatá platba, DAR",
+276,2023-09-08,-462,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Vyroba vreckovych kalendarov - volby NR SR 2023",VS: 202300081
+277,2023-09-08,-1500,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Facebook reklamy - volby NR SR 2023","VS: 202300082
+KS: 0308"
+278,2023-09-08,-1200,EUR,Szovetseg a Kozos Celokert - Zdruzenie za spolocne ciele,"Odoslaná platba elektronicky, Vykonane ulohy-naklady medialnej kampane vo volbach NR SR 2023","VS: 152023
+KS: 0308"
+279,2023-09-08,-11451.98,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Plagaty,vstupenky,nalepky,banner,Google ads kampan - volby NR SR 2023",VS: 202300078
+280,2023-09-07,-104.8,EUR,,"Transakcia platobnou kartou, Suma: 104,8 EUR 06.09.2023 Miesto: FACEBK QEZSXS7DA2 fb.me/ads","VS: 405000250
+ŠS: 5032806830
+KS: 0608"
+281,2023-09-07,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 06.09.2023","VS: 497000250
+ŠS: 5032806830
+KS: 6898"
+282,2023-09-07,-3540,EUR,"H and K Plus s.r.o., ICO: 51471965","Odoslaná platba elektronicky, Telefonicka reklama a prieskum - kampan NR SR 2023",VS: 20230109
+283,2023-09-07,-148,EUR,Mesto Senec,"Odoslaná platba elektronicky, Inzercia v novinach Sencan 09/2023 - kampan NR SR 2023",VS: 348
+284,2023-09-07,-300,EUR,COM-MEDIA spol. s r.o.,"Odoslaná platba elektronicky, Uverejnenie politickej reklamy v Komarnanskych listoch c. 9/2023",VS: 20230028
+285,2023-09-07,-431.9,EUR,KEMAR s.r.o.,"Odoslaná platba elektronicky, Bannery,papierovy billboard,letaky - kampan NR SR 2023",VS: 20230474
+286,2023-09-06,-845,EUR,,"Transakcia platobnou kartou, Suma: 845 EUR 04.09.2023 Miesto: FACEBK 583JZQBDA2 fb.me/ads","VS: 405000248
+ŠS: 5032806830
+KS: 0608"
+287,2023-09-06,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 04.09.2023","VS: 497000248
+ŠS: 5032806830
+KS: 6898"
+288,2023-09-06,-80,EUR,MESTO Kosice,"Odoslaná platba elektronicky, Spravny poplatok za vydanie rozhodnutia zo dna 6.9.2023 - kampan NR SR 2023",VS: 3451230366
+289,2023-09-06,-250,EUR,Frantisek Fazekas - Graphic Design,"Odoslaná platba elektronicky, Tlaciarenske sluzby - kampan NR SR 2023",VS: 282023
+290,2023-09-06,-336,EUR,Ing. Szilard Nemeth-REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Vyroba letakov - kampan NR SR 2023",VS: 20230345
+291,2023-09-06,-960,EUR,Ing. Szilard Nemeth-REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Reklamne predmety,plagaty,bannery,letaky - kampan NR SR 2023",VS: 20230344
+292,2023-09-06,1200,EUR,Tunde Neszmeri,"Prijatá platba, ",
+293,2023-09-06,-780,EUR,Ing. Szilard Nemeth-REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Pera s potlacou - kampan NR SR 2023",VS: 20230343
+294,2023-09-06,-1509.96,EUR,Tomas Fischer FISH5 - GRAFICKE a KREATIVNE STUDIO,"Odoslaná platba elektronicky, Graficke prace a tlaciarenske sluzby","VS: 2023099
+KS: 0308"
+295,2023-09-06,-625.01,EUR,INPANG s.r.o.,"Odoslaná platba elektronicky, Prenajom a lepenie billboardov",VS: 92023
+296,2023-09-06,-20137.68,EUR,Slovenska Grafia a.s.,"Odoslaná platba elektronicky, Vyroba volebnych brozur - kampan NR SR 2023",VS: 23005924
+297,2023-09-06,-300,EUR,"Web and go design, s.r.o., ICO: 52378373","Odoslaná platba elektronicky, Graficke a tlaciarenske sluzby - kampan NR SR 2023",VS: 20230204
+298,2023-09-05,300,EUR,JANOS MERY,"Prijatá platba, ajandek (dar)",
+299,2023-09-04,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 31.08.2023","VS: 497000244
+ŠS: 5032806830
+KS: 6898"
+300,2023-09-04,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 31.08.2023","VS: 497000244
+ŠS: 5032806830
+KS: 6898"
+301,2023-09-04,-194.97,EUR,,"Transakcia platobnou kartou, Suma: 194,97 EUR 31.08.2023 Miesto: FACEBK 3HUMVQBDA2 fb.me/ads","VS: 405000244
+ŠS: 5032806830
+KS: 0608"
+302,2023-09-04,-920,EUR,,"Transakcia platobnou kartou, Suma: 920 EUR 31.08.2023 Miesto: FACEBK WV623R3DA2 fb.me/ads","VS: 405000244
+ŠS: 5032806830
+KS: 0608"
+303,2023-09-04,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.08.2023","VS: 497000243
+ŠS: 5032806830
+KS: 6898"
+304,2023-09-04,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.08.2023","VS: 497000243
+ŠS: 5032806830
+KS: 6898"
+305,2023-09-04,-500,EUR,,"Transakcia platobnou kartou, Suma: 500 EUR 30.08.2023 Miesto: FACEBK DTHM4RKCA2 fb.me/ads","VS: 405000243
+ŠS: 5032806830
+KS: 0608"
+306,2023-09-04,-300,EUR,,"Transakcia platobnou kartou, Suma: 300 EUR 30.08.2023 Miesto: FACEBK HAPM4RKCA2 fb.me/ads","VS: 405000243
+ŠS: 5032806830
+KS: 0608"
+307,2023-09-04,2000,EUR,Csaba Furik,"Prijatá platba, Dar, Furik Csaba Maly Hores",
+308,2023-09-04,-597,EUR,Sigress s.r.o.,"Odoslaná platba elektronicky, Kupa bicyklov na podujatia v ramci kampane NR SR 2023",VS: 20234547
+309,2023-09-04,-8400,EUR,Bela Simon,"Odoslaná platba elektronicky, Organizacia kampanoveho podujatia - kampan NR SR 2023",VS: 2023074
+310,2023-09-04,-714,EUR,"UNIPOSTER, s.r.o.","Odoslaná platba elektronicky, Prenajom billboardov za 8,9/2023, tlac plagatov - kampan NR SR 2023",VS: 238039
+311,2023-09-04,-1290,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Vyroba - roll-up s potlacou, banner s potlacou","VS: 202300076
+KS: 0308"
+312,2023-09-04,714,EUR,Adrianna Gergelypapp,"Prijatá platba, ",
+313,2023-09-04,2000,EUR,Zsolt Baranyay,"Prijatá platba, ",VS: 780703
+314,2023-08-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.08.2023 do 31.08.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 12 x prijaté platby: 0,00, 41 x debet - elektronicky: 0,00",
+315,2023-08-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 30.08.2023","VS: 495000242
+ŠS: 5032806830
+KS: 6898"
+316,2023-08-31,-12117.6,EUR,"H and K Plus s.r.o., ICO: 51471965","Odoslaná platba elektronicky, Prenajom a tlac billboardov - kampan NR SR 2023",VS: 20230105
+317,2023-08-30,-800,EUR,,"Transakcia platobnou kartou, Suma: 800 EUR 27.08.2023 Miesto: FACEBK LGYSNRPCA2 fb.me/ads","VS: 405000240
+ŠS: 5032806830
+KS: 0608"
+318,2023-08-30,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 27.08.2023","VS: 497000240
+ŠS: 5032806830
+KS: 6898"
+319,2023-08-30,-948,EUR,"SILVA TRADE, spol. s r.o.","Odoslaná platba elektronicky, Reklamne predmety - kampan NR SR 2023","VS: 2308055
+KS: 0308"
+320,2023-08-30,-570,EUR,NOVOVITAL,"Odoslaná platba elektronicky, Prenajom Velkej saly v Dome kultury Nove Zamky dna 18.8.2023 - kulturne podujatie pocas kampane NR SR 2023","VS: 0809023
+KS: 0308"
+321,2023-08-30,100000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - volby NR SR 2023",VS: 30082023
+322,2023-08-28,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 25.08.2023","VS: 497000238
+ŠS: 5032806830
+KS: 6898"
+323,2023-08-28,-800,EUR,,"Transakcia platobnou kartou, Suma: 800 EUR 25.08.2023 Miesto: FACEBK 3M7GVQ3DA2 fb.me/ads","VS: 405000238
+ŠS: 5032806830
+KS: 0608"
+324,2023-08-28,-468,EUR,H and K Plus s.r.o. ICO: 51471965,"Odoslaná platba elektronicky, Prenajom a tlac billboardov - Furik,Furik,Takacs kampan NR SR 2023",VS: 20230102
+325,2023-08-28,468,EUR,Istvan Takacs,"Prijatá platba, Dar- Takacs Istvan",
+326,2023-08-25,-825.6,EUR,Kanovits Group s.r.o.,"Odoslaná platba elektronicky, Tlac a vylep billboardov a bigboardov, tlac a vyves citylightov - kampan NR SR 2023","VS: 23008137
+KS: 0308"
+327,2023-08-25,-400,EUR,Mesto Nove Zamky,"Odoslaná platba elektronicky, Uverejnenie plosnej politickej inzercie v dvojtyzdenniku Castrum Novum c. 18/2023",VS: 2113300611
+328,2023-08-25,-108,EUR,Ing. Julius Banyacski,"Odoslaná platba elektronicky, Pohostenie dna 16.8.2023 - kampan NR SR 2023",VS: 23069
+329,2023-08-25,-298.8,EUR,INPANG s.r.o.,"Odoslaná platba elektronicky, Letaky,plagaty,billboardy pre okres Michalovce",VS: 82023
+330,2023-08-25,3500,EUR,Aneta Forrova,"Prijatá platba, Aneta Forrova Vozokany",VS: 20230824
+331,2023-08-25,400,EUR,NAGY DAVID,"Prijatá platba, Ersekujvar jaras",
+332,2023-08-25,-2520,EUR,"DARCUS, a.s.","Odoslaná platba elektronicky, Bannerova inzercia - kampan NR SR 2023","VS: 0052023
+KS: 0308"
+333,2023-08-24,-240,EUR,"Euroko, spol.s r.o.","Odoslaná platba elektronicky, Reklamne predmety/pera/ - kampan NR SR 2023",VS: 2400011672
+334,2023-08-24,-12675.78,EUR,"Red Post, s.r.o.","Odoslaná platba elektronicky, Zaloha za distribuciu letakov - kampan NR SR 2023",VS: 2023028
+335,2023-08-23,204,EUR,Peter Koponcei,"Prijatá platba, darovanie_Koponcei",
+336,2023-08-23,-24500,EUR,Monika Csikmakova - GHYMES,"Odoslaná platba elektronicky, Organizovanie podujati pocas kampane NR SR 2023","VS: 32023
+KS: 0308"
+337,2023-08-22,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 21.08.2023","VS: 497000233
+ŠS: 5032806830
+KS: 6898"
+338,2023-08-22,-800,EUR,,"Transakcia platobnou kartou, Suma: 800 EUR 21.08.2023 Miesto: FACEBK S9NFGS7DA2 fb.me/ads","VS: 405000233
+ŠS: 5032806830
+KS: 0608"
+339,2023-08-22,-2520,EUR,"euroAWK, spol. s r.o.","Odoslaná platba elektronicky, Zaloha na kampan - Aliancia Peter Pandy",VS: 2370107
+340,2023-08-22,-37500,EUR,Festivitas s.r.o.,"Odoslaná platba elektronicky, Marketingova cinnost v ramci volebnej kampane NR SR 2023",VS: 01082023
+341,2023-08-22,1500,EUR,Tamas Ivan,"Prijatá platba, DAR_Tamas Ivan",
+342,2023-08-22,-750,EUR,WADO s.r.o.,"Odoslaná platba elektronicky, Marketingove prace - kampan NR SR 2023",VS: 2023024
+343,2023-08-22,-3000,EUR,Vox Juventae,"Odoslaná platba elektronicky, Bannerova reklama - kampan NR SR 2023","VS: 048012023
+ŠS: 082023
+KS: 0308"
+344,2023-08-22,-3114,EUR,WADO s.r.o.,"Odoslaná platba elektronicky, Marketingove prace, online a offline reklamna kampan",VS: 2023025
+345,2023-08-21,-621,EUR,"DUEL - PRESS, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzercie v denniku Uj Szo dna 18.8.2023","VS: 7022301385
+KS: 0308"
+346,2023-08-21,-141.2,EUR,"Ekoung, s.r.o.","Odoslaná platba elektronicky, Reprezentacne vydavky - kampan vo Velkych Kapusanoch",VS: 322023
+347,2023-08-18,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 16.08.2023","VS: 497000229
+ŠS: 5032806830
+KS: 6898"
+348,2023-08-18,-800,EUR,,"Transakcia platobnou kartou, Suma: 800 EUR 16.08.2023 Miesto: FACEBK 4CWUXPKDA2 fb.me/ads","VS: 405000229
+ŠS: 5032806830
+KS: 0608"
+349,2023-08-18,1,EUR,Neexistujuci ucet,"Prijatá platba, Vratenie prijatej sumy",VS: 07082023
+350,2023-08-18,1,EUR,Neexistujuci ucet,"Prijatá platba, Vratenie prijatej sumy",VS: 07082023
+351,2023-08-18,-1,EUR,Neexistujuci ucet - Gasparova Zdenka,"Odoslaná platba elektronicky, Vratenie prijatej sumy",VS: 07082023
+352,2023-08-18,-1,EUR,Neexistujuci ucet - Gasparova Zdenka,"Odoslaná platba elektronicky, Vratenie prijatej sumy",VS: 07082023
+353,2023-08-17,-10000,EUR,Interregionalny vyskumno - rozvojovy institut,"Odoslaná platba elektronicky, Organizovanie spolocenskej akcie s cielom a rozvoju kultury",VS: 20230002
+354,2023-08-17,-10000,EUR,Interregionalny vyskumno - rozvojovy institut,"Odoslaná platba elektronicky, Organizovanie spolocenskej akcie s cielom a rozvoju kultury",VS: 20230001
+355,2023-08-16,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 14.08.2023","VS: 497000227
+ŠS: 5032806830
+KS: 6898"
+356,2023-08-16,-800,EUR,,"Transakcia platobnou kartou, Suma: 800 EUR 14.08.2023 Miesto: FACEBK BHD3KQ3DA2 fb.me/ads","VS: 405000227
+ŠS: 5032806830
+KS: 0608"
+357,2023-08-16,-8259.6,EUR,"DUEL - PRESS, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzercii 9/2023","VS: 7012300544
+KS: 0308"
+358,2023-08-16,-182.21,EUR,Mestske kulturne stredisko ICO:00062448,"Odoslaná platba elektronicky, Uverejnenie inzercie v mesacniku Sturovo a okolie 8/2023","VS: 2023030
+KS: 0308"
+359,2023-08-16,-2788.8,EUR,"DUEL - PRESS, s.r.o.","Odoslaná platba elektronicky, Uverejnenie inzercii 9/2023","VS: 7012300542
+KS: 0308"
+360,2023-08-16,-17000,EUR,"4Publications, s.r.o.","Odoslaná platba elektronicky, Zabezpecenie reklamnej kampane-billboardy,reklamne predmety","VS: 202301
+KS: 0308"
+361,2023-08-16,100000,EUR,SZOVETSEG - ALIANCIA,"Prijatá platba, Prevod z hlavneho uctu na uhrady nakladov - volby NR SR 2023",VS: 16082023
+362,2023-08-15,-27394.8,EUR,Ing.Szilard Nemeth-REKLAMNA AGENTURA SINEX,"Odoslaná platba elektronicky, Vyroba propagacnych materialov - kampan NR SR 2023",VS: 20230334
+363,2023-08-15,-108,EUR,KEMAR s.r.o.,"Odoslaná platba elektronicky, Vyroba papierovych billboardov - kampan NR SR 2023",VS: 20230445
+364,2023-08-14,-948,EUR,"VALEUR, s.r.o.","Odoslaná platba elektronicky, Vyroba letakov",VS: 6922023
+365,2023-08-14,-600,EUR,web positive s.r.o.,"Odoslaná platba elektronicky, Graficke prace","VS: 2282023
+KS: 0308"
+366,2023-08-14,-345.16,EUR,"EGM, s.r.o.","Odoslaná platba elektronicky, Vyroba - plagaty,nalepky,vstupenky,banner","VS: 202300073
+KS: 0308"
+367,2023-08-10,-800,EUR,,"Transakcia platobnou kartou, Suma: 800 EUR 08.08.2023 Miesto: FACEBK 376FHQTCA2 fb.me/ads","VS: 405000222
+ŠS: 5032806830
+KS: 0608"
+368,2023-08-10,-0.2,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 08.08.2023","VS: 497000222
+ŠS: 5032806830
+KS: 6898"
+369,2023-08-10,-2654.4,EUR,"KandS /advertising, s. r. oICO:35827696","Odoslaná platba elektronicky, Realizacia produkcnychprac",VS: 0442023
