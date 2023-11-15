@@ -72,7 +72,7 @@ function Layout() {
     // load ads data from google sheet
     useEffect(() => {
         const csvFiles = Object.entries(csvConfig);
-        let filesData = {};
+        const filesData = {};
         Promise.all(
             csvFiles.map(
                 ([key, config]) =>
@@ -83,7 +83,7 @@ function Layout() {
                             dynamicTyping: false, // do not resolve types
                             skipEmptyLines: true,
                             complete: (csv) => {
-                                filesData = { ...filesData, [key]: csv };
+                                filesData[key] = csv;
                                 return resolve(key);
                             },
                             error: reject,
