@@ -3,6 +3,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { setTitle } from '../api/browserHelpers';
+import { processArticles } from '../api/wpHelpers';
 
 import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
@@ -37,7 +38,7 @@ function Article() {
         // article successfully loaded from API - show it!
         article = {
             ...article,
-            ...data[0],
+            ...processArticles(data)[0],
         };
     }
 
