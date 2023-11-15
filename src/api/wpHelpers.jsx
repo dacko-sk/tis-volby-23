@@ -68,10 +68,9 @@ const parserOptions = {
                     return domToReact(children, parserOptions);
                 }
                 if (attribs.href.startsWith('http://')) {
-                    // fix http links to https
                     const props = {
                         ...attributesToProps(attribs),
-                        // proxy image to force https
+                        // force http links to https
                         href: attribs.href.replace('http://', 'https://'),
                     };
                     return (
