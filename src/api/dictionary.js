@@ -260,11 +260,16 @@ export const labels = {
                 'Advertising expenses in Meta',
             ],
         },
+        noAccounts: [
+            'Hľadanému výrazu nezodpovedá žiaden online účet.',
+            'No online account matches the search query',
+        ],
         noData: [
             'Neevidujeme žiaden účet strany s výdavkami na sponzorované príspevky na tejto platforme.',
             'We did not find any profiles of the party with sponsored ads on this platform.',
         ],
         pageTitle: ['Online kampane', 'Online campaigns'],
+        partyAccounts: ['Online účty strán', 'Party online accounts'],
         percent: ['Podiel', 'Share'],
         showMore: [
             'Zistiť viac o online kampani',
@@ -594,6 +599,10 @@ export const labels = {
             'All political parties with transparent account sorted alphabetically.',
         ],
         navTitle: ['Strany', 'Parties'],
+        noParty: [
+            'Hľadanému výrazu nezodpovedá žiadna zo strán, ktoré kandidujú v parlamentných voľbách 2023.',
+            'No party in 2023 elections matches the search query.',
+        ],
         pageTitle: ['Strany a hnutia', 'Political Parties'],
     },
     party: {

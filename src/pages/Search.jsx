@@ -152,26 +152,25 @@ function Search({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
                 <br />
             </Title>
 
-            <h2 className="my-4">Strany a hnutia</h2>
+            <h2 className="my-4">{t(labels.parties.pageTitle)}</h2>
             {parties.length ? (
                 <Row className="tiles gx-4 gy-4">{parties}</Row>
             ) : (
                 <AlertWithIcon className="my-4" variant="danger">
-                    Hľadanému výrazu nezodpovedá žiadna zo strán, ktoré
-                    kandidujú v parlamentných voľbách 2023.
+                    {t(labels.parties.noParty)}
                 </AlertWithIcon>
             )}
 
-            <h2 className="my-4">Online účty strán</h2>
+            <h2 className="my-4">{t(labels.ads.partyAccounts)}</h2>
             {online.length ? (
                 <Row className="tiles gx-4 gy-4">{online}</Row>
             ) : (
                 <AlertWithIcon className="my-4" variant="danger">
-                    Hľadanému výrazu nezodpovedá žiaden online účet.
+                    {t(labels.ads.noAccounts)}
                 </AlertWithIcon>
             )}
 
-            <h2 className="my-4">{t(labels.news.navTitle)}</h2>
+            <h2 className="my-4">{t(labels.news.pageTitle)}</h2>
             <Posts
                 categories={[wpCat.news]}
                 noResults={t(labels.news.noData)}
