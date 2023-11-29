@@ -43,14 +43,14 @@ export const localSegments = {
         [segments.TRANSACTIONS]: 'financovanie',
     },
     [languages.en]: {
-        [segments.ANALYSES]: 'analyses',
-        [segments.ANALYSIS]: 'analysis',
+        [segments.ANALYSES]: 'assesments',
+        [segments.ANALYSIS]: 'assesment',
         [segments.ASSETS]: 'assets',
         [segments.NEWS]: 'news',
         [segments.ONLINE]: 'online',
         [segments.PARTIES]: 'parties',
         [segments.SEARCH]: 'search',
-        [segments.TRANSACTIONS]: 'transactions',
+        [segments.TRANSACTIONS]: 'financing',
     },
 };
 
