@@ -33,24 +33,10 @@ VS1500009747/SS2303028577/KS379"
 23,2023-09-29,-160.0,EUR,PETRIK SIMONA,"Platba/Petrik, vratenie daru",VS/SS008/KS
 24,2023-09-29,-300.0,EUR,Mgr.Tina Gazovicova,"Platba/Gazovicova, vratenie daru",VS/SS024/KS
 25,2023-09-29,-75.0,EUR,MIHALCIN GABRIEL,"Platba/Mihalcin, vratenie daru",VS/SS100/KS
-26,2023-09-29,-45.0,EUR,"
-                            Obec Nová Dedinka
-                    ","
-                        Platba
-                    /
-                        Obec Nova Dedinka, inzercia v novinach Hargas
-                    ","
-                        2310080VS2310080/SS031/KS
-                    "
-27,2023-09-29,-50173.51,EUR,"
-                            GROOW DIGITAL, s. r.
-                    ","
-                        Platba
-                    /
-                        GROOW, medialny nakup adform
-                    ","
-                        2023141VS2023141/SS/KS
-                    "
+26,2023-09-29,-45.0,EUR,Obec Nová Dedinka,"Platba/Obec Nova Dedinka, inzercia v novinach Hargas","2310080
+VS2310080/SS031/KS"
+27,2023-09-29,-50173.51,EUR,"GROOW DIGITAL, s. r.","Platba/GROOW, medialny nakup adform","2023141
+VS2023141/SS/KS"
 28,2023-09-29,-5299.2,EUR,"GROOW DIGITAL, s. r.","Platba/GROOW DIGITAL, agency fee 08-09","2023142
 VS2023142/SS/KS"
 29,2023-09-29,-5.0,EUR,,Zrušenie karty ZRUŠENIE KARTY,
@@ -95,85 +81,139 @@ VS20230021/SS/KS"
 60,2023-09-29,-10.52,EUR,,EUR NÁKUP POS FACEBK JVWFRSK9D2 / fb.me/ads / (POS 99999999),
 61,2023-09-28,20.0,EUR,Peter Kovac,Platba,
 62,2023-09-29,-467.62,EUR,,EUR NÁKUP POS FACEBK *T6B7QSFM52 / fb.me/ads / (POS 99999999),
-63,2023-09-29,-27.64,EUR,"
+63,2023-09-29,-27.64,EUR,,EUR NÁKUP POS FACEBK *6HFDQVTTJ2 / fb.me/ads / (POS 99999999),
+64,2023-09-29,-656.94,EUR,,EUR NÁKUP POS FACEBK P63YAUX8D2 / fb.me/ads / (POS 99999999),
+65,2023-09-29,-600.0,EUR,,EUR NÁKUP POS FACEBK FH27ATT9D2 / fb.me/ads / (POS 99999999),
+66,2023-09-28,-100.0,EUR,"Tarnovský Juraj, Ing","Platba/Tarnovsky, vratenie daru podla 85/2005 Z.z.",
+67,2023-09-29,-500.0,EUR,,EUR NÁKUP POS GOOGLE *ADS8627705599 / cc@google.com / (POS 99999999),
+68,2023-09-28,100.0,EUR,"Tarnovský Juraj, Ing",Platba/Juraj Tarnovsky - dar,
+69,2023-09-29,-998.9,EUR,,EUR NÁKUP POS FACEBK 9FHZWUBUJ2 / fb.me/ads / (POS 99999999),
+70,2023-09-29,-1000.0,EUR,"
                             
                     ","
-                        EUR NÁKUP POS FACEBK *6HFDQVTTJ2 / fb.me/ads / (POS 99999999)
+                        EUR NÁKUP POS GoogleAdwordsEU ADS862770 / Dublin / (POS 99999999)
                     /
                         
                     ","
                         
                     "
-64,2023-09-29,-656.94,EUR,"
+71,2023-09-29,-873.82,EUR,"
                             
                     ","
-                        EUR NÁKUP POS FACEBK P63YAUX8D2 / fb.me/ads / (POS 99999999)
+                        MOBILE APP NÁKUP E-COMM FACEBK FPPCRSK9D2 / fb.me/ads / (POS 99999999)
                     /
                         
                     ","
                         
                     "
-65,2023-09-29,-600.0,EUR,"
+72,2023-09-29,-1000.0,EUR,"
                             
                     ","
-                        EUR NÁKUP POS FACEBK FH27ATT9D2 / fb.me/ads / (POS 99999999)
+                        EUR NÁKUP POS GoogleAdwordsEU ADS862770 / Dublin / (POS 99999999)
                     /
                         
                     ","
                         
                     "
-66,2023-09-28,-100.0,EUR,"
-                            Tarnovský Juraj, Ing
+73,2023-09-27,75.0,EUR,"
+                            Progresívne Slov.
                     ","
                         Platba
                     /
-                        Tarnovsky, vratenie daru podla 85/2005 Z.z.
+                        martin strba vratenie duplicitneho vratenia daru
                     ","
                         
                     "
-67,2023-09-29,-500.0,EUR,"
+74,2023-09-29,-869.82,EUR,"
                             
                     ","
-                        EUR NÁKUP POS GOOGLE *ADS8627705599 / cc@google.com / (POS 99999999)
+                        EUR NÁKUP POS FACEBK *VZZ8HSTM52 / fb.me/ads / (POS 99999999)
                     /
                         
                     ","
                         
                     "
-68,2023-09-28,100.0,EUR,"
-                            Tarnovský Juraj, Ing
+75,2023-09-29,-1000.0,EUR,"
+                            
+                    ","
+                        EUR NÁKUP POS GoogleAdwordsEU ADS862770 / Dublin / (POS 99999999)
+                    /
+                        
+                    ","
+                        
+                    "
+76,2023-09-29,-3000.0,EUR,"
+                            
+                    ","
+                        EUR NÁKUP POS GoogleAdwordsEU ADS862770 / Dublin / (POS 99999999)
+                    /
+                        
+                    ","
+                        
+                    "
+77,2023-09-29,-800.0,EUR,"
+                            
+                    ","
+                        EUR NÁKUP POS FACEBK QFM6MT39D2 / fb.me/ads / (POS 99999999)
+                    /
+                        
+                    ","
+                        
+                    "
+78,2023-09-29,-800.0,EUR,"
+                            
+                    ","
+                        EUR NÁKUP POS FACEBK B8GVWUBUJ2 / fb.me/ads / (POS 99999999)
+                    /
+                        
+                    ","
+                        
+                    "
+79,2023-09-29,-324.26,EUR,"
+                            
+                    ","
+                        EUR NÁKUP POS FACEBK YWUYFUKUJ2 / fb.me/ads / (POS 99999999)
+                    /
+                        
+                    ","
+                        
+                    "
+80,2023-09-29,-300.0,EUR,"
+                            
+                    ","
+                        EUR NÁKUP POS FACEBK *8EGGVU3UJ2 / fb.me/ads / (POS 99999999)
+                    /
+                        
+                    ","
+                        
+                    "
+81,2023-09-27,-6479.52,EUR,"
+                            LIFEPARK S.R.O.
                     ","
                         Platba
                     /
-                        Juraj Tarnovsky - dar
+                        Lifepark, technicke zabezpecenie volebna noc
                     ","
-                        
+                        30230027VS30230027/SS/KS
                     "
-69,2023-09-29,-998.9,EUR,"
+82,2023-09-27,-500.0,EUR,"
+                            Dolinská Daniela
+                    ","
+                        Platba
+                    /
+                        Dolinska, video spot Kosova
+                    ","
+                        12VS012/SS/KS
+                    "
+83,2023-09-29,-300.0,EUR,"
                             
                     ","
-                        EUR NÁKUP POS FACEBK 9FHZWUBUJ2 / fb.me/ads / (POS 99999999)
+                        EUR NÁKUP POS FACEBK L42GVU3UJ2 / fb.me/ads / (POS 99999999)
                     /
                         
                     ","
                         
                     "
-70,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK *B84WGSTM52 / fb.me/ads / (POS 99999999),
-71,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK 6P5QZSP9D2 / fb.me/ads / (POS 99999999),
-72,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK LFZXDUPTJ2 / fb.me/ads / (POS 99999999),
-73,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK EVNUQSK9D2 / fb.me/ads / (POS 99999999),
-74,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK BS66GUFUJ2 / fb.me/ads / (POS 99999999),
-75,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK *ADQ89U7UJ2 / fb.me/ads / (POS 99999999),
-76,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK *E928AUX8D2 / fb.me/ads / (POS 99999999),
-77,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK JJDHFUKUJ2 / fb.me/ads / (POS 99999999),
-78,2023-09-29,-800.0,EUR,,EUR NÁKUP POS FACEBK *F83SZSBN52 / fb.me/ads / (POS 99999999),
-79,2023-09-28,-10.0,EUR,Stadsfiets s.r.o.,Platba/stadsfiets sro vratenie daru,
-80,2023-09-28,-10.0,EUR,ANDREJ SHADURA,Platba/andrej shadura vratenie daru,
-81,2023-09-28,10.0,EUR,Stadsfiets s.r.o.,PLATBA,"267199
-VS267199/SS/KS"
-82,2023-09-28,10.0,EUR,ANDREJ SHADURA,PLATBA/PS DAR ANDREJ SHADURA,"52032
-VS0000052032/SS/KS0308"
-83,2023-09-28,-40.8,EUR,MACSEK PETER,Platba/macsek peter vratenie,
 84,2023-09-28,40.8,EUR,MACSEK PETER,PLATBA,"101
 VS101/SS/KS"
 85,2023-09-28,-2477.0,EUR,íčko s.r.o.,"Platba/icko, administrativne prace september","20230010
