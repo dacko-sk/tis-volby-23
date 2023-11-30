@@ -1,10 +1,9 @@
 import { createContext, useContext, useMemo, useState } from 'react';
-import has from 'has';
 
 import { parties } from '../api/constants';
 import { contains } from '../api/helpers';
 
-import aggregatedAcounts from '../../public/csv/transparent/aggregation_no_returns.csv';
+import aggregatedAcounts from '../../public/csv/transparent/final_aggr_no_returns.csv';
 // import all csv files from the accounts folder via webpack
 const accountsFolder = require.context(
     '../../public/csv/transparent/accounts',
@@ -30,6 +29,8 @@ export const reloadMinutes = 70;
 export const csvAggregatedKeys = {
     account: 'url',
     name: 'name',
+    incoming: 'incoming',
+    outgoing: 'outgoing',
 };
 
 export const csvAccountKeys = {
@@ -50,8 +51,8 @@ export const types = {
 
 export const getFileName = (account) => {
     if (
-        !has(account, csvAggregatedKeys.name) ||
-        !has(account, csvAggregatedKeys.account)
+        !(account[csvAggregatedKeys.name] ?? false) ||
+        !(account[csvAggregatedKeys.account] ?? false)
     ) {
         return null;
     }
@@ -72,7 +73,7 @@ export const getFileName = (account) => {
 };
 
 export const processAccountsData = (data) => {
-    if (has(data, 'data')) {
+    if (data.data ?? false) {
         const pd = data;
         let lastUpdate = baseDate;
         pd.data.forEach((row, index) => {
@@ -98,8 +99,11 @@ export const processAccountsData = (data) => {
             }
 
             // parse numbers
-            pd.data[index].sum_incoming = row.sum_incoming ?? 0;
-            pd.data[index].sum_outgoing = Math.abs(row.sum_outgoing ?? 0);
+            pd.data[index][csvAggregatedKeys.incoming] =
+                row[csvAggregatedKeys.incoming] ?? 0;
+            pd.data[index][csvAggregatedKeys.outgoing] = Math.abs(
+                row[csvAggregatedKeys.outgoing] ?? 0
+            );
             pd.data[index].balance = row.balance ?? 0;
             pd.data[index].num_incoming = row.num_incoming ?? 0;
             pd.data[index].num_outgoing = row.num_outgoing ?? 0;
@@ -115,7 +119,7 @@ export const processAccountsData = (data) => {
             };
 
             // merge data with party config
-            if (has(parties, pd.data[index][csvAggregatedKeys.name])) {
+            if (parties[pd.data[index][csvAggregatedKeys.name]] ?? false) {
                 pd.data[index] = {
                     ...pd.data[index],
                     // overwrite with config

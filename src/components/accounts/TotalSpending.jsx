@@ -3,7 +3,7 @@ import has from 'has';
 import { labels, t } from '../../api/dictionary';
 import { currencyFormat } from '../../api/helpers';
 
-import useData from '../../context/DataContext';
+import useData, { csvAggregatedKeys } from '../../context/DataContext';
 
 import LastUpdateTag from '../general/LastUpdateTag';
 import Loading from '../general/Loading';
@@ -16,8 +16,8 @@ function TotalSpending() {
     if (csvData.data ?? false) {
         csvData.data.forEach((row) => {
             // sum of outgoing amounts from all transparent accounts
-            if (row.sum_outgoing > 0) {
-                total += row.sum_outgoing;
+            if (row[csvAggregatedKeys.outgoing] > 0) {
+                total += row[csvAggregatedKeys.outgoing];
             }
             // remove manually added duplicate expenses
             if (has(row, 'duplicateExpenses') && row.duplicateExpenses > 0) {

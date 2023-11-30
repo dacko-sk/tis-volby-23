@@ -5,7 +5,7 @@ import { getPartyChartLabel } from '../../api/chartHelpers';
 import { sortBySpending } from '../../api/helpers';
 import { routes } from '../../api/routes';
 
-import useData from '../../context/DataContext';
+import useData, { csvAggregatedKeys } from '../../context/DataContext';
 
 import TisBarChart from './TisBarChart';
 
@@ -18,8 +18,8 @@ function Top10({ maxItems = 10 }) {
         csvData.data.forEach((row) => {
             columns.push({
                 name: getPartyChartLabel(row),
-                incoming: row.sum_incoming,
-                outgoing: row.sum_outgoing,
+                incoming: row[csvAggregatedKeys.incoming],
+                outgoing: row[csvAggregatedKeys.outgoing],
             });
         });
     }

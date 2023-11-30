@@ -22,11 +22,15 @@ function PartyTransactions() {
                 <tbody>
                     <tr>
                         <td>{t(labels.charts.incoming)}</td>
-                        <td>{currencyFormat(party.sum_incoming)}</td>
+                        <td>
+                            {currencyFormat(party[csvAggregatedKeys.incoming])}
+                        </td>
                     </tr>
                     <tr>
                         <td>{t(labels.charts.outgoing)}</td>
-                        <td>{currencyFormat(party.sum_outgoing)}</td>
+                        <td>
+                            {currencyFormat(party[csvAggregatedKeys.outgoing])}
+                        </td>
                     </tr>
                     <tr>
                         <td>{t(labels.account.balance)}</td>

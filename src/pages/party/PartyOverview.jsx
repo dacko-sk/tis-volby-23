@@ -12,6 +12,7 @@ import { routes, segments } from '../../api/routes';
 import { wpCat } from '../../api/wpHelpers';
 
 import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';
+import { csvAggregatedKeys } from '../../context/DataContext';
 
 import LastUpdateTag from '../../components/general/LastUpdateTag';
 import Posts, { templates } from '../../components/wp/Posts';
@@ -73,11 +74,11 @@ function PartyTransactions({
                         data={[
                             {
                                 name: t(labels.charts.outgoing),
-                                outgoing: party.sum_outgoing,
+                                outgoing: party[csvAggregatedKeys.outgoing],
                             },
                             {
                                 name: t(labels.charts.incoming),
-                                incoming: party.sum_incoming,
+                                incoming: party[csvAggregatedKeys.incoming],
                             },
                         ]}
                         buttonLink={routes.charts}
@@ -91,7 +92,7 @@ function PartyTransactions({
                             {t(labels.account.partySpending)}
                         </h2>
                         <p className="hero-number">
-                            {currencyFormat(party.sum_outgoing)}
+                            {currencyFormat(party[csvAggregatedKeys.outgoing])}
                             <LastUpdateTag timestamp={party.timestamp} />
                         </p>
                     </div>
