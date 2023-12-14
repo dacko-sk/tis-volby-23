@@ -1,64 +1,66 @@
 index,date,amount,currency,account_name,message,vs
-0,2023-11-10,-3,EUR,Avizo - Vyzva,"Poplatok, ",
-1,2023-10-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.10.2023 do 31.10.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 2 x prijaté platby: 0,00, 3 x debet - elektronicky: 0,00",
-2,2023-10-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 30.10.2023","VS: 495000303
+0,2023-12-05,-7,EUR,Avizo - Upomienka,"Poplatok, ",
+1,2023-11-30,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.11.2023 do 30.11.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00",
+2,2023-11-10,-3,EUR,Avizo - Vyzva,"Poplatok, ",
+3,2023-10-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.10.2023 do 31.10.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 2 x prijaté platby: 0,00, 3 x debet - elektronicky: 0,00",
+4,2023-10-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 30.10.2023","VS: 495000303
 ŠS: 5032809677
 KS: 6898"
-3,2023-10-10,-1300,EUR,,"Odoslaná platba elektronicky, ",
-4,2023-10-10,1300,EUR,Hudec Jan,"Prijatá platba, ",
-5,2023-10-09,-700,EUR,,"Odoslaná platba elektronicky, ",
-6,2023-10-09,50,EUR,Maros Varga,"Prijatá platba, Podpora QR web",
-7,2023-10-02,-2500,EUR,,"Odoslaná platba elektronicky, Letaky",
-8,2023-09-30,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.09.2023 do 30.09.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 12 x prijaté platby: 0,00, 12 x debet - elektronicky: 0,00",
-9,2023-09-29,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 28.09.2023","VS: 495000271
+5,2023-10-10,-1300,EUR,,"Odoslaná platba elektronicky, ",
+6,2023-10-10,1300,EUR,Hudec Jan,"Prijatá platba, ",
+7,2023-10-09,-700,EUR,,"Odoslaná platba elektronicky, ",
+8,2023-10-09,50,EUR,Maros Varga,"Prijatá platba, Podpora QR web",
+9,2023-10-02,-2500,EUR,,"Odoslaná platba elektronicky, Letaky",
+10,2023-09-30,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.09.2023 do 30.09.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 12 x prijaté platby: 0,00, 12 x debet - elektronicky: 0,00",
+11,2023-09-29,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 28.09.2023","VS: 495000271
 ŠS: 5032809677
 KS: 6898"
-10,2023-09-29,-1500,EUR,,"Odoslaná platba elektronicky, ",VS: 2333101859
-11,2023-09-29,250,EUR,ORVISKA KATARINA,"Prijatá platba, Mgr. Katarina Orviska",
-12,2023-09-29,2500,EUR,Hamrozy Patrik,"Prijatá platba, ",
-13,2023-09-28,400,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
-14,2023-09-26,1000,EUR,Marian Liptak,"Prijatá platba, ",ŠS: 4008510309
-15,2023-09-25,-480,EUR,,"Odoslaná platba elektronicky, ",VS: 23025
-16,2023-09-25,1000,EUR,"FINTECH, S. R. O.","Prijatá platba, Reklama",
-17,2023-09-21,-357.4,EUR,,"Odoslaná platba elektronicky, ",VS: 230100334
-18,2023-09-21,-356.4,EUR,,"Odoslaná platba elektronicky, ",VS: 2333101797
-19,2023-09-21,-507.6,EUR,,"Odoslaná platba elektronicky, ",VS: 202309022
-20,2023-09-21,-503.76,EUR,,"Odoslaná platba elektronicky, Bilbord TN",VS: 202309001
-21,2023-09-21,1700,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
-22,2023-09-18,-2500,EUR,,"Odoslaná platba elektronicky, Zaloha plachty",
-23,2023-09-18,1400,EUR,"FINTECH, S. R. O.","Prijatá platba, Reklama",
-24,2023-09-15,500,EUR,HUDEC JAN,"Prijatá platba, ",
-25,2023-09-13,-5000,EUR,,"Odoslaná platba elektronicky, Zaloha placty",
-26,2023-09-13,1500,EUR,KARMA,"Prijatá platba, ",
-27,2023-09-13,3000,EUR,"FINTECH, S. R. O.","Prijatá platba, ",
-28,2023-09-06,-304.8,EUR,,"Odoslaná platba elektronicky, TLAC LETAK",VS: 2023450
-29,2023-09-06,-1225.2,EUR,,"Odoslaná platba elektronicky, WEB KARMA24",VS: 202308008
-30,2023-09-06,-80,EUR,,"Odoslaná platba elektronicky, Spravny poplatok za vydanie rozhodnutia. MK/A/2023/21293 zo dna 06.09.2023.",VS: 3451230360
-31,2023-09-06,500,EUR,Silvia Kissova,"Prijatá platba, Silvia Kissova",
-32,2023-09-06,300,EUR,Viliam Kapusta,"Prijatá platba, Mgr. Viliam Kapusta",
-33,2023-09-06,999.99,EUR,Marek Grussmann,"Prijatá platba, ",
-34,2023-09-05,-40,EUR,,"Odoslaná platba elektronicky, SP akcia doprava",VS: 221004
-35,2023-09-04,-5,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.08.2023","VS: 497000243
+12,2023-09-29,-1500,EUR,,"Odoslaná platba elektronicky, ",VS: 2333101859
+13,2023-09-29,250,EUR,ORVISKA KATARINA,"Prijatá platba, Mgr. Katarina Orviska",
+14,2023-09-29,2500,EUR,Hamrozy Patrik,"Prijatá platba, ",
+15,2023-09-28,400,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
+16,2023-09-26,1000,EUR,Marian Liptak,"Prijatá platba, ",ŠS: 4008510309
+17,2023-09-25,-480,EUR,,"Odoslaná platba elektronicky, ",VS: 23025
+18,2023-09-25,1000,EUR,"FINTECH, S. R. O.","Prijatá platba, Reklama",
+19,2023-09-21,-357.4,EUR,,"Odoslaná platba elektronicky, ",VS: 230100334
+20,2023-09-21,-356.4,EUR,,"Odoslaná platba elektronicky, ",VS: 2333101797
+21,2023-09-21,-507.6,EUR,,"Odoslaná platba elektronicky, ",VS: 202309022
+22,2023-09-21,-503.76,EUR,,"Odoslaná platba elektronicky, Bilbord TN",VS: 202309001
+23,2023-09-21,1700,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
+24,2023-09-18,-2500,EUR,,"Odoslaná platba elektronicky, Zaloha plachty",
+25,2023-09-18,1400,EUR,"FINTECH, S. R. O.","Prijatá platba, Reklama",
+26,2023-09-15,500,EUR,HUDEC JAN,"Prijatá platba, ",
+27,2023-09-13,-5000,EUR,,"Odoslaná platba elektronicky, Zaloha placty",
+28,2023-09-13,1500,EUR,KARMA,"Prijatá platba, ",
+29,2023-09-13,3000,EUR,"FINTECH, S. R. O.","Prijatá platba, ",
+30,2023-09-06,-304.8,EUR,,"Odoslaná platba elektronicky, TLAC LETAK",VS: 2023450
+31,2023-09-06,-1225.2,EUR,,"Odoslaná platba elektronicky, WEB KARMA24",VS: 202308008
+32,2023-09-06,-80,EUR,,"Odoslaná platba elektronicky, Spravny poplatok za vydanie rozhodnutia. MK/A/2023/21293 zo dna 06.09.2023.",VS: 3451230360
+33,2023-09-06,500,EUR,Silvia Kissova,"Prijatá platba, Silvia Kissova",
+34,2023-09-06,300,EUR,Viliam Kapusta,"Prijatá platba, Mgr. Viliam Kapusta",
+35,2023-09-06,999.99,EUR,Marek Grussmann,"Prijatá platba, ",
+36,2023-09-05,-40,EUR,,"Odoslaná platba elektronicky, SP akcia doprava",VS: 221004
+37,2023-09-04,-5,EUR,,"Poplatok platobné karty, Miesto: Transakcny poplatok Suma: 0 EUR 30.08.2023","VS: 497000243
 ŠS: 5032809677
 KS: 6898"
-36,2023-09-04,-10,EUR,,"Výber hotovosti kartou, Suma: 10 EUR 30.08.2023 Miesto: TRENCIN, MIEROVE NAM. 37 TRENCIN","VS: 401000243
+38,2023-09-04,-10,EUR,,"Výber hotovosti kartou, Suma: 10 EUR 30.08.2023 Miesto: TRENCIN, MIEROVE NAM. 37 TRENCIN","VS: 401000243
 ŠS: 5032809677
 KS: 0608"
-37,2023-08-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.08.2023 do 31.08.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 3 x prijaté platby: 0,00, 2 x debet - elektronicky: 0,00",
-38,2023-08-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 30.08.2023","VS: 495000242
+39,2023-08-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.08.2023 do 31.08.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00, 3 x prijaté platby: 0,00, 2 x debet - elektronicky: 0,00",
+40,2023-08-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 30.08.2023","VS: 495000242
 ŠS: 5032809677
 KS: 6898"
-39,2023-08-31,-7000,EUR,Modify Studio,"Odoslaná platba elektronicky, ",VS: 2023077
-40,2023-08-30,-0.2,EUR,,"Poplatok za platbu, ",
-41,2023-08-30,2990,EUR,ADRIANA SZABOOVA,"Prijatá platba, Karma politicka strana transparentn y ucet",ŠS: 4009563308
-42,2023-08-22,5000,EUR,Jan Barton,"Prijatá platba, ",VS: 911
-43,2023-08-21,-5000,EUR,Modify Studio,"Odoslaná platba elektronicky, ",VS: 2023077
-44,2023-08-21,2121,EUR,KARMA,"Prijatá platba, ",
-45,2023-08-11,1000,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
-46,2023-08-09,1000,EUR,Marian Liptak,"Prijatá platba, ",ŠS: 4003262308
-47,2023-08-04,800,EUR,Marian Liptak,"Prijatá platba, ",ŠS: 4001899308
-48,2023-07-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.07.2023 do 31.07.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00",
-49,2023-07-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 28.07.2023","VS: 495000209
+41,2023-08-31,-7000,EUR,Modify Studio,"Odoslaná platba elektronicky, ",VS: 2023077
+42,2023-08-30,-0.2,EUR,,"Poplatok za platbu, ",
+43,2023-08-30,2990,EUR,ADRIANA SZABOOVA,"Prijatá platba, Karma politicka strana transparentn y ucet",ŠS: 4009563308
+44,2023-08-22,5000,EUR,Jan Barton,"Prijatá platba, ",VS: 911
+45,2023-08-21,-5000,EUR,Modify Studio,"Odoslaná platba elektronicky, ",VS: 2023077
+46,2023-08-21,2121,EUR,KARMA,"Prijatá platba, ",
+47,2023-08-11,1000,EUR,"Chudy Roman, Mgr.","Prijatá platba, ",
+48,2023-08-09,1000,EUR,Marian Liptak,"Prijatá platba, ",ŠS: 4003262308
+49,2023-08-04,800,EUR,Marian Liptak,"Prijatá platba, ",ŠS: 4001899308
+50,2023-07-31,-10,EUR,Service Fees,"Za vedenie účtu, výpisy a transakcie, od 01.07.2023 do 31.07.2023, Za vedenie účtu/balíka služieb a výpisy: 10,00, Za transakcie: 0,00",
+51,2023-07-31,-3,EUR,,"Poplatok platobné karty, Miesto: VISA BUSINESS DEB. CL Suma: 3 EUR 28.07.2023","VS: 495000209
 ŠS: 5032809677
 KS: 6898"
-50,2023-06-27,111,EUR,KLASICO S.R.O.,"Prijatá platba, ",
+52,2023-06-27,111,EUR,KLASICO S.R.O.,"Prijatá platba, ",
