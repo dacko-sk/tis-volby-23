@@ -24,7 +24,6 @@ const accountFile = (filename) => {
 
 export const accountsFile = aggregatedAcounts;
 export const baseDate = 1669068712;
-export const reloadMinutes = 70;
 
 export const csvAggregatedKeys = {
     account: 'url',
