@@ -1,22 +1,22 @@
+import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import { dateTimeFormat } from '../../../api/helpers';
+import { routes } from '../../../api/routes';
 import { parseWpHtml } from '../../../api/wpHelpers';
 
 import Media from '../Media';
 import PartyTags from '../PartyTags';
 
-function NewsCondensed({ article, clickHandler, keyUpHandler }) {
+function NewsCondensed({ article }) {
     return (
         <Col className="d-flex" md={6}>
-            <div
+            <Link
                 id={article.slug}
                 className="article hover-bg"
-                onClick={clickHandler}
-                onKeyUp={keyUpHandler}
-                role="link"
-                tabIndex={0}
+                state={{ article }}
+                to={routes.article(article.slug)}
             >
                 <h2 className="d-none d-xxl-block">{article.title.rendered}</h2>
 
@@ -42,10 +42,12 @@ function NewsCondensed({ article, clickHandler, keyUpHandler }) {
                             className="article-tags my-2"
                             tags={article.tags}
                         />
-                        {parseWpHtml(article.excerpt.rendered)}
+                        <div className="article-excerpt">
+                            {parseWpHtml(article.excerpt.rendered)}
+                        </div>
                     </Col>
                 </Row>
-            </div>
+            </Link>
         </Col>
     );
 }

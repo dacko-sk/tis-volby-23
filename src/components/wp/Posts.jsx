@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Button from 'react-bootstrap/Button';
 import Pagination from 'react-bootstrap/Pagination';
@@ -7,10 +7,8 @@ import Row from 'react-bootstrap/Row';
 
 import { scrollToTop } from '../../api/browserHelpers';
 import { labels, t } from '../../api/dictionary';
-import { routes, segments } from '../../api/routes';
+import { routes } from '../../api/routes';
 import { getAnalysedData, processArticles, wpCat } from '../../api/wpHelpers';
-
-import useData from '../../context/DataContext';
 
 import AnalysisFeatured from './templates/AnalysisFeatured';
 import AnalysisList from './templates/AnalysisList';
@@ -40,8 +38,6 @@ function Posts({
 }) {
     const [totalPages, setTotalPages] = useState(0);
     const [activePage, setActivePage] = useState(1);
-    const navigate = useNavigate();
-    const { findPartyByWpTags } = useData();
 
     const isAnalysis =
         categories.includes(wpCat.analyses) ||
@@ -75,29 +71,6 @@ function Posts({
             })
     );
 
-    const navigateToArticle = (article) => {
-        let route = routes.article(article.slug);
-        if (isAnalysis && (article.analysis ?? false)) {
-            const party = findPartyByWpTags(article.tags);
-            if (party) {
-                route = routes.party(party.slug, segments.ANALYSIS);
-            }
-        }
-        navigate(route, {
-            state: { article },
-        });
-    };
-    const getClickHandler = (article) => (event) => {
-        if (event.target.tagName.toLowerCase() !== 'a') {
-            navigateToArticle(article);
-        }
-    };
-    const getKeyUpHandler = (article) => (event) => {
-        if (event.keyCode === 13) {
-            navigateToArticle(article);
-        }
-    };
-
     const loadPage = (page) => () => {
         setActivePage(page);
         scrollToTop();
@@ -116,16 +89,9 @@ function Posts({
                         <AnalysisFeatured
                             key={article.slug}
                             article={article}
-                            clickHandler={getClickHandler(article)}
-                            keyUpHandler={getKeyUpHandler(article)}
                         />
                     ) : (
-                        <AnalysisList
-                            key={article.slug}
-                            article={article}
-                            clickHandler={getClickHandler(article)}
-                            keyUpHandler={getKeyUpHandler(article)}
-                        />
+                        <AnalysisList key={article.slug} article={article} />
                     )
                 );
             });
@@ -133,19 +99,9 @@ function Posts({
             processArticles(data).forEach((article) => {
                 articles.push(
                     template === templates.condensed ? (
-                        <NewsCondensed
-                            key={article.slug}
-                            article={article}
-                            clickHandler={getClickHandler(article)}
-                            keyUpHandler={getKeyUpHandler(article)}
-                        />
+                        <NewsCondensed key={article.slug} article={article} />
                     ) : (
-                        <NewsList
-                            key={article.slug}
-                            article={article}
-                            clickHandler={getClickHandler(article)}
-                            keyUpHandler={getKeyUpHandler(article)}
-                        />
+                        <NewsList key={article.slug} article={article} />
                     )
                 );
             });

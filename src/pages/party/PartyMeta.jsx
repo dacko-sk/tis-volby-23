@@ -227,7 +227,6 @@ function PartyMeta({
                 });
             }
         });
-        console.log(attributions);
     }
 
     const charts = {

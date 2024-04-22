@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
 import { labels, t } from '../../../api/dictionary';
 import { badgePctFormat } from '../../../api/helpers';
+import { routes, segments } from '../../../api/routes';
 import {
     baseData as abd,
     metaData as amd,
@@ -12,7 +14,7 @@ import {
 
 import useData from '../../../context/DataContext';
 
-function AnalysisList({ article, clickHandler, keyUpHandler }) {
+function AnalysisList({ article }) {
     const { analysis } = article;
     if (analysis.error ?? false) {
         console.log(analysis.error);
@@ -40,13 +42,10 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
 
     return (
         <Col md={12}>
-            <div
+            <Link
                 id={article.slug}
                 className={`article hover-bg analysis-preview score-${cls}`}
-                onClick={clickHandler}
-                onKeyUp={keyUpHandler}
-                role="link"
-                tabIndex={0}
+                to={routes.party(party.slug, segments.ANALYSIS)}
             >
                 <Row className="align-items-center">
                     <Col sm>
@@ -94,7 +93,7 @@ function AnalysisList({ article, clickHandler, keyUpHandler }) {
                         </Table>
                     </Col>
                 </Row>
-            </div>
+            </Link>
         </Col>
     );
 }

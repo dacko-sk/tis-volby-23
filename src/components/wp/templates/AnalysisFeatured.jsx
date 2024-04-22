@@ -1,12 +1,14 @@
+import { Link } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 
 import { badgePctFormat } from '../../../api/helpers';
+import { routes, segments } from '../../../api/routes';
 import { transparencyClass } from '../../../api/wpHelpers';
 
 import useData from '../../../context/DataContext';
 import Media from '../Media';
 
-function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
+function AnalysisFeatured({ article }) {
     const { analysis } = article;
     if (analysis.error ?? false) {
         console.log(analysis.error);
@@ -21,19 +23,16 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
     const party = findPartyByWpTags(article.tags);
     const logo = party && (party.logo ?? false) ? party.logo : null;
     const name =
-        party && (party.fullName ?? false)
+        party && (party.fbName ?? false)
             ? party.fbName
             : article.title.rendered;
 
     return (
         <Col>
-            <div
+            <Link
                 id={article.slug}
                 className={`article analysis-preview score-${cls}`}
-                onClick={clickHandler}
-                onKeyUp={keyUpHandler}
-                role="link"
-                tabIndex={0}
+                to={routes.party(party.slug, segments.ANALYSIS)}
             >
                 <div
                     className="thumb"
@@ -51,7 +50,7 @@ function AnalysisFeatured({ article, clickHandler, keyUpHandler }) {
                         <span className="badge">{name}</span>
                     </div>
                 </div>
-            </div>
+            </Link>
         </Col>
     );
 }

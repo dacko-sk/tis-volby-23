@@ -5,7 +5,7 @@ import { decodeSlug, routes } from '../../api/routes';
 
 import useData, { csvAggregatedKeys } from '../../context/DataContext';
 
-function PartyTags({ tags, className }) {
+function PartyTags({ tags, className, link }) {
     const { csvData } = useData();
     const { slug } = useParams();
     const currentParty = slug ? decodeSlug(slug) : null;
@@ -18,14 +18,26 @@ function PartyTags({ tags, className }) {
                 csvData.data.some((row) => {
                     if (partyKey === row[csvAggregatedKeys.name]) {
                         const tagName = partyProps.slug ?? partyKey;
+                        const tag =
+                            currentParty === tagName ? (
+                                <strong>{tagName}</strong>
+                            ) : (
+                                tagName
+                            );
                         items.push(
-                            <Link key={partyKey} to={routes.party(tagName)}>
-                                {currentParty === tagName ? (
-                                    <strong>{tagName}</strong>
-                                ) : (
-                                    tagName
-                                )}
-                            </Link>
+                            link ? (
+                                <Link
+                                    className="tag"
+                                    key={partyKey}
+                                    to={routes.party(tagName)}
+                                >
+                                    {tag}
+                                </Link>
+                            ) : (
+                                <span className="tag" key={partyKey}>
+                                    {tag}
+                                </span>
+                            )
                         );
                         return true;
                     }
