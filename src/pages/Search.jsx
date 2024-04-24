@@ -16,6 +16,9 @@ import AlertWithIcon from '../components/general/AlertWithIcon';
 import Title from '../components/structure/Title';
 import Posts from '../components/wp/Posts';
 
+import linkIcon from '../../public/img/external_link_icon.svg?url';
+import pdfIcon from '../../public/img/PDF_icon.svg?url';
+
 function Search({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
     const params = useParams();
     const query = params.query ?? null;
@@ -31,6 +34,10 @@ function Search({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
 
     // parse data
     const parties = [];
+    const candidatesLists = [];
+    const assets = [];
+    const reports = [];
+    const accounts = [];
     if (csvData.data ?? false) {
         csvData.data.forEach((row) => {
             // party name matches - list party
@@ -54,6 +61,89 @@ function Search({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
                             <h3>{row[csvAggregatedKeys.name]}</h3>
                             <div className="town mt-3">{row.fullName}</div>
                         </Link>
+                    </Col>
+                );
+
+                if (sheetsData.candidatesLists[row.fbName] ?? false) {
+                    candidatesLists.push(
+                        <Col key={row.fbName} className="d-flex" sm>
+                            <a
+                                className="d-flex flex-column justify-content-between w-100 cat-local"
+                                href={sheetsData.candidatesLists[row.fbName]}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="download"
+                            >
+                                <h3>
+                                    <span className="me-2">{row.fullName}</span>
+                                    <img
+                                        className="inline-icon"
+                                        src={pdfIcon}
+                                    />
+                                </h3>
+                            </a>
+                        </Col>
+                    );
+                }
+
+                if (sheetsData.assets[row.fbName] ?? false) {
+                    assets.push(
+                        <Col key={row.fbName} className="d-flex" sm>
+                            <a
+                                className="d-flex flex-column justify-content-between w-100 cat-local"
+                                href={sheetsData.assets[row.fbName]}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="download"
+                            >
+                                <h3>
+                                    <span className="me-2">{row.fullName}</span>
+                                    <img
+                                        className="inline-icon"
+                                        src={pdfIcon}
+                                    />
+                                </h3>
+                            </a>
+                        </Col>
+                    );
+                }
+
+                if (sheetsData.reports[row.fbName] ?? false) {
+                    reports.push(
+                        <Col key={row.fbName} className="d-flex" sm>
+                            <a
+                                className="d-flex flex-column justify-content-between w-100 cat-local"
+                                href={sheetsData.reports[row.fbName]}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="download"
+                            >
+                                <h3>
+                                    <span className="me-2">{row.fullName}</span>
+                                    <img
+                                        className="inline-icon"
+                                        src={pdfIcon}
+                                    />
+                                </h3>
+                            </a>
+                        </Col>
+                    );
+                }
+
+                accounts.push(
+                    <Col key={row.fbName} className="d-flex" sm>
+                        <a
+                            className="d-flex flex-column justify-content-between w-100 cat-local"
+                            href={row[csvAggregatedKeys.account]}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label="download"
+                        >
+                            <h3>
+                                <span className="me-2">{row.fullName}</span>
+                                <img className="inline-icon" src={linkIcon} />
+                            </h3>
+                        </a>
                     </Col>
                 );
             }
@@ -158,6 +248,42 @@ function Search({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
             ) : (
                 <AlertWithIcon className="my-4" variant="danger">
                     {t(labels.parties.noParty)}
+                </AlertWithIcon>
+            )}
+
+            <h2 className="my-4">{t(labels.parties.candidatesLists)}</h2>
+            {candidatesLists.length ? (
+                <Row className="tiles gx-4 gy-4">{candidatesLists}</Row>
+            ) : (
+                <AlertWithIcon className="my-4" variant="danger">
+                    {t(labels.parties.noParty)}
+                </AlertWithIcon>
+            )}
+
+            <h2 className="my-4">{t(labels.party.assets)}</h2>
+            {assets.length ? (
+                <Row className="tiles gx-4 gy-4">{assets}</Row>
+            ) : (
+                <AlertWithIcon className="my-4" variant="danger">
+                    {t(labels.parties.noParty)}
+                </AlertWithIcon>
+            )}
+
+            <h2 className="my-4">{t(labels.parties.reports)}</h2>
+            {reports.length ? (
+                <Row className="tiles gx-4 gy-4">{reports}</Row>
+            ) : (
+                <AlertWithIcon className="my-4" variant="danger">
+                    {t(labels.parties.noParty)}
+                </AlertWithIcon>
+            )}
+
+            <h2 className="my-4">{t(labels.account.title)}</h2>
+            {accounts.length ? (
+                <Row className="tiles gx-4 gy-4">{accounts}</Row>
+            ) : (
+                <AlertWithIcon className="my-4" variant="danger">
+                    {t(labels.parties.noResults)}
                 </AlertWithIcon>
             )}
 

@@ -135,17 +135,10 @@ export const processAccountsData = (data) => {
 };
 
 export const findByProperty = (csvData, property, value) => {
-    let party = null;
     if (csvData.data ?? false) {
-        csvData.data.some((row) => {
-            if (row[property] === value) {
-                party = row;
-                return true;
-            }
-            return false;
-        });
+        return csvData.data.find((row) => row[property] === value);
     }
-    return party;
+    return null;
 };
 
 export const buildParserConfig = (processCallback, storeDataCallback) => {

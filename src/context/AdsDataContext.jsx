@@ -18,6 +18,9 @@ export const csvConfig = {
             PARTY: 'Strana',
             FB_ACCOUNTS: 'FB Účty',
             GOOGLE_ACCOUNTS: 'Google účty',
+            CL: 'Kandidátne listiny',
+            ASSETS: 'Majetkové priznania',
+            REPORT: 'Záverečné správy',
         },
         file: accounts,
     },
@@ -56,6 +59,9 @@ const initialState = {
         metaAds: [],
         lastUpdateFb: 0,
         lastUpdateGgl: 0,
+        candidatesLists: {},
+        assets: {},
+        reports: {},
     },
     metaApiData: {
         error: null,
@@ -107,6 +113,19 @@ export const processCsvFiles = (allData) => {
                                 row[csvConfig[key].columns.GOOGLE_ACCOUNTS]
                                     .replaceAll(' ', '')
                                     .split(',');
+                        }
+                        if (row[csvConfig[key].columns.CL] ?? false) {
+                            pd.candidatesLists[
+                                row[csvConfig[key].columns.PARTY]
+                            ] = row[csvConfig[key].columns.CL];
+                        }
+                        if (row[csvConfig[key].columns.ASSETS] ?? false) {
+                            pd.assets[row[csvConfig[key].columns.PARTY]] =
+                                row[csvConfig[key].columns.ASSETS];
+                        }
+                        if (row[csvConfig[key].columns.REPORT] ?? false) {
+                            pd.reports[row[csvConfig[key].columns.PARTY]] =
+                                row[csvConfig[key].columns.REPORT];
                         }
                     });
                     break;

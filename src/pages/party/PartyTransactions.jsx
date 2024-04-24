@@ -9,6 +9,8 @@ import { csvAggregatedKeys } from '../../context/DataContext';
 
 import AccountTransactions from '../../components/accounts/AccountTransactions';
 
+import linkIcon from '../../../public/img/external_link_icon.svg?url';
+
 function PartyTransactions() {
     const party = useOutletContext();
 
@@ -56,7 +58,17 @@ function PartyTransactions() {
                                 target="_blank"
                                 rel="noreferrer"
                             >
-                                {shortenUrl(party[csvAggregatedKeys.account])}
+                                <span className="me-2">
+                                    <span className="d-md-none">
+                                        {shortenUrl(
+                                            party[csvAggregatedKeys.account]
+                                        )}
+                                    </span>
+                                    <span className="d-none d-md-inline">
+                                        {party[csvAggregatedKeys.account]}
+                                    </span>
+                                </span>
+                                <img className="inline-icon" src={linkIcon} />
                             </a>
                         </td>
                     </tr>

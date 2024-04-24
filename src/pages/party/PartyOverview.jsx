@@ -2,10 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link, useOutletContext } from 'react-router-dom';
-import has from 'has';
 
 import { setTitle } from '../../api/browserHelpers';
-import { colors } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
 import { currencyFormat, fixNumber, isNumeric } from '../../api/helpers';
 import { routes, segments } from '../../api/routes';
@@ -16,7 +14,8 @@ import { csvAggregatedKeys } from '../../context/DataContext';
 
 import LastUpdateTag from '../../components/general/LastUpdateTag';
 import Posts, { templates } from '../../components/wp/Posts';
-import TisBarChart from '../../components/charts/TisBarChart';
+
+import pdfIcon from '../../../public/img/PDF_icon.svg?url';
 
 function PartyTransactions({
     googleColumns = csvConfig[csvFiles.GOOGLE].columns,
@@ -56,41 +55,59 @@ function PartyTransactions({
         <div className="subpage">
             <Row className="my-4">
                 <Col lg={6}>
-                    <TisBarChart
-                        bars={[
-                            {
-                                key: 'outgoing',
-                                name: labels.charts.outgoing,
-                                color: colors.colorOrange,
-                                stackId: 'finance',
-                            },
-                            {
-                                key: 'incoming',
-                                name: labels.charts.incoming,
-                                color: colors.colorDarkBlue,
-                                stackId: 'finance',
-                            },
-                        ]}
-                        data={[
-                            {
-                                name: t(labels.charts.outgoing),
-                                outgoing: party[csvAggregatedKeys.outgoing],
-                            },
-                            {
-                                name: t(labels.charts.incoming),
-                                incoming: party[csvAggregatedKeys.incoming],
-                            },
-                        ]}
-                        buttonLink={routes.charts}
-                        currency
-                        lastUpdate={false}
-                    />
+                    <h2 className="text-center mb-4">{t(labels.party.info)}</h2>
+                    <div className="mb-4">
+                        <Link
+                            to={routes.party(party.name, segments.TRANSACTIONS)}
+                            className="icon-link"
+                        >
+                            <span>{t(labels.elections.account)}</span>
+                        </Link>
+
+                        {(sheetsData.candidatesLists[party.fbName] ??
+                            false) && (
+                            <a
+                                className="icon-link"
+                                href={sheetsData.candidatesLists[party.fbName]}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="download"
+                            >
+                                <span>{t(labels.party.candidatesList)}</span>
+                                <img src={pdfIcon} />
+                            </a>
+                        )}
+
+                        {(sheetsData.assets[party.fbName] ?? false) && (
+                            <a
+                                className="icon-link"
+                                href={sheetsData.assets[party.fbName]}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="download"
+                            >
+                                <span>{t(labels.party.assets)}</span>
+                                <img src={pdfIcon} />
+                            </a>
+                        )}
+
+                        {(sheetsData.reports[party.fbName] ?? false) && (
+                            <a
+                                className="icon-link"
+                                href={sheetsData.reports[party.fbName]}
+                                target="_blank"
+                                rel="noreferrer"
+                                aria-label="download"
+                            >
+                                <span>{t(labels.party.report)}</span>
+                                <img src={pdfIcon} />
+                            </a>
+                        )}
+                    </div>
                 </Col>
                 <Col lg={6} className="text-center">
                     <div className="total-spending">
-                        <h2 className="mt-xxl-4">
-                            {t(labels.account.partySpending)}
-                        </h2>
+                        <h2>{t(labels.account.partySpending)}</h2>
                         <p className="hero-number">
                             {currencyFormat(party[csvAggregatedKeys.outgoing])}
                             <LastUpdateTag timestamp={party.timestamp} />
@@ -152,7 +169,7 @@ function PartyTransactions({
                 </Button>
             </div>
 
-            {has(party, 'tag') && (
+            {(party.tag ?? false) && (
                 <>
                     <h2 className="mt-4">{t(labels.news.latest)}</h2>
                     <Posts

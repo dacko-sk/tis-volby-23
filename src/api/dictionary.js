@@ -39,6 +39,7 @@ export const labels = {
             [ak.vs]: ['VS', 'Variabile symbol'],
             [ak.ss]: ['ŠS', 'Specific symbol'],
         },
+        title: ['Transparentné účty', 'Transparent accounts'],
         totalDisclaimer: [
             'Súčet výdavkov na všetkých transparentných účtoch politických strán.',
             'Sum of spendings on accounts of all political parties.',
@@ -594,6 +595,7 @@ export const labels = {
         navTitle: ['Online'],
     },
     parties: {
+        candidatesLists: ['Kandidátne listiny', 'Candidates lists'],
         list: [
             'Abecedný zoznam všetkých subjektov s transparentným účtom.',
             'All political parties with transparent account sorted alphabetically.',
@@ -604,11 +606,15 @@ export const labels = {
             'No party in 2023 elections matches the search query.',
         ],
         pageTitle: ['Strany a hnutia', 'Political Parties'],
+        reports: ['Záverečné správy', 'Final reports'],
     },
     party: {
         assets: ['Majetkové priznania', 'Assets'],
+        candidatesList: ['Kandidátna listina', 'Candidates list'],
         funding: ['Financovanie', 'Financing'],
+        info: ['Informácie o kampani', 'Campaign details'],
         overview: ['Prehľad', 'Overview'],
+        report: ['Záverečná správa', 'Final report'],
     },
     privacy: ['Ochrana súkromia', 'Privacy Policy'],
     readMore: ['Čítať ďalej…', 'Read more…'],
