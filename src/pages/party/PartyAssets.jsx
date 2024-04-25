@@ -49,7 +49,7 @@ function PartyAssets() {
         content = <AssetsDetail article={article} />;
     }
 
-    setTitle(`${party.fullName} : ${t(labels.party.assets)}`);
+    setTitle(`${party.fullName} : ${t(labels.parties.assets)}`);
 
     return (
         <div className="subpage">

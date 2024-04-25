@@ -97,7 +97,9 @@ function Search({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
                                 aria-label="download"
                             >
                                 <h3>
-                                    <span className="me-2">{row.fullName}</span>
+                                    <span className="me-2">
+                                        {`${row.fullName} - ${t(labels.party.extendedAssets)}`}
+                                    </span>
                                     <img
                                         className="inline-icon"
                                         src={pdfIcon}
@@ -260,7 +262,7 @@ function Search({ googleColumns = csvConfig[csvFiles.GOOGLE].columns }) {
                 </AlertWithIcon>
             )}
 
-            <h2 className="my-4">{t(labels.party.assets)}</h2>
+            <h2 className="my-4">{t(labels.parties.assets)}</h2>
             {assets.length ? (
                 <Row className="tiles gx-4 gy-4">{assets}</Row>
             ) : (

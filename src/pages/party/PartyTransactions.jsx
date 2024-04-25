@@ -23,6 +23,28 @@ function PartyTransactions() {
             <Table striped bordered responsive hover>
                 <tbody>
                     <tr>
+                        <td>{t(labels.elections.account)}</td>
+                        <td>
+                            <a
+                                href={party[csvAggregatedKeys.account]}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <span className="me-2">
+                                    <span className="d-md-none">
+                                        {shortenUrl(
+                                            party[csvAggregatedKeys.account]
+                                        )}
+                                    </span>
+                                    <span className="d-none d-md-inline">
+                                        {party[csvAggregatedKeys.account]}
+                                    </span>
+                                </span>
+                                <img className="inline-icon" src={linkIcon} />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>{t(labels.charts.incoming)}</td>
                         <td>
                             {currencyFormat(party[csvAggregatedKeys.incoming])}
@@ -49,28 +71,6 @@ function PartyTransactions() {
                     <tr>
                         <td>{t(labels.charts.uniqeDonors)}</td>
                         <td>{party.num_unique_donors}</td>
-                    </tr>
-                    <tr>
-                        <td>{t(labels.elections.account)}</td>
-                        <td>
-                            <a
-                                href={party[csvAggregatedKeys.account]}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <span className="me-2">
-                                    <span className="d-md-none">
-                                        {shortenUrl(
-                                            party[csvAggregatedKeys.account]
-                                        )}
-                                    </span>
-                                    <span className="d-none d-md-inline">
-                                        {party[csvAggregatedKeys.account]}
-                                    </span>
-                                </span>
-                                <img className="inline-icon" src={linkIcon} />
-                            </a>
-                        </td>
                     </tr>
                 </tbody>
             </Table>

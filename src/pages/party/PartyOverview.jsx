@@ -86,7 +86,7 @@ function PartyTransactions({
                                 rel="noreferrer"
                                 aria-label="download"
                             >
-                                <span>{t(labels.party.assets)}</span>
+                                <span>{t(labels.party.extendedAssets)}</span>
                                 <img src={pdfIcon} />
                             </a>
                         )}

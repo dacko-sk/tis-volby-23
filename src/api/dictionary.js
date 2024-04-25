@@ -595,6 +595,7 @@ export const labels = {
         navTitle: ['Online'],
     },
     parties: {
+        assets: ['Majetkové priznania', 'Assets declarations'],
         candidatesLists: ['Kandidátne listiny', 'Candidates lists'],
         list: [
             'Abecedný zoznam všetkých subjektov s transparentným účtom.',
@@ -609,7 +610,10 @@ export const labels = {
         reports: ['Záverečné správy', 'Final reports'],
     },
     party: {
-        assets: ['Majetkové priznania', 'Assets'],
+        extendedAssets: [
+            'Rozšírene majetkové priznanie lídra',
+            'Extended assets declaration of leader',
+        ],
         candidatesList: ['Kandidátna listina', 'Candidates list'],
         funding: ['Financovanie', 'Financing'],
         info: ['Informácie o kampani', 'Campaign details'],

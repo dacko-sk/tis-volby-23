@@ -102,14 +102,6 @@ function Party() {
                             {t(labels.news.navTitle)}
                         </Nav.Link>
                     )}
-                    {(party.tag ?? false) && (
-                        <Nav.Link
-                            as={NavLink}
-                            to={routes.party(party.slug, segments.ASSETS)}
-                        >
-                            {t(labels.party.assets)}
-                        </Nav.Link>
-                    )}
                 </Nav>
             </div>
 
