@@ -611,7 +611,7 @@ export const labels = {
     },
     party: {
         extendedAssets: [
-            'Rozšírene majetkové priznanie lídra',
+            'Rozšírené majetkové priznanie lídra',
             'Extended assets declaration of leader',
         ],
         candidatesList: ['Kandidátna listina', 'Candidates list'],
