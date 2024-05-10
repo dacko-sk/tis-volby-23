@@ -24,9 +24,11 @@ export const segments = {
     ANALYSES: 'ANALYSES',
     ANALYSIS: 'ANALYSIS',
     ASSETS: 'ASSETS',
+    CANDIDATES: 'CANDIDATES',
     NEWS: 'NEWS',
     ONLINE: 'ONLINE',
     PARTIES: 'PARTIES',
+    REPORTS: 'REPORTS',
     SEARCH: 'SEARCH',
     TRANSACTIONS: 'TRANSACTIONS',
 };
@@ -36,9 +38,11 @@ export const localSegments = {
         [segments.ANALYSES]: 'hodnotenia',
         [segments.ANALYSIS]: 'hodnotenie',
         [segments.ASSETS]: 'majetkove-priznania',
+        [segments.CANDIDATES]: 'kandidatne-listiny',
         [segments.NEWS]: 'aktuality',
         [segments.ONLINE]: 'online',
         [segments.PARTIES]: 'strany',
+        [segments.REPORTS]: 'zaverecne-spravy',
         [segments.SEARCH]: 'vyhladavanie',
         [segments.TRANSACTIONS]: 'financovanie',
     },
@@ -46,9 +50,11 @@ export const localSegments = {
         [segments.ANALYSES]: 'assesments',
         [segments.ANALYSIS]: 'assesment',
         [segments.ASSETS]: 'assets',
+        [segments.CANDIDATES]: 'candidates-lists',
         [segments.NEWS]: 'news',
         [segments.ONLINE]: 'online',
         [segments.PARTIES]: 'parties',
+        [segments.REPORTS]: 'reports',
         [segments.SEARCH]: 'search',
         [segments.TRANSACTIONS]: 'financing',
     },
@@ -112,7 +118,10 @@ export const routes = {
     home: (lang) => languageRoot(lang),
     news: (lang) => languageRoot(lang) + urlSegment(segments.NEWS, lang),
     online: (lang) => languageRoot(lang) + urlSegment(segments.ONLINE, lang),
-    parties: (lang) => languageRoot(lang) + urlSegment(segments.PARTIES, lang),
+    parties: (subpage, lang) =>
+        languageRoot(lang) +
+        urlSegment(segments.PARTIES, lang) +
+        (subpage ? separators.url + urlSegment(subpage, lang) : ''),
     party: (slug, subpage, lang) => {
         const niceSlug =
             slug === true

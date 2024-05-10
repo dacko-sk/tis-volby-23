@@ -1,50 +1,40 @@
-import { Link } from 'react-router-dom';
+import Nav from 'react-bootstrap/Nav';
+import { NavLink, Outlet } from 'react-router-dom';
 
-import { setTitle } from '../api/browserHelpers';
 import { labels, t } from '../api/dictionary';
-import { sortByTextProp } from '../api/helpers';
-import { routes } from '../api/routes';
+import { routes, segments } from '../api/routes';
 
-import useData, { csvAggregatedKeys } from '../context/DataContext';
-
-import Loading from '../components/general/Loading';
 import Title from '../components/structure/Title';
 
-import '../components/general/Parties.scss';
-
 function Parties() {
-    const { csvData } = useData();
-
-    const links = [];
-
-    if (csvData.data ?? false) {
-        csvData.data.sort(sortByTextProp('fullName')).forEach((row) => {
-            links.push(
-                <div key={row[csvAggregatedKeys.name]}>
-                    <Link
-                        className="party-logo-link hover-bg d-flex align-items-center"
-                        to={routes.party(row[csvAggregatedKeys.name])}
-                    >
-                        <figure className="flex-shrink-0 me-3">
-                            {(row.logo ?? false) && <img src={row.logo} />}
-                        </figure>
-
-                        <h3 className="my-2">{row.fullName}</h3>
-                    </Link>
-                </div>
-            );
-        });
-    } else {
-        return <Loading />;
-    }
-
-    setTitle(t(labels.parties.pageTitle));
-
     return (
         <section>
             <Title>{t(labels.parties.pageTitle)}</Title>
-            <p className="mb-4">{t(labels.parties.list)}</p>
-            {links}
+
+            <div className="tabs-scrollable mb-4">
+                <Nav variant="tabs">
+                    <Nav.Link as={NavLink} to={routes.parties()} end>
+                        {t(labels.account.title)}
+                    </Nav.Link>
+                    <Nav.Link
+                        as={NavLink}
+                        to={routes.parties(segments.CANDIDATES)}
+                    >
+                        {t(labels.parties.candidatesLists)}
+                    </Nav.Link>
+                    <Nav.Link as={NavLink} to={routes.parties(segments.ASSETS)}>
+                        {t(labels.parties.assets)}
+                    </Nav.Link>
+                    <Nav.Link
+                        as={NavLink}
+                        to={routes.parties(segments.REPORTS)}
+                    >
+                        {t(labels.parties.reports)}
+                    </Nav.Link>
+                </Nav>
+            </div>
+
+            <Outlet />
         </section>
     );
 }

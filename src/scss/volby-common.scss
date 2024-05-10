@@ -263,8 +263,14 @@ th a {
   &:focus {
     background-color: $tis-grey;
   }
+  [class^='col-'] > & {
+    @extend .h-100;
+  }
+
   img {
+    @extend .object-fit-contain;
     width: 1.5em;
+    max-height: 2em;
   }
 }
 

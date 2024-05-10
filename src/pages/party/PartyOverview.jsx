@@ -12,10 +12,9 @@ import { wpCat } from '../../api/wpHelpers';
 import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';
 import { csvAggregatedKeys } from '../../context/DataContext';
 
+import DownloadLink from '../../components/general/DownloadLink';
 import LastUpdateTag from '../../components/general/LastUpdateTag';
 import Posts, { templates } from '../../components/wp/Posts';
-
-import pdfIcon from '../../../public/img/PDF_icon.svg?url';
 
 function PartyTransactions({
     googleColumns = csvConfig[csvFiles.GOOGLE].columns,
@@ -57,51 +56,31 @@ function PartyTransactions({
                 <Col lg={6}>
                     <h2 className="text-center mb-4">{t(labels.party.info)}</h2>
                     <div className="mb-4">
-                        <Link
+                        <DownloadLink
                             to={routes.party(party.name, segments.TRANSACTIONS)}
-                            className="icon-link"
                         >
-                            <span>{t(labels.elections.account)}</span>
-                        </Link>
+                            {t(labels.elections.account)}
+                        </DownloadLink>
 
                         {(sheetsData.candidatesLists[party.fbName] ??
                             false) && (
-                            <a
-                                className="icon-link"
-                                href={sheetsData.candidatesLists[party.fbName]}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label="download"
+                            <DownloadLink
+                                to={sheetsData.candidatesLists[party.fbName]}
                             >
-                                <span>{t(labels.party.candidatesList)}</span>
-                                <img src={pdfIcon} />
-                            </a>
+                                {t(labels.party.candidatesList)}
+                            </DownloadLink>
                         )}
 
                         {(sheetsData.assets[party.fbName] ?? false) && (
-                            <a
-                                className="icon-link"
-                                href={sheetsData.assets[party.fbName]}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label="download"
-                            >
-                                <span>{t(labels.party.extendedAssets)}</span>
-                                <img src={pdfIcon} />
-                            </a>
+                            <DownloadLink to={sheetsData.assets[party.fbName]}>
+                                {t(labels.party.extendedAssets)}
+                            </DownloadLink>
                         )}
 
                         {(sheetsData.reports[party.fbName] ?? false) && (
-                            <a
-                                className="icon-link"
-                                href={sheetsData.reports[party.fbName]}
-                                target="_blank"
-                                rel="noreferrer"
-                                aria-label="download"
-                            >
-                                <span>{t(labels.party.report)}</span>
-                                <img src={pdfIcon} />
-                            </a>
+                            <DownloadLink to={sheetsData.reports[party.fbName]}>
+                                {t(labels.party.report)}
+                            </DownloadLink>
                         )}
                     </div>
                 </Col>
