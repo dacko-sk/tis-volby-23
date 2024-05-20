@@ -9,8 +9,6 @@ import useData, { csvAggregatedKeys } from '../../context/DataContext';
 
 import Loading from '../../components/general/Loading';
 
-import './Parties.scss';
-
 function PartiesList() {
     const { csvData } = useData();
 
@@ -24,7 +22,7 @@ function PartiesList() {
                         className="party-logo-link hover-bg d-flex align-items-center"
                         to={routes.party(row[csvAggregatedKeys.name])}
                     >
-                        <figure className="flex-shrink-0 me-3">
+                        <figure className="party-logo-inline">
                             {(row.logo ?? false) && <img src={row.logo} />}
                         </figure>
 

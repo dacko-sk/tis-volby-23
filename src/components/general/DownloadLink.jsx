@@ -13,7 +13,7 @@ function DownloadLink({ children, to }) {
     return (
         <Link to={to} className="icon-link" target={icon ? '_blank' : null}>
             <span className="h-100 d-flex align-items-center">{children}</span>
-            {icon && <img src={icon} />}
+            {icon && <img src={icon} className="download-icon" />}
         </Link>
     );
 }

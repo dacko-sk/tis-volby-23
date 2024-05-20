@@ -37,10 +37,12 @@ function PartiesReports() {
                                       to={sheetsData.reports[row.fbName]}
                                   >
                                       {(row.logo ?? false) && (
-                                          <img
-                                              src={row.logo}
-                                              className="object-fit-contain me-3"
-                                          />
+                                          <figure className="party-logo-inline">
+                                              <img
+                                                  src={row.logo}
+                                                  className="party-logo"
+                                              />
+                                          </figure>
                                       )}
 
                                       <h3 className="text-secondary my-0">

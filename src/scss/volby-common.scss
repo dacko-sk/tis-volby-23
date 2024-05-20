@@ -226,10 +226,16 @@ th a {
   }
 }
 
+.unfade-image {
+  filter: saturate(100%);
+}
+
 .fade-image {
-  filter: saturate(25%);
+  @media (min-width: map.get($grid-breakpoints, 'xl')) {
+    filter: saturate(25%);
+  }
   &.hover-unfade-image:hover {
-    filter: saturate(100%);
+    @extend .unfade-image;
   }
 }
 
@@ -267,10 +273,8 @@ th a {
     @extend .h-100;
   }
 
-  img {
-    @extend .object-fit-contain;
+  .download-icon {
     width: 1.5em;
-    max-height: 2em;
   }
 }
 

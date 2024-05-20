@@ -8,3 +8,57 @@ header {
   background-position-x: center;
   background-position-y: 20%;
 }
+
+.party-logo {
+  @extend .mw-100;
+
+  a & {
+    @extend .fade-image;
+  }
+
+  a:hover &,
+  a:active &,
+  a:focus & {
+    @extend .unfade-image;
+  }
+}
+
+.party-logo-link {
+  &:hover,
+  &:active,
+  &:focus {
+    img {
+      filter: saturate(100%);
+    }
+  }
+  figure {
+    margin: 0;
+  }
+  img {
+    width: 120px;
+    max-width: 100%;
+    @media (min-width: map.get($grid-breakpoints, 'xl')) {
+      filter: saturate(25%);
+    }
+  }
+  h3 {
+    color: $tis-orange;
+    margin-bottom: 0;
+  }
+
+  &.hover-bg {
+    &,
+    &:hover {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+    figure {
+      width: 36px;
+    }
+  }
+}
+
+figure.party-logo-inline {
+  @extend #{'.flex-shrink-0', '.me-3', '.m-0'};
+  width: 36px;
+}
