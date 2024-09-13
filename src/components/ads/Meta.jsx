@@ -4,16 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 import { setTitle } from '../../api/browserHelpers';
-import {
-    ageColors,
-    attributionColors,
-    attributionKeys,
-    genderColors,
-    genderKeys,
-    getPartyChartLabel,
-    regionOptions,
-    regionKeys,
-} from '../../api/chartHelpers';
+import { getPartyChartLabel } from '../../api/chartHelpers';
 import { colors } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
 import {
@@ -21,6 +12,15 @@ import {
     sortByNumericProp,
     sortBySpending,
 } from '../../api/helpers';
+import {
+    ageColors,
+    attributionColors,
+    attributionKeys,
+    genderColors,
+    genderKeys,
+    regionOptions,
+    regionKeys,
+} from '../../api/online';
 import { segments } from '../../api/routes';
 
 import useAdsData from '../../context/AdsDataContext';

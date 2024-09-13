@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState } from 'react';
 
-import { getTimestampFromDate, isNumeric } from '../api/helpers';
+import { fixNumber, getTimestampFromDate, isNumeric } from '../api/helpers';
 
 import accounts from '../../public/csv/online/accounts.csv';
 import google from '../../public/csv/online/Google.csv';
@@ -21,6 +21,8 @@ export const csvConfig = {
             CL: 'Kandidátne listiny',
             ASSETS: 'Majetkové priznania',
             REPORT: 'Záverečné správy',
+            CAMPAIGN: 'Kampaň',
+            PRECAMPAIGN: 'Predkampaň',
         },
         file: accounts,
     },
@@ -52,15 +54,18 @@ export const metaApiUrl = 'https://volby.transparency.sk/api/meta/ads_json.php';
 
 const initialState = {
     sheetsData: {
+        assets: {},
+        campaign: {},
+        candidatesLists: {},
         error: null,
-        partiesFb: {},
-        partiesGgl: {},
         googleAds: [],
-        metaAds: [],
         lastUpdateFb: 0,
         lastUpdateGgl: 0,
-        candidatesLists: {},
-        assets: {},
+        loaded: false,
+        metaAds: [],
+        partiesFb: {},
+        partiesGgl: {},
+        precampaign: {},
         reports: {},
     },
     metaApiData: {
@@ -89,11 +94,11 @@ const filterPoliticAccounts = (partiesFb) => (pageData) => {
 };
 
 export const loadingErrorCsv = (error) => {
-    return { ...initialState.sheetsData, error };
+    return { ...initialState.sheetsData, error, loaded: true };
 };
 
 export const processCsvFiles = (allData) => {
-    const pd = { ...initialState.sheetsData };
+    const pd = { ...initialState.sheetsData, loaded: true };
     Object.keys(csvFiles).forEach((key) => {
         if (Array.isArray(allData[key].data)) {
             switch (key) {
@@ -126,6 +131,16 @@ export const processCsvFiles = (allData) => {
                         if (row[csvConfig[key].columns.REPORT] ?? false) {
                             pd.reports[row[csvConfig[key].columns.PARTY]] =
                                 row[csvConfig[key].columns.REPORT];
+                        }
+                        if (row[csvConfig[key].columns.CAMPAIGN] ?? false) {
+                            pd.campaign[row[csvConfig[key].columns.PARTY]] =
+                                fixNumber(row[csvConfig[key].columns.CAMPAIGN]);
+                        }
+                        if (row[csvConfig[key].columns.PRECAMPAIGN] ?? false) {
+                            pd.precampaign[row[csvConfig[key].columns.PARTY]] =
+                                fixNumber(
+                                    row[csvConfig[key].columns.PRECAMPAIGN]
+                                );
                         }
                     });
                     break;

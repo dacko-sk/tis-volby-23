@@ -218,6 +218,10 @@ export const colors = {
     colorGrey,
 };
 
+export const dates = {
+    monitoringEnd: '2023-12-15T12:00:00',
+};
+
 export const elections = {
     s22: 's22',
     n20: 'n20',

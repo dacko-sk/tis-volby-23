@@ -73,6 +73,11 @@ export const dateFormat = (timestamp) =>
         day: 'numeric',
     });
 
+export const getTimeFromDate = (string) => {
+    const t = new Date(string).getTime();
+    return Number.isNaN(t) ? 0 : t / 1000;
+};
+
 export const getTimestampFromDate = (date) => {
     const dateParts = date.replaceAll('/', '.').replaceAll(' ', '').split('.');
     return dateParts.length === 3

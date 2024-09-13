@@ -4,16 +4,16 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
+import { colors } from '../../api/constants';
+import { labels, t } from '../../api/dictionary';
+import { sortByNumericProp, sortBySpending } from '../../api/helpers';
 import {
     ageColors,
     attributionColors,
     attributionKeys,
     genderColors,
     regionOptions,
-} from '../../api/chartHelpers';
-import { colors } from '../../api/constants';
-import { labels, t } from '../../api/dictionary';
-import { sortByNumericProp, sortBySpending } from '../../api/helpers';
+} from '../../api/online';
 
 import useAdsData from '../../context/AdsDataContext';
 

@@ -52,6 +52,13 @@ tspan {
   }
 }
 
+.recharts-default-tooltip {
+  padding: 10px;
+  background-color: white;
+  border: 1px solid rgb(204, 204, 204);
+  white-space: nowrap;
+}
+
 .recharts-tooltip-label,
 .recharts-tooltip-item-list {
   margin: 0;
@@ -87,4 +94,11 @@ tspan {
 
 .pie-inactive {
   opacity: 0.5;
+}
+
+.recharts-pie {
+  // hide labels of all but first pie
+  & + & .recharts-pie-labels {
+    visibility: hidden;
+  }
 }

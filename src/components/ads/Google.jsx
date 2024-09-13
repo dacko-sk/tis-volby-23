@@ -3,14 +3,15 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { formatDefs, getPartyChartLabel } from '../../api/chartHelpers';
-import { labels, t } from '../../api/dictionary';
 import { setTitle } from '../../api/browserHelpers';
+import { getPartyChartLabel } from '../../api/chartHelpers';
+import { labels, t } from '../../api/dictionary';
 import {
     fixNumber,
     sortByNumericProp,
     sortBySpending,
 } from '../../api/helpers';
+import { formatDefs } from '../../api/online';
 import { segments } from '../../api/routes';
 
 import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';

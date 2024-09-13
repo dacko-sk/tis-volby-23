@@ -14,10 +14,10 @@ import {
 } from 'recharts';
 
 import {
+    BarsTooltip,
     horizontalYaxisWidth,
     prepareAvgDeltaPctData,
     shortChartNames,
-    tooltipNameFormat,
     verticalYaxisWidth,
 } from '../../api/chartHelpers';
 import { colors } from '../../api/constants';
@@ -39,6 +39,34 @@ import LastUpdateTag from '../general/LastUpdateTag';
 import './Charts.scss';
 
 export const columnVariants = {
+    amount: [
+        {
+            key: 'num',
+            name: labels.ads.amount.label,
+            color: colors.colorOrange,
+        },
+    ],
+    donors: [
+        {
+            key: 'donors',
+            name: labels.charts.uniqeDonors,
+            color: colors.colorDarkBlue,
+        },
+    ],
+    finalReport: [
+        {
+            key: 'precampaign',
+            name: labels.charts.precampaign,
+            color: colors.colorDarkBlue,
+            stackId: 'FR',
+        },
+        {
+            key: 'campaign',
+            name: labels.charts.campaign,
+            color: colors.colorOrange,
+            stackId: 'FR',
+        },
+    ],
     inOut: [
         {
             key: 'outgoing',
@@ -49,20 +77,6 @@ export const columnVariants = {
             key: 'incoming',
             name: labels.charts.incoming,
             color: colors.colorDarkBlue,
-        },
-    ],
-    donors: [
-        {
-            key: 'donors',
-            name: labels.charts.uniqeDonors,
-            color: colors.colorDarkBlue,
-        },
-    ],
-    amount: [
-        {
-            key: 'num',
-            name: labels.ads.amount.label,
-            color: colors.colorOrange,
         },
     ],
     spending: [
@@ -88,6 +102,7 @@ function TisBarChart({
     lastUpdate = true,
     percent = false,
     scrollable = false,
+    showSum = false,
     subtitle,
     timestamp,
     title,
@@ -143,6 +158,7 @@ function TisBarChart({
         fill: '#333',
         fontSize: tickFontSize,
     };
+    const tooltipContent = BarsTooltip(bars, showSum, tooltipNumFormat);
 
     const refLine = diffFromAverage ? (
         <ReferenceLine
@@ -242,10 +258,7 @@ function TisBarChart({
                                     width={horizontalYaxisWidth}
                                 />
                             )}
-                            <Tooltip
-                                formatter={tooltipNumFormat}
-                                labelFormatter={tooltipNameFormat}
-                            />
+                            <Tooltip content={tooltipContent} />
                             <Legend />
                             {refLine}
                             {barElements}

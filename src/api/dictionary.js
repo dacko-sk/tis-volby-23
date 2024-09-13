@@ -1,18 +1,18 @@
 import { elections as el } from './constants';
+import {
+    attributionKeys as ca,
+    genderKeys as cg,
+    regionKeys as cr,
+} from './online';
 import { getCurrentLanguage, languages } from './routes';
-
-import { csvAccountKeys as ak } from '../context/DataContext';
 import {
     baseData as abd,
     metaData as amd,
     transparencyClasses as atc,
     transparencyIndicators as ati,
 } from './wpHelpers';
-import {
-    attributionKeys as ca,
-    genderKeys as cg,
-    regionKeys as cr,
-} from './chartHelpers';
+
+import { csvAccountKeys as ak } from '../context/DataContext';
 
 export const labels = {
     account: {
@@ -23,6 +23,10 @@ export const labels = {
         balance: ['Zostatok', 'Balance'],
         download: ['Stiahnuť ako CSV', 'Download as CSV'],
         expensesAmount: ['Počet výdavkov', 'Number of expenses'],
+        finalReportDisclaimer: [
+            'Súčet výdavkov všetkých strán podľa záverečných správ.',
+            'Sum of spendings of all parties.',
+        ],
         incomesAmount: ['Počet príjmov', 'Number of incomes'],
         info: ['Informácie o kampani', 'Campaign details'],
         overview: [
@@ -497,6 +501,7 @@ export const labels = {
         },
     },
     charts: {
+        campaign: ['Kampaň', 'Campaign'],
         disclaimer: [
             'Grafy obsahujú dáta z transparentných účtov, očistené o vrátené platby.',
             'Graphs contains data from transparent accounts net of return payments.',
@@ -505,8 +510,20 @@ export const labels = {
             'Po kliknutí na názov strany sa rozbalia podrobnosti.',
             'Click the party name for details.',
         ],
+        finalReport: {
+            disclaimer: [
+                'Grafy obsahujú dáta zo záverečných správ politických strán.',
+                'Graphs contains data from parties final reports.',
+            ],
+            title: [
+                'Top 10 kampaní podľa záverečných správ',
+                'Top 10 campaigns by final reports',
+            ],
+        },
         incoming: ['Príjmy', 'Incomes'],
         outgoing: ['Výdavky', 'Expenses'],
+        precampaign: ['Predkampaň', 'Precampaign'],
+        sum: ['Spolu', 'Total'],
         top10: [
             'Top 10 kampaní podľa výdavkov a príjmov',
             'Top 10 campaigns by incomes and spendings',

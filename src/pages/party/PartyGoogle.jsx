@@ -4,13 +4,13 @@ import Accordion from 'react-bootstrap/Accordion';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import { formatDefs } from '../../api/chartHelpers';
 import { labels, t } from '../../api/dictionary';
 import {
     fixNumber,
     sortByNumericProp,
     sortBySpending,
 } from '../../api/helpers';
+import { formatDefs } from '../../api/online';
 
 import useAdsData, { csvConfig, csvFiles } from '../../context/AdsDataContext';
 

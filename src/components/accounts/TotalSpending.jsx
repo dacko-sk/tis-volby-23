@@ -1,18 +1,39 @@
-import has from 'has';
-
+import { dates } from '../../api/constants';
 import { labels, t } from '../../api/dictionary';
-import { currencyFormat } from '../../api/helpers';
+import { getTimeFromDate } from '../../api/helpers';
 
+import useAdsData from '../../context/AdsDataContext';
 import useData, { csvAggregatedKeys } from '../../context/DataContext';
 
-import LastUpdateTag from '../general/LastUpdateTag';
-import Loading from '../general/Loading';
+import HeroNumber from '../general/HeroNumber';
 
-function TotalSpending() {
+function TotalSpending({ finalReport = false }) {
+    let total = 0;
+
+    if (finalReport) {
+        const { sheetsData } = useAdsData();
+
+        if (sheetsData.loaded) {
+            total = [
+                ...Object.values(sheetsData.campaign),
+                ...Object.values(sheetsData.precampaign),
+            ].reduce((sum, amount) => sum + amount, total);
+        }
+
+        return (
+            <HeroNumber
+                disclaimer={t(labels.account.finalReportDisclaimer)}
+                lastUpdate={getTimeFromDate(dates.monitoringEnd)}
+                loading={!sheetsData.loaded}
+                number={total}
+                title={t(labels.account.totalSpending)}
+            />
+        );
+    }
+
     const { csvData } = useData();
 
     // parse data
-    let total = 0;
     if (csvData.data ?? false) {
         csvData.data.forEach((row) => {
             // sum of outgoing amounts from all transparent accounts
@@ -20,28 +41,20 @@ function TotalSpending() {
                 total += row[csvAggregatedKeys.outgoing];
             }
             // remove manually added duplicate expenses
-            if (has(row, 'duplicateExpenses') && row.duplicateExpenses > 0) {
+            if ((row.duplicateExpenses ?? false) && row.duplicateExpenses > 0) {
                 total -= row.duplicateExpenses;
             }
         });
     }
 
     return (
-        <div className="total-spending">
-            <h2>{t(labels.account.totalSpending)}</h2>
-            <div className="hero-number">
-                {csvData.data ?? false ? (
-                    currencyFormat(total)
-                ) : (
-                    <Loading small />
-                )}
-                <LastUpdateTag
-                    timestamp={has(csvData, 'data') ? csvData.lastUpdate : null}
-                >
-                    {t(labels.account.totalDisclaimer)}
-                </LastUpdateTag>
-            </div>
-        </div>
+        <HeroNumber
+            disclaimer={t(labels.account.totalDisclaimer)}
+            lastUpdate={csvData.lastUpdate ?? null}
+            loading={!(csvData.data ?? false)}
+            number={total}
+            title={t(labels.account.totalSpending)}
+        />
     );
 }
 

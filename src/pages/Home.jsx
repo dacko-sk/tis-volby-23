@@ -31,7 +31,7 @@ function Home() {
                     />
                 </Col>
                 <Col lg={6}>
-                    <TotalSpending />
+                    <TotalSpending finalReport />
                 </Col>
             </Row>
 
@@ -39,7 +39,7 @@ function Home() {
                 <DonateButton long xl />
             </div>
 
-            <Top10 />
+            <Top10 finalReport />
 
             <Posts
                 categories={[wpCat.featured]}
