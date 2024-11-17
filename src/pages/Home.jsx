@@ -1,6 +1,7 @@
 import { Col, Row } from 'react-bootstrap';
 
 import { setTitle } from '../api/browserHelpers';
+import { elections } from '../api/constants';
 import { labels, t } from '../api/dictionary';
 import { routes } from '../api/routes';
 import { wpCat } from '../api/wpHelpers';
@@ -10,6 +11,7 @@ import Top10 from '../components/charts/Top10';
 import Top10Ads from '../components/charts/Top10Ads';
 import ElectionsCountdown from '../components/general/ElectionsCountdown';
 import TotalSpending from '../components/accounts/TotalSpending';
+import SiteNavigator from '../components/structure/SiteNavigator';
 import Title from '../components/structure/Title';
 import Posts, { templates } from '../components/wp/Posts';
 import DonateButton from '../components/general/DonateButton';
@@ -22,6 +24,10 @@ function Home() {
             <Title secondaryWords={1} uppercase>
                 {t(labels.home.pageTitle)}
             </Title>
+
+            <div id="search-container">
+                <SiteNavigator site={elections.n23} />
+            </div>
 
             <Row className="gy-3 gy-lg-0 text-center mb-4">
                 <Col lg={6}>
